@@ -37,6 +37,18 @@
 		0F67CA702B10646600259285 /* GmarketSansTTFLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F67CA6D2B10646600259285 /* GmarketSansTTFLight.ttf */; };
 		0F67CA712B10646600259285 /* GmarketSansTTFBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F67CA6E2B10646600259285 /* GmarketSansTTFBold.ttf */; };
 		0F67CA722B10646600259285 /* GmarketSansTTFMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F67CA6F2B10646600259285 /* GmarketSansTTFMedium.ttf */; };
+		0F67CA742B10656B00259285 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CA732B10656B00259285 /* FeedViewController.swift */; };
+		0F67CA762B10657300259285 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CA752B10657300259285 /* FeedView.swift */; };
+		0F67CA782B10657D00259285 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CA772B10657D00259285 /* FeedViewModel.swift */; };
+		0F67CA7D2B1065F700259285 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CA7C2B1065F700259285 /* APIKey.swift */; };
+		0F67CA7F2B10660500259285 /* BaseURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CA7E2B10660500259285 /* BaseURL.swift */; };
+		0F67CA812B10661B00259285 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 0F67CA802B10661B00259285 /* .gitignore */; };
+		0F67CA832B10663700259285 /* FiveError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CA822B10663700259285 /* FiveError.swift */; };
+		0F67CA862B10664C00259285 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 0F67CA852B10664C00259285 /* Moya */; };
+		0F67CA882B10667100259285 /* FiveAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CA872B10667000259285 /* FiveAPI.swift */; };
+		0F67CA8A2B10669700259285 /* OutputAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CA892B10669700259285 /* OutputAPIModel.swift */; };
+		0F67CA8C2B1066A500259285 /* InputAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CA8B2B1066A500259285 /* InputAPIModel.swift */; };
+		0F67CA8E2B10677200259285 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CA8D2B10677200259285 /* APIManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +100,17 @@
 		0F67CA6D2B10646600259285 /* GmarketSansTTFLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansTTFLight.ttf; sourceTree = "<group>"; };
 		0F67CA6E2B10646600259285 /* GmarketSansTTFBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansTTFBold.ttf; sourceTree = "<group>"; };
 		0F67CA6F2B10646600259285 /* GmarketSansTTFMedium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansTTFMedium.ttf; sourceTree = "<group>"; };
+		0F67CA732B10656B00259285 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		0F67CA752B10657300259285 /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
+		0F67CA772B10657D00259285 /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
+		0F67CA7C2B1065F700259285 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
+		0F67CA7E2B10660500259285 /* BaseURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseURL.swift; sourceTree = "<group>"; };
+		0F67CA802B10661B00259285 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		0F67CA822B10663700259285 /* FiveError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveError.swift; sourceTree = "<group>"; };
+		0F67CA872B10667000259285 /* FiveAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveAPI.swift; sourceTree = "<group>"; };
+		0F67CA892B10669700259285 /* OutputAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputAPIModel.swift; sourceTree = "<group>"; };
+		0F67CA8B2B1066A500259285 /* InputAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputAPIModel.swift; sourceTree = "<group>"; };
+		0F67CA8D2B10677200259285 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +120,7 @@
 			files = (
 				0F67CA4C2B1036CA00259285 /* RxSwift in Frameworks */,
 				0F67CA4A2B1036CA00259285 /* RxCocoa in Frameworks */,
+				0F67CA862B10664C00259285 /* Moya in Frameworks */,
 				0F67CA472B1036B100259285 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -257,6 +281,9 @@
 		0F67CA642B10630800259285 /* Feed */ = {
 			isa = PBXGroup;
 			children = (
+				0F67CA732B10656B00259285 /* FeedViewController.swift */,
+				0F67CA752B10657300259285 /* FeedView.swift */,
+				0F67CA772B10657D00259285 /* FeedViewModel.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -271,8 +298,40 @@
 		0F67CA662B10632000259285 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				0F67CA7B2B1065E100259285 /* API */,
+				0F67CA7A2B1065CF00259285 /* Key */,
+				0F67CA792B1065C900259285 /* Error */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		0F67CA792B1065C900259285 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				0F67CA822B10663700259285 /* FiveError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
+		0F67CA7A2B1065CF00259285 /* Key */ = {
+			isa = PBXGroup;
+			children = (
+				0F67CA7C2B1065F700259285 /* APIKey.swift */,
+				0F67CA7E2B10660500259285 /* BaseURL.swift */,
+				0F67CA802B10661B00259285 /* .gitignore */,
+			);
+			path = Key;
+			sourceTree = "<group>";
+		};
+		0F67CA7B2B1065E100259285 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				0F67CA872B10667000259285 /* FiveAPI.swift */,
+				0F67CA892B10669700259285 /* OutputAPIModel.swift */,
+				0F67CA8B2B1066A500259285 /* InputAPIModel.swift */,
+				0F67CA8D2B10677200259285 /* APIManager.swift */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -295,6 +354,7 @@
 				0F67CA462B1036B100259285 /* SnapKit */,
 				0F67CA492B1036CA00259285 /* RxCocoa */,
 				0F67CA4B2B1036CA00259285 /* RxSwift */,
+				0F67CA852B10664C00259285 /* Moya */,
 			);
 			productName = Five;
 			productReference = 0F67C9FD2B0F7C5000259285 /* Five.app */;
@@ -371,6 +431,7 @@
 			packageReferences = (
 				0F67CA452B1036B100259285 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				0F67CA482B1036CA00259285 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				0F67CA842B10664C00259285 /* XCRemoteSwiftPackageReference "Moya" */,
 			);
 			productRefGroup = 0F67C9FE2B0F7C5000259285 /* Products */;
 			projectDirPath = "";
@@ -389,6 +450,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F67CA6C2B10644B00259285 /* OK DDUNG.ttf in Resources */,
+				0F67CA812B10661B00259285 /* .gitignore in Resources */,
 				0F67CA702B10646600259285 /* GmarketSansTTFLight.ttf in Resources */,
 				0F67CA0D2B0F7C5200259285 /* LaunchScreen.storyboard in Resources */,
 				0F67CA0A2B0F7C5200259285 /* Assets.xcassets in Resources */,
@@ -418,10 +480,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F67CA762B10657300259285 /* FeedView.swift in Sources */,
 				0F67CA402B1035B800259285 /* LoginViewController.swift in Sources */,
 				0F67CA5D2B10625700259285 /* NicknameViewController.swift in Sources */,
 				0F67CA682B10633D00259285 /* CustomColor.swift in Sources */,
 				0F67CA5B2B1061DB00259285 /* PasswordViewModel.swift in Sources */,
+				0F67CA742B10656B00259285 /* FeedViewController.swift in Sources */,
+				0F67CA7D2B1065F700259285 /* APIKey.swift in Sources */,
 				0F67CA512B10617100259285 /* EmailViewController.swift in Sources */,
 				0F67CA422B1035C000259285 /* LoginView.swift in Sources */,
 				0F67CA592B1061C800259285 /* PasswordView.swift in Sources */,
@@ -429,12 +494,19 @@
 				0F67CA572B1061B300259285 /* PasswordViewController.swift in Sources */,
 				0F67CA6A2B10641000259285 /* CustomFont.swift in Sources */,
 				0F67CA442B1035CA00259285 /* LoginViewModel.swift in Sources */,
+				0F67CA832B10663700259285 /* FiveError.swift in Sources */,
 				0F67CA3C2B10354200259285 /* BaseView.swift in Sources */,
+				0F67CA782B10657D00259285 /* FeedViewModel.swift in Sources */,
+				0F67CA8A2B10669700259285 /* OutputAPIModel.swift in Sources */,
 				0F67CA012B0F7C5000259285 /* AppDelegate.swift in Sources */,
 				0F67CA612B10626900259285 /* NicknameViewModel.swift in Sources */,
+				0F67CA8E2B10677200259285 /* APIManager.swift in Sources */,
+				0F67CA882B10667100259285 /* FiveAPI.swift in Sources */,
 				0F67CA032B0F7C5000259285 /* SceneDelegate.swift in Sources */,
 				0F67CA552B10619800259285 /* EmailViewModel.swift in Sources */,
 				0F67CA5F2B10626000259285 /* NicknameView.swift in Sources */,
+				0F67CA7F2B10660500259285 /* BaseURL.swift in Sources */,
+				0F67CA8C2B1066A500259285 /* InputAPIModel.swift in Sources */,
 				0F67CA532B10618200259285 /* EmailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -796,6 +868,14 @@
 				minimumVersion = 6.6.0;
 			};
 		};
+		0F67CA842B10664C00259285 /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 15.0.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -813,6 +893,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0F67CA482B1036CA00259285 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
+		};
+		0F67CA852B10664C00259285 /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0F67CA842B10664C00259285 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
