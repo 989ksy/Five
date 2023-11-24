@@ -49,7 +49,7 @@ class LoginViewController : BaseViewController {
         
         output.validation
             .subscribe(with: self) { owner, value in
-                owner.mainView.loginButton.backgroundColor = value ? Color.pointColor : .lightGray
+                owner.mainView.loginButton.backgroundColor = value ? CustomColor.pointColor : .lightGray
             }
             .disposed(by: disposeBag)
         

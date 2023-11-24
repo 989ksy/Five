@@ -32,6 +32,11 @@
 		0F67CA5F2B10626000259285 /* NicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CA5E2B10626000259285 /* NicknameView.swift */; };
 		0F67CA612B10626900259285 /* NicknameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CA602B10626900259285 /* NicknameViewModel.swift */; };
 		0F67CA682B10633D00259285 /* CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CA672B10633D00259285 /* CustomColor.swift */; };
+		0F67CA6A2B10641000259285 /* CustomFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CA692B10641000259285 /* CustomFont.swift */; };
+		0F67CA6C2B10644B00259285 /* OK DDUNG.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F67CA6B2B10644B00259285 /* OK DDUNG.ttf */; };
+		0F67CA702B10646600259285 /* GmarketSansTTFLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F67CA6D2B10646600259285 /* GmarketSansTTFLight.ttf */; };
+		0F67CA712B10646600259285 /* GmarketSansTTFBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F67CA6E2B10646600259285 /* GmarketSansTTFBold.ttf */; };
+		0F67CA722B10646600259285 /* GmarketSansTTFMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F67CA6F2B10646600259285 /* GmarketSansTTFMedium.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +83,11 @@
 		0F67CA5E2B10626000259285 /* NicknameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameView.swift; sourceTree = "<group>"; };
 		0F67CA602B10626900259285 /* NicknameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameViewModel.swift; sourceTree = "<group>"; };
 		0F67CA672B10633D00259285 /* CustomColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColor.swift; sourceTree = "<group>"; };
+		0F67CA692B10641000259285 /* CustomFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFont.swift; sourceTree = "<group>"; };
+		0F67CA6B2B10644B00259285 /* OK DDUNG.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OK DDUNG.ttf"; sourceTree = "<group>"; };
+		0F67CA6D2B10646600259285 /* GmarketSansTTFLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansTTFLight.ttf; sourceTree = "<group>"; };
+		0F67CA6E2B10646600259285 /* GmarketSansTTFBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansTTFBold.ttf; sourceTree = "<group>"; };
+		0F67CA6F2B10646600259285 /* GmarketSansTTFMedium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansTTFMedium.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -227,6 +237,11 @@
 		0F67CA622B1062FB00259285 /* Font */ = {
 			isa = PBXGroup;
 			children = (
+				0F67CA6B2B10644B00259285 /* OK DDUNG.ttf */,
+				0F67CA6E2B10646600259285 /* GmarketSansTTFBold.ttf */,
+				0F67CA6D2B10646600259285 /* GmarketSansTTFLight.ttf */,
+				0F67CA6F2B10646600259285 /* GmarketSansTTFMedium.ttf */,
+				0F67CA692B10641000259285 /* CustomFont.swift */,
 			);
 			path = Font;
 			sourceTree = "<group>";
@@ -373,8 +388,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F67CA6C2B10644B00259285 /* OK DDUNG.ttf in Resources */,
+				0F67CA702B10646600259285 /* GmarketSansTTFLight.ttf in Resources */,
 				0F67CA0D2B0F7C5200259285 /* LaunchScreen.storyboard in Resources */,
 				0F67CA0A2B0F7C5200259285 /* Assets.xcassets in Resources */,
+				0F67CA712B10646600259285 /* GmarketSansTTFBold.ttf in Resources */,
+				0F67CA722B10646600259285 /* GmarketSansTTFMedium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -408,6 +427,7 @@
 				0F67CA592B1061C800259285 /* PasswordView.swift in Sources */,
 				0F67CA3A2B10353800259285 /* BaseViewController.swift in Sources */,
 				0F67CA572B1061B300259285 /* PasswordViewController.swift in Sources */,
+				0F67CA6A2B10641000259285 /* CustomFont.swift in Sources */,
 				0F67CA442B1035CA00259285 /* LoginViewModel.swift in Sources */,
 				0F67CA3C2B10354200259285 /* BaseView.swift in Sources */,
 				0F67CA012B0F7C5000259285 /* AppDelegate.swift in Sources */,

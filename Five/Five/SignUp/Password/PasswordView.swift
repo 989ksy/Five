@@ -12,7 +12,7 @@ class PasswordView : BaseView {
     let guideLabel = {
         let view = UILabel()
         view.text = "로그인에 사용할\n비밀번호를 입력해주세요."
-        view.font = Font.guideLabel18
+        view.font = CustomFont.guideLabel18
         view.numberOfLines = 0
         return view
     }()
@@ -52,14 +52,14 @@ class PasswordView : BaseView {
     let passwordTextfield = {
         let view = UITextField()
         view.placeholder = "비밀번호 입력"
-        view.font = Font.textfield15
+        view.font = CustomFont.textfield15
         view.borderStyle = .roundedRect
         return view
     }()
     
     let firstDirectionLabel = {
         let view = UILabel()
-        view.font = Font.suggestLabel13
+        view.font = CustomFont.suggestLabel13
         view.textColor = .lightGray
         return view
     }()
@@ -67,14 +67,14 @@ class PasswordView : BaseView {
     let checkPasswordTextfield = {
         let view = UITextField()
         view.placeholder = "비밀번호 확인"
-        view.font = Font.textfield15
+        view.font = CustomFont.textfield15
         view.borderStyle = .roundedRect
         return view
     }()
     
     let secondDirectionLabel = {
         let view = UILabel()
-        view.font = Font.suggestLabel13
+        view.font = CustomFont.suggestLabel13
         view.textColor = .lightGray
         return view
     }()
@@ -84,7 +84,7 @@ class PasswordView : BaseView {
         view.setTitle("다음", for: .normal)
         view.backgroundColor = .black
         view.layer.cornerRadius = 15
-        view.titleLabel?.font = Font.textfield15
+        view.titleLabel?.font = CustomFont.textfield15
         return view
     }()
     
