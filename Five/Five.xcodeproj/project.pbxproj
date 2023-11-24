@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		0F67CA012B0F7C5000259285 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CA002B0F7C5000259285 /* AppDelegate.swift */; };
 		0F67CA032B0F7C5000259285 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CA022B0F7C5000259285 /* SceneDelegate.swift */; };
-		0F67CA052B0F7C5000259285 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CA042B0F7C5000259285 /* ViewController.swift */; };
 		0F67CA0A2B0F7C5200259285 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F67CA092B0F7C5200259285 /* Assets.xcassets */; };
 		0F67CA0D2B0F7C5200259285 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F67CA0B2B0F7C5200259285 /* LaunchScreen.storyboard */; };
 		0F67CA182B0F7C5200259285 /* FiveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CA172B0F7C5200259285 /* FiveTests.swift */; };
@@ -32,6 +31,7 @@
 		0F67CA5D2B10625700259285 /* NicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CA5C2B10625700259285 /* NicknameViewController.swift */; };
 		0F67CA5F2B10626000259285 /* NicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CA5E2B10626000259285 /* NicknameView.swift */; };
 		0F67CA612B10626900259285 /* NicknameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CA602B10626900259285 /* NicknameViewModel.swift */; };
+		0F67CA682B10633D00259285 /* CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CA672B10633D00259285 /* CustomColor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,7 +55,6 @@
 		0F67C9FD2B0F7C5000259285 /* Five.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Five.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F67CA002B0F7C5000259285 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0F67CA022B0F7C5000259285 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		0F67CA042B0F7C5000259285 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0F67CA092B0F7C5200259285 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0F67CA0C2B0F7C5200259285 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0F67CA0E2B0F7C5200259285 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -78,6 +77,7 @@
 		0F67CA5C2B10625700259285 /* NicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameViewController.swift; sourceTree = "<group>"; };
 		0F67CA5E2B10626000259285 /* NicknameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameView.swift; sourceTree = "<group>"; };
 		0F67CA602B10626900259285 /* NicknameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameViewModel.swift; sourceTree = "<group>"; };
+		0F67CA672B10633D00259285 /* CustomColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,12 +131,16 @@
 		0F67C9FF2B0F7C5000259285 /* Five */ = {
 			isa = PBXGroup;
 			children = (
+				0F67CA662B10632000259285 /* Network */,
+				0F67CA652B10631300259285 /* Profile */,
+				0F67CA642B10630800259285 /* Feed */,
+				0F67CA632B10630200259285 /* Color */,
+				0F67CA622B1062FB00259285 /* Font */,
 				0F67CA3E2B10356900259285 /* SignUp */,
 				0F67CA3D2B10355100259285 /* Login */,
 				0F67CA302B0F802600259285 /* Base */,
 				0F67CA002B0F7C5000259285 /* AppDelegate.swift */,
 				0F67CA022B0F7C5000259285 /* SceneDelegate.swift */,
-				0F67CA042B0F7C5000259285 /* ViewController.swift */,
 				0F67CA092B0F7C5200259285 /* Assets.xcassets */,
 				0F67CA0B2B0F7C5200259285 /* LaunchScreen.storyboard */,
 				0F67CA0E2B0F7C5200259285 /* Info.plist */,
@@ -218,6 +222,42 @@
 				0F67CA602B10626900259285 /* NicknameViewModel.swift */,
 			);
 			path = Nickname;
+			sourceTree = "<group>";
+		};
+		0F67CA622B1062FB00259285 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
+		0F67CA632B10630200259285 /* Color */ = {
+			isa = PBXGroup;
+			children = (
+				0F67CA672B10633D00259285 /* CustomColor.swift */,
+			);
+			path = Color;
+			sourceTree = "<group>";
+		};
+		0F67CA642B10630800259285 /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Feed;
+			sourceTree = "<group>";
+		};
+		0F67CA652B10631300259285 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		0F67CA662B10632000259285 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -361,10 +401,10 @@
 			files = (
 				0F67CA402B1035B800259285 /* LoginViewController.swift in Sources */,
 				0F67CA5D2B10625700259285 /* NicknameViewController.swift in Sources */,
+				0F67CA682B10633D00259285 /* CustomColor.swift in Sources */,
 				0F67CA5B2B1061DB00259285 /* PasswordViewModel.swift in Sources */,
 				0F67CA512B10617100259285 /* EmailViewController.swift in Sources */,
 				0F67CA422B1035C000259285 /* LoginView.swift in Sources */,
-				0F67CA052B0F7C5000259285 /* ViewController.swift in Sources */,
 				0F67CA592B1061C800259285 /* PasswordView.swift in Sources */,
 				0F67CA3A2B10353800259285 /* BaseViewController.swift in Sources */,
 				0F67CA572B1061B300259285 /* PasswordViewController.swift in Sources */,
