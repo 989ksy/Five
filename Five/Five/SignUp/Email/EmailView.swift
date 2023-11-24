@@ -78,7 +78,7 @@ class EmailView : BaseView {
     let nextButton = {
         let view = UIButton()
         view.setTitle("다음", for: .normal)
-        view.backgroundColor = .black
+        view.backgroundColor = .lightGray
         view.layer.cornerRadius = 15
         view.titleLabel?.font = CustomFont.textfield15
         return view
