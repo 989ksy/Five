@@ -21,8 +21,8 @@ class NicknameViewController : BaseViewController{
     
     let disposeBag = DisposeBag()
     
-    var email : String?
-    var password : String?
+    var emailInputText : String?
+    var passwordInputText : String?
     
     override func loadView() {
         self.view = mainView
@@ -62,10 +62,6 @@ class NicknameViewController : BaseViewController{
             .subscribe(with: self) { owner, _ in
                 
                 //회원가입
-                
-                guard let nick = self.mainView.nicknameTextfield.text else { return }
-                
-//                APIManager.shared.signUp(email: self.email ?? "이메일 없음", password: self.password ?? "비밀번호 없음", nickname: nick)
                 
                 self.navigationController?.popToRootViewController(animated: true)
             }

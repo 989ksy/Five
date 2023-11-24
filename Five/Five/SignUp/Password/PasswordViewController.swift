@@ -17,7 +17,7 @@ protocol PasswordViewControllerAttributed {
 
 class PasswordViewController : BaseViewController {
     
-    var email : String?
+    var emailInputText : String?
     
     private let mainView = PasswordView()
     private let viewModel = PasswordViewModel()
@@ -64,7 +64,6 @@ class PasswordViewController : BaseViewController {
             .map { $0.range(of: self.viewModel.passwordRegex, options: .regularExpression) != nil}
             .subscribe(with: self) { owner, value in
                 owner.mainView.firstDirectionLabel.textColor = value ? CustomColor.pointColor : .lightGray
- 
             }
             .disposed(by: disposeBag)
         
@@ -83,7 +82,13 @@ class PasswordViewController : BaseViewController {
         output.tap
             .subscribe(with: self, onNext: { owner, _ in
                 let vc = NicknameViewController()
+                vc.emailInputText = self.emailInputText
+                guard let passwordInputText = owner.mainView.checkPasswordTextfield.text
+                else { return }
+                vc.passwordInputText = passwordInputText
+                
                 self.navigationController?.pushViewController(vc, animated: true)
+                
                 print("password NextBtn tap")
             })
             .disposed(by: disposeBag)

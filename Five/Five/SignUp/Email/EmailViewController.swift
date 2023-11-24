@@ -66,7 +66,7 @@ class EmailViewController: BaseViewController {
             .subscribe(with: self) { owner, _ in
                 let vc = PasswordViewController()
                 guard let emailInput = owner.mainView.emailTextfield.text else {return }
-                vc.email = emailInput
+                vc.emailInputText = emailInput
                 self.navigationController?.pushViewController(vc, animated: true)
             }
             .disposed(by: disposeBag)
