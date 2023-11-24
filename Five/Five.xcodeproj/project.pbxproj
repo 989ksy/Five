@@ -23,6 +23,15 @@
 		0F67CA472B1036B100259285 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0F67CA462B1036B100259285 /* SnapKit */; };
 		0F67CA4A2B1036CA00259285 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 0F67CA492B1036CA00259285 /* RxCocoa */; };
 		0F67CA4C2B1036CA00259285 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0F67CA4B2B1036CA00259285 /* RxSwift */; };
+		0F67CA512B10617100259285 /* EmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CA502B10617100259285 /* EmailViewController.swift */; };
+		0F67CA532B10618200259285 /* EmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CA522B10618200259285 /* EmailView.swift */; };
+		0F67CA552B10619800259285 /* EmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CA542B10619800259285 /* EmailViewModel.swift */; };
+		0F67CA572B1061B300259285 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CA562B1061B300259285 /* PasswordViewController.swift */; };
+		0F67CA592B1061C800259285 /* PasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CA582B1061C800259285 /* PasswordView.swift */; };
+		0F67CA5B2B1061DB00259285 /* PasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CA5A2B1061DB00259285 /* PasswordViewModel.swift */; };
+		0F67CA5D2B10625700259285 /* NicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CA5C2B10625700259285 /* NicknameViewController.swift */; };
+		0F67CA5F2B10626000259285 /* NicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CA5E2B10626000259285 /* NicknameView.swift */; };
+		0F67CA612B10626900259285 /* NicknameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CA602B10626900259285 /* NicknameViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +69,15 @@
 		0F67CA3F2B1035B800259285 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0F67CA412B1035C000259285 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		0F67CA432B1035CA00259285 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		0F67CA502B10617100259285 /* EmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailViewController.swift; sourceTree = "<group>"; };
+		0F67CA522B10618200259285 /* EmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailView.swift; sourceTree = "<group>"; };
+		0F67CA542B10619800259285 /* EmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailViewModel.swift; sourceTree = "<group>"; };
+		0F67CA562B1061B300259285 /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
+		0F67CA582B1061C800259285 /* PasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordView.swift; sourceTree = "<group>"; };
+		0F67CA5A2B1061DB00259285 /* PasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewModel.swift; sourceTree = "<group>"; };
+		0F67CA5C2B10625700259285 /* NicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameViewController.swift; sourceTree = "<group>"; };
+		0F67CA5E2B10626000259285 /* NicknameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameView.swift; sourceTree = "<group>"; };
+		0F67CA602B10626900259285 /* NicknameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,8 +183,41 @@
 		0F67CA3E2B10356900259285 /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
+				0F67CA4F2B10614800259285 /* Nickname */,
+				0F67CA4E2B10614100259285 /* Password */,
+				0F67CA4D2B10613700259285 /* Email */,
 			);
 			path = SignUp;
+			sourceTree = "<group>";
+		};
+		0F67CA4D2B10613700259285 /* Email */ = {
+			isa = PBXGroup;
+			children = (
+				0F67CA502B10617100259285 /* EmailViewController.swift */,
+				0F67CA522B10618200259285 /* EmailView.swift */,
+				0F67CA542B10619800259285 /* EmailViewModel.swift */,
+			);
+			path = Email;
+			sourceTree = "<group>";
+		};
+		0F67CA4E2B10614100259285 /* Password */ = {
+			isa = PBXGroup;
+			children = (
+				0F67CA562B1061B300259285 /* PasswordViewController.swift */,
+				0F67CA582B1061C800259285 /* PasswordView.swift */,
+				0F67CA5A2B1061DB00259285 /* PasswordViewModel.swift */,
+			);
+			path = Password;
+			sourceTree = "<group>";
+		};
+		0F67CA4F2B10614800259285 /* Nickname */ = {
+			isa = PBXGroup;
+			children = (
+				0F67CA5C2B10625700259285 /* NicknameViewController.swift */,
+				0F67CA5E2B10626000259285 /* NicknameView.swift */,
+				0F67CA602B10626900259285 /* NicknameViewModel.swift */,
+			);
+			path = Nickname;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -309,13 +360,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F67CA402B1035B800259285 /* LoginViewController.swift in Sources */,
+				0F67CA5D2B10625700259285 /* NicknameViewController.swift in Sources */,
+				0F67CA5B2B1061DB00259285 /* PasswordViewModel.swift in Sources */,
+				0F67CA512B10617100259285 /* EmailViewController.swift in Sources */,
 				0F67CA422B1035C000259285 /* LoginView.swift in Sources */,
 				0F67CA052B0F7C5000259285 /* ViewController.swift in Sources */,
+				0F67CA592B1061C800259285 /* PasswordView.swift in Sources */,
 				0F67CA3A2B10353800259285 /* BaseViewController.swift in Sources */,
+				0F67CA572B1061B300259285 /* PasswordViewController.swift in Sources */,
 				0F67CA442B1035CA00259285 /* LoginViewModel.swift in Sources */,
 				0F67CA3C2B10354200259285 /* BaseView.swift in Sources */,
 				0F67CA012B0F7C5000259285 /* AppDelegate.swift in Sources */,
+				0F67CA612B10626900259285 /* NicknameViewModel.swift in Sources */,
 				0F67CA032B0F7C5000259285 /* SceneDelegate.swift in Sources */,
+				0F67CA552B10619800259285 /* EmailViewModel.swift in Sources */,
+				0F67CA5F2B10626000259285 /* NicknameView.swift in Sources */,
+				0F67CA532B10618200259285 /* EmailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
