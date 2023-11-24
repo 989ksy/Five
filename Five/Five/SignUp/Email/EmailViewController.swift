@@ -66,7 +66,7 @@ class EmailViewController: BaseViewController {
         
         output.validation
             .subscribe(with: self) { owner, value in
-                owner.mainView.nextButton.backgroundColor = value ? Color.pointColor : .lightGray
+                owner.mainView.nextButton.backgroundColor = value ? CustomColor.pointColor : .lightGray
                 owner.mainView.nextButton.isEnabled = value
             }
             .disposed(by: disposeBag)

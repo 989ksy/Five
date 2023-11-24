@@ -63,15 +63,15 @@ class PasswordViewController : BaseViewController {
         input.originText
             .map { $0.range(of: self.viewModel.passwordRegex, options: .regularExpression) != nil}
             .subscribe(with: self) { owner, value in
-                owner.mainView.firstDirectionLabel.textColor = value ? Color.pointColor : .lightGray
+                owner.mainView.firstDirectionLabel.textColor = value ? CustomColor.pointColor : .lightGray
  
             }
             .disposed(by: disposeBag)
         
         output.validation
         .subscribe(with: self) { owner, value in
-            owner.mainView.secondDirectionLabel.textColor = value ? Color.pointColor : .lightGray
-            owner.mainView.nextButton.backgroundColor = value ? Color.pointColor : .lightGray
+            owner.mainView.secondDirectionLabel.textColor = value ? CustomColor.pointColor : .lightGray
+            owner.mainView.nextButton.backgroundColor = value ? CustomColor.pointColor : .lightGray
         }
         .disposed(by: disposeBag)
         

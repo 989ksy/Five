@@ -54,7 +54,7 @@ class NicknameViewController : BaseViewController{
         
         output.validation
             .subscribe(with: self) { owner, value in
-                owner.mainView.nextButton.backgroundColor = value ? Color.pointColor : .lightGray
+                owner.mainView.nextButton.backgroundColor = value ? CustomColor.pointColor : .lightGray
             }
             .disposed(by: disposeBag)
         

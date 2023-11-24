@@ -25,14 +25,14 @@ class EmailView : BaseView {
         let view = UIStackView()
         view.distribution = .fillEqually
         view.layer.borderWidth = 1
-        view.layer.borderColor = Color.pointColor?.cgColor// UIColor.darkGray.cgColor
+        view.layer.borderColor = CustomColor.pointColor?.cgColor// UIColor.darkGray.cgColor
         view.layer.cornerRadius = 3
         return view
     }()
     
     let emailView = {
         let view = UIView()
-        view.backgroundColor = Color.pointColor
+        view.backgroundColor = CustomColor.pointColor
         view.layer.cornerRadius = 3
         return view
     }()

@@ -22,20 +22,20 @@ class PasswordView : BaseView {
         let view = UIStackView()
         view.distribution = .fillEqually
         view.layer.borderWidth = 1
-        view.layer.borderColor = Color.pointColor?.cgColor
+        view.layer.borderColor = CustomColor.pointColor?.cgColor
         view.layer.cornerRadius = 3
         return view
     }()
     
     let emailView = {
         let view = UIView()
-        view.backgroundColor = Color.pointColor
+        view.backgroundColor = CustomColor.pointColor
         view.layer.cornerRadius = 3
         return view
     }()
     let passwordView = {
         let view = UIView()
-        view.backgroundColor = Color.pointColor
+        view.backgroundColor = CustomColor.pointColor
         return view
     }()
 //    let birthdayView = {
