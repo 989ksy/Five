@@ -31,24 +31,17 @@ class APIManager {
         return Single.create { single in
             
             self.provider.request(.emailValidation(model: data)) { result in
-                
-                //상태코드 체크 500번까지 성공으로 넘기기.
-                
+                                
                 switch result {
                     
                 case .success(let response):
-                    print("=== APIManager, StatusCode === \(response.statusCode)")
-                    
-                    guard let data = try? JSONDecoder().decode(CheckEmailResponse.self, from: response.data) else {
-                        single(.success(.failure(.decodingError)))
-                        return
-                    }
-                    
-                    single(.success(.success(data)))
+                    print("=== APIManager, StatusCode === \(response.statusCode), == response: \(response)")
                     
                     do {
                         let data = try JSONDecoder().decode(CheckEmailResponse.self, from: response.data)
                         single(.success(.success(data)))
+                        
+                        let statusCode = response.statusCode
                         
                     } catch {
                         single(.success(.failure(.decodingError)))
@@ -63,9 +56,7 @@ class APIManager {
                     single(.success(.failure(customError)))
                 }
             }
-            
             return Disposables.create()
-            
         }
         
         
