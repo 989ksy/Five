@@ -40,7 +40,7 @@ enum FiveError: Int, Error, LocalizedError {
         case .valueRequired:
             return "필수값을 채워주세요."
         case .existedAccount:
-            return "이미 가입된 계정입니다."
+            return "이미 사용중인 이메일입니다."
         case .unacceptedAccount:
             return "가입되지 않은 계정입니다. 비밀번호 입력을 확인해주세요."
         case .Forbidden:
@@ -48,7 +48,7 @@ enum FiveError: Int, Error, LocalizedError {
         case .expiredToken:
             return "리프레시 토큰이 만려되었습니다. 다시 로그인 해주세요."
         case .decodingError:
-            return "error"
+            return "decoding error"
         }
     }
 }
