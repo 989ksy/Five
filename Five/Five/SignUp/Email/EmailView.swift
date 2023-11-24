@@ -25,7 +25,7 @@ class EmailView : BaseView {
         let view = UIStackView()
         view.distribution = .fillEqually
         view.layer.borderWidth = 1
-        view.layer.borderColor = CustomColor.pointColor?.cgColor// UIColor.darkGray.cgColor
+        view.layer.borderColor = CustomColor.pointColor?.cgColor
         view.layer.cornerRadius = 3
         return view
     }()
@@ -40,10 +40,7 @@ class EmailView : BaseView {
         let view = UIView()
         return view
     }()
-//    let birthdayView = {
-//        let view = UIView()
-//        return view
-//    }()
+
     let nicknameView = {
         let view = UIView()
         return view
@@ -66,6 +63,18 @@ class EmailView : BaseView {
         return view
     }()
     
+    let validationButton = {
+        let view = UIButton()
+        view.setTitle("중복확인", for: .normal)
+        view.setTitleColor(.black, for: .normal)
+        view.backgroundColor = .clear
+        view.layer.borderColor = UIColor.lightGray.cgColor
+        view.layer.borderWidth = 1
+        view.layer.cornerRadius = 4
+        view.titleLabel?.font = UIFont(name: "GmarketSansTTFLight", size: 13)
+        return view
+    }()
+    
     let nextButton = {
         let view = UIButton()
         view.setTitle("다음", for: .normal)
@@ -82,11 +91,11 @@ class EmailView : BaseView {
         addSubview(progressStackView)
         progressStackView.addArrangedSubview(emailView)
         progressStackView.addArrangedSubview(passwordView)
-//        progressStackView.addArrangedSubview(birthdayView)
         progressStackView.addArrangedSubview(nicknameView)
         addSubview(emailTextfield)
         addSubview(directionLabel)
         addSubview(nextButton)
+        addSubview(validationButton)
     }
     
     override func setConstraints() {
@@ -104,8 +113,16 @@ class EmailView : BaseView {
         
         emailTextfield.snp.makeConstraints{
             $0.top.equalTo(progressStackView.snp.bottom).offset(50)
-            $0.horizontalEdges.equalToSuperview().inset(20)
+            $0.leading.equalToSuperview().inset(20)
             $0.height.equalTo(45)
+        }
+        
+        validationButton.snp.makeConstraints{
+            $0.top.equalTo(progressStackView.snp.bottom).offset(50)
+            $0.leading.equalTo(emailTextfield.snp.trailing).offset(5)
+            $0.trailing.equalToSuperview().inset(20)
+            $0.height.equalTo(45)
+            $0.width.equalTo(70)
         }
         
         directionLabel.snp.makeConstraints{
