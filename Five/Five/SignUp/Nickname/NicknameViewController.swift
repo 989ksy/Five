@@ -40,7 +40,7 @@ class NicknameViewController : BaseViewController{
     
     func bind() {
         
-        let input = NicknameViewModel.Input(nicknameText: mainView.nicknameTextfield.rx.text.orEmpty, tap: mainView.nextButton.rx.tap)
+        let input = NicknameViewModel.Input(nicknameText: mainView.nicknameTextfield.rx.text.orEmpty, email: emailInputText ?? "", password: passwordInputText ?? "", joinTap: mainView.nextButton.rx.tap)
         
         let output = viewModel.transform(input: input)
         
@@ -58,14 +58,20 @@ class NicknameViewController : BaseViewController{
             }
             .disposed(by: disposeBag)
         
-        output.tap
-            .subscribe(with: self) { owner, _ in
-                
-                //회원가입
-                
-                self.navigationController?.popToRootViewController(animated: true)
-            }
-            .disposed(by: disposeBag)
+//        output.isSucceeded
+//            .subscribe(with: self) { owner, value in
+//                <#code#>
+//            }
+//            .disposed(by: disposeBag)
+        
+//        input.joinTap
+//            .subscribe(with: self) { owner, _ in
+//                
+//                //회원가입
+//                self.navigationController?.popToRootViewController(animated: true)
+//            }
+//            .disposed(by: disposeBag)
+
         
         
     }

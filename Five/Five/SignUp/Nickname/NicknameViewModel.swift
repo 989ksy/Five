@@ -12,21 +12,53 @@ import RxCocoa
 class NicknameViewModel {
     
     let directionText = BehaviorRelay(value: "8자 이내의 닉네임을 입력해주세요.")
+    let disposeBag = DisposeBag()
     
     struct Input {
         let nicknameText : ControlProperty<String>
-        let tap : ControlEvent<Void>
+        var email : String
+        var password : String
+        let joinTap : ControlEvent<Void>
     }
     
     struct Output {
-        let tap : ControlEvent<Void>
         let validation: Observable<Bool>
+        let isSucceeded: PublishSubject<Bool>
     }
     
     func transform (input: Input) -> Output {
-        let validation = input.nicknameText
+        
+        let nicknameCountValidation = input.nicknameText
             .map { $0.count <= 8 && $0.count >= 1 }
-        return Output(tap: input.tap, validation: validation)
+        
+        let isSucceeded = PublishSubject<Bool>()
+        
+        input.joinTap
+            .throttle(.seconds(1), scheduler: MainScheduler.instance)
+            .withLatestFrom(input.nicknameText, resultSelector: {_, query in
+                return query
+            })
+            .map { query in
+                return "\(query)"
+            }
+            .flatMap {
+                APIManager.shared.signuUp(email: input.email, password: input.password, nick: $0)
+            }
+            .subscribe(with: self) { owner, result in
+                switch result {
+                case .success(let response):
+                    isSucceeded.onNext(true)
+                    print("==SignUp: \(response)")
+                case .failure(let failure):
+                    isSucceeded.onNext(false)
+                    print(failure.errorDescription ?? "error")
+                }
+            }
+            .disposed(by: disposeBag )
+        
+        
+        
+        return Output( validation: nicknameCountValidation, isSucceeded: isSucceeded)
     }
     
     
