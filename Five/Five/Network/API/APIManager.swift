@@ -20,6 +20,36 @@ class APIManager {
     
     //MARK: - 회원가입
     
+    func signuUp(email: String, password: String, nick: String) -> Single<Result<SignupResponse, FiveError>> {
+        
+        let data = Signup(email: email, password: password, nick: nick)
+        
+        return Single.create { single in
+            self.provider.request(.signUp(model: data)) { result in
+                switch result {
+                case .success(let response):
+                    print("===APIMAnager, StatusCode === \(response.statusCode), == response: \(response)")
+                    
+                    do {
+                        let data = try JSONDecoder().decode(SignupResponse.self, from: response.data)
+                        single(.success(.success(data)))
+                        
+                    } catch {
+                        
+                        single(.success(.failure(.decodingError)))
+                    }
+                    
+                case .failure(let error):
+                    guard let customError = FiveError(rawValue: error.response?.statusCode ?? 1) else {
+                        return
+                    }
+                    single(.success(.failure(customError)))
+                }
+            }
+            return Disposables.create()
+        }
+        
+    }
 
     
     //MARK: - 이메일 중복확인
@@ -41,7 +71,7 @@ class APIManager {
                         let data = try JSONDecoder().decode(CheckEmailResponse.self, from: response.data)
                         single(.success(.success(data)))
                         
-                        let statusCode = response.statusCode
+//                        let statusCode = response.statusCode
                         
                     } catch {
                         single(.success(.failure(.decodingError)))
