@@ -58,21 +58,23 @@ class NicknameViewController : BaseViewController{
             }
             .disposed(by: disposeBag)
         
-//        output.isSucceeded
-//            .subscribe(with: self) { owner, value in
-//                <#code#>
-//            }
-//            .disposed(by: disposeBag)
-        
-//        input.joinTap
-//            .subscribe(with: self) { owner, _ in
-//                
-//                //회원가입
-//                self.navigationController?.popToRootViewController(animated: true)
-//            }
-//            .disposed(by: disposeBag)
-
-        
+        input.joinTap
+            .subscribe(with: self) { owner, _ in
+                
+                guard let nickname = owner.mainView.nicknameTextfield.text else { return }
+                
+                let alert = UIAlertController(title: "확인", message: "\(nickname)님, 가입을 환영합니다!", preferredStyle: .alert)
+                let ok = UIAlertAction(title: "확인", style:.default) { _ in
+                    
+                    self.navigationController?.popToRootViewController(animated: true)
+                }
+                
+                alert.addAction(ok)
+                
+                self.present(alert, animated: true)
+                
+            }
+            .disposed(by: disposeBag)
         
     }
     

@@ -81,6 +81,7 @@ class PasswordViewController : BaseViewController {
         
         output.tap
             .subscribe(with: self, onNext: { owner, _ in
+                
                 let vc = NicknameViewController()
                 vc.emailInputText = self.emailInputText
                 guard let passwordInputText = owner.mainView.checkPasswordTextfield.text
