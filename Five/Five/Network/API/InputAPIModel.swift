@@ -24,13 +24,6 @@ struct Login: Encodable {
     let password: String
 }
 
-
-//MARK: - 닉네임
-
-struct Nickname: Encodable {
-    let nick: String
-}
-
 //MARK: - 이메일 중복 확인
 
 struct CheckEmail: Encodable {

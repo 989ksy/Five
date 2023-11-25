@@ -11,9 +11,9 @@ import Foundation
 
 //MARK: - 회원가입
 struct SignupResponse : Decodable {
+    let _id : String
     let email : String
-    let password : String
-    let nick: String
+    let nick : String
 }
 
 //MARK: - 로그인
@@ -21,12 +21,6 @@ struct SignupResponse : Decodable {
 struct LoginResponse: Decodable {
     let email: String
     let password: String
-}
-
-//MARK: - 닉네임
-
-struct NicknameResponse : Decodable {
-    let nick: String
 }
 
 //MARK: - 이메일 중복 확인
