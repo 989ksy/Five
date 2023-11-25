@@ -38,7 +38,7 @@ class LoginView : BaseView {
         let view = UIButton()
         view.setTitle("로그인하기", for: .normal)
         view.backgroundColor = CustomColor.pointColor
-        view.layer.cornerRadius = 15
+        view.layer.cornerRadius = 10
         view.titleLabel?.font = CustomFont.textfield15
         return view
     }()
