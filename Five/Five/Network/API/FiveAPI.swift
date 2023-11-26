@@ -10,7 +10,7 @@ import Moya
 
 enum FiveAPI {
     case signUp (model: Signup)
-    case login (email: String, password: String)
+    case login (model: Login)
     case emailValidation (model: CheckEmail)
     case tokenRefresh// HTTP - GET은 요청바디 없음.
     case withdraw // HTTP - GET은 요청바디 없음.
@@ -57,8 +57,7 @@ extension FiveAPI : TargetType {
         case .signUp(let data):
             return .requestJSONEncodable(data)
             
-        case .login(let email, let password):
-            let data = Login(email: email, password: password)
+        case .login(let data):
             return .requestJSONEncodable(data)
             
         case .emailValidation(let data):
