@@ -25,9 +25,22 @@ class FeedViewController : BaseViewController {
         mainView.feedCollectionView.delegate = self
         mainView.feedCollectionView.dataSource = self
 
+        mainView.addContentButton.addTarget(self, action: #selector(addContentButtonTapped), for: .touchUpInside)
         
         setNavigationController()
     }
+    
+    
+    //MARK: - 글 작성하기 버튼
+    
+    @objc func addContentButtonTapped() {
+        
+        let vc = WriteViewController()
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true)
+        
+    }
+    
     
     //MARK: - navigation
     
@@ -47,6 +60,9 @@ class FeedViewController : BaseViewController {
     
 }
 
+
+
+//MARK: - 컬렉션뷰
 
 extension FeedViewController : UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
