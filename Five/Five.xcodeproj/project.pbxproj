@@ -49,6 +49,9 @@
 		0F67CA8A2B10669700259285 /* OutputAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CA892B10669700259285 /* OutputAPIModel.swift */; };
 		0F67CA8C2B1066A500259285 /* InputAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CA8B2B1066A500259285 /* InputAPIModel.swift */; };
 		0F67CA8E2B10677200259285 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CA8D2B10677200259285 /* APIManager.swift */; };
+		0F7DB6772B133FE400A48828 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7DB6762B133FE400A48828 /* BaseCollectionViewCell.swift */; };
+		0F7DB6792B13639000A48828 /* FeedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7DB6782B13639000A48828 /* FeedCollectionViewCell.swift */; };
+		0F7DB67E2B13709200A48828 /* CustomPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7DB67D2B13709200A48828 /* CustomPhoto.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +114,9 @@
 		0F67CA892B10669700259285 /* OutputAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputAPIModel.swift; sourceTree = "<group>"; };
 		0F67CA8B2B1066A500259285 /* InputAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputAPIModel.swift; sourceTree = "<group>"; };
 		0F67CA8D2B10677200259285 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		0F7DB6762B133FE400A48828 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
+		0F7DB6782B13639000A48828 /* FeedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCollectionViewCell.swift; sourceTree = "<group>"; };
+		0F7DB67D2B13709200A48828 /* CustomPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPhoto.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +171,7 @@
 		0F67C9FF2B0F7C5000259285 /* Five */ = {
 			isa = PBXGroup;
 			children = (
+				0F7DB67C2B13708500A48828 /* Photo */,
 				0F67CA662B10632000259285 /* Network */,
 				0F67CA652B10631300259285 /* Profile */,
 				0F67CA642B10630800259285 /* Feed */,
@@ -204,6 +211,7 @@
 			children = (
 				0F67CA392B10353800259285 /* BaseViewController.swift */,
 				0F67CA3B2B10354200259285 /* BaseView.swift */,
+				0F7DB6762B133FE400A48828 /* BaseCollectionViewCell.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -284,6 +292,7 @@
 				0F67CA732B10656B00259285 /* FeedViewController.swift */,
 				0F67CA752B10657300259285 /* FeedView.swift */,
 				0F67CA772B10657D00259285 /* FeedViewModel.swift */,
+				0F7DB6782B13639000A48828 /* FeedCollectionViewCell.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -332,6 +341,14 @@
 				0F67CA8D2B10677200259285 /* APIManager.swift */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		0F7DB67C2B13708500A48828 /* Photo */ = {
+			isa = PBXGroup;
+			children = (
+				0F7DB67D2B13709200A48828 /* CustomPhoto.swift */,
+			);
+			path = Photo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -481,7 +498,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F67CA762B10657300259285 /* FeedView.swift in Sources */,
+				0F7DB67E2B13709200A48828 /* CustomPhoto.swift in Sources */,
 				0F67CA402B1035B800259285 /* LoginViewController.swift in Sources */,
+				0F7DB6792B13639000A48828 /* FeedCollectionViewCell.swift in Sources */,
 				0F67CA5D2B10625700259285 /* NicknameViewController.swift in Sources */,
 				0F67CA682B10633D00259285 /* CustomColor.swift in Sources */,
 				0F67CA5B2B1061DB00259285 /* PasswordViewModel.swift in Sources */,
@@ -501,6 +520,7 @@
 				0F67CA012B0F7C5000259285 /* AppDelegate.swift in Sources */,
 				0F67CA612B10626900259285 /* NicknameViewModel.swift in Sources */,
 				0F67CA8E2B10677200259285 /* APIManager.swift in Sources */,
+				0F7DB6772B133FE400A48828 /* BaseCollectionViewCell.swift in Sources */,
 				0F67CA882B10667100259285 /* FiveAPI.swift in Sources */,
 				0F67CA032B0F7C5000259285 /* SceneDelegate.swift in Sources */,
 				0F67CA552B10619800259285 /* EmailViewModel.swift in Sources */,
