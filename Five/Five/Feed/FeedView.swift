@@ -10,42 +10,55 @@ import SnapKit
 
 class FeedView: BaseView {
     
-    let storyAddButton = {
-        let btn = UIButton()
-        btn.setImage(UIImage(systemName: "plus"), for: .normal)
-        btn.tintColor = CustomColor.pointColor
-        btn.layer.cornerRadius = 30
-        btn.layer.borderWidth = 2
-        btn.layer.borderColor = CustomColor.pointColor?.cgColor
-        return btn
-    }()
-    
-    let storyTableView = {
-        let view = UITableView()
-        view.backgroundColor = .brown
+    let feedCollectionView = {
+        let view = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionLayout())
+        view.register(FeedCollectionViewCell.self, forCellWithReuseIdentifier: "FeedCollectionViewCell")
         return view
     }()
     
+    let addContentButton = {
+        let btn = UIButton()
+        btn.setImage(UIImage(named: "add")?.withTintColor(.white), for: .normal)
+        btn.backgroundColor = CustomColor.pointColor
+        btn.layer.cornerRadius = 30
+        btn.layer.shadowColor = UIColor.gray.cgColor
+        btn.layer.shadowOpacity = 0.3
+        btn.layer.shadowOffset = CGSize.zero
+        btn.layer.shadowRadius = 6
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        return btn
+    }()
+    
+    static func configureCollectionLayout() -> UICollectionViewLayout {
+        let layout = UICollectionViewFlowLayout()
+        let spacing : CGFloat = 12
+        let width = UIScreen.main.bounds.width - (spacing)
+        layout.itemSize = CGSize(width: width , height: width)
+        layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
+        
+        return layout
+    }
+    
     override func configureView() {
         
-        addSubview(storyAddButton)
-        addSubview(storyTableView)
+        addSubview(feedCollectionView)
+        addSubview(addContentButton)
+        
     }
     
     override func setConstraints() {
         
-        storyAddButton.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide).offset(8)
-            make.size.equalTo(60)
-            make.leading.equalToSuperview().offset(12)
+
+        feedCollectionView.snp.makeConstraints { make in
+            make.edges.equalTo(safeAreaLayoutGuide)
         }
         
-        storyTableView.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide).offset(8)
-            make.leading.equalTo(storyAddButton.snp.trailing).offset(8)
-            make.trailing.equalToSuperview().inset(12)
-            make.height.equalTo(60)
+        addContentButton.snp.makeConstraints { make in
+            make.size.equalTo(60)
+            make.trailing.equalToSuperview().inset(23)
+            make.bottom.equalToSuperview().inset(80)
         }
+
         
         
     }
