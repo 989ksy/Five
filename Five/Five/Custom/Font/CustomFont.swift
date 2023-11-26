@@ -27,6 +27,7 @@ enum CustomFont {
     static let suggestLabel13 = UIFont(name: "GmarketSansTTFLight", size: 13)
     static let feedProfile15 = UIFont(name: "GmarketSansTTFMedium", size: 15)
     static let guideLabel18 = UIFont(name: "GmarketSansTTFMedium", size: 25)
+    static let dateLabel11 = UIFont(name: "GmarketSansTTFLight", size: 11)
     
     
 }
