@@ -42,11 +42,11 @@ enum FiveError: Int, Error, LocalizedError {
         case .existedAccount:
             return "이미 사용중인 이메일입니다."
         case .unacceptedAccount:
-            return "가입되지 않은 계정입니다. 비밀번호 입력을 확인해주세요."
+            return "가입되지 않은 계정입니다. 입력 정보를 확인해주세요."
         case .Forbidden:
             return "접근권한이 없습니다."
         case .expiredToken:
-            return "리프레시 토큰이 만려되었습니다. 다시 로그인 해주세요."
+            return "리프레시 토큰이 만려되었습니다."
         case .decodingError:
             return "decoding error"
         }
