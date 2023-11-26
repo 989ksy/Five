@@ -19,12 +19,18 @@ struct SignupResponse : Decodable {
 //MARK: - 로그인
 
 struct LoginResponse: Decodable {
-    let email: String
-    let password: String
+    let token: String
+    let refreshToken: String
 }
 
 //MARK: - 이메일 중복 확인
 
 struct CheckEmailResponse : Decodable {
     let message: String
+}
+
+//MARK: - 토큰 갱신
+
+struct RefreshToken : Decodable {
+    let token : String
 }
