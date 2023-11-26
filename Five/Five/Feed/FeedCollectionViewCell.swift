@@ -94,7 +94,7 @@ class FeedCollectionViewCell : BaseCollectionViewCell {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy년 MM월 dd일"
         label.text = dateFormatter.dateFormat
-        label.font = CustomFont.suggestLabel13
+        label.font = CustomFont.dateLabel11
         label.textColor = .gray
         return label
     }()
