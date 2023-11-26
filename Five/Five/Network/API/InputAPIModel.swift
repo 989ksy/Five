@@ -30,8 +30,3 @@ struct CheckEmail: Encodable {
     let email: String
 }
 
-//MARK: - 토큰 갱신 _ LSLP에선 토큰갱신 x, 로그인으로 화면전환되어야함....인데 http라 바디없음...
-
-//struct Token: Encodable {
-//    let receivedToken : String
-//}
