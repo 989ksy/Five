@@ -18,7 +18,7 @@ class FeedView: BaseView {
     
     let addContentButton = {
         let btn = UIButton()
-        btn.setImage(UIImage(named: "add")?.withTintColor(.white), for: .normal)
+        btn.setImage(UIImage(named: "customPlus")?.withTintColor(.white), for: .normal)
         btn.backgroundColor = CustomColor.pointColor
         btn.layer.cornerRadius = 30
         btn.layer.shadowColor = UIColor.gray.cgColor

@@ -52,6 +52,8 @@
 		0F7DB6772B133FE400A48828 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7DB6762B133FE400A48828 /* BaseCollectionViewCell.swift */; };
 		0F7DB6792B13639000A48828 /* FeedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7DB6782B13639000A48828 /* FeedCollectionViewCell.swift */; };
 		0F7DB67E2B13709200A48828 /* CustomPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7DB67D2B13709200A48828 /* CustomPhoto.swift */; };
+		0F7DB6822B13A80B00A48828 /* WriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7DB6812B13A80B00A48828 /* WriteViewController.swift */; };
+		0F7DB6842B13A83400A48828 /* WriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7DB6832B13A83400A48828 /* WriteView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,6 +119,8 @@
 		0F7DB6762B133FE400A48828 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		0F7DB6782B13639000A48828 /* FeedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCollectionViewCell.swift; sourceTree = "<group>"; };
 		0F7DB67D2B13709200A48828 /* CustomPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPhoto.swift; sourceTree = "<group>"; };
+		0F7DB6812B13A80B00A48828 /* WriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteViewController.swift; sourceTree = "<group>"; };
+		0F7DB6832B13A83400A48828 /* WriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,12 +175,11 @@
 		0F67C9FF2B0F7C5000259285 /* Five */ = {
 			isa = PBXGroup;
 			children = (
-				0F7DB67C2B13708500A48828 /* Photo */,
+				0F7DB6802B13A6E000A48828 /* Custom */,
+				0F7DB67F2B13A6BE00A48828 /* Write */,
 				0F67CA662B10632000259285 /* Network */,
 				0F67CA652B10631300259285 /* Profile */,
 				0F67CA642B10630800259285 /* Feed */,
-				0F67CA632B10630200259285 /* Color */,
-				0F67CA622B1062FB00259285 /* Font */,
 				0F67CA3E2B10356900259285 /* SignUp */,
 				0F67CA3D2B10355100259285 /* Login */,
 				0F67CA302B0F802600259285 /* Base */,
@@ -351,6 +354,25 @@
 			path = Photo;
 			sourceTree = "<group>";
 		};
+		0F7DB67F2B13A6BE00A48828 /* Write */ = {
+			isa = PBXGroup;
+			children = (
+				0F7DB6812B13A80B00A48828 /* WriteViewController.swift */,
+				0F7DB6832B13A83400A48828 /* WriteView.swift */,
+			);
+			path = Write;
+			sourceTree = "<group>";
+		};
+		0F7DB6802B13A6E000A48828 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				0F7DB67C2B13708500A48828 /* Photo */,
+				0F67CA632B10630200259285 /* Color */,
+				0F67CA622B1062FB00259285 /* Font */,
+			);
+			path = Custom;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -502,6 +524,7 @@
 				0F67CA402B1035B800259285 /* LoginViewController.swift in Sources */,
 				0F7DB6792B13639000A48828 /* FeedCollectionViewCell.swift in Sources */,
 				0F67CA5D2B10625700259285 /* NicknameViewController.swift in Sources */,
+				0F7DB6842B13A83400A48828 /* WriteView.swift in Sources */,
 				0F67CA682B10633D00259285 /* CustomColor.swift in Sources */,
 				0F67CA5B2B1061DB00259285 /* PasswordViewModel.swift in Sources */,
 				0F67CA742B10656B00259285 /* FeedViewController.swift in Sources */,
@@ -527,6 +550,7 @@
 				0F67CA5F2B10626000259285 /* NicknameView.swift in Sources */,
 				0F67CA7F2B10660500259285 /* BaseURL.swift in Sources */,
 				0F67CA8C2B1066A500259285 /* InputAPIModel.swift in Sources */,
+				0F7DB6822B13A80B00A48828 /* WriteViewController.swift in Sources */,
 				0F67CA532B10618200259285 /* EmailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
