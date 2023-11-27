@@ -6,12 +6,13 @@
 //
 
 import UIKit
-import SnapKit
 import RxSwift
 import RxCocoa
 
 protocol LoginViewControllerAttributed {
     func bind()
+    func loginAlertForSuccess(message: String)
+    func loginAlertForFailure(message: String)
 }
 
 class LoginViewController : BaseViewController {
@@ -19,7 +20,7 @@ class LoginViewController : BaseViewController {
     private let mainView = LoginView()
     private let viewModel = LoginViewModel()
     
-    let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     
     override func loadView() {
         let view = mainView
@@ -31,7 +32,7 @@ class LoginViewController : BaseViewController {
         
         //dummy
         mainView.emailTextField.text = "kia@g.com"
-        mainView.passwordTextField.text = "#GoKiaV1"
+        mainView.passwordTextField.text = "#gokiaV11"
         
         bind()
     }
@@ -40,7 +41,11 @@ class LoginViewController : BaseViewController {
     
     func bind() {
         
-        let input = LoginViewModel.Input(email: mainView.emailTextField.rx.text.orEmpty, password: mainView.passwordTextField.rx.text.orEmpty, loginTap: mainView.loginButton.rx.tap, joinTap: mainView.joinButton.rx.tap)
+        guard let emailInput = mainView.emailTextField.text else { return }
+        guard let passwordInput = mainView.passwordTextField.text else { return }
+        
+        let input = LoginViewModel.Input(email: mainView.emailTextField.rx.text.orEmpty, password: mainView.passwordTextField.rx.text.orEmpty, loginTap: mainView.loginButton.rx.tap, joinTap: mainView.joinButton.rx.tap, emailInput: emailInput, passwordInput: passwordInput)
+        
         let output = viewModel.transform(input: input)
         
         output.validation
@@ -53,18 +58,20 @@ class LoginViewController : BaseViewController {
             }
             .disposed(by: disposeBag)
         
-        output.loginTap
-            .subscribe(with: self) { owner, _ in
-                let vc = FeedViewController()
-                self.navigationController?.pushViewController(vc, animated: true)
-//                vc.modalPresentationStyle = .fullScreen
-//                self.present(vc, animated: true)
+        output.isSucceeded
+            .subscribe(with: self) { owner, bool in
+                
+                if bool {
+                    self.loginAlertForSuccess(message: "로그인에 성공하였습니다.")
+                } else {
+                    self.loginAlertForFailure(message: "가입되지 않은 계정입니다.\n입력 정보를 확인해주세요.")
+                }
             }
             .disposed(by: disposeBag)
         
         
         //회원가입
-        output.joinTap
+        input.joinTap
             .observe(on: MainScheduler.instance)
             .subscribe(with: self) { owner, value in
                 let vc = EmailViewController()
@@ -72,8 +79,34 @@ class LoginViewController : BaseViewController {
                 print("join btn tap")
             }
             .disposed(by: disposeBag)
-        
     }
+    
+    
+    //MARK: - 얼럿
+    
+    func loginAlertForSuccess(message: String) {
+        
+        let alert = UIAlertController(title: "안내", message: message, preferredStyle: .alert)
+        let ok = UIAlertAction(title: "확인", style:.default) { _ in
+
+            let vc = FeedViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+
+        alert.addAction(ok)
+        
+        present(alert, animated: true)
+    }
+    func loginAlertForFailure(message: String) {
+        
+        let alert = UIAlertController(title: "안내", message: message, preferredStyle: .alert)
+        let ok = UIAlertAction(title: "확인", style:.default)
+        alert.addAction(ok)
+        
+        present(alert, animated: true)
+    }
+    
+    
     
 }
 
