@@ -14,20 +14,25 @@ class LoginViewModel {
     let emailRegex = #"^([a-zA-Z0-9._-])+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,20}$"#
     let passwordRegex = "[A-Za-z0-9!_@$%^&+=]{8,20}"
     
+    let disposeBag = DisposeBag()
+    
     struct Input {
         
         let email : ControlProperty<String>
         let password : ControlProperty<String>
+        
         let loginTap : ControlEvent<Void>
         let joinTap : ControlEvent<Void>
+        
+        var emailInput : String
+        var passwordInput : String
         
     }
     
     struct Output {
         
         let validation : Observable<Bool>
-        let loginTap : ControlEvent<Void>
-        let joinTap : ControlEvent<Void>
+        let isSucceeded : Observable<Bool>
         
     }
     
@@ -38,7 +43,27 @@ class LoginViewModel {
             return email.range(of: self.emailRegex, options: .regularExpression) != nil && password.range(of: self.passwordRegex, options: .regularExpression) != nil
         }
         
-        return Output(validation: validation, loginTap: input.loginTap, joinTap: input.joinTap)
+        let isSucceeded = PublishSubject<Bool>()
+        
+        input.loginTap
+            .throttle(.seconds(1), scheduler: MainScheduler.instance)
+            .flatMap{
+                APIManager.shared.login(email: input.emailInput, password: input.passwordInput)
+            }
+            .subscribe(with: self) { owner, result in
+                switch result {
+                case .success(let response):
+                    isSucceeded.onNext(true)
+                    print("==login: \(response)")
+                case .failure(let failure):
+                    isSucceeded.onNext(false)
+                    print("===login failure: \(failure.errorDescription ?? "APIManager error")")
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        
+        return Output(validation: validation, isSucceeded: isSucceeded)
     }
     
     
