@@ -12,7 +12,7 @@ import RxCocoa
 
 class PasswordViewModel {
     
-    let firstGuideText = BehaviorRelay(value: "✓ 특수문자 포함 8-20자 이내")
+    let firstGuideText = BehaviorRelay(value: "✓ 영문 및 숫자 8-20자 이내")
     let secondGuideText = BehaviorRelay(value: "✓ 비밀번호 일치")
     let passwordRegex = "[A-Za-z0-9!_@$%^&+=]{8,20}"
     
