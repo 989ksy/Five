@@ -8,6 +8,7 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import SwiftKeychainWrapper
 
 class LoginViewModel {
     
@@ -55,6 +56,10 @@ class LoginViewModel {
                 case .success(let response):
                     isSucceeded.onNext(true)
                     print("==login: \(response)")
+                    KeychainStorage.shared.userToken = response.token
+                    print("==Token: 토큰이 성공적으로 저장되었습니다.")
+                    KeychainStorage.shared.userRefreshToken = response.refreshToken
+                    print("==RefreshToken: 갱신토큰이 성공적으로 저장되었습니다.")
                 case .failure(let failure):
                     isSucceeded.onNext(false)
                     print("===login failure: \(failure.errorDescription ?? "APIManager error")")
