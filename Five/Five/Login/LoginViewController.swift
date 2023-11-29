@@ -31,7 +31,7 @@ class LoginViewController : BaseViewController {
         super.viewDidLoad()
         
         //dummy
-        mainView.emailTextField.text = "kia@g.com"
+        mainView.emailTextField.text = "989ksy@gmail.com"
         mainView.passwordTextField.text = "#gokiaV11"
         
         bind()
@@ -45,6 +45,8 @@ class LoginViewController : BaseViewController {
         guard let passwordInput = mainView.passwordTextField.text else { return }
         
         let input = LoginViewModel.Input(email: mainView.emailTextField.rx.text.orEmpty, password: mainView.passwordTextField.rx.text.orEmpty, loginTap: mainView.loginButton.rx.tap, joinTap: mainView.joinButton.rx.tap, emailInput: emailInput, passwordInput: passwordInput)
+        
+        print(input.emailInput, input.passwordInput)
         
         let output = viewModel.transform(input: input)
         
@@ -61,11 +63,18 @@ class LoginViewController : BaseViewController {
         output.isSucceeded
             .subscribe(with: self) { owner, bool in
                 
+                print("LoginVC == 네트워크 통신 결과: \(bool)")
+                
                 if bool {
-                    self.loginAlertForSuccess(message: "로그인에 성공하였습니다.")
+                    self.loginAlert(message: "로그인에 성공하였습니다.") { 
+                        let vc = FeedViewController()
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
                 } else {
-                    self.loginAlertForFailure(message: "가입되지 않은 계정입니다.\n입력 정보를 확인해주세요.")
+                    self.loginAlert(message: "가입되지 않은 계정입니다.\n입력 정보를 확인해주세요.") {
+                    }
                 }
+                
             }
             .disposed(by: disposeBag)
         
@@ -84,27 +93,18 @@ class LoginViewController : BaseViewController {
     
     //MARK: - 얼럿
     
-    func loginAlertForSuccess(message: String) {
+    func loginAlert(message: String, completion: @escaping () -> Void) {
         
         let alert = UIAlertController(title: "안내", message: message, preferredStyle: .alert)
         let ok = UIAlertAction(title: "확인", style:.default) { _ in
-
-            let vc = FeedViewController()
-            self.navigationController?.pushViewController(vc, animated: true)
+            completion()
         }
 
         alert.addAction(ok)
         
         present(alert, animated: true)
     }
-    func loginAlertForFailure(message: String) {
-        
-        let alert = UIAlertController(title: "안내", message: message, preferredStyle: .alert)
-        let ok = UIAlertAction(title: "확인", style:.default)
-        alert.addAction(ok)
-        
-        present(alert, animated: true)
-    }
+
     
     
     
