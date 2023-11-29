@@ -15,7 +15,7 @@ class APIManager {
     static let shared = APIManager()
     private init() {}
     
-    private let provider = MoyaProvider<FiveAPI>()
+    private let provider = MoyaProvider<FiveAPI>(session: Session(interceptor: AuthInterceptor.shared))
     private let disposeBag = DisposeBag()
     
     //MARK: - 로그인
@@ -120,11 +120,39 @@ class APIManager {
             return Disposables.create()
         }
         
-        
-        
     }
     
     
+    
+    //MARK: - 토큰 갱신
+    
+    
+    func RefreshToken() -> Single<Result<RefreshTokenResponse, FiveError>> {
+        
+        return Single.create { single in
+            self.provider.request(.tokenRefresh) { result in
+                switch result {
+                case .success(let response):
+                    print("===APIMAnager, StatusCode === \(response.statusCode), == response: \(response)")
+                    
+                    do {
+                        let data = try JSONDecoder().decode(RefreshTokenResponse.self, from: response.data)
+                        single(.success(.success(data)))
+                    } catch {
+                        single(.success(.failure(.decodingError)))
+                    }
+                    
+                case .failure(let error):
+                    guard let customError = FiveError(rawValue: error.response?.statusCode ?? 1) else {
+                        return
+                    }
+                    single(.success(.failure(customError)))
+                }
+            }
+            return Disposables.create()
+        }
+        
+    }
     
 }
 
