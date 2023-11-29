@@ -12,8 +12,8 @@ enum FiveAPI {
     case signUp (model: Signup)
     case login (model: Login)
     case emailValidation (model: CheckEmail)
-    case tokenRefresh// HTTP - GET은 요청바디 없음.
-    case withdraw // HTTP - GET은 요청바디 없음.
+    case tokenRefresh
+    case withdraw
 }
 
 extension FiveAPI : TargetType {
@@ -64,10 +64,10 @@ extension FiveAPI : TargetType {
             return .requestJSONEncodable(data)
             
         case .tokenRefresh:
-            return .requestPlain//.requestParameters(parameters: ["token":""], encoding: URLEncoding.httpBody)
+            return .requestPlain
             
         case .withdraw:
-            return .requestParameters(parameters: ["_id" : "뭔데..", "email":"a@c.com","nick":"별명"], encoding: URLEncoding.httpBody)
+            return .requestPlain
         }
     }
     
@@ -88,10 +88,9 @@ extension FiveAPI : TargetType {
                     "SesacKey" : "\(APIKey.sesacKey)"]
         case .tokenRefresh :
             return ["Content-Type" : "application/json",
-                    "SesacKey" : "\(APIKey.sesacKey)", "Authorization" : "토큰..", "Refresh" : "토큰..인데 새 거.."]
-        case .withdraw:
-            return ["Authorization" : "token...",
                     "SesacKey" : "\(APIKey.sesacKey)"]
+        case .withdraw:
+            return [ "SesacKey" : "\(APIKey.sesacKey)"]
         }
         
     }
