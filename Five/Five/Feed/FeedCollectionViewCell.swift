@@ -12,6 +12,8 @@ class FeedCollectionViewCell : BaseCollectionViewCell {
     
     static let identifier = "FeedCollectionViewCell"
     
+    //MARK: - 큰틀
+    
     let cellBackgroundView = {
         let view = UIView()
         view.layer.borderWidth = 1
@@ -20,6 +22,7 @@ class FeedCollectionViewCell : BaseCollectionViewCell {
         return view
     }()
     
+    //MARK: - 프로필 + 이름 + 메뉴
     let profileView = {
         let view = UIView()
         return view
@@ -34,7 +37,7 @@ class FeedCollectionViewCell : BaseCollectionViewCell {
     
     let profilePic = {
         let view = UIImageView()
-        view.layer.cornerRadius = 20
+        view.layer.cornerRadius = 15
         view.image = UIImage(systemName: "person.fill")
         view.clipsToBounds = true
         view.contentMode = .scaleAspectFit
@@ -57,8 +60,10 @@ class FeedCollectionViewCell : BaseCollectionViewCell {
         return btn
     }()
     
-    let dummyView = {
-        let view = UIView()
+    //MARK: - 이미지영역
+    
+    let imageView = {
+        let view = UIImageView()
         view.backgroundColor = .lightGray
         return view
     }()
@@ -83,8 +88,14 @@ class FeedCollectionViewCell : BaseCollectionViewCell {
     
     let commentButton = {
         let btn = UIButton()
-        btn.setImage(UIImage(systemName: "bubble.right"), for: .normal)
-        btn.tintColor = .gray
+        btn.setImage(UIImage(named: "comment")?.withTintColor(.gray), for: .normal)
+        btn.contentMode = .scaleAspectFill
+        return btn
+    }()
+    
+    let contentButton = {
+        let btn = UIButton()
+        btn.setImage(UIImage(named: "content")?.withTintColor(.gray), for: .normal)
         btn.contentMode = .scaleAspectFill
         return btn
     }()
@@ -102,7 +113,7 @@ class FeedCollectionViewCell : BaseCollectionViewCell {
     override func configureView() {
         addSubview(cellBackgroundView)
         cellBackgroundView.addSubview(profileView)
-        cellBackgroundView.addSubview(dummyView)
+        cellBackgroundView.addSubview(imageView)
         profileView.addSubview(profilePic)
         profileView.addSubview(nicknameLabel)
         profileView.addSubview(moreButton)
@@ -111,9 +122,10 @@ class FeedCollectionViewCell : BaseCollectionViewCell {
         elementView.addSubview(borderline)
         elementView.addSubview(fiveButton)
         elementView.addSubview(commentButton)
+        elementView.addSubview(contentButton)
         elementView.addSubview(dateLabel)
         
-        dummyView.backgroundColor = .systemGray6
+        imageView.backgroundColor = .systemGray6
     }
     
     override func setConstraints() {
@@ -130,7 +142,7 @@ class FeedCollectionViewCell : BaseCollectionViewCell {
         
         profilePic.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(20)
-            make.size.equalTo(40)
+            make.size.equalTo(30)
             make.centerY.equalToSuperview()
         }
         
@@ -142,8 +154,8 @@ class FeedCollectionViewCell : BaseCollectionViewCell {
         
         moreButton.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.size.equalTo(25)
-            make.trailing.equalToSuperview().inset(20)
+            make.size.equalTo(17)
+            make.trailing.equalToSuperview().inset(10)
         }
         
         profileViewBottomLine.snp.makeConstraints { make in
@@ -152,40 +164,46 @@ class FeedCollectionViewCell : BaseCollectionViewCell {
             make.bottom.equalTo(profileView.snp.bottom)
         }
         
-        dummyView.snp.makeConstraints { make in
+        imageView.snp.makeConstraints { make in
             make.top.equalTo(profileView.snp.bottom)
             make.horizontalEdges.equalToSuperview()
-            make.height.equalToSuperview().multipliedBy(0.75)
+            make.height.equalTo(220)
         }
         
         borderline.snp.makeConstraints { make in
             make.height.equalTo(1)
             make.horizontalEdges.equalToSuperview()
-            make.top.equalTo(dummyView.snp.bottom)
+            make.top.equalTo(imageView.snp.bottom)
         }
         
         elementView.snp.makeConstraints { make in
             make.top.equalTo(borderline.snp.bottom)
-            make.bottom.equalToSuperview()
             make.horizontalEdges.equalToSuperview()
+            make.height.equalTo(36)
         }
         
         fiveButton.snp.makeConstraints { make in
             make.size.equalTo(26)
-            make.leading.equalToSuperview().inset(20)
+            make.leading.equalToSuperview().inset(12)
             make.centerY.equalToSuperview()
         }
         
         commentButton.snp.makeConstraints { make in
-            make.size.equalTo(36)
-            make.leading.equalTo(fiveButton.snp.trailing).offset(8)
+            make.size.equalTo(26)
+            make.leading.equalTo(fiveButton.snp.trailing).offset(12)
             make.centerY.equalToSuperview()
         }
         
+        contentButton.snp.makeConstraints { make in
+            make.size.equalTo(23)
+            make.leading.equalTo(commentButton.snp.trailing).offset(12)
+            make.centerY.equalToSuperview()
+        }
+
         dateLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.height.equalTo(20)
-            make.trailing.equalToSuperview().offset(-20)
+            make.trailing.equalToSuperview().offset(-12)
         }
         
         

@@ -33,7 +33,7 @@ class FeedView: BaseView {
         let layout = UICollectionViewFlowLayout()
         let spacing : CGFloat = 12
         let width = UIScreen.main.bounds.width - (spacing)
-        layout.itemSize = CGSize(width: width , height: width)
+        layout.itemSize = CGSize(width: width , height: 310)
         layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
         
         return layout
