@@ -31,6 +31,6 @@ struct CheckEmailResponse : Decodable {
 
 //MARK: - 토큰 갱신
 
-struct RefreshToken : Decodable {
+struct RefreshTokenResponse : Decodable {
     let token : String
 }
