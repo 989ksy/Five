@@ -33,7 +33,7 @@ class FeedView: BaseView {
         let layout = UICollectionViewFlowLayout()
         let spacing : CGFloat = 12
         let width = UIScreen.main.bounds.width - (spacing)
-        layout.itemSize = CGSize(width: width , height: 310)
+        layout.itemSize = CGSize(width: width , height: 350)
         layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
         
         return layout
@@ -56,7 +56,7 @@ class FeedView: BaseView {
         addContentButton.snp.makeConstraints { make in
             make.size.equalTo(60)
             make.trailing.equalToSuperview().inset(23)
-            make.bottom.equalToSuperview().inset(80)
+            make.bottom.equalToSuperview().inset(72)
         }
 
         
