@@ -48,6 +48,7 @@
 		0F67CA8C2B1066A500259285 /* InputAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CA8B2B1066A500259285 /* InputAPIModel.swift */; };
 		0F67CA8E2B10677200259285 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CA8D2B10677200259285 /* APIManager.swift */; };
 		0F6C75FB2B1872D600077831 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6C75FA2B1872D600077831 /* ContentViewModel.swift */; };
+		0F6C75FE2B18986A00077831 /* YPImagePicker in Frameworks */ = {isa = PBXBuildFile; productRef = 0F6C75FD2B18986A00077831 /* YPImagePicker */; };
 		0F7DB6772B133FE400A48828 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7DB6762B133FE400A48828 /* BaseCollectionViewCell.swift */; };
 		0F7DB6792B13639000A48828 /* FeedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7DB6782B13639000A48828 /* FeedCollectionViewCell.swift */; };
 		0F7DB67E2B13709200A48828 /* CustomIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7DB67D2B13709200A48828 /* CustomIcon.swift */; };
@@ -140,6 +141,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F7DB6952B148F2900A48828 /* RxCocoa in Frameworks */,
+				0F6C75FE2B18986A00077831 /* YPImagePicker in Frameworks */,
 				0F67CA862B10664C00259285 /* Moya in Frameworks */,
 				0F7DB69D2B15B46900A48828 /* SwiftKeychainWrapper in Frameworks */,
 				0F7DB6972B148F2900A48828 /* RxSwift in Frameworks */,
@@ -444,6 +446,7 @@
 				0F7DB6942B148F2900A48828 /* RxCocoa */,
 				0F7DB6962B148F2900A48828 /* RxSwift */,
 				0F7DB69C2B15B46900A48828 /* SwiftKeychainWrapper */,
+				0F6C75FD2B18986A00077831 /* YPImagePicker */,
 			);
 			productName = Five;
 			productReference = 0F67C9FD2B0F7C5000259285 /* Five.app */;
@@ -522,6 +525,7 @@
 				0F67CA842B10664C00259285 /* XCRemoteSwiftPackageReference "Moya" */,
 				0F7DB6932B148F2900A48828 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				0F7DB69B2B15B46900A48828 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
+				0F6C75FC2B18986A00077831 /* XCRemoteSwiftPackageReference "YPImagePicker" */,
 			);
 			productRefGroup = 0F67C9FE2B0F7C5000259285 /* Products */;
 			projectDirPath = "";
@@ -970,6 +974,14 @@
 				minimumVersion = 15.0.3;
 			};
 		};
+		0F6C75FC2B18986A00077831 /* XCRemoteSwiftPackageReference "YPImagePicker" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Yummypets/YPImagePicker.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.2.2;
+			};
+		};
 		0F7DB6932B148F2900A48828 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
@@ -998,6 +1010,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0F67CA842B10664C00259285 /* XCRemoteSwiftPackageReference "Moya" */;
 			productName = Moya;
+		};
+		0F6C75FD2B18986A00077831 /* YPImagePicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0F6C75FC2B18986A00077831 /* XCRemoteSwiftPackageReference "YPImagePicker" */;
+			productName = YPImagePicker;
 		};
 		0F7DB6942B148F2900A48828 /* RxCocoa */ = {
 			isa = XCSwiftPackageProductDependency;
