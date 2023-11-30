@@ -35,7 +35,7 @@ class FeedViewController : BaseViewController {
     
     @objc func addContentButtonTapped() {
         
-        let vc = WriteViewController()
+        let vc = ContentViewController()
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true)
         

@@ -47,11 +47,12 @@
 		0F67CA8A2B10669700259285 /* OutputAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CA892B10669700259285 /* OutputAPIModel.swift */; };
 		0F67CA8C2B1066A500259285 /* InputAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CA8B2B1066A500259285 /* InputAPIModel.swift */; };
 		0F67CA8E2B10677200259285 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CA8D2B10677200259285 /* APIManager.swift */; };
+		0F6C75FB2B1872D600077831 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6C75FA2B1872D600077831 /* ContentViewModel.swift */; };
 		0F7DB6772B133FE400A48828 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7DB6762B133FE400A48828 /* BaseCollectionViewCell.swift */; };
 		0F7DB6792B13639000A48828 /* FeedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7DB6782B13639000A48828 /* FeedCollectionViewCell.swift */; };
 		0F7DB67E2B13709200A48828 /* CustomIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7DB67D2B13709200A48828 /* CustomIcon.swift */; };
-		0F7DB6822B13A80B00A48828 /* WriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7DB6812B13A80B00A48828 /* WriteViewController.swift */; };
-		0F7DB6842B13A83400A48828 /* WriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7DB6832B13A83400A48828 /* WriteView.swift */; };
+		0F7DB6822B13A80B00A48828 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7DB6812B13A80B00A48828 /* ContentViewController.swift */; };
+		0F7DB6842B13A83400A48828 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7DB6832B13A83400A48828 /* ContentView.swift */; };
 		0F7DB6952B148F2900A48828 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 0F7DB6942B148F2900A48828 /* RxCocoa */; };
 		0F7DB6972B148F2900A48828 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0F7DB6962B148F2900A48828 /* RxSwift */; };
 		0F7DB69D2B15B46900A48828 /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 0F7DB69C2B15B46900A48828 /* SwiftKeychainWrapper */; };
@@ -121,11 +122,12 @@
 		0F67CA892B10669700259285 /* OutputAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputAPIModel.swift; sourceTree = "<group>"; };
 		0F67CA8B2B1066A500259285 /* InputAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputAPIModel.swift; sourceTree = "<group>"; };
 		0F67CA8D2B10677200259285 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		0F6C75FA2B1872D600077831 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		0F7DB6762B133FE400A48828 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		0F7DB6782B13639000A48828 /* FeedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCollectionViewCell.swift; sourceTree = "<group>"; };
 		0F7DB67D2B13709200A48828 /* CustomIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomIcon.swift; sourceTree = "<group>"; };
-		0F7DB6812B13A80B00A48828 /* WriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteViewController.swift; sourceTree = "<group>"; };
-		0F7DB6832B13A83400A48828 /* WriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteView.swift; sourceTree = "<group>"; };
+		0F7DB6812B13A80B00A48828 /* ContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
+		0F7DB6832B13A83400A48828 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		0F7DB69F2B15B76500A48828 /* KeychainStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStorage.swift; sourceTree = "<group>"; };
 		0F7DB6A22B15C45200A48828 /* AuthInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInterceptor.swift; sourceTree = "<group>"; };
 		0F7DB6BE2B17499B00A48828 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
@@ -189,7 +191,7 @@
 				0F7DB6BD2B17498300A48828 /* Tabbar */,
 				0F7DB69E2B15B75000A48828 /* Keychain */,
 				0F7DB6802B13A6E000A48828 /* Custom */,
-				0F7DB67F2B13A6BE00A48828 /* Write */,
+				0F7DB67F2B13A6BE00A48828 /* Content */,
 				0F67CA662B10632000259285 /* Network */,
 				0F67CA652B10631300259285 /* Profile */,
 				0F67CA642B10630800259285 /* Feed */,
@@ -369,13 +371,14 @@
 			path = Icon;
 			sourceTree = "<group>";
 		};
-		0F7DB67F2B13A6BE00A48828 /* Write */ = {
+		0F7DB67F2B13A6BE00A48828 /* Content */ = {
 			isa = PBXGroup;
 			children = (
-				0F7DB6812B13A80B00A48828 /* WriteViewController.swift */,
-				0F7DB6832B13A83400A48828 /* WriteView.swift */,
+				0F7DB6812B13A80B00A48828 /* ContentViewController.swift */,
+				0F7DB6832B13A83400A48828 /* ContentView.swift */,
+				0F6C75FA2B1872D600077831 /* ContentViewModel.swift */,
 			);
-			path = Write;
+			path = Content;
 			sourceTree = "<group>";
 		};
 		0F7DB6802B13A6E000A48828 /* Custom */ = {
@@ -572,13 +575,14 @@
 				0F67CA402B1035B800259285 /* LoginViewController.swift in Sources */,
 				0F7DB6792B13639000A48828 /* FeedCollectionViewCell.swift in Sources */,
 				0F67CA5D2B10625700259285 /* NicknameViewController.swift in Sources */,
-				0F7DB6842B13A83400A48828 /* WriteView.swift in Sources */,
+				0F7DB6842B13A83400A48828 /* ContentView.swift in Sources */,
 				0F67CA682B10633D00259285 /* CustomColor.swift in Sources */,
 				0F67CA5B2B1061DB00259285 /* PasswordViewModel.swift in Sources */,
 				0F67CA742B10656B00259285 /* FeedViewController.swift in Sources */,
 				0F67CA7D2B1065F700259285 /* APIKey.swift in Sources */,
 				0F67CA512B10617100259285 /* EmailViewController.swift in Sources */,
 				0F67CA422B1035C000259285 /* LoginView.swift in Sources */,
+				0F6C75FB2B1872D600077831 /* ContentViewModel.swift in Sources */,
 				0F67CA592B1061C800259285 /* PasswordView.swift in Sources */,
 				0F67CA3A2B10353800259285 /* BaseViewController.swift in Sources */,
 				0F67CA572B1061B300259285 /* PasswordViewController.swift in Sources */,
@@ -602,7 +606,7 @@
 				0F67CA7F2B10660500259285 /* BaseURL.swift in Sources */,
 				0F67CA8C2B1066A500259285 /* InputAPIModel.swift in Sources */,
 				0F7DB6C12B174B2600A48828 /* ProfileViewController.swift in Sources */,
-				0F7DB6822B13A80B00A48828 /* WriteViewController.swift in Sources */,
+				0F7DB6822B13A80B00A48828 /* ContentViewController.swift in Sources */,
 				0F67CA532B10618200259285 /* EmailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

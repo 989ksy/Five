@@ -1,5 +1,5 @@
 //
-//  WriteViewController.swift
+//  ContentViewController.swift
 //  Five
 //
 //  Created by Seungyeon Kim on 11/27/23.
@@ -7,9 +7,10 @@
 
 import UIKit
 
-class WriteViewController : BaseViewController {
+class ContentViewController : BaseViewController {
     
-    let mainView = WriteView()
+    let mainView = ContentView()
+    let placeholder = "메모하고 싶은 내용을 입력하세요."
     
     override func loadView() {
         self.view = mainView
@@ -25,7 +26,7 @@ class WriteViewController : BaseViewController {
     
     @objc func closeButtonTapped() {
         self.dismiss(animated: true)
-        print("tap")
+        print("writeVC dismiss tapped")
     }
     
 }
