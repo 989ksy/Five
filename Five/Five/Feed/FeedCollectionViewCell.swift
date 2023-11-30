@@ -16,8 +16,8 @@ class FeedCollectionViewCell : BaseCollectionViewCell {
     
     let cellBackgroundView = {
         let view = UIView()
-        view.layer.borderWidth = 1
-        view.layer.borderColor = UIColor.systemGray4.cgColor
+        view.layer.borderWidth = 1.1
+        view.layer.borderColor = UIColor.systemGray5.cgColor
         view.layer.cornerRadius = 4
         return view
     }()
@@ -30,8 +30,8 @@ class FeedCollectionViewCell : BaseCollectionViewCell {
     
     let profileViewBottomLine = {
         let view = UIView()
-        view.layer.borderWidth = 1
-        view.layer.borderColor = UIColor.systemGray4.cgColor
+        view.layer.borderWidth = 1.1
+        view.layer.borderColor = UIColor.systemGray5.cgColor
         return view
     }()
     
@@ -41,8 +41,8 @@ class FeedCollectionViewCell : BaseCollectionViewCell {
         view.image = UIImage(systemName: "person.fill")
         view.clipsToBounds = true
         view.contentMode = .scaleAspectFit
-        view.layer.borderWidth = 1
-        view.layer.borderColor = UIColor.systemGray2.cgColor
+        view.layer.borderWidth = 1.1
+        view.layer.borderColor = UIColor.systemGray5.cgColor
         return view
     }()
     
@@ -56,7 +56,7 @@ class FeedCollectionViewCell : BaseCollectionViewCell {
     
     let moreButton = {
         let btn = UIButton()
-        btn.setImage(UIImage(named:"more")?.withTintColor(.lightGray), for: .normal)
+        btn.setImage(UIImage(named:"more")?.withTintColor(.gray), for: .normal)
         return btn
     }()
     
@@ -70,8 +70,8 @@ class FeedCollectionViewCell : BaseCollectionViewCell {
     
     let borderline = {
         let view = UIView()
-        view.layer.borderWidth = 1
-        view.layer.borderColor = UIColor.systemGray4.cgColor
+        view.layer.borderWidth = 1.1
+        view.layer.borderColor = UIColor.systemGray5.cgColor
         return view
     }()
     
@@ -106,7 +106,7 @@ class FeedCollectionViewCell : BaseCollectionViewCell {
         dateFormatter.dateFormat = "yyyy년 MM월 dd일"
         label.text = dateFormatter.dateFormat
         label.font = CustomFont.dateLabel11
-        label.textColor = .gray
+        label.textColor = .darkGray
         return label
     }()
     
@@ -141,8 +141,8 @@ class FeedCollectionViewCell : BaseCollectionViewCell {
         }
         
         profilePic.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(20)
-            make.size.equalTo(30)
+            make.leading.equalToSuperview().inset(16)
+            make.size.equalTo(36)
             make.centerY.equalToSuperview()
         }
         
@@ -167,7 +167,7 @@ class FeedCollectionViewCell : BaseCollectionViewCell {
         imageView.snp.makeConstraints { make in
             make.top.equalTo(profileView.snp.bottom)
             make.horizontalEdges.equalToSuperview()
-            make.height.equalTo(220)
+            make.height.equalTo(260)
         }
         
         borderline.snp.makeConstraints { make in
