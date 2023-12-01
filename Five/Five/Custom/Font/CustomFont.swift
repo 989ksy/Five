@@ -23,12 +23,18 @@ enum CustomFont {
     
     static let logo33 = UIFont(name: "OKDDUNG", size: 33)
     static let logo25 = UIFont(name: "OKDDUNG", size: 25)
-    static let textfield15 = UIFont(name: "GmarketSansTTFLight", size: 15)
-    static let suggestLabel13 = UIFont(name: "GmarketSansTTFLight", size: 13)
-    static let feedProfile15 = UIFont(name: "GmarketSansTTFMedium", size: 15)
-    static let guideLabel18 = UIFont(name: "GmarketSansTTFMedium", size: 25)
-    static let dateLabel11 = UIFont(name: "GmarketSansTTFLight", size: 11)
     
+    //Light
+    static let lightGmarket15 = UIFont(name: "GmarketSansTTFLight", size: 15)
+    static let lightGmarket13 = UIFont(name: "GmarketSansTTFLight", size: 13)
+    static let lightGmarket11 = UIFont(name: "GmarketSansTTFLight", size: 11)
     
+    //Medium
+    static let mediumGmarket15 = UIFont(name: "GmarketSansTTFMedium", size: 15)
+    static let mediumGmarket17 = UIFont(name: "GmarketSansTTFMedium", size: 17)
+    static let mediumGmarket18 = UIFont(name: "GmarketSansTTFMedium", size: 25)
+
+    //Bold
+    static let boldGmarket20 = UIFont(name: "GmarketSansTTFBold", size: 20)
 }
 

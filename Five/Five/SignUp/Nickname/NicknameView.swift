@@ -14,7 +14,7 @@ class NicknameView : BaseView {
     let guideLabel = {
         let view = UILabel()
         view.text = "사용하실\n닉네임을 입력해주세요."
-        view.font = CustomFont.guideLabel18
+        view.font = CustomFont.mediumGmarket18
         view.numberOfLines = 0
         return view
     }()
@@ -57,14 +57,14 @@ class NicknameView : BaseView {
     let nicknameTextfield = {
         let view = UITextField()
         view.placeholder = "닉네임 입력"
-        view.font = CustomFont.textfield15
+        view.font = CustomFont.lightGmarket15
         view.borderStyle = .roundedRect
         return view
     }()
     
     let directionLabel = {
         let view = UILabel()
-        view.font = CustomFont.suggestLabel13
+        view.font = CustomFont.lightGmarket13
         view.textColor = .gray
         return view
     }()
@@ -74,7 +74,7 @@ class NicknameView : BaseView {
         view.setTitle("가입하기", for: .normal)
         view.backgroundColor = .black
         view.layer.cornerRadius = 15
-        view.titleLabel?.font = CustomFont.textfield15
+        view.titleLabel?.font = CustomFont.lightGmarket15
         return view
     }()
     
