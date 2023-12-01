@@ -41,51 +41,39 @@ class ContentView : BaseView {
         return btn
     }()
     
-    let contentTextfield = {
+    let contentTextView = {
         let txtfield = UITextView()
-        txtfield.text = "  함께 하이파이브 하고 싶은 순간을 공유해주세요."
+        txtfield.text = "함께 하이파이브 하고 싶은 순간을 공유해주세요."
         txtfield.font = CustomFont.textfield15
-        txtfield.textColor = .black
+        txtfield.textColor = .gray
         txtfield.textAlignment = .left
-//        txtfield.backgroundColor = .systemGray6
         return txtfield
     }()
     
-    let addButton = {
+    let imageAddButton = {
         let btn = UIButton()
-        btn.setImage(UIImage(named: "customPlus"), for: .normal)
+        btn.setImage(UIImage(named: "imageIcon")?.withTintColor(.lightGray), for: .normal)
         btn.layer.borderWidth = 1
         btn.layer.borderColor = CustomColor.pointColor?.cgColor
         btn.layer.cornerRadius = 6
         return btn
     }()
     
-    let firstImageView = {
-       let view = UIImageView()
-        view.layer.borderWidth = 1
-        view.layer.borderColor = CustomColor.pointColor?.cgColor
-        view.layer.cornerRadius = 6
-        view.backgroundColor = CustomColor.subColor
+    let imageCollectionView = {
+        let view = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionLayout())
+        view.register(ContentCollectionViewCell.self, forCellWithReuseIdentifier: "ContentCollectionViewCell")
         return view
     }()
     
-    let secondImageView = {
-       let view = UIImageView()
-        view.layer.borderWidth = 1
-        view.layer.borderColor = CustomColor.pointColor?.cgColor
-        view.layer.cornerRadius = 6
-        view.backgroundColor = CustomColor.subColor
-        return view
-    }()
-    
-    let thirdImageView = {
-       let view = UIImageView()
-        view.layer.borderWidth = 1
-        view.layer.borderColor = CustomColor.pointColor?.cgColor
-        view.layer.cornerRadius = 6
-        view.backgroundColor = CustomColor.subColor
-        return view
-    }()
+    static func configureCollectionLayout() -> UICollectionViewLayout {
+        let layout = UICollectionViewFlowLayout()
+        let spacing : CGFloat = 12
+        let width = UIScreen.main.bounds.width - (spacing)
+        layout.itemSize = CGSize(width: width/6 , height: width/6)
+        layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
+        layout.scrollDirection = .horizontal
+        return layout
+    }
     
     override func configureView() {
         
@@ -93,11 +81,9 @@ class ContentView : BaseView {
         upperView.addSubview(closeButton)
         upperView.addSubview(newPostLabel)
         upperView.addSubview(uploadButton)
-        addSubview(contentTextfield)
-        addSubview(addButton)
-        addSubview(firstImageView)
-        addSubview(secondImageView)
-        addSubview(thirdImageView)
+        addSubview(contentTextView)
+        addSubview(imageAddButton)
+        addSubview(imageCollectionView)
 
     }
     
@@ -128,33 +114,25 @@ class ContentView : BaseView {
             make.centerY.equalToSuperview()
         }
         
-        contentTextfield.snp.makeConstraints { make in
-            make.top.equalTo(upperView.snp.bottom).offset(8)
+        contentTextView.snp.makeConstraints { make in
+            make.top.equalTo(upperView.snp.bottom).offset(13)
             make.horizontalEdges.equalToSuperview().inset(4)
             make.height.equalToSuperview().multipliedBy(0.2)
         }
         
-        addButton.snp.makeConstraints { make in
-            make.top.equalTo(contentTextfield.snp.bottom).offset(8)
+        imageAddButton.snp.makeConstraints { make in
+            make.top.equalTo(contentTextView.snp.bottom).offset(8)
             make.leading.equalToSuperview().offset(8)
             make.size.equalTo(67)
         }
         
-        firstImageView.snp.makeConstraints { make in
-            make.top.equalTo(contentTextfield.snp.bottom).offset(8)
-            make.leading.equalTo(addButton.snp.trailing).offset(13)
-            make.size.equalTo(67)
+        imageCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(contentTextView.snp.bottom).offset(8)
+            make.leading.equalTo(imageAddButton.snp.trailing).offset(3)
+            make.trailing.equalToSuperview().offset(-10)
+            make.height.equalTo(67)
         }
-        secondImageView.snp.makeConstraints { make in
-            make.top.equalTo(contentTextfield.snp.bottom).offset(8)
-            make.leading.equalTo(firstImageView.snp.trailing).offset(8)
-            make.size.equalTo(67)
-        }
-        thirdImageView.snp.makeConstraints { make in
-            make.top.equalTo(contentTextfield.snp.bottom).offset(8)
-            make.leading.equalTo(secondImageView.snp.trailing).offset(8)
-            make.size.equalTo(67)
-        }
+        
         
     }
     
