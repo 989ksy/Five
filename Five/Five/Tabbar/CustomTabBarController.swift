@@ -21,15 +21,20 @@ class CustomTabBarController: UITabBarController {
     //아이콘 설정
         let firstVC = UINavigationController(rootViewController: FeedViewController())
         firstVC.tabBarItem.selectedImage = UIImage(named: "home")
-//        firstVC.tabBarItem.title = ""
+        firstVC.tabBarItem.title = ""
         firstVC.tabBarItem.image = UIImage(named: "home")
         
-        let secondVC = UINavigationController(rootViewController: ProfileViewController())
-        secondVC.tabBarItem.selectedImage = UIImage(named: "personal")
-        secondVC.tabBarItem.image = UIImage(named: "personal")
-        secondVC.tabBarItem.title = "Profile"
+        let secondVC = UINavigationController(rootViewController: SearchViewController())
+        secondVC.tabBarItem.selectedImage = UIImage(named: "searchIcon")
+        secondVC.tabBarItem.image = UIImage(named: "searchIcon")
+        secondVC.tabBarItem.title = "Search"
+        
+        let thirdVC = UINavigationController(rootViewController: ProfileViewController())
+        thirdVC.tabBarItem.selectedImage = UIImage(named: "personal")
+        thirdVC.tabBarItem.image = UIImage(named: "personal")
+        thirdVC.tabBarItem.title = "My"
 
-        viewControllers = [firstVC, secondVC]
+        viewControllers = [firstVC, secondVC, thirdVC]
         
     }
 
