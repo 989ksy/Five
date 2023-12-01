@@ -12,6 +12,8 @@ class FeedCollectionViewCell : BaseCollectionViewCell {
     
     static let identifier = "FeedCollectionViewCell"
     
+    var contentButtonTappedAction : (() -> Void)?
+    
     //MARK: - 큰틀
     
     let cellBackgroundView = {
@@ -48,7 +50,7 @@ class FeedCollectionViewCell : BaseCollectionViewCell {
     
     let nicknameLabel = {
         let label = UILabel()
-        label.font = CustomFont.feedProfile15
+        label.font = CustomFont.mediumGmarket15
         label.textColor = .black
         label.text = "양현종"
         return label
@@ -105,7 +107,7 @@ class FeedCollectionViewCell : BaseCollectionViewCell {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy년 MM월 dd일"
         label.text = dateFormatter.dateFormat
-        label.font = CustomFont.dateLabel11
+        label.font = CustomFont.lightGmarket11
         label.textColor = .darkGray
         return label
     }()
