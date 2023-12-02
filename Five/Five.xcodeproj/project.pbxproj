@@ -74,6 +74,7 @@
 		0F89F0EE2B1B57E200FECBCD /* HideKeyboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F89F0ED2B1B57E200FECBCD /* HideKeyboard+Extension.swift */; };
 		0F89F0F02B1B787200FECBCD /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F89F0EF2B1B787200FECBCD /* ProfileViewModel.swift */; };
 		0F89F0F32B1B79FD00FECBCD /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F89F0F22B1B79FD00FECBCD /* SettingViewController.swift */; };
+		0F89F0F52B1B7AD600FECBCD /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F89F0F42B1B7AD600FECBCD /* SettingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -159,6 +160,7 @@
 		0F89F0ED2B1B57E200FECBCD /* HideKeyboard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HideKeyboard+Extension.swift"; sourceTree = "<group>"; };
 		0F89F0EF2B1B787200FECBCD /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		0F89F0F22B1B79FD00FECBCD /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		0F89F0F42B1B7AD600FECBCD /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -523,6 +525,7 @@
 			isa = PBXGroup;
 			children = (
 				0F89F0F22B1B79FD00FECBCD /* SettingViewController.swift */,
+				0F89F0F42B1B7AD600FECBCD /* SettingView.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -698,6 +701,7 @@
 				0F6C76072B18ED0D00077831 /* ProfileView.swift in Sources */,
 				0F67CA592B1061C800259285 /* PasswordView.swift in Sources */,
 				0F86DD3D2B19B6240043939F /* SearchViewController.swift in Sources */,
+				0F89F0F52B1B7AD600FECBCD /* SettingView.swift in Sources */,
 				0F89F0EE2B1B57E200FECBCD /* HideKeyboard+Extension.swift in Sources */,
 				0F67CA3A2B10353800259285 /* BaseViewController.swift in Sources */,
 				0F67CA572B1061B300259285 /* PasswordViewController.swift in Sources */,
