@@ -15,7 +15,7 @@ class EmailView : BaseView {
     let guideLabel = {
         let view = UILabel()
         view.text = "로그인에 사용할\n이메일을 입력해주세요."
-        view.font = CustomFont.guideLabel18
+        view.font = CustomFont.mediumGmarket18
         view.numberOfLines = 0
         return view
     }()
@@ -51,14 +51,14 @@ class EmailView : BaseView {
     let emailTextfield = {
         let view = UITextField()
         view.placeholder = "이메일 입력"
-        view.font = CustomFont.textfield15
+        view.font = CustomFont.lightGmarket15
         view.borderStyle = .roundedRect
         return view
     }()
     
     let directionLabel = {
         let view = UILabel()
-        view.font = CustomFont.suggestLabel13
+        view.font = CustomFont.lightGmarket13
         view.textColor = .gray
         return view
     }()
@@ -80,7 +80,7 @@ class EmailView : BaseView {
         view.setTitle("다음", for: .normal)
         view.backgroundColor = .lightGray
         view.layer.cornerRadius = 15
-        view.titleLabel?.font = CustomFont.textfield15
+        view.titleLabel?.font = CustomFont.lightGmarket15
         return view
     }()
     

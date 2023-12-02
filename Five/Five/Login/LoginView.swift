@@ -22,7 +22,7 @@ class LoginView : BaseView {
         let view = UITextField()
         view.placeholder = "이메일을 입력해주세요."
         view.borderStyle = .roundedRect
-        view.font = CustomFont.textfield15
+        view.font = CustomFont.lightGmarket15
         return view
     }()
     
@@ -30,7 +30,7 @@ class LoginView : BaseView {
         let view = UITextField()
         view.placeholder = "비밀번호를 입력해주세요."
         view.borderStyle = .roundedRect
-        view.font = CustomFont.textfield15
+        view.font = CustomFont.lightGmarket15
         return view
     }()
     
@@ -39,7 +39,7 @@ class LoginView : BaseView {
         view.setTitle("로그인하기", for: .normal)
         view.backgroundColor = CustomColor.pointColor
         view.layer.cornerRadius = 10
-        view.titleLabel?.font = CustomFont.textfield15
+        view.titleLabel?.font = CustomFont.lightGmarket15
         return view
     }()
     
@@ -52,7 +52,7 @@ class LoginView : BaseView {
     let askJoinLabel = {
         let view = UILabel()
         view.text = "회원이 아니신가요?"
-        view.font = CustomFont.suggestLabel13
+        view.font = CustomFont.lightGmarket13
         view.textColor = .gray
         return view
     }()
