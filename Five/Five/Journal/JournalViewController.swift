@@ -7,7 +7,7 @@
 
 import UIKit
 
-class JournalViewController: BaseViewController {
+final class JournalViewController: BaseViewController {
     
     let mainView = JournalView()
     

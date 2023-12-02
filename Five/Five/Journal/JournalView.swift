@@ -29,13 +29,14 @@ class JournalView : BaseView {
     
     override func setConstraints() {
         contentLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(12)
+            make.top.equalTo(safeAreaLayoutGuide).offset(21)
             make.height.equalTo(16)
             make.centerX.equalToSuperview()
         }
         upperLine.snp.makeConstraints { make in
             make.top.equalTo(contentLabel.snp.bottom).offset(12)
             make.horizontalEdges.equalToSuperview()
+            make.height.equalTo(1)
         }
     }
     
