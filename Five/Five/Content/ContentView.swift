@@ -24,37 +24,46 @@ class ContentView : BaseView {
     }()
     
     let newPostLabel = {
-        let label = UILabel()
-        label.text = "새 게시물"
-        label.font = CustomFont.feedProfile15
+        let label = viewTitleLabel()
+        label.text = "새 포스트"
         return label
+    }()
+    
+    let upperLine = {
+        let view = lineUIView()
+        return view
     }()
     
     let uploadButton = {
         let btn = UIButton()
         btn.setTitle("게시", for: .normal)
         btn.setTitleColor(.darkGray, for: .normal)
-        btn.titleLabel?.font = CustomFont.feedProfile15
+        btn.titleLabel?.font = CustomFont.mediumGmarket15
         btn.layer.borderColor = CustomColor.pointColor?.cgColor
-        btn.layer.borderWidth = 1
+        btn.layer.borderWidth = 2
         btn.layer.cornerRadius = 5
         return btn
     }()
     
     let contentTextView = {
         let txtfield = UITextView()
-        txtfield.text = "함께 하이파이브 하고 싶은 순간을 공유해주세요."
-        txtfield.font = CustomFont.textfield15
+        txtfield.text = "함께 파이브 하고 싶은 순간을 공유해보세요."
+        txtfield.font = CustomFont.mediumGmarket15
         txtfield.textColor = .gray
         txtfield.textAlignment = .left
         return txtfield
+    }()
+    
+    let contentTextViewBottomLine = {
+        let view = lineUIView()
+        return view
     }()
     
     let imageAddButton = {
         let btn = UIButton()
         btn.setImage(UIImage(named: "imageIcon")?.withTintColor(.lightGray), for: .normal)
         btn.layer.borderWidth = 1
-        btn.layer.borderColor = CustomColor.pointColor?.cgColor
+        btn.layer.borderColor = UIColor.systemGray3.cgColor
         btn.layer.cornerRadius = 6
         return btn
     }()
@@ -62,6 +71,7 @@ class ContentView : BaseView {
     let imageCollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionLayout())
         view.register(ContentCollectionViewCell.self, forCellWithReuseIdentifier: "ContentCollectionViewCell")
+        view.showsHorizontalScrollIndicator = false
         return view
     }()
     
@@ -81,7 +91,9 @@ class ContentView : BaseView {
         upperView.addSubview(closeButton)
         upperView.addSubview(newPostLabel)
         upperView.addSubview(uploadButton)
+        addSubview(upperLine)
         addSubview(contentTextView)
+        addSubview(contentTextViewBottomLine)
         addSubview(imageAddButton)
         addSubview(imageCollectionView)
 
@@ -114,20 +126,32 @@ class ContentView : BaseView {
             make.centerY.equalToSuperview()
         }
         
+        upperLine.snp.makeConstraints { make in
+            make.top.equalTo(upperView.snp.bottom)
+            make.horizontalEdges.equalToSuperview()
+            make.height.equalTo(0.5)
+        }
+        
         contentTextView.snp.makeConstraints { make in
             make.top.equalTo(upperView.snp.bottom).offset(13)
             make.horizontalEdges.equalToSuperview().inset(4)
-            make.height.equalToSuperview().multipliedBy(0.2)
+            make.height.equalTo(220)
+        }
+        
+        contentTextViewBottomLine.snp.makeConstraints { make in
+            make.top.equalTo(contentTextView.snp.bottom)
+            make.horizontalEdges.equalToSuperview()
+            make.height.equalTo(0.5)
         }
         
         imageAddButton.snp.makeConstraints { make in
-            make.top.equalTo(contentTextView.snp.bottom).offset(8)
+            make.top.equalTo(contentTextView.snp.bottom).offset(12)
             make.leading.equalToSuperview().offset(8)
             make.size.equalTo(67)
         }
         
         imageCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(contentTextView.snp.bottom).offset(8)
+            make.top.equalTo(contentTextView.snp.bottom).offset(12)
             make.leading.equalTo(imageAddButton.snp.trailing).offset(3)
             make.trailing.equalToSuperview().offset(-10)
             make.height.equalTo(67)
