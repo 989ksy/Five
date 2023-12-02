@@ -84,20 +84,20 @@ class FeedCollectionViewCell : BaseCollectionViewCell {
     
     let fiveButton = {
         let btn = UIButton()
-        btn.setImage(UIImage(named: "five")?.withTintColor(.gray), for: .normal)
+        btn.setImage(UIImage(named: "five")?.withTintColor(.black), for: .normal)
         return btn
     }()
     
     let commentButton = {
         let btn = UIButton()
-        btn.setImage(UIImage(named: "comment")?.withTintColor(.gray), for: .normal)
+        btn.setImage(UIImage(named: "comment")?.withTintColor(.black), for: .normal)
         btn.contentMode = .scaleAspectFill
         return btn
     }()
     
     let contentButton = {
         let btn = UIButton()
-        btn.setImage(UIImage(named: "content")?.withTintColor(.gray), for: .normal)
+        btn.setImage(UIImage(named: "content")?.withTintColor(.black), for: .normal)
         btn.contentMode = .scaleAspectFill
         return btn
     }()
