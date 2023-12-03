@@ -169,7 +169,7 @@ class FeedCollectionViewCell : BaseCollectionViewCell {
         imageView.snp.makeConstraints { make in
             make.top.equalTo(profileView.snp.bottom)
             make.horizontalEdges.equalToSuperview()
-            make.height.equalTo(260)
+            make.height.equalTo(230)
         }
         
         borderline.snp.makeConstraints { make in
