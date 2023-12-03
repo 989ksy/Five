@@ -36,5 +36,6 @@ enum CustomFont {
 
     //Bold
     static let boldGmarket20 = UIFont(name: "GmarketSansTTFBold", size: 20)
+    static let boldGmarket15 = UIFont(name: "GmarketSansTTFBold", size: 15)
 }
 
