@@ -18,6 +18,7 @@ final class SettingViewController : BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavigation()
+        self.hideKeyboardWhenTappedAround()
     }
     
     
