@@ -51,6 +51,7 @@ class ContentView : BaseView {
         txtfield.font = CustomFont.mediumGmarket15
         txtfield.textColor = .gray
         txtfield.textAlignment = .left
+        txtfield.backgroundColor = CustomColor.backgroundColor
         return txtfield
     }()
     
@@ -72,6 +73,7 @@ class ContentView : BaseView {
         let view = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionLayout())
         view.register(ContentCollectionViewCell.self, forCellWithReuseIdentifier: "ContentCollectionViewCell")
         view.showsHorizontalScrollIndicator = false
+        view.backgroundColor = CustomColor.backgroundColor
         return view
     }()
     
