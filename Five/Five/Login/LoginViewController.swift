@@ -70,14 +70,14 @@ class LoginViewController : BaseViewController {
                 
                 if bool {
                     self.loginAlert(message: "로그인에 성공하였습니다.") { 
+                        //로그인 성공 -> 피드 화면전환
                         
                         let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
                         let SceneDelegate = windowScene?.delegate as? SceneDelegate
                         
                         let vc = CustomTabBarController()
-                        let nav = UINavigationController(rootViewController: vc)
                         
-                        SceneDelegate?.window?.rootViewController = nav
+                        SceneDelegate?.window?.rootViewController = vc
                         SceneDelegate?.window?.makeKeyAndVisible()
                         
                     }
