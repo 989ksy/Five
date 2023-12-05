@@ -14,7 +14,7 @@ protocol EmailViewControllerAttributed {
     func bind()
 }
 
-class EmailViewController: BaseViewController {
+final class EmailViewController: BaseViewController {
     
     private let mainView = EmailView()
     private let viewModel = EmailViewModel()

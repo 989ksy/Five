@@ -15,7 +15,7 @@ protocol PasswordViewControllerAttributed {
     func setNavigation()
 }
 
-class PasswordViewController : BaseViewController {
+final class PasswordViewController : BaseViewController {
     
     var emailInputText : String?
     

@@ -14,7 +14,7 @@ protocol NicknameViewControllerAttributed {
     func setNavigation()
 }
 
-class NicknameViewController : BaseViewController{
+final class NicknameViewController : BaseViewController{
     
     private let mainView = NicknameView()
     private let viewModel = NicknameViewModel()
