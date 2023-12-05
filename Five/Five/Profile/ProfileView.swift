@@ -21,9 +21,9 @@ class ProfileView : BaseView {
         btn.setImage(UIImage(named: "setting")?.withRenderingMode(.alwaysTemplate), for: .normal)
         btn.layer.cornerRadius = 18
         btn.layer.borderWidth = 5
-        btn.layer.borderColor = UIColor.white.cgColor
+        btn.layer.borderColor = CustomColor.backgroundColor?.cgColor
         btn.tintColor = .darkGray
-        btn.backgroundColor = .white
+        btn.backgroundColor = CustomColor.backgroundColor
         return btn
     }()
     
@@ -33,7 +33,7 @@ class ProfileView : BaseView {
         view.clipsToBounds = true
         view.layer.cornerRadius = 60
         view.layer.borderWidth = 5
-        view.layer.borderColor = UIColor.white.cgColor
+        view.layer.borderColor = CustomColor.backgroundColor?.cgColor
         view.image = UIImage(named: "test_profile")
         return view
     }()
