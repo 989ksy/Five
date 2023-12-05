@@ -91,11 +91,30 @@ class ProfileView : BaseView {
         return btn
     }()
     
+    let segmentedControl = {
+        let control = UnderlineSegmentedControl(items: ["Five","Fived"])
+        control.translatesAutoresizingMaskIntoConstraints = false
+        return control
+    }()
+    
+    let fiveView = {
+        let view = UIView()
+        view.backgroundColor = .green
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    let fivedView = {
+        let view = UIView()
+        view.backgroundColor = .blue
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     
     override func configureView() {
         addSubview(backgroundView)
         addSubview(profileImage)
-        profileImage.backgroundColor = .black
         addSubview(settingButton)
         addSubview(nicknameLabel)
         addSubview(followLabel)
@@ -103,6 +122,9 @@ class ProfileView : BaseView {
         addSubview(followDataLabel)
         addSubview(followingDataLabel)
         addSubview(followButton)
+        addSubview(segmentedControl)
+        addSubview(fivedView)
+        addSubview(fiveView)
     }
     
     override func setConstraints() {
@@ -161,6 +183,24 @@ class ProfileView : BaseView {
             make.centerX.equalToSuperview()
             make.height.equalTo(38)
             make.width.equalTo(90)
+        }
+        
+        segmentedControl.snp.makeConstraints { make in
+            make.top.equalTo(followButton.snp.bottom).offset(24)
+            make.horizontalEdges.equalToSuperview().inset(120)
+            make.height.equalTo(40)
+        }
+        
+        fiveView.snp.makeConstraints { make in
+            make.top.equalTo(segmentedControl.snp.bottom).offset(12)
+            make.horizontalEdges.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
+        
+        fivedView.snp.makeConstraints { make in
+            make.top.equalTo(segmentedControl.snp.bottom).offset(12)
+            make.horizontalEdges.equalToSuperview()
+            make.bottom.equalToSuperview()
         }
         
     }
