@@ -25,9 +25,6 @@ class LoginViewModel {
         let loginTap : ControlEvent<Void>
         let joinTap : ControlEvent<Void>
         
-        var emailInput : String
-        var passwordInput : String
-        
     }
     
     struct Output {
@@ -46,10 +43,16 @@ class LoginViewModel {
         
         let isSucceeded = PublishSubject<Bool>()
         
+        let value = Observable.combineLatest(input.email, input.password)
+            .map { user in
+                return user
+            } //$0가능
+        
         input.loginTap
             .throttle(.seconds(1), scheduler: MainScheduler.instance)
-            .flatMap{
-                APIManager.shared.login(email: input.emailInput, password: input.passwordInput)
+            .withLatestFrom(value)
+            .flatMap { user in
+                APIManager.shared.login(email: user.0, password: user.1)
             }
             .subscribe(with: self) { owner, result in
                 switch result {

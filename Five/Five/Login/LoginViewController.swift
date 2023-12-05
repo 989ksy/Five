@@ -31,8 +31,8 @@ class LoginViewController : BaseViewController {
         super.viewDidLoad()
         
         //dummy
-        mainView.emailTextField.text = "989ksy@gmail.com"
-        mainView.passwordTextField.text = "#gokiaV11"
+//        mainView.emailTextField.text = "989ksy@gmail.com"
+//        mainView.passwordTextField.text = "#gokiaV11"
         
         bind()
     }
@@ -44,10 +44,13 @@ class LoginViewController : BaseViewController {
         guard let emailInput = mainView.emailTextField.text else { return }
         guard let passwordInput = mainView.passwordTextField.text else { return }
         
-        let input = LoginViewModel.Input(email: mainView.emailTextField.rx.text.orEmpty, password: mainView.passwordTextField.rx.text.orEmpty, loginTap: mainView.loginButton.rx.tap, joinTap: mainView.joinButton.rx.tap, emailInput: emailInput, passwordInput: passwordInput)
-        
-        print(input.emailInput, input.passwordInput)
-        
+        let input = LoginViewModel.Input(
+            email: mainView.emailTextField.rx.text.orEmpty,
+            password: mainView.passwordTextField.rx.text.orEmpty,
+            loginTap: mainView.loginButton.rx.tap,
+            joinTap: mainView.joinButton.rx.tap
+        )
+                
         let output = viewModel.transform(input: input)
         
         output.validation
