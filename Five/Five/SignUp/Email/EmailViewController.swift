@@ -27,7 +27,7 @@ final class EmailViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = CustomColor.backgroundColor
 
         setNavigation()
         bind()

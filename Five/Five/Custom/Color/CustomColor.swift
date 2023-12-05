@@ -10,7 +10,7 @@ import UIKit
 enum CustomColor {
     
     static let pointColor = UIColor(named: "PointColor")
-    
     static let subColor = UIColor(named: "SubColor")
+    static let backgroundColor = UIColor(named: "BackgroundColor")
     
 }

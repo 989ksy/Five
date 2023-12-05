@@ -20,7 +20,7 @@ final class ContentViewController : BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = CustomColor.backgroundColor
         
         //버튼 액션
         mainView.closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)

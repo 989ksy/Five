@@ -30,7 +30,7 @@ final class NicknameViewController : BaseViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = CustomColor.backgroundColor
         
         bind()
         setNavigation()

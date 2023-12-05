@@ -23,7 +23,7 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = CustomColor.backgroundColor
         
         mainView.feedCollectionView.delegate = self
         mainView.feedCollectionView.dataSource = self
