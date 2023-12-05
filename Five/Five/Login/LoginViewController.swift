@@ -70,8 +70,16 @@ class LoginViewController : BaseViewController {
                 
                 if bool {
                     self.loginAlert(message: "로그인에 성공하였습니다.") { 
-                        let vc = FeedViewController()
-                        self.navigationController?.pushViewController(vc, animated: true)
+                        
+                        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+                        let SceneDelegate = windowScene?.delegate as? SceneDelegate
+                        
+                        let vc = CustomTabBarController()
+                        let nav = UINavigationController(rootViewController: vc)
+                        
+                        SceneDelegate?.window?.rootViewController = nav
+                        SceneDelegate?.window?.makeKeyAndVisible()
+                        
                     }
                 } else {
                     self.loginAlert(message: "가입되지 않은 계정입니다.\n입력 정보를 확인해주세요.") {
