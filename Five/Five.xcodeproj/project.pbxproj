@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F56A5C02B1C5D3700C7FAD3 /* UnderlineSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F56A5BF2B1C5D3700C7FAD3 /* UnderlineSegmentedControl.swift */; };
+		0F56A5C22B1CA40100C7FAD3 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F56A5C12B1CA40100C7FAD3 /* CommentViewController.swift */; };
+		0F56A5C42B1CA8FF00C7FAD3 /* CommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F56A5C32B1CA8FF00C7FAD3 /* CommentView.swift */; };
 		0F67CA012B0F7C5000259285 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CA002B0F7C5000259285 /* AppDelegate.swift */; };
 		0F67CA032B0F7C5000259285 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CA022B0F7C5000259285 /* SceneDelegate.swift */; };
 		0F67CA0A2B0F7C5200259285 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F67CA092B0F7C5200259285 /* Assets.xcassets */; };
@@ -95,6 +98,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F56A5BF2B1C5D3700C7FAD3 /* UnderlineSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlineSegmentedControl.swift; sourceTree = "<group>"; };
+		0F56A5C12B1CA40100C7FAD3 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
+		0F56A5C32B1CA8FF00C7FAD3 /* CommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
 		0F67C9FD2B0F7C5000259285 /* Five.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Five.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F67CA002B0F7C5000259285 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0F67CA022B0F7C5000259285 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -194,6 +200,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0F56A5BE2B1C5C8100C7FAD3 /* SegmentedControl */ = {
+			isa = PBXGroup;
+			children = (
+				0F56A5BF2B1C5D3700C7FAD3 /* UnderlineSegmentedControl.swift */,
+			);
+			path = SegmentedControl;
+			sourceTree = "<group>";
+		};
 		0F67C9F42B0F7C5000259285 = {
 			isa = PBXGroup;
 			children = (
@@ -219,6 +233,8 @@
 		0F67C9FF2B0F7C5000259285 /* Five */ = {
 			isa = PBXGroup;
 			children = (
+				0F56A5BE2B1C5C8100C7FAD3 /* SegmentedControl */,
+				0F89F0F62B1B962E00FECBCD /* Post */,
 				0F89F0F12B1B79EF00FECBCD /* Setting */,
 				0F86DD3B2B19B6130043939F /* Search */,
 				0F86DD3A2B19B5A00043939F /* Journal */,
@@ -484,6 +500,8 @@
 		0F86DD392B19B5540043939F /* Comment */ = {
 			isa = PBXGroup;
 			children = (
+				0F56A5C12B1CA40100C7FAD3 /* CommentViewController.swift */,
+				0F56A5C32B1CA8FF00C7FAD3 /* CommentView.swift */,
 			);
 			path = Comment;
 			sourceTree = "<group>";
@@ -528,6 +546,13 @@
 				0F89F0F42B1B7AD600FECBCD /* SettingView.swift */,
 			);
 			path = Setting;
+			sourceTree = "<group>";
+		};
+		0F89F0F62B1B962E00FECBCD /* Post */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Post;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -688,6 +713,7 @@
 				0F89F0F32B1B79FD00FECBCD /* SettingViewController.swift in Sources */,
 				0F67CA5D2B10625700259285 /* NicknameViewController.swift in Sources */,
 				0F86DD432B19BCE60043939F /* JournalView.swift in Sources */,
+				0F56A5C22B1CA40100C7FAD3 /* CommentViewController.swift in Sources */,
 				0F7DB6842B13A83400A48828 /* ContentView.swift in Sources */,
 				0F67CA682B10633D00259285 /* CustomColor.swift in Sources */,
 				0F67CA5B2B1061DB00259285 /* PasswordViewModel.swift in Sources */,
@@ -706,6 +732,7 @@
 				0F67CA3A2B10353800259285 /* BaseViewController.swift in Sources */,
 				0F67CA572B1061B300259285 /* PasswordViewController.swift in Sources */,
 				0F86DD412B19BC270043939F /* JournalViewController.swift in Sources */,
+				0F56A5C02B1C5D3700C7FAD3 /* UnderlineSegmentedControl.swift in Sources */,
 				0F67CA6A2B10641000259285 /* CustomFont.swift in Sources */,
 				0F6C76002B18A96800077831 /* ContentCollectionViewCell.swift in Sources */,
 				0F67CA442B1035CA00259285 /* LoginViewModel.swift in Sources */,
@@ -731,6 +758,7 @@
 				0F7DB6822B13A80B00A48828 /* ContentViewController.swift in Sources */,
 				0F6C76032B18B02F00077831 /* ContentTextView+Extension.swift in Sources */,
 				0F86DD362B19A5C20043939F /* lineUIView + Extension.swift in Sources */,
+				0F56A5C42B1CA8FF00C7FAD3 /* CommentView.swift in Sources */,
 				0F67CA532B10618200259285 /* EmailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
