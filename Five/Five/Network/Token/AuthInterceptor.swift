@@ -31,19 +31,22 @@ final class AuthInterceptor: RequestInterceptor {
         var urlRequest = urlRequest
         urlRequest.setValue(accessToken, forHTTPHeaderField: "accessToken")
         urlRequest.setValue(refreshToken, forHTTPHeaderField: "refreshToken")
-        print("adator 적용 \(urlRequest.headers)")
+//        print("adator 적용 \(urlRequest.headers)")
         completion(.success(urlRequest))
     }
 
-    //response의 statusCode가 401인 경우 토큰을 갱신하는 API를 호출
+    //response의 statusCode가 419인 경우 토큰을 갱신하는 API를 호출
     func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {
         print("retry 진입")
-        guard let response = request.task?.response as? HTTPURLResponse, response.statusCode == 401
+        guard let response = request.task?.response as? HTTPURLResponse, response.statusCode == 419
         else {
+            print("retry Error")
+            print(error)
             completion(.doNotRetryWithError(error))
             return
         }
         
+        print("refresh token 진입")
         APIManager.shared.RefreshToken()
             .subscribe(with: self) { owner, result in
                 switch result {
