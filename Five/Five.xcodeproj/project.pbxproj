@@ -10,6 +10,9 @@
 		0F56A5C02B1C5D3700C7FAD3 /* UnderlineSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F56A5BF2B1C5D3700C7FAD3 /* UnderlineSegmentedControl.swift */; };
 		0F56A5C22B1CA40100C7FAD3 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F56A5C12B1CA40100C7FAD3 /* CommentViewController.swift */; };
 		0F56A5C42B1CA8FF00C7FAD3 /* CommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F56A5C32B1CA8FF00C7FAD3 /* CommentView.swift */; };
+		0F64AF842B21B4CA00ED4CBE /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F64AF832B21B4CA00ED4CBE /* SearchTableViewCell.swift */; };
+		0F64AF862B21C33E00ED4CBE /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F64AF852B21C33E00ED4CBE /* BaseTableViewCell.swift */; };
+		0F64AF892B21D45100ED4CBE /* FollowUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F64AF882B21D45100ED4CBE /* FollowUIButton.swift */; };
 		0F67CA012B0F7C5000259285 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CA002B0F7C5000259285 /* AppDelegate.swift */; };
 		0F67CA032B0F7C5000259285 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CA022B0F7C5000259285 /* SceneDelegate.swift */; };
 		0F67CA0A2B0F7C5200259285 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F67CA092B0F7C5200259285 /* Assets.xcassets */; };
@@ -102,6 +105,9 @@
 		0F56A5BF2B1C5D3700C7FAD3 /* UnderlineSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlineSegmentedControl.swift; sourceTree = "<group>"; };
 		0F56A5C12B1CA40100C7FAD3 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		0F56A5C32B1CA8FF00C7FAD3 /* CommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
+		0F64AF832B21B4CA00ED4CBE /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
+		0F64AF852B21C33E00ED4CBE /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
+		0F64AF882B21D45100ED4CBE /* FollowUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowUIButton.swift; sourceTree = "<group>"; };
 		0F67C9FD2B0F7C5000259285 /* Five.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Five.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F67CA002B0F7C5000259285 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0F67CA022B0F7C5000259285 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -250,12 +256,13 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		0F64AF5F2B219D2700ED4CBE /* CollectionViewCell */ = {
+		0F64AF5F2B219D2700ED4CBE /* Cell */ = {
 			isa = PBXGroup;
 			children = (
 				0F7DB6762B133FE400A48828 /* BaseCollectionViewCell.swift */,
+				0F64AF852B21C33E00ED4CBE /* BaseTableViewCell.swift */,
 			);
-			path = CollectionViewCell;
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		0F64AF602B219D5600ED4CBE /* ViewController */ = {
@@ -282,12 +289,12 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		0F64AF632B219E4200ED4CBE /* CollectionViewCell */ = {
+		0F64AF632B219E4200ED4CBE /* Cell */ = {
 			isa = PBXGroup;
 			children = (
 				0F7DB6782B13639000A48828 /* FeedCollectionViewCell.swift */,
 			);
-			path = CollectionViewCell;
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		0F64AF642B219E5B00ED4CBE /* ViewController */ = {
@@ -436,12 +443,12 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		0F64AF772B21A00100ED4CBE /* CollectionViewCell */ = {
+		0F64AF772B21A00100ED4CBE /* Cell */ = {
 			isa = PBXGroup;
 			children = (
 				0F6C75FF2B18A96800077831 /* ContentCollectionViewCell.swift */,
 			);
-			path = CollectionViewCell;
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		0F64AF782B21A02C00ED4CBE /* UIView */ = {
@@ -524,6 +531,22 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		0F64AF822B21B49800ED4CBE /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				0F64AF832B21B4CA00ED4CBE /* SearchTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		0F64AF872B21D42500ED4CBE /* UIButton */ = {
+			isa = PBXGroup;
+			children = (
+				0F64AF882B21D45100ED4CBE /* FollowUIButton.swift */,
+			);
+			path = UIButton;
+			sourceTree = "<group>";
+		};
 		0F67C9F42B0F7C5000259285 = {
 			isa = PBXGroup;
 			children = (
@@ -594,7 +617,7 @@
 		0F67CA302B0F802600259285 /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				0F64AF5F2B219D2700ED4CBE /* CollectionViewCell */,
+				0F64AF5F2B219D2700ED4CBE /* Cell */,
 				0F64AF5E2B219D2000ED4CBE /* View */,
 				0F64AF5D2B219D1700ED4CBE /* ViewController */,
 			);
@@ -674,7 +697,7 @@
 		0F67CA642B10630800259285 /* Feed */ = {
 			isa = PBXGroup;
 			children = (
-				0F64AF632B219E4200ED4CBE /* CollectionViewCell */,
+				0F64AF632B219E4200ED4CBE /* Cell */,
 				0F64AF622B219E3B00ED4CBE /* ViewModel */,
 				0F64AF612B219E2900ED4CBE /* View */,
 				0F64AF602B219D5600ED4CBE /* ViewController */,
@@ -750,7 +773,7 @@
 		0F7DB67F2B13A6BE00A48828 /* Content */ = {
 			isa = PBXGroup;
 			children = (
-				0F64AF772B21A00100ED4CBE /* CollectionViewCell */,
+				0F64AF772B21A00100ED4CBE /* Cell */,
 				0F64AF762B219FF900ED4CBE /* ViewModel */,
 				0F64AF752B219FEC00ED4CBE /* View */,
 				0F64AF742B219FE200ED4CBE /* ViewController */,
@@ -803,6 +826,7 @@
 		0F86DD342B19A5A40043939F /* Extension + Share */ = {
 			isa = PBXGroup;
 			children = (
+				0F64AF872B21D42500ED4CBE /* UIButton */,
 				0F56A5BE2B1C5C8100C7FAD3 /* SegmentedControl */,
 				0F64AF792B21A03A00ED4CBE /* UILabel */,
 				0F64AF782B21A02C00ED4CBE /* UIView */,
@@ -832,6 +856,7 @@
 		0F86DD3B2B19B6130043939F /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				0F64AF822B21B49800ED4CBE /* Cell */,
 				0F64AF7F2B21A07800ED4CBE /* View */,
 				0F64AF7E2B21A07000ED4CBE /* ViewController */,
 			);
@@ -1037,6 +1062,7 @@
 				0F67CA512B10617100259285 /* EmailViewController.swift in Sources */,
 				0F67CA422B1035C000259285 /* LoginView.swift in Sources */,
 				0F89F0F02B1B787200FECBCD /* ProfileViewModel.swift in Sources */,
+				0F64AF842B21B4CA00ED4CBE /* SearchTableViewCell.swift in Sources */,
 				0F6C75FB2B1872D600077831 /* ContentViewModel.swift in Sources */,
 				0F86DD4A2B19C4820043939F /* FiveViewController.swift in Sources */,
 				0F6C76072B18ED0D00077831 /* ProfileView.swift in Sources */,
@@ -1052,7 +1078,9 @@
 				0F6C76002B18A96800077831 /* ContentCollectionViewCell.swift in Sources */,
 				0F67CA442B1035CA00259285 /* LoginViewModel.swift in Sources */,
 				0F67CA832B10663700259285 /* FiveError.swift in Sources */,
+				0F64AF892B21D45100ED4CBE /* FollowUIButton.swift in Sources */,
 				0F67CA3C2B10354200259285 /* BaseView.swift in Sources */,
+				0F64AF862B21C33E00ED4CBE /* BaseTableViewCell.swift in Sources */,
 				0F67CA782B10657D00259285 /* FeedViewModel.swift in Sources */,
 				0F67CA8A2B10669700259285 /* OutputAPIModel.swift in Sources */,
 				0F7DB6A02B15B76500A48828 /* KeychainStorage.swift in Sources */,
