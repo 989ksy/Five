@@ -30,19 +30,12 @@ class LoginViewController : BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //dummy
-//        mainView.emailTextField.text = "989ksy@gmail.com"
-//        mainView.passwordTextField.text = "#gokiaV11"
-        
         bind()
     }
     
     //MARK: - Bind
     
     func bind() {
-        
-        guard let emailInput = mainView.emailTextField.text else { return }
-        guard let passwordInput = mainView.passwordTextField.text else { return }
         
         let input = LoginViewModel.Input(
             email: mainView.emailTextField.rx.text.orEmpty,
@@ -69,18 +62,16 @@ class LoginViewController : BaseViewController {
                 print("LoginVC == 네트워크 통신 결과: \(bool)")
                 
                 if bool {
-                    self.loginAlert(message: "로그인에 성공하였습니다.") { 
-                        //로그인 성공 -> 피드 화면전환
-                        
-                        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
-                        let SceneDelegate = windowScene?.delegate as? SceneDelegate
-                        
-                        let vc = CustomTabBarController()
-                        
-                        SceneDelegate?.window?.rootViewController = vc
-                        SceneDelegate?.window?.makeKeyAndVisible()
-                        
-                    }
+                    //로그인 성공 -> 피드 화면전환
+                    
+                    let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+                    let SceneDelegate = windowScene?.delegate as? SceneDelegate
+                    
+                    let vc = CustomTabBarController()
+                    
+                    SceneDelegate?.window?.rootViewController = vc
+                    SceneDelegate?.window?.makeKeyAndVisible()
+                    
                 } else {
                     self.loginAlert(message: "가입되지 않은 계정입니다.\n입력 정보를 확인해주세요.") {
                     }
