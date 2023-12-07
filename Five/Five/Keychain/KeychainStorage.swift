@@ -10,7 +10,7 @@ import SwiftKeychainWrapper
 
 private struct KeychainKeys {
     static let userTokenKey: String = "User.Token.Key"
-    static let userRefreshTokenKey: String = "User.Token.Key"
+    static let userRefreshTokenKey: String = "User.RefeshToken.Key"
 }
 
 final class KeychainStorage {
