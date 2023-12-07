@@ -12,7 +12,7 @@ final class SearchView : BaseView {
     
     let searchBar = {
         let bar = UISearchBar()
-        bar.placeholder = "검색하고 싶은 해시태그를 입력하세요."
+        bar.placeholder = "검색하고 싶은 유저의 닉네임을 입력하세요."
         bar.searchTextField.font = CustomFont.mediumGmarket15
         return bar
     }()

@@ -13,8 +13,10 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
     
     //MARK: - 기본세팅
     
-    let mainView = FeedView()
-    let viewModel = FeedViewModel()
+    let mainView = FeedView() //메인 뷰
+    let viewModel = FeedViewModel() //뷰모델
+    
+    var feedItems : [CreatePostResponse] = []
     
     
     override func loadView() {
@@ -32,6 +34,10 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
         
         
         setNavigationController()
+        
+        print("===FeedVC ViewDidLoad, 유저토큰 확인 호출: \(KeychainStorage.shared.userToken!)")
+        
+        
     }
     
     
@@ -102,7 +108,7 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
         title = "Five"
         
         //로고 UI 설정
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : CustomFont.logo25 ?? .boldSystemFont(ofSize: 24), NSAttributedString.Key.foregroundColor:CustomColor.pointColor ?? .systemYellow]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : CustomFont.logo25 ?? .boldSystemFont(ofSize: 25), NSAttributedString.Key.foregroundColor:CustomColor.pointColor ?? .systemYellow]
         
         //네비게이션 컬러
         self.navigationController?.navigationBar.tintColor = .black

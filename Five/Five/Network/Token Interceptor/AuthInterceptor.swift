@@ -21,18 +21,18 @@ final class AuthInterceptor: RequestInterceptor {
     //adapt를 통해 Request Header에 필요한 토큰을 넣기
     //adapt: request전에 특정 작업을 하고 싶을 때
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
-        guard urlRequest.url?.absoluteString.hasPrefix(BaseURL.base) == true,
-              let accessToken = KeychainStorage.shared.userToken,
-              let refreshToken = KeychainStorage.shared.userRefreshToken
-        else {
-            completion(.success(urlRequest))
-            return
-        }
-        
-        var urlRequest = urlRequest
-        urlRequest.setValue(accessToken, forHTTPHeaderField: "accessToken")
-        urlRequest.setValue(refreshToken, forHTTPHeaderField: "refreshToken")
-//        print("adator 적용 \(urlRequest.headers)")
+//        guard urlRequest.url?.absoluteString.hasPrefix(BaseURL.base) == true,
+//              let accessToken = KeychainStorage.shared.userToken,
+//              let refreshToken = KeychainStorage.shared.userRefreshToken
+//        else {
+//            completion(.success(urlRequest))
+//            return
+//        }
+//        
+//        var urlRequest = urlRequest
+//        urlRequest.setValue(accessToken, forHTTPHeaderField: "Authorization")
+//        urlRequest.setValue(refreshToken, forHTTPHeaderField: "Refresh")
+////        print("adator 적용 \(urlRequest.headers)")
         completion(.success(urlRequest))
     }
 
@@ -55,6 +55,8 @@ final class AuthInterceptor: RequestInterceptor {
                 case .success(let response):
                     print("Retry-토큰 재발급 성공 = 갈아끼우기")
                     KeychainStorage.shared.userToken = response.token
+                    
+                    print("===auth refresh: \(KeychainStorage.shared.userRefreshToken!)")
                     completion(.retry)
                     
                 case .failure(let error):

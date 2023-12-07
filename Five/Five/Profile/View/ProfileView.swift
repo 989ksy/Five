@@ -31,7 +31,7 @@ class ProfileView : BaseView {
         let view = UIImageView()
         view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
-        view.layer.cornerRadius = 60
+        view.layer.cornerRadius = 45
         view.layer.borderWidth = 5
         view.layer.borderColor = CustomColor.backgroundColor?.cgColor
         view.image = UIImage(named: "test_profile")
@@ -132,16 +132,16 @@ class ProfileView : BaseView {
         backgroundView.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.horizontalEdges.equalToSuperview()
-            make.height.equalTo(164)
+            make.height.equalTo(130)
         }
         profileImage.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide)
-            make.size.equalTo(120)
+            make.size.equalTo(90)
             make.centerX.equalToSuperview()
         }
         
         settingButton.snp.makeConstraints { make in
-            make.size.equalTo(36)
+            make.size.equalTo(32)
             make.leading.equalTo(profileImage.snp.trailing).inset(30)
             make.top.equalTo(backgroundView.snp.bottom).offset(10)
         }
@@ -179,14 +179,14 @@ class ProfileView : BaseView {
         }
         
         followButton.snp.makeConstraints { make in
-            make.top.equalTo(nicknameLabel.snp.bottom).offset(15)
-            make.centerX.equalToSuperview()
-            make.height.equalTo(38)
+            make.top.equalTo(nicknameLabel.snp.bottom).offset(12)
+            make.height.equalTo(35)
             make.width.equalTo(90)
+            make.centerX.equalTo(profileImage)
         }
         
         segmentedControl.snp.makeConstraints { make in
-            make.top.equalTo(followButton.snp.bottom).offset(24)
+            make.top.equalTo(followButton.snp.bottom).offset(14)
             make.horizontalEdges.equalToSuperview().inset(120)
             make.height.equalTo(40)
         }

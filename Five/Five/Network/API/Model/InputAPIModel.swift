@@ -33,7 +33,7 @@ struct CheckEmail: Encodable {
 //MARK: - 포스트 작성
 
 struct CreatePost: Encodable {
-    let content : String
-    let file : Data
+    let content : String?
+    let file : [Data]?
     let product_id : String
 }

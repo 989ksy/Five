@@ -7,16 +7,26 @@
 
 import UIKit
 import YPImagePicker
+import RxSwift
+import RxCocoa
 
 final class ContentViewController : BaseViewController {
     
     let mainView = ContentView()
+    let viewModel = ContentViewModel()
+    
+    let disposeBag = DisposeBag()
     
     private lazy var selectedImage: [YPMediaPhoto] = []
+
+    // Input으로 넣을 이미지 스트림
+    let imageInput = PublishRelay<[Data]>.init()
     
     override func loadView() {
         self.view = mainView
     }
+    
+    //MARK: - ViewDidLoad
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,12 +43,15 @@ final class ContentViewController : BaseViewController {
         
 //        mainView.contentTextView.becomeFirstResponder()
         
+        //게시물 게시
+        bind()
+     
+        print("===contentVC ViewDidLoad호출: \(KeychainStorage.shared.userToken!)")
     }
     
     //MARK: - 이미지 업로드
     
     @objc func addImageButtonTapped() {
-        print("Add Image - tapped")
         var config = YPImagePickerConfiguration()
         
         //디폴트 설정
@@ -47,7 +60,7 @@ final class ContentViewController : BaseViewController {
         config.screens = [.library] //보여줄 화면
         config.startOnScreen = .library // 갤러리 첫 시작화면
         config.library.options = nil
-        config.showsPhotoFilters = false // 카메리 필터 싫어 ㅋㅋㅋ
+        config.showsPhotoFilters = false // 카메리 필터 싫어
         config.library.isSquareByDefault = false
         config.shouldSaveNewPicturesToAlbum = false //새이미지를 라이브러리에 저장하지 않음.
         
@@ -74,6 +87,12 @@ final class ContentViewController : BaseViewController {
                     default: break
                     }
                 }
+                
+                let mappedImage = self.selectedImage.map { $0.image.jpegData(compressionQuality: 0.1)
+                }.flatMap{ $0 }
+
+                self.imageInput.accept(mappedImage)
+                
                 self.mainView.imageCollectionView.reloadData()
             }
             picker.dismiss(animated: true, completion: nil)
@@ -84,14 +103,38 @@ final class ContentViewController : BaseViewController {
     }
     
     
-    //MARK: - 상단 버튼 작동 (닫기, 게시)
+    //MARK: - 닫기 버튼 작동
     
     @objc func closeButtonTapped() {
         self.dismiss(animated: true)
         print("writeVC dismiss tapped")
     }
     
-    @objc func uploadButtonTapped() {
+    
+    //MARK: - 업로드 버튼 작동
+    
+    
+    func bind() {
+        
+        let input = ContentViewModel.Input(
+            uploadTap: mainView.uploadButton.rx.tap,
+            textContent: mainView.contentTextView.rx.text.orEmpty,
+            images: imageInput.asObservable()
+        )
+        let output = viewModel.transform(input: input)
+        
+        output.isSucceeded
+            .subscribe(with: self) { owner, bool in
+                if bool {
+                    
+                    self.dismiss(animated: true)
+                    
+                } else {
+                    self.alertMessage(title: "알림", message: "포스트를 업로드 할 수 없습니다. 다시 시도해주세요.")
+                }
+            }
+            .disposed(by: disposeBag)
+        
         
     }
 

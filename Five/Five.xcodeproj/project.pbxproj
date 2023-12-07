@@ -78,6 +78,7 @@
 		0F89F0F02B1B787200FECBCD /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F89F0EF2B1B787200FECBCD /* ProfileViewModel.swift */; };
 		0F89F0F32B1B79FD00FECBCD /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F89F0F22B1B79FD00FECBCD /* SettingViewController.swift */; };
 		0F89F0F52B1B7AD600FECBCD /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F89F0F42B1B7AD600FECBCD /* SettingView.swift */; };
+		0F8ADAB62B1F57F6007CDB61 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8ADAB52B1F57F6007CDB61 /* SearchView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -167,6 +168,7 @@
 		0F89F0EF2B1B787200FECBCD /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		0F89F0F22B1B79FD00FECBCD /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		0F89F0F42B1B7AD600FECBCD /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		0F8ADAB52B1F57F6007CDB61 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,6 +210,320 @@
 			path = SegmentedControl;
 			sourceTree = "<group>";
 		};
+		0F64AF5A2B219CEA00ED4CBE /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0F67CA3F2B1035B800259285 /* LoginViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		0F64AF5B2B219CFA00ED4CBE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0F67CA412B1035C000259285 /* LoginView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0F64AF5C2B219D0900ED4CBE /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0F67CA432B1035CA00259285 /* LoginViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0F64AF5D2B219D1700ED4CBE /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0F67CA392B10353800259285 /* BaseViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		0F64AF5E2B219D2000ED4CBE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0F67CA3B2B10354200259285 /* BaseView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0F64AF5F2B219D2700ED4CBE /* CollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				0F7DB6762B133FE400A48828 /* BaseCollectionViewCell.swift */,
+			);
+			path = CollectionViewCell;
+			sourceTree = "<group>";
+		};
+		0F64AF602B219D5600ED4CBE /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0F67CA732B10656B00259285 /* FeedViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		0F64AF612B219E2900ED4CBE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0F67CA752B10657300259285 /* FeedView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0F64AF622B219E3B00ED4CBE /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0F67CA772B10657D00259285 /* FeedViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0F64AF632B219E4200ED4CBE /* CollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				0F7DB6782B13639000A48828 /* FeedCollectionViewCell.swift */,
+			);
+			path = CollectionViewCell;
+			sourceTree = "<group>";
+		};
+		0F64AF642B219E5B00ED4CBE /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0F7DB6C02B174B2600A48828 /* ProfileViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		0F64AF652B219E6800ED4CBE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0F6C76062B18ED0D00077831 /* ProfileView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0F64AF672B219E7A00ED4CBE /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0F89F0EF2B1B787200FECBCD /* ProfileViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0F64AF682B219E8800ED4CBE /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0F67CA5C2B10625700259285 /* NicknameViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		0F64AF692B219E9000ED4CBE /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0F67CA602B10626900259285 /* NicknameViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0F64AF6A2B219EA000ED4CBE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0F67CA5E2B10626000259285 /* NicknameView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0F64AF6B2B219EC900ED4CBE /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0F67CA562B1061B300259285 /* PasswordViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		0F64AF6C2B219ED500ED4CBE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0F67CA582B1061C800259285 /* PasswordView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0F64AF6D2B219EDB00ED4CBE /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0F67CA5A2B1061DB00259285 /* PasswordViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0F64AF6E2B219EE400ED4CBE /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0F67CA502B10617100259285 /* EmailViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		0F64AF6F2B219EED00ED4CBE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0F67CA522B10618200259285 /* EmailView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0F64AF702B219EF300ED4CBE /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0F67CA542B10619800259285 /* EmailViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0F64AF712B219FA000ED4CBE /* SegmentedControl */ = {
+			isa = PBXGroup;
+			children = (
+				0F86DD472B19C43E0043939F /* Five */,
+				0F86DD482B19C4590043939F /* Fived */,
+			);
+			path = SegmentedControl;
+			sourceTree = "<group>";
+		};
+		0F64AF722B219FBB00ED4CBE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0F67CA892B10669700259285 /* OutputAPIModel.swift */,
+				0F67CA8B2B1066A500259285 /* InputAPIModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0F64AF732B219FC400ED4CBE /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				0F67CA8D2B10677200259285 /* APIManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		0F64AF742B219FE200ED4CBE /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0F7DB6812B13A80B00A48828 /* ContentViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		0F64AF752B219FEC00ED4CBE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0F7DB6832B13A83400A48828 /* ContentView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0F64AF762B219FF900ED4CBE /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0F6C75FA2B1872D600077831 /* ContentViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0F64AF772B21A00100ED4CBE /* CollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				0F6C75FF2B18A96800077831 /* ContentCollectionViewCell.swift */,
+			);
+			path = CollectionViewCell;
+			sourceTree = "<group>";
+		};
+		0F64AF782B21A02C00ED4CBE /* UIView */ = {
+			isa = PBXGroup;
+			children = (
+				0F86DD352B19A5C20043939F /* lineUIView + Extension.swift */,
+			);
+			path = UIView;
+			sourceTree = "<group>";
+		};
+		0F64AF792B21A03A00ED4CBE /* UILabel */ = {
+			isa = PBXGroup;
+			children = (
+				0F86DD3E2B19B6D80043939F /* viewTitleLabel + Extension.swift */,
+			);
+			path = UILabel;
+			sourceTree = "<group>";
+		};
+		0F64AF7A2B21A04700ED4CBE /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0F56A5C12B1CA40100C7FAD3 /* CommentViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		0F64AF7B2B21A05000ED4CBE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0F56A5C32B1CA8FF00C7FAD3 /* CommentView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0F64AF7C2B21A05D00ED4CBE /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0F86DD402B19BC270043939F /* JournalViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		0F64AF7D2B21A06700ED4CBE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0F86DD422B19BCE60043939F /* JournalView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0F64AF7E2B21A07000ED4CBE /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0F86DD3C2B19B6240043939F /* SearchViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		0F64AF7F2B21A07800ED4CBE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0F8ADAB52B1F57F6007CDB61 /* SearchView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0F64AF802B21A08000ED4CBE /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0F89F0F22B1B79FD00FECBCD /* SettingViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		0F64AF812B21A08900ED4CBE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0F89F0F42B1B7AD600FECBCD /* SettingView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		0F67C9F42B0F7C5000259285 = {
 			isa = PBXGroup;
 			children = (
@@ -233,7 +549,6 @@
 		0F67C9FF2B0F7C5000259285 /* Five */ = {
 			isa = PBXGroup;
 			children = (
-				0F56A5BE2B1C5C8100C7FAD3 /* SegmentedControl */,
 				0F89F0F62B1B962E00FECBCD /* Post */,
 				0F89F0F12B1B79EF00FECBCD /* Setting */,
 				0F86DD3B2B19B6130043939F /* Search */,
@@ -242,7 +557,7 @@
 				0F86DD342B19A5A40043939F /* Extension + Share */,
 				0F7DB6BD2B17498300A48828 /* Tabbar */,
 				0F7DB69E2B15B75000A48828 /* Keychain */,
-				0F7DB6802B13A6E000A48828 /* Custom */,
+				0F7DB6802B13A6E000A48828 /* Custom Constant */,
 				0F7DB67F2B13A6BE00A48828 /* Content */,
 				0F67CA662B10632000259285 /* Network */,
 				0F67CA652B10631300259285 /* Profile */,
@@ -279,9 +594,9 @@
 		0F67CA302B0F802600259285 /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				0F67CA392B10353800259285 /* BaseViewController.swift */,
-				0F67CA3B2B10354200259285 /* BaseView.swift */,
-				0F7DB6762B133FE400A48828 /* BaseCollectionViewCell.swift */,
+				0F64AF5F2B219D2700ED4CBE /* CollectionViewCell */,
+				0F64AF5E2B219D2000ED4CBE /* View */,
+				0F64AF5D2B219D1700ED4CBE /* ViewController */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -289,9 +604,9 @@
 		0F67CA3D2B10355100259285 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				0F67CA3F2B1035B800259285 /* LoginViewController.swift */,
-				0F67CA412B1035C000259285 /* LoginView.swift */,
-				0F67CA432B1035CA00259285 /* LoginViewModel.swift */,
+				0F64AF5C2B219D0900ED4CBE /* ViewModel */,
+				0F64AF5B2B219CFA00ED4CBE /* View */,
+				0F64AF5A2B219CEA00ED4CBE /* ViewController */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -309,9 +624,9 @@
 		0F67CA4D2B10613700259285 /* Email */ = {
 			isa = PBXGroup;
 			children = (
-				0F67CA502B10617100259285 /* EmailViewController.swift */,
-				0F67CA522B10618200259285 /* EmailView.swift */,
-				0F67CA542B10619800259285 /* EmailViewModel.swift */,
+				0F64AF702B219EF300ED4CBE /* ViewModel */,
+				0F64AF6F2B219EED00ED4CBE /* View */,
+				0F64AF6E2B219EE400ED4CBE /* ViewController */,
 			);
 			path = Email;
 			sourceTree = "<group>";
@@ -319,9 +634,9 @@
 		0F67CA4E2B10614100259285 /* Password */ = {
 			isa = PBXGroup;
 			children = (
-				0F67CA562B1061B300259285 /* PasswordViewController.swift */,
-				0F67CA582B1061C800259285 /* PasswordView.swift */,
-				0F67CA5A2B1061DB00259285 /* PasswordViewModel.swift */,
+				0F64AF6D2B219EDB00ED4CBE /* ViewModel */,
+				0F64AF6C2B219ED500ED4CBE /* View */,
+				0F64AF6B2B219EC900ED4CBE /* ViewController */,
 			);
 			path = Password;
 			sourceTree = "<group>";
@@ -329,9 +644,9 @@
 		0F67CA4F2B10614800259285 /* Nickname */ = {
 			isa = PBXGroup;
 			children = (
-				0F67CA5C2B10625700259285 /* NicknameViewController.swift */,
-				0F67CA5E2B10626000259285 /* NicknameView.swift */,
-				0F67CA602B10626900259285 /* NicknameViewModel.swift */,
+				0F64AF6A2B219EA000ED4CBE /* View */,
+				0F64AF692B219E9000ED4CBE /* ViewModel */,
+				0F64AF682B219E8800ED4CBE /* ViewController */,
 			);
 			path = Nickname;
 			sourceTree = "<group>";
@@ -359,10 +674,10 @@
 		0F67CA642B10630800259285 /* Feed */ = {
 			isa = PBXGroup;
 			children = (
-				0F67CA732B10656B00259285 /* FeedViewController.swift */,
-				0F67CA752B10657300259285 /* FeedView.swift */,
-				0F67CA772B10657D00259285 /* FeedViewModel.swift */,
-				0F7DB6782B13639000A48828 /* FeedCollectionViewCell.swift */,
+				0F64AF632B219E4200ED4CBE /* CollectionViewCell */,
+				0F64AF622B219E3B00ED4CBE /* ViewModel */,
+				0F64AF612B219E2900ED4CBE /* View */,
+				0F64AF602B219D5600ED4CBE /* ViewController */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -370,11 +685,10 @@
 		0F67CA652B10631300259285 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				0F86DD482B19C4590043939F /* Fived */,
-				0F86DD472B19C43E0043939F /* Five */,
-				0F7DB6C02B174B2600A48828 /* ProfileViewController.swift */,
-				0F6C76062B18ED0D00077831 /* ProfileView.swift */,
-				0F89F0EF2B1B787200FECBCD /* ProfileViewModel.swift */,
+				0F64AF712B219FA000ED4CBE /* SegmentedControl */,
+				0F64AF672B219E7A00ED4CBE /* ViewModel */,
+				0F64AF652B219E6800ED4CBE /* View */,
+				0F64AF642B219E5B00ED4CBE /* ViewController */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -382,7 +696,7 @@
 		0F67CA662B10632000259285 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				0F7DB6A12B15C44600A48828 /* Token */,
+				0F7DB6A12B15C44600A48828 /* Token Interceptor */,
 				0F67CA7B2B1065E100259285 /* API */,
 				0F67CA7A2B1065CF00259285 /* Key */,
 				0F67CA792B1065C900259285 /* Error */,
@@ -410,10 +724,9 @@
 		0F67CA7B2B1065E100259285 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				0F64AF732B219FC400ED4CBE /* Manager */,
+				0F64AF722B219FBB00ED4CBE /* Model */,
 				0F67CA872B10667000259285 /* FiveAPI.swift */,
-				0F67CA892B10669700259285 /* OutputAPIModel.swift */,
-				0F67CA8B2B1066A500259285 /* InputAPIModel.swift */,
-				0F67CA8D2B10677200259285 /* APIManager.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -437,23 +750,23 @@
 		0F7DB67F2B13A6BE00A48828 /* Content */ = {
 			isa = PBXGroup;
 			children = (
+				0F64AF772B21A00100ED4CBE /* CollectionViewCell */,
+				0F64AF762B219FF900ED4CBE /* ViewModel */,
+				0F64AF752B219FEC00ED4CBE /* View */,
+				0F64AF742B219FE200ED4CBE /* ViewController */,
 				0F6C76012B18B00900077831 /* Extension */,
-				0F7DB6812B13A80B00A48828 /* ContentViewController.swift */,
-				0F7DB6832B13A83400A48828 /* ContentView.swift */,
-				0F6C75FA2B1872D600077831 /* ContentViewModel.swift */,
-				0F6C75FF2B18A96800077831 /* ContentCollectionViewCell.swift */,
 			);
 			path = Content;
 			sourceTree = "<group>";
 		};
-		0F7DB6802B13A6E000A48828 /* Custom */ = {
+		0F7DB6802B13A6E000A48828 /* Custom Constant */ = {
 			isa = PBXGroup;
 			children = (
 				0F7DB67C2B13708500A48828 /* Icon */,
 				0F67CA632B10630200259285 /* Color */,
 				0F67CA622B1062FB00259285 /* Font */,
 			);
-			path = Custom;
+			path = "Custom Constant";
 			sourceTree = "<group>";
 		};
 		0F7DB6982B14926600A48828 /* Frameworks */ = {
@@ -471,12 +784,12 @@
 			path = Keychain;
 			sourceTree = "<group>";
 		};
-		0F7DB6A12B15C44600A48828 /* Token */ = {
+		0F7DB6A12B15C44600A48828 /* Token Interceptor */ = {
 			isa = PBXGroup;
 			children = (
 				0F7DB6A22B15C45200A48828 /* AuthInterceptor.swift */,
 			);
-			path = Token;
+			path = "Token Interceptor";
 			sourceTree = "<group>";
 		};
 		0F7DB6BD2B17498300A48828 /* Tabbar */ = {
@@ -490,8 +803,9 @@
 		0F86DD342B19A5A40043939F /* Extension + Share */ = {
 			isa = PBXGroup;
 			children = (
-				0F86DD352B19A5C20043939F /* lineUIView + Extension.swift */,
-				0F86DD3E2B19B6D80043939F /* viewTitleLabel + Extension.swift */,
+				0F56A5BE2B1C5C8100C7FAD3 /* SegmentedControl */,
+				0F64AF792B21A03A00ED4CBE /* UILabel */,
+				0F64AF782B21A02C00ED4CBE /* UIView */,
 				0F89F0ED2B1B57E200FECBCD /* HideKeyboard+Extension.swift */,
 			);
 			path = "Extension + Share";
@@ -500,8 +814,8 @@
 		0F86DD392B19B5540043939F /* Comment */ = {
 			isa = PBXGroup;
 			children = (
-				0F56A5C12B1CA40100C7FAD3 /* CommentViewController.swift */,
-				0F56A5C32B1CA8FF00C7FAD3 /* CommentView.swift */,
+				0F64AF7B2B21A05000ED4CBE /* View */,
+				0F64AF7A2B21A04700ED4CBE /* ViewController */,
 			);
 			path = Comment;
 			sourceTree = "<group>";
@@ -509,8 +823,8 @@
 		0F86DD3A2B19B5A00043939F /* Journal */ = {
 			isa = PBXGroup;
 			children = (
-				0F86DD402B19BC270043939F /* JournalViewController.swift */,
-				0F86DD422B19BCE60043939F /* JournalView.swift */,
+				0F64AF7D2B21A06700ED4CBE /* View */,
+				0F64AF7C2B21A05D00ED4CBE /* ViewController */,
 			);
 			path = Journal;
 			sourceTree = "<group>";
@@ -518,7 +832,8 @@
 		0F86DD3B2B19B6130043939F /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				0F86DD3C2B19B6240043939F /* SearchViewController.swift */,
+				0F64AF7F2B21A07800ED4CBE /* View */,
+				0F64AF7E2B21A07000ED4CBE /* ViewController */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -542,8 +857,8 @@
 		0F89F0F12B1B79EF00FECBCD /* Setting */ = {
 			isa = PBXGroup;
 			children = (
-				0F89F0F22B1B79FD00FECBCD /* SettingViewController.swift */,
-				0F89F0F42B1B7AD600FECBCD /* SettingView.swift */,
+				0F64AF812B21A08900ED4CBE /* View */,
+				0F64AF802B21A08000ED4CBE /* ViewController */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -757,6 +1072,7 @@
 				0F7DB6C12B174B2600A48828 /* ProfileViewController.swift in Sources */,
 				0F7DB6822B13A80B00A48828 /* ContentViewController.swift in Sources */,
 				0F6C76032B18B02F00077831 /* ContentTextView+Extension.swift in Sources */,
+				0F8ADAB62B1F57F6007CDB61 /* SearchView.swift in Sources */,
 				0F86DD362B19A5C20043939F /* lineUIView + Extension.swift in Sources */,
 				0F56A5C42B1CA8FF00C7FAD3 /* CommentView.swift in Sources */,
 				0F67CA532B10618200259285 /* EmailView.swift in Sources */,
