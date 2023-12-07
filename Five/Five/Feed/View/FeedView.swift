@@ -56,8 +56,8 @@ class FeedView: BaseView {
         
         addContentButton.snp.makeConstraints { make in
             make.size.equalTo(60)
-            make.trailing.equalToSuperview().inset(23)
-            make.bottom.equalToSuperview().inset(45)
+            make.trailing.equalToSuperview().inset(16)
+            make.bottom.equalToSuperview().inset(27)
         }
 
         
