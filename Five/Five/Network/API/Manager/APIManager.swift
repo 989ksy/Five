@@ -10,12 +10,16 @@ import RxSwift
 import Moya
 
 
-class APIManager {
+final class APIManager {
     
     static let shared = APIManager()
     private init() {}
     
     private let provider = MoyaProvider<FiveAPI>(session: Session(interceptor: AuthInterceptor.shared))
+//    private let provider = MoyaProvider<FiveAPI>(plugins: [NetworkLoggerPlugin(configuration: .init(logOptions: .verbose))])
+    
+//    var provider = MoyaProvider<MainAPI>(plugins: [NetworkLoggerPlugin(verbose: true)])
+
     private let disposeBag = DisposeBag()
     
     //MARK: - 포스트 등록
@@ -28,7 +32,7 @@ class APIManager {
             self.provider.request(.createPost(model: data)) { result in
                 switch result {
                 case .success(let response) :
-                    print("===APIManager, StatusCode == \(response.statusCode), == response: \(response)")
+                    print("===APIManager for CreatePost, StatusCode == \(response.statusCode), == response: \(response)")
                     
                     do {
                         let data = try JSONDecoder().decode(CreatePostResponse.self, from: response.data)

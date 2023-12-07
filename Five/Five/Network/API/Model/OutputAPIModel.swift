@@ -39,12 +39,13 @@ struct RefreshTokenResponse : Decodable {
 
 struct CreatePostResponse: Decodable {
 
-    let id, time, content, productId : String
-    let likes, image, hashTags : [String]
+    let id, time, content: String
+    let productId : String
+    let likes, image : [String]
     let creator: Creator
     
     enum CodingKeys: String, CodingKey {
-        case likes, image, hashTags
+        case likes, image
         case id = "_id"
         case time, content, creator
         case productId = "product_id"

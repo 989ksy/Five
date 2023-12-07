@@ -32,6 +32,7 @@ extension FiveAPI : TargetType {
     ///the path of each operation that will be appended to our base URL.
     var path: String {
         switch self {
+            
             //회원
         case .signUp:
             return "join"
@@ -41,10 +42,10 @@ extension FiveAPI : TargetType {
             return "validation/email"
         case .tokenRefresh:
             return "refresh"
-            
-            //포스트
         case .withdraw:
             return "withdraw"
+            
+            //포스트
         case .createPost, .readPost:
             return "post"
         }
@@ -54,6 +55,7 @@ extension FiveAPI : TargetType {
     ///specify which method our calls should use.
     var method: Moya.Method {
         switch self {
+            
         case .signUp, .login, .emailValidation, .createPost:
             return .post
         case .tokenRefresh, .withdraw, .readPost:
@@ -85,10 +87,28 @@ extension FiveAPI : TargetType {
             
             //포스트 작성-조회
         case .createPost(let data):
-            let imageData = MultipartFormData(provider: .data(data.file), name: "file", fileName: "\(data.file).jpeg", mimeType: "image/jpeg")
+            
+            var multipartData: [MultipartFormData] = []
+
+            if let file = data.file {
+                for item in file {
+                    let multi = MultipartFormData(
+                        provider: .data(item),
+                        name: "file",
+                        fileName: "\(Date()).jpeg", //UUID().uuidString
+                        mimeType: "image/jpeg"
+                    )
+                    multipartData.append(multi)
+                }
+            }
+            
             let productIdData = MultipartFormData(provider: .data(data.product_id.data(using: .utf8)!), name: "product_id")
-            let contentData = MultipartFormData(provider: .data(data.content.data(using: .utf8)!), name: "content")
-            let multipartData: [MultipartFormData] = [imageData, productIdData,contentData]
+            multipartData.append(productIdData)
+            if let contentData = data.content {
+                let multi = MultipartFormData(provider: .data(contentData.data(using: .utf8)!), name: "content")
+                multipartData.append(multi)
+            }
+            print("multipartData", multipartData)
             return .uploadMultipart(multipartData)
             
         case .readPost:
@@ -121,7 +141,11 @@ extension FiveAPI : TargetType {
             
             //포스트조회-업로드
         case .createPost:
-            return ["Content-Type" : "multipart/form-data", "SesacKey" : "\(APIKey.sesacKey)"]
+            
+            print("======= 포스트업로드 fiveAPI, accessToken: \(KeychainStorage.shared.userToken!), === refresh: \(KeychainStorage.shared.userRefreshToken!)")
+            
+            return ["Authorization" : "\(KeychainStorage.shared.userToken!)" ,"Content-Type" : "multipart/form-data", "SesacKey" : "\(APIKey.sesacKey)"]
+            
         case .readPost:
             return ["Content-Type" : "multipart/form-data", "SesacKey" : "\(APIKey.sesacKey)"]
         }
