@@ -52,8 +52,13 @@ class FeedCollectionViewCell : BaseCollectionViewCell {
         let label = UILabel()
         label.font = CustomFont.mediumGmarket15
         label.textColor = .black
-        label.text = "양현종"
+        label.text = "레오나르도다빈치"
         return label
+    }()
+    
+    let nicknameButton = {
+        let btn = UIButton()
+        return btn
     }()
     
     let moreButton = {
@@ -118,6 +123,7 @@ class FeedCollectionViewCell : BaseCollectionViewCell {
         cellBackgroundView.addSubview(imageView)
         profileView.addSubview(profilePic)
         profileView.addSubview(nicknameLabel)
+        profileView.addSubview(nicknameButton)
         profileView.addSubview(moreButton)
         profileView.addSubview(profileViewBottomLine)
         cellBackgroundView.addSubview(elementView)
@@ -152,6 +158,12 @@ class FeedCollectionViewCell : BaseCollectionViewCell {
             make.centerY.equalToSuperview()
             make.height.equalTo(40)
             make.leading.equalTo(profilePic.snp.trailing).offset(16)
+        }
+        
+        nicknameButton.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.size.equalTo(nicknameLabel)
+            make.leading.equalTo(nicknameLabel)
         }
         
         moreButton.snp.makeConstraints { make in

@@ -13,6 +13,8 @@
 		0F64AF842B21B4CA00ED4CBE /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F64AF832B21B4CA00ED4CBE /* SearchTableViewCell.swift */; };
 		0F64AF862B21C33E00ED4CBE /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F64AF852B21C33E00ED4CBE /* BaseTableViewCell.swift */; };
 		0F64AF892B21D45100ED4CBE /* FollowUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F64AF882B21D45100ED4CBE /* FollowUIButton.swift */; };
+		0F64AF8B2B21EE9C00ED4CBE /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F64AF8A2B21EE9C00ED4CBE /* PostViewController.swift */; };
+		0F64AF8D2B21EEB600ED4CBE /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F64AF8C2B21EEB600ED4CBE /* PostView.swift */; };
 		0F67CA012B0F7C5000259285 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CA002B0F7C5000259285 /* AppDelegate.swift */; };
 		0F67CA032B0F7C5000259285 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CA022B0F7C5000259285 /* SceneDelegate.swift */; };
 		0F67CA0A2B0F7C5200259285 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F67CA092B0F7C5200259285 /* Assets.xcassets */; };
@@ -108,6 +110,8 @@
 		0F64AF832B21B4CA00ED4CBE /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		0F64AF852B21C33E00ED4CBE /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		0F64AF882B21D45100ED4CBE /* FollowUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowUIButton.swift; sourceTree = "<group>"; };
+		0F64AF8A2B21EE9C00ED4CBE /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		0F64AF8C2B21EEB600ED4CBE /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
 		0F67C9FD2B0F7C5000259285 /* Five.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Five.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F67CA002B0F7C5000259285 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0F67CA022B0F7C5000259285 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -891,6 +895,8 @@
 		0F89F0F62B1B962E00FECBCD /* Post */ = {
 			isa = PBXGroup;
 			children = (
+				0F64AF8A2B21EE9C00ED4CBE /* PostViewController.swift */,
+				0F64AF8C2B21EEB600ED4CBE /* PostView.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -1069,11 +1075,13 @@
 				0F67CA592B1061C800259285 /* PasswordView.swift in Sources */,
 				0F86DD3D2B19B6240043939F /* SearchViewController.swift in Sources */,
 				0F89F0F52B1B7AD600FECBCD /* SettingView.swift in Sources */,
+				0F64AF8B2B21EE9C00ED4CBE /* PostViewController.swift in Sources */,
 				0F89F0EE2B1B57E200FECBCD /* HideKeyboard+Extension.swift in Sources */,
 				0F67CA3A2B10353800259285 /* BaseViewController.swift in Sources */,
 				0F67CA572B1061B300259285 /* PasswordViewController.swift in Sources */,
 				0F86DD412B19BC270043939F /* JournalViewController.swift in Sources */,
 				0F56A5C02B1C5D3700C7FAD3 /* UnderlineSegmentedControl.swift in Sources */,
+				0F64AF8D2B21EEB600ED4CBE /* PostView.swift in Sources */,
 				0F67CA6A2B10641000259285 /* CustomFont.swift in Sources */,
 				0F6C76002B18A96800077831 /* ContentCollectionViewCell.swift in Sources */,
 				0F67CA442B1035CA00259285 /* LoginViewModel.swift in Sources */,
