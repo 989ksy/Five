@@ -81,13 +81,7 @@ class ProfileView : BaseView {
     }()
     
     let followButton = {
-        let btn = UIButton()
-        btn.layer.cornerRadius = 6
-        btn.layer.borderWidth = 1
-        btn.layer.borderColor = UIColor.systemGray4.cgColor
-        btn.titleLabel?.font = CustomFont.mediumGmarket15
-        btn.setTitleColor(.darkGray, for: .normal)
-        btn.setTitle("팔로우하기", for: .normal)
+        let btn = FollowUIButton()
         return btn
     }()
     
