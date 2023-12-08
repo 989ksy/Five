@@ -11,6 +11,17 @@ class CustomTabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let appearance = UITabBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        
+        appearance.shadowColor = .clear
+        appearance.backgroundColor = CustomColor.backgroundColor
+        tabBarItem.standardAppearance = appearance
+        
+        tabBarItem.scrollEdgeAppearance = tabBarItem.standardAppearance
+        
+        
     //기본 컬러세팅
         
         self.tabBar.tintColor = CustomColor.pointColor
@@ -21,7 +32,7 @@ class CustomTabBarController: UITabBarController {
     //아이콘 설정
         let firstVC = UINavigationController(rootViewController: FeedViewController())
         firstVC.tabBarItem.selectedImage = UIImage(named: "home")
-        firstVC.tabBarItem.title = ""
+        firstVC.tabBarItem.title = "Five"
         firstVC.tabBarItem.image = UIImage(named: "home")
         
         let secondVC = UINavigationController(rootViewController: SearchViewController())
