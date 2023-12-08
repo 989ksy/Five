@@ -44,7 +44,6 @@ extension FiveAPI : TargetType {
             return "refresh"
         case .withdraw:
             return "withdraw"
-            
             //포스트
         case .createPost, .readPost:
             return "post"
@@ -55,7 +54,6 @@ extension FiveAPI : TargetType {
     ///specify which method our calls should use.
     var method: Moya.Method {
         switch self {
-            
         case .signUp, .login, .emailValidation, .createPost:
             return .post
         case .tokenRefresh, .withdraw, .readPost:
@@ -142,12 +140,11 @@ extension FiveAPI : TargetType {
             //포스트조회-업로드
         case .createPost:
             
-            print("======= 포스트업로드 fiveAPI, accessToken: \(KeychainStorage.shared.userToken!), === refresh: \(KeychainStorage.shared.userRefreshToken!)")
+            print("===FiveAPI_Key:\(KeychainStorage.shared.userToken!)")
             
-            return ["Authorization" : "\(KeychainStorage.shared.userToken!)" ,"Content-Type" : "multipart/form-data", "SesacKey" : "\(APIKey.sesacKey)"]
-            
+            return ["Authorization" : "\(KeychainStorage.shared.userToken!)", "Content-Type" : "multipart/form-data", "SesacKey" : "\(APIKey.sesacKey)"] //"Authorization" : "\(KeychainStorage.shared.userToken!)",
         case .readPost:
-            return ["Content-Type" : "multipart/form-data", "SesacKey" : "\(APIKey.sesacKey)"]
+            return ["SesacKey" : "\(APIKey.sesacKey)"]
         }
         
     }
