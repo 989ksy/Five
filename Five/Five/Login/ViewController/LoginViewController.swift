@@ -41,7 +41,7 @@ class LoginViewController : BaseViewController {
             email: mainView.emailTextField.rx.text.orEmpty,
             password: mainView.passwordTextField.rx.text.orEmpty,
             loginTap: mainView.loginButton.rx.tap,
-            joinTap: mainView.joinButton.rx.tap
+            joinTap: mainView.joinButton.rx.tap, eyeTap: mainView.eyeButton.rx.tap
         )
                 
         let output = viewModel.transform(input: input)
@@ -88,6 +88,20 @@ class LoginViewController : BaseViewController {
                 let vc = EmailViewController()
                 self.navigationController?.pushViewController(vc, animated: true)
                 print("join btn tap")
+            }
+            .disposed(by: disposeBag)
+        
+        //비밀번호 보기
+        input.eyeTap
+            .observe(on: MainScheduler.instance)
+            .subscribe(with: self) { owner, _ in
+
+                owner.mainView.passwordTextField.isSecureTextEntry.toggle()
+                owner.mainView.eyeButton.isSelected.toggle()
+                
+                let eyeImage = owner.mainView.eyeButton.isSelected ? "EyeOn" : "EyeOff"
+                owner.mainView.eyeButton.setImage(UIImage(named: eyeImage)?.withTintColor(.systemGray2), for: .normal)
+                owner.mainView.eyeButton.tintColor = .clear
             }
             .disposed(by: disposeBag)
     }
