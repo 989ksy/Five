@@ -37,6 +37,12 @@ class LoginView : BaseView {
         return view
     }()
     
+    let eyeButton = {
+        let btn = UIButton()
+        btn.setImage(UIImage(named: "EyeOn")?.withTintColor(.systemGray2), for: .normal)
+        return btn
+    }()
+    
     let loginButton = {
         let view = UIButton()
         view.setTitle("로그인하기", for: .normal)
@@ -73,6 +79,7 @@ class LoginView : BaseView {
         addSubview(titleLabel)
         addSubview(emailTextField)
         addSubview(passwordTextField)
+        addSubview(eyeButton)
         addSubview(loginButton)
         addSubview(joinStackView)
         joinStackView.addArrangedSubview(askJoinLabel)
@@ -100,6 +107,12 @@ class LoginView : BaseView {
             $0.height.equalTo(50)
             $0.top.equalTo(emailTextField.snp.bottom).offset(15)
             $0.horizontalEdges.equalToSuperview().inset(20)
+        }
+        
+        eyeButton.snp.makeConstraints { make in
+            make.size.equalTo(30)
+            make.trailing.equalTo(passwordTextField.snp.trailing ).inset(8)
+            make.centerY.equalTo(passwordTextField)
         }
         
         loginButton.snp.makeConstraints {
