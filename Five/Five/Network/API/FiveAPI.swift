@@ -16,7 +16,7 @@ enum FiveAPI {
     case withdraw
     
     case createPost (model: CreatePost)
-    case readPost
+    case readPost (next: String, limit: String, product_id: String)
 }
 
 extension FiveAPI : TargetType {
@@ -45,7 +45,9 @@ extension FiveAPI : TargetType {
         case .withdraw:
             return "withdraw"
             //포스트
-        case .createPost, .readPost:
+        case .createPost:
+            return "post"
+        case .readPost:
             return "post"
         }
     }
@@ -109,8 +111,8 @@ extension FiveAPI : TargetType {
             print("multipartData", multipartData)
             return .uploadMultipart(multipartData)
             
-        case .readPost:
-            return .requestPlain
+        case .readPost(let next, let limit, let product_id ):
+            return .requestParameters(parameters: ["next" : next, "limit" : limit, "product_id" : product_id], encoding: URLEncoding.queryString)
         }
     }
     
