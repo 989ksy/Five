@@ -38,10 +38,7 @@ class PasswordView : BaseView {
         view.backgroundColor = CustomColor.pointColor
         return view
     }()
-//    let birthdayView = {
-//        let view = UIView()
-//        return view
-//    }()
+
     let nicknameView = {
         let view = UIView()
         return view
@@ -54,6 +51,7 @@ class PasswordView : BaseView {
         view.placeholder = "비밀번호 입력"
         view.font = CustomFont.lightGmarket15
         view.borderStyle = .roundedRect
+        view.autocapitalizationType = .none
         return view
     }()
     
@@ -69,6 +67,7 @@ class PasswordView : BaseView {
         view.placeholder = "비밀번호 확인"
         view.font = CustomFont.lightGmarket15
         view.borderStyle = .roundedRect
+        view.autocapitalizationType = .none
         return view
     }()
     
@@ -95,7 +94,6 @@ class PasswordView : BaseView {
         addSubview(progressStackView)
         progressStackView.addArrangedSubview(emailView)
         progressStackView.addArrangedSubview(passwordView)
-//        progressStackView.addArrangedSubview(birthdayView)
         progressStackView.addArrangedSubview(nicknameView)
         addSubview(passwordTextfield)
         addSubview(firstDirectionLabel)

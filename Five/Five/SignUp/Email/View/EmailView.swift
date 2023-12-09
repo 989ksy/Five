@@ -53,6 +53,7 @@ class EmailView : BaseView {
         view.placeholder = "이메일 입력"
         view.font = CustomFont.lightGmarket15
         view.borderStyle = .roundedRect
+        view.autocapitalizationType = .none
         return view
     }()
     
