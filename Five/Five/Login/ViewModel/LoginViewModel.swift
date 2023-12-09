@@ -25,6 +25,8 @@ class LoginViewModel {
         let loginTap : ControlEvent<Void>
         let joinTap : ControlEvent<Void>
         
+        let eyeTap : ControlEvent<Void>
+        
     }
     
     struct Output {
