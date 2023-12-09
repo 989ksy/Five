@@ -21,8 +21,35 @@ final class SearchViewController: BaseViewController {
         view.backgroundColor = CustomColor.backgroundColor
         self.navigationItem.titleView = mainView.searchBar
         
+        mainView.resultTableView.delegate = self
+        mainView.resultTableView.dataSource = self
+        
         self.hideKeyboardWhenTappedAround()
     }
+    
+    
+}
+
+extension SearchViewController : UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 30
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath) as? SearchTableViewCell else {return UITableViewCell()}
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 62
+    }
+    
+    
+
+    
+    
     
     
 }

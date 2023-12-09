@@ -33,24 +33,24 @@ class SearchTableViewCell : BaseTableViewCell {
         return label
     }()
     
-    private let followButton = {
-        let btn = FollowUIButton()
-        return btn
-    }()
-    
+//    private let followButton = {
+//        let btn = FollowUIButton()
+//        return btn
+//    }()
+//    
 
     
     override func configureView() {
         addSubview(profileImage)
         addSubview(nicknameLabel)
-        addSubview(followButton)
+//        addSubview(followButton)
     }
     
     override func setConstraints() {
         profileImage.snp.makeConstraints { make in
             make.size.equalTo(40)
             make.centerY.equalToSuperview()
-            make.leading.equalToSuperview().offset(13)
+            make.leading.equalToSuperview().offset(16)
         }
         
         nicknameLabel.snp.makeConstraints { make in
@@ -58,13 +58,13 @@ class SearchTableViewCell : BaseTableViewCell {
             make.centerY.equalToSuperview()
             make.height.equalTo(16)
         }
-        followButton.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().inset(13)
-            make.centerY.equalToSuperview()
-            make.height.equalTo(35)
-            make.width.equalTo(90)
-
-        }
+//        followButton.snp.makeConstraints { make in
+//            make.trailing.equalToSuperview().inset(13)
+//            make.centerY.equalToSuperview()
+//            make.height.equalTo(35)
+//            make.width.equalTo(90)
+//
+//        }
     }
     
     

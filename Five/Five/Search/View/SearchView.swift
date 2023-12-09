@@ -17,11 +17,23 @@ final class SearchView : BaseView {
         return bar
     }()
     
+    let resultTableView = {
+        let view = UITableView()
+        view.register(SearchTableViewCell.self, forCellReuseIdentifier: "SearchTableViewCell")
+        view.backgroundColor = CustomColor.backgroundColor
+        view.separatorStyle = .none
+        return view
+    }()
+    
     override func configureView() {
-        
+        addSubview(resultTableView)
     }
     
     override func setConstraints() {
+        
+        resultTableView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
         
     }
     
