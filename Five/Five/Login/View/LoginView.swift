@@ -33,6 +33,7 @@ class LoginView : BaseView {
         view.borderStyle = .roundedRect
         view.font = CustomFont.lightGmarket15
         view.autocapitalizationType = .none
+        view.isSecureTextEntry = true
         return view
     }()
     
