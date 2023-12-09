@@ -62,3 +62,32 @@ struct Creator: Decodable {
     }
     
 }
+
+//MARK: - 포스트 조회
+
+struct ReadPostResponse: Decodable {
+    let data: [ReadData]
+    let nextCursor: String
+
+    enum CodingKeys: String, CodingKey {
+        case data
+        case nextCursor = "next_cursor"
+    }
+}
+
+struct ReadData : Decodable {
+    let likes, image: [String]
+    let id: String
+    let creator: Creator
+    let time, content, productID: String
+
+    enum CodingKeys: String, CodingKey {
+        case likes, image
+        case id = "_id"
+        case creator, time, content
+        case productID = "product_id"
+    }
+    
+    
+    
+}
