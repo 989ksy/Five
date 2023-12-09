@@ -57,6 +57,8 @@ class ContentViewModel {
                 )
             }
             .subscribe(with: self) { owner, result in
+                print("+++contentViewModel", result)
+                
                 switch result {
                 case .success(let response):
                     print("==Content 네트워크 성공: \(response)")

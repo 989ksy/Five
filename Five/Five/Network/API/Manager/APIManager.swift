@@ -16,11 +16,39 @@ final class APIManager {
     private init() {}
     
     private let provider = MoyaProvider<FiveAPI>(session: Session(interceptor: AuthInterceptor.shared))
-//    private let provider = MoyaProvider<FiveAPI>(plugins: [NetworkLoggerPlugin(configuration: .init(logOptions: .verbose))])
     
-//    var provider = MoyaProvider<MainAPI>(plugins: [NetworkLoggerPlugin(verbose: true)])
+//    private let provider = MoyaProvider<FiveAPI>(plugins: [NetworkLoggerPlugin(configuration: .init(logOptions: .verbose))])
+
 
     private let disposeBag = DisposeBag()
+    
+    
+    //MARK: - 포스트 조회
+    
+    func readPost(next: String, limit: String, productId: String) -> Single<Result<ReadPostResponse, FiveError>> {
+        
+        return Single.create { single in
+            self.provider.request(.readPost(next: next, limit: limit, product_id: productId)) { result in
+                switch result {
+                case .success(let response):
+                    do {
+                        let data = try JSONDecoder().decode(ReadPostResponse.self, from: response.data)
+                        single(.success(.success(data)))
+                    } catch {
+                        single(.success(.failure(.decodingError)))
+                    }
+                case .failure(let error):
+                    print("=======\(error.response?.request)")
+                    guard let customError = FiveError(rawValue: error.response?.statusCode ??  1) else {
+                        return
+                    }
+                    single(.success(.failure(customError)))
+                    
+                }
+            }
+            return Disposables.create()
+        }
+    }
     
     //MARK: - 포스트 등록
     
@@ -47,7 +75,6 @@ final class APIManager {
                     }
                     single(.success(.failure(customError)))
                 }
-                
             }
             
             return Disposables.create()
