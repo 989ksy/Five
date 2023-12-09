@@ -90,6 +90,7 @@ final class ProfileViewController: BaseViewController {
             )
             self.mainView.segmentedControl.selectedSegmentIndex = 0
         
+
         
     }
     
