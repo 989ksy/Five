@@ -23,6 +23,7 @@ class LoginView : BaseView {
         view.placeholder = "이메일을 입력해주세요."
         view.borderStyle = .roundedRect
         view.font = CustomFont.lightGmarket15
+        view.autocapitalizationType = .none
         return view
     }()
     
@@ -31,6 +32,7 @@ class LoginView : BaseView {
         view.placeholder = "비밀번호를 입력해주세요."
         view.borderStyle = .roundedRect
         view.font = CustomFont.lightGmarket15
+        view.autocapitalizationType = .none
         return view
     }()
     
