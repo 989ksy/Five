@@ -47,11 +47,14 @@ class ContentView : BaseView {
     
     let contentTextView = {
         let txtfield = UITextView()
-        txtfield.text = "함께 파이브 하고 싶은 순간을 공유해보세요."
+        txtfield.text = "함께 파이브 하고 싶은 순간을 공유해보세요..."
         txtfield.font = CustomFont.mediumGmarket15
         txtfield.textColor = .gray
         txtfield.textAlignment = .left
         txtfield.backgroundColor = CustomColor.backgroundColor
+        txtfield.layer.borderColor = UIColor.systemGray5.cgColor
+        txtfield.layer.borderWidth = 1
+        txtfield.layer.cornerRadius = 5
         return txtfield
     }()
     
@@ -93,11 +96,14 @@ class ContentView : BaseView {
         upperView.addSubview(closeButton)
         upperView.addSubview(newPostLabel)
         upperView.addSubview(uploadButton)
+        
         addSubview(upperLine)
-        addSubview(contentTextView)
-        addSubview(contentTextViewBottomLine)
+        
         addSubview(imageAddButton)
         addSubview(imageCollectionView)
+        addSubview(contentTextView)
+//        addSubview(contentTextViewBottomLine)
+
 
     }
     
@@ -134,29 +140,25 @@ class ContentView : BaseView {
             make.height.equalTo(0.5)
         }
         
-        contentTextView.snp.makeConstraints { make in
-            make.top.equalTo(upperView.snp.bottom).offset(13)
-            make.horizontalEdges.equalToSuperview().inset(4)
-            make.height.equalTo(220)
-        }
-        
-        contentTextViewBottomLine.snp.makeConstraints { make in
-            make.top.equalTo(contentTextView.snp.bottom)
-            make.horizontalEdges.equalToSuperview()
-            make.height.equalTo(0.5)
-        }
-        
         imageAddButton.snp.makeConstraints { make in
-            make.top.equalTo(contentTextView.snp.bottom).offset(12)
+            
+            make.top.equalTo(upperView.snp.bottom).offset(12)
             make.leading.equalToSuperview().offset(8)
             make.size.equalTo(67)
+
         }
         
         imageCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(contentTextView.snp.bottom).offset(12)
+            make.top.equalTo(upperView.snp.bottom).offset(12)
             make.leading.equalTo(imageAddButton.snp.trailing).offset(3)
             make.trailing.equalToSuperview().offset(-10)
             make.height.equalTo(67)
+        }
+        
+        contentTextView.snp.makeConstraints { make in
+            make.top.equalTo(imageAddButton.snp.bottom).offset(13)
+            make.horizontalEdges.equalToSuperview().inset(8)
+            make.height.equalTo(220)
         }
         
         
