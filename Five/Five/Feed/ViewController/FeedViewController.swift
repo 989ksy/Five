@@ -18,9 +18,7 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
     let viewModel = FeedViewModel() //뷰모델
     
     let disposeBag = DisposeBag()
-    
-//    var feedItems : [CreatePostResponse] = []
-    
+        
     
     override func loadView() {
         self.view = mainView
@@ -30,12 +28,16 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
         super.viewDidLoad()
         view.backgroundColor = CustomColor.backgroundColor
         
-//        print("+++feedViewController viewDidLoad: \(KeychainStorage.shared.userToken!)")
-        
         setNavigationController()
         
         bind()
                 
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+//        bind()
     }
     
 
@@ -58,15 +60,45 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
         output.items
             .bind(to: mainView.feedCollectionView.rx.items(cellIdentifier: "FeedCollectionViewCell", cellType: FeedCollectionViewCell.self)) { (row, element, cell) in
                 
+                //닉네임
                 cell.nicknameLabel.text = "\(element.creator.nick)"
-//                cell.imageView.image =
+                
+                //날짜
+                let dateformatter = DateFormatter()
+                dateformatter.dateFormat = "yyyy-MM-dd HH:mm"
+                let str = dateformatter.date(from: element.time)
+                let date = dateformatter.string(from: str ?? Date())
+                
+                cell.dateLabel.text = date 
+                
+                /*
+                 킹피셔 사용법:
+                 let url = URL(string: "https://example.com/image.png")
+                 imageView.kf.setImage(with: url)
+                 */
+                
+                let url = URL(string: "\(BaseURL.base)" + "post/" + element.image.first!)
+                cell.imageView.kf.setImage(with: url)
+                
                 
             }
             .disposed(by: disposeBag)
         
-//        mainView.feedCollectionView.rx.itemSelected
-//            .subscribe(with: self) { owner, indexPath in
+//        Observable
+//            .zip(
+//                mainView.feedCollectionView.rx.modelSelected(ReadData.self),
+//                mainView.feedCollectionView.rx.itemSelected)
+//            .subscribe(with: self) { owner, value in
+//                <#code#>
 //            }
+//            .disposed(by: disposeBag)
+//
+        mainView.feedCollectionView.rx.itemSelected
+            .subscribe(with: self) { owner, indexPath in
+                
+
+            }
+            .disposed(by: disposeBag)
         
         
     }
@@ -159,7 +191,8 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
         
     }
     
-    //decelerate;스크롤 인지 불리언; 사용자가 스크롤을 멈추면 false.
+    //decelerate : 스크롤 인지 bool값;
+    //사용자가 스크롤을 멈추면 false.
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if decelerate == false {
             self.navigationController?.setNavigationBarHidden(false, animated: true)
@@ -174,35 +207,3 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
     
     
 }
-
-
-
-
-//MARK: - 컬렉션뷰 Extension
-//
-//extension FeedViewController : UICollectionViewDelegate, UICollectionViewDataSource {
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return 10
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        
-//        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FeedCollectionViewCell", for: indexPath) as? FeedCollectionViewCell else {return UICollectionViewCell()}
-//        
-//        //댓글버튼
-//        cell.commentButton.tag = indexPath.row
-//        cell.commentButton.addTarget(self, action: #selector(commentButtonTapped), for: .touchUpInside)
-//        
-//        //내용버튼
-//        cell.contentButton.tag = indexPath.row
-//        cell.contentButton.addTarget(self, action: #selector(contentButtonTapped), for: .touchUpInside)
-//        
-//        //프로필 닉네임버튼
-//        cell.nicknameButton.tag = indexPath.row
-//        cell.nicknameButton.addTarget(self, action: #selector(nicknameButtonTapped), for: .touchUpInside)
-//        
-//        return cell
-//    }
-//    
-//    
-//}
