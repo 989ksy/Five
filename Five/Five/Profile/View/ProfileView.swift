@@ -92,9 +92,8 @@ class ProfileView : BaseView {
     }()
     
     let fiveView = {
-        let view = UIView()
-        view.backgroundColor = .green
-        view.translatesAutoresizingMaskIntoConstraints = false
+        let view = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionLayout())
+        view.register(FiveCollectionViewCell.self, forCellWithReuseIdentifier: "FiveCollectionViewCell")
         return view
     }()
     
@@ -104,6 +103,25 @@ class ProfileView : BaseView {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    
+    static func configureCollectionLayout() -> UICollectionViewLayout {
+
+        let layout = UICollectionViewFlowLayout()
+          
+          let spacing: CGFloat = 3
+          let numberOfItemsInRow: CGFloat = 3
+  
+          let width = (UIScreen.main.bounds.width - (numberOfItemsInRow + 1) * spacing) / numberOfItemsInRow
+          layout.itemSize = CGSize(width: width, height: width)
+          
+          layout.minimumInteritemSpacing = spacing
+          layout.minimumLineSpacing = spacing
+          
+          layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
+          
+          return layout
+        
+    }
     
     
     override func configureView() {
