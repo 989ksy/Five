@@ -40,9 +40,7 @@ final class ContentViewController : BaseViewController {
         mainView.contentTextView.delegate = self
         mainView.imageCollectionView.delegate = self
         mainView.imageCollectionView.dataSource = self
-        
-//        mainView.contentTextView.becomeFirstResponder()
-        
+                
         //게시물 게시
         bind()
      
@@ -178,8 +176,17 @@ extension ContentViewController : UICollectionViewDelegate, UICollectionViewData
         let selectedPhoto = selectedImage[indexPath.item]
         cell.imageView.image = selectedPhoto.image
         
+        cell.deleteButton.tag = indexPath.item
+        cell.deleteButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
+        
         return cell
     }
+    
+    @objc func deleteButtonTapped(_ sender: UIButton) {
+           let indexPath = sender.tag
+           selectedImage.remove(at: indexPath)
+           mainView.imageCollectionView.reloadData()
+       }
     
     
 }

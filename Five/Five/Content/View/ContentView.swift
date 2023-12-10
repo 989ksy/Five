@@ -47,7 +47,7 @@ class ContentView : BaseView {
     
     let contentTextView = {
         let txtfield = UITextView()
-        txtfield.text = "함께 파이브 하고 싶은 순간을 공유해보세요..."
+        txtfield.text = "  함께 파이브 하고 싶은 순간을 공유해보세요..."
         txtfield.font = CustomFont.mediumGmarket15
         txtfield.textColor = .gray
         txtfield.textAlignment = .left
