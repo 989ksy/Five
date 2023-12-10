@@ -79,8 +79,6 @@
 		0F86DD3F2B19B6D80043939F /* viewTitleLabel + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F86DD3E2B19B6D80043939F /* viewTitleLabel + Extension.swift */; };
 		0F86DD412B19BC270043939F /* JournalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F86DD402B19BC270043939F /* JournalViewController.swift */; };
 		0F86DD432B19BCE60043939F /* JournalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F86DD422B19BCE60043939F /* JournalView.swift */; };
-		0F86DD4A2B19C4820043939F /* FiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F86DD492B19C4820043939F /* FiveViewController.swift */; };
-		0F86DD4C2B19C4BA0043939F /* FivedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F86DD4B2B19C4BA0043939F /* FivedViewController.swift */; };
 		0F89F0EE2B1B57E200FECBCD /* HideKeyboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F89F0ED2B1B57E200FECBCD /* HideKeyboard+Extension.swift */; };
 		0F89F0F02B1B787200FECBCD /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F89F0EF2B1B787200FECBCD /* ProfileViewModel.swift */; };
 		0F89F0F32B1B79FD00FECBCD /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F89F0F22B1B79FD00FECBCD /* SettingViewController.swift */; };
@@ -175,8 +173,6 @@
 		0F86DD3E2B19B6D80043939F /* viewTitleLabel + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "viewTitleLabel + Extension.swift"; sourceTree = "<group>"; };
 		0F86DD402B19BC270043939F /* JournalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalViewController.swift; sourceTree = "<group>"; };
 		0F86DD422B19BCE60043939F /* JournalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalView.swift; sourceTree = "<group>"; };
-		0F86DD492B19C4820043939F /* FiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveViewController.swift; sourceTree = "<group>"; };
-		0F86DD4B2B19C4BA0043939F /* FivedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FivedViewController.swift; sourceTree = "<group>"; };
 		0F89F0ED2B1B57E200FECBCD /* HideKeyboard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HideKeyboard+Extension.swift"; sourceTree = "<group>"; };
 		0F89F0EF2B1B787200FECBCD /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		0F89F0F22B1B79FD00FECBCD /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
@@ -407,15 +403,6 @@
 				0F67CA542B10619800259285 /* EmailViewModel.swift */,
 			);
 			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		0F64AF712B219FA000ED4CBE /* SegmentedControl */ = {
-			isa = PBXGroup;
-			children = (
-				0F86DD472B19C43E0043939F /* Five */,
-				0F86DD482B19C4590043939F /* Fived */,
-			);
-			path = SegmentedControl;
 			sourceTree = "<group>";
 		};
 		0F64AF722B219FBB00ED4CBE /* Model */ = {
@@ -725,7 +712,6 @@
 			isa = PBXGroup;
 			children = (
 				0F4AE4E52B24CB2F007BA5EF /* Cell */,
-				0F64AF712B219FA000ED4CBE /* SegmentedControl */,
 				0F64AF672B219E7A00ED4CBE /* ViewModel */,
 				0F64AF652B219E6800ED4CBE /* View */,
 				0F64AF642B219E5B00ED4CBE /* ViewController */,
@@ -878,22 +864,6 @@
 				0F64AF7E2B21A07000ED4CBE /* ViewController */,
 			);
 			path = Search;
-			sourceTree = "<group>";
-		};
-		0F86DD472B19C43E0043939F /* Five */ = {
-			isa = PBXGroup;
-			children = (
-				0F86DD492B19C4820043939F /* FiveViewController.swift */,
-			);
-			path = Five;
-			sourceTree = "<group>";
-		};
-		0F86DD482B19C4590043939F /* Fived */ = {
-			isa = PBXGroup;
-			children = (
-				0F86DD4B2B19C4BA0043939F /* FivedViewController.swift */,
-			);
-			path = Fived;
 			sourceTree = "<group>";
 		};
 		0F89F0F12B1B79EF00FECBCD /* Setting */ = {
@@ -1085,7 +1055,6 @@
 				0F89F0F02B1B787200FECBCD /* ProfileViewModel.swift in Sources */,
 				0F64AF842B21B4CA00ED4CBE /* SearchTableViewCell.swift in Sources */,
 				0F6C75FB2B1872D600077831 /* ContentViewModel.swift in Sources */,
-				0F86DD4A2B19C4820043939F /* FiveViewController.swift in Sources */,
 				0F6C76072B18ED0D00077831 /* ProfileView.swift in Sources */,
 				0F67CA592B1061C800259285 /* PasswordView.swift in Sources */,
 				0F86DD3D2B19B6240043939F /* SearchViewController.swift in Sources */,
@@ -1110,7 +1079,6 @@
 				0F7DB6A32B15C45200A48828 /* AuthInterceptor.swift in Sources */,
 				0F67CA012B0F7C5000259285 /* AppDelegate.swift in Sources */,
 				0F67CA612B10626900259285 /* NicknameViewModel.swift in Sources */,
-				0F86DD4C2B19C4BA0043939F /* FivedViewController.swift in Sources */,
 				0F67CA8E2B10677200259285 /* APIManager.swift in Sources */,
 				0F7DB6BF2B17499B00A48828 /* CustomTabBarController.swift in Sources */,
 				0F7DB6772B133FE400A48828 /* BaseCollectionViewCell.swift in Sources */,

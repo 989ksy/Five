@@ -39,7 +39,7 @@ class ContentView : BaseView {
         btn.setTitle("게시", for: .normal)
         btn.setTitleColor(.darkGray, for: .normal)
         btn.titleLabel?.font = CustomFont.mediumGmarket15
-        btn.layer.borderColor = CustomColor.pointColor?.cgColor
+        btn.layer.borderColor = UIColor.systemGray2.cgColor
         btn.layer.borderWidth = 1
         btn.layer.cornerRadius = 5
         return btn

@@ -44,7 +44,6 @@ final class ContentViewController : BaseViewController {
         //게시물 게시
         bind()
      
-//        print("===contentVC ViewDidLoad호출: \(KeychainStorage.shared.userToken!)")
     }
     
     //MARK: - 이미지 업로드
@@ -105,12 +104,9 @@ final class ContentViewController : BaseViewController {
     
     @objc func closeButtonTapped() {
         self.dismiss(animated: true)
-        print("writeVC dismiss tapped")
     }
     
-    
     //MARK: - 업로드 버튼 작동
-    
     
     func bind() {
         
@@ -121,15 +117,26 @@ final class ContentViewController : BaseViewController {
         )
         let output = viewModel.transform(input: input)
         
+        
+        
         output.isSucceeded
             .subscribe(with: self) { owner, bool in
                 if bool {
-                    
                     self.dismiss(animated: true)
-                    
                 } else {
                     self.alertMessage(title: "알림", message: "포스트를 업로드 할 수 없습니다. 다시 시도해주세요.")
                 }
+            }
+            .disposed(by: disposeBag)
+        
+        output.validation
+            .bind(to: mainView.uploadButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+        
+        output.validation
+            .subscribe(with: self) { owner, bool in
+                owner.mainView.uploadButton.layer.borderColor = bool ? CustomColor.pointColor?.cgColor : UIColor.systemGray2.cgColor
+                
             }
             .disposed(by: disposeBag)
         
@@ -175,7 +182,7 @@ extension ContentViewController : UICollectionViewDelegate, UICollectionViewData
         
         let selectedPhoto = selectedImage[indexPath.item]
         cell.imageView.image = selectedPhoto.image
-        
+
         cell.deleteButton.tag = indexPath.item
         cell.deleteButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
         

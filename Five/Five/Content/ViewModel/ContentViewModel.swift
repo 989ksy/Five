@@ -22,17 +22,24 @@ class ContentViewModel {
     
     struct Output {
         let isSucceeded : Observable<Bool>
+        let validation : Observable<Bool>
     }
     
     func transform(input: Input) -> Output {
         
         let isSucceeded = PublishSubject<Bool>()
+
+        let validation = Observable.combineLatest(input.textContent, input.images) { text, image in
+            
+            return text.count >= 1 && !image.isEmpty
+            
+        }
         
         let text = input.textContent
             .map { text -> String in
             return String(text)
             }
-        
+            
         let value = Observable.combineLatest (
             input.images,
             text
@@ -57,7 +64,6 @@ class ContentViewModel {
                 )
             }
             .subscribe(with: self) { owner, result in
-                print("+++contentViewModel", result)
                 
                 switch result {
                 case .success(let response):
@@ -70,7 +76,7 @@ class ContentViewModel {
             }
             .disposed(by: disposeBag)
         
-        return Output(isSucceeded: isSucceeded)
+        return Output(isSucceeded: isSucceeded, validation: validation)
     }
     
     
