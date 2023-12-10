@@ -64,20 +64,32 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
                 cell.nicknameLabel.text = "\(element.creator.nick)"
                 
                 //날짜
-                let dateformatter = DateFormatter()
-                dateformatter.dateFormat = "yyyy-MM-dd HH:mm"
-                let str = dateformatter.date(from: element.time)
-                let date = dateformatter.string(from: str ?? Date())
+                let dateString = "\(element.time)"
+
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+                dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+
+                if let date = dateFormatter.date(from: dateString) {
+                    let formattedDate = DateFormatter.localizedString(from: date, dateStyle: .medium, timeStyle: .none)
+
+                    cell.dateLabel.text = formattedDate
+//                    print(formattedDate)
+                } else {
+                    print("유효하지 않은 날짜 형식: \(dateString)")
+                }
                 
-                cell.dateLabel.text = date 
                 
                 /*
                  킹피셔 사용법:
                  let url = URL(string: "https://example.com/image.png")
                  imageView.kf.setImage(with: url)
+                 
+                 예시: uploads/posts/1702111403536.jpeg
+                 
                  */
                 
-                let url = URL(string: "\(BaseURL.base)" + "post/" + element.image.first!)
+                let url = URL(string: "\(BaseURL.base)" + element.image.first!)
                 cell.imageView.kf.setImage(with: url)
                 
                 

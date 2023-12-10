@@ -46,7 +46,7 @@ final class ContentViewController : BaseViewController {
         //게시물 게시
         bind()
      
-        print("===contentVC ViewDidLoad호출: \(KeychainStorage.shared.userToken!)")
+//        print("===contentVC ViewDidLoad호출: \(KeychainStorage.shared.userToken!)")
     }
     
     //MARK: - 이미지 업로드
