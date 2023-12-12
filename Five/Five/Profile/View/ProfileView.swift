@@ -18,8 +18,8 @@ class ProfileView : BaseView {
     
     let settingButton = {
         let btn = UIButton()
-        btn.setImage(UIImage(named: "setting")?.withRenderingMode(.alwaysTemplate), for: .normal)
-        btn.layer.cornerRadius = 18
+        btn.setImage(UIImage(named: "setting")?.withRenderingMode(.alwaysTemplate).withTintColor(.white), for: .normal)
+        btn.layer.cornerRadius = 16
         btn.layer.borderWidth = 5
         btn.layer.borderColor = CustomColor.backgroundColor?.cgColor
         btn.tintColor = .darkGray
