@@ -27,9 +27,10 @@ enum CustomFont {
     //Light
     static let lightGmarket15 = UIFont(name: "GmarketSansTTFLight", size: 15)
     static let lightGmarket13 = UIFont(name: "GmarketSansTTFLight", size: 13)
-    static let lightGmarket11 = UIFont(name: "GmarketSansTTFLight", size: 11)
+    static let lightGmarket12 = UIFont(name: "GmarketSansTTFLight", size: 12)
     
     //Medium
+    static let mediumGmarket12 = UIFont(name: "GmarketSansTTFMedium", size: 12)
     static let mediumGmarket15 = UIFont(name: "GmarketSansTTFMedium", size: 15)
     static let mediumGmarket17 = UIFont(name: "GmarketSansTTFMedium", size: 17)
     static let mediumGmarket18 = UIFont(name: "GmarketSansTTFMedium", size: 25)

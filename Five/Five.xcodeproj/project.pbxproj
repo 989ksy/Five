@@ -91,6 +91,7 @@
 		0FB732AD2B286FC20065AB5B /* FiveButton + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB732AC2B286FC20065AB5B /* FiveButton + Extension.swift */; };
 		0FB732AF2B286FF00065AB5B /* CommentButton + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB732AE2B286FF00065AB5B /* CommentButton + Extension.swift */; };
 		0FB732B12B2870B00065AB5B /* ShareButton + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB732B02B2870B00065AB5B /* ShareButton + Extension.swift */; };
+		0FB732B32B28BA340065AB5B /* DateLabel + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB732B22B28BA340065AB5B /* DateLabel + Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -192,6 +193,7 @@
 		0FB732AC2B286FC20065AB5B /* FiveButton + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FiveButton + Extension.swift"; sourceTree = "<group>"; };
 		0FB732AE2B286FF00065AB5B /* CommentButton + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CommentButton + Extension.swift"; sourceTree = "<group>"; };
 		0FB732B02B2870B00065AB5B /* ShareButton + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShareButton + Extension.swift"; sourceTree = "<group>"; };
+		0FB732B22B28BA340065AB5B /* DateLabel + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateLabel + Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -481,6 +483,7 @@
 			children = (
 				0F86DD3E2B19B6D80043939F /* ViewTitleLabel + Extension.swift */,
 				0FB732A82B28679F0065AB5B /* NicknameLabel + Extension.swift */,
+				0FB732B22B28BA340065AB5B /* DateLabel + Extension.swift */,
 			);
 			path = UILabel;
 			sourceTree = "<group>";
@@ -1129,6 +1132,7 @@
 				0F7DB6822B13A80B00A48828 /* ContentViewController.swift in Sources */,
 				0F6C76032B18B02F00077831 /* ContentTextView+Extension.swift in Sources */,
 				0F8ADAB62B1F57F6007CDB61 /* SearchView.swift in Sources */,
+				0FB732B32B28BA340065AB5B /* DateLabel + Extension.swift in Sources */,
 				0F86DD362B19A5C20043939F /* LineView + Extension.swift in Sources */,
 				0F56A5C42B1CA8FF00C7FAD3 /* CommentView.swift in Sources */,
 				0F67CA532B10618200259285 /* EmailView.swift in Sources */,
