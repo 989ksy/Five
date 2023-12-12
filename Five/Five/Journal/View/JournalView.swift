@@ -11,13 +11,13 @@ import SnapKit
 class JournalView : BaseView {
     
     let contentLabel = {
-        let label = viewTitleLabel()
+        let label = ViewTitleLabel()
         label.text = "내용"
         return label
     }()
     
     let upperLine = {
-        let view = lineUIView()
+        let view = LineView()
         return view
     }()
     

@@ -24,13 +24,13 @@ class ContentView : BaseView {
     }()
     
     let newPostLabel = {
-        let label = viewTitleLabel()
+        let label = ViewTitleLabel()
         label.text = "새 포스트"
         return label
     }()
     
     let upperLine = {
-        let view = lineUIView()
+        let view = LineView()
         return view
     }()
     
@@ -59,7 +59,7 @@ class ContentView : BaseView {
     }()
     
     let contentTextViewBottomLine = {
-        let view = lineUIView()
+        let view = LineView()
         return view
     }()
     

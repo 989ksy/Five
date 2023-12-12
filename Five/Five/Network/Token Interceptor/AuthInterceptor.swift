@@ -49,6 +49,7 @@ final class AuthInterceptor: RequestInterceptor {
         }
         
         print("refresh token 진입")
+        
         APIManager.shared.RefreshToken()
             .subscribe(with: self) { owner, result in
                 switch result {

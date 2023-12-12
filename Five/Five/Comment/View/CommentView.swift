@@ -11,13 +11,13 @@ import SnapKit
 class CommentView : BaseView {
     
     let contentLabel = {
-        let label = viewTitleLabel()
+        let label = ViewTitleLabel()
         label.text = "댓글"
         return label
     }()
     
     let upperLine = {
-        let view = lineUIView()
+        let view = LineView()
         return view
     }()
     

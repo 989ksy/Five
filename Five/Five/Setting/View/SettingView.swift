@@ -33,7 +33,7 @@ class SettingView : BaseView {
     }()
     
     let plainLine = {
-        let view = lineUIView()
+        let view = LineView()
         return view
     }()
     
@@ -54,12 +54,12 @@ class SettingView : BaseView {
     }()
     
     let nickTxtFieldLine = {
-        let view = lineUIView()
+        let view = LineView()
         return view
     }()
     
     let plainLine2 = {
-        let view = lineUIView()
+        let view = LineView()
         return view
     }()
     
