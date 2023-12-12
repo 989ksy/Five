@@ -74,9 +74,9 @@
 		0F7DB6A32B15C45200A48828 /* AuthInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7DB6A22B15C45200A48828 /* AuthInterceptor.swift */; };
 		0F7DB6BF2B17499B00A48828 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7DB6BE2B17499B00A48828 /* CustomTabBarController.swift */; };
 		0F7DB6C12B174B2600A48828 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7DB6C02B174B2600A48828 /* ProfileViewController.swift */; };
-		0F86DD362B19A5C20043939F /* lineUIView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F86DD352B19A5C20043939F /* lineUIView + Extension.swift */; };
+		0F86DD362B19A5C20043939F /* LineView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F86DD352B19A5C20043939F /* LineView + Extension.swift */; };
 		0F86DD3D2B19B6240043939F /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F86DD3C2B19B6240043939F /* SearchViewController.swift */; };
-		0F86DD3F2B19B6D80043939F /* viewTitleLabel + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F86DD3E2B19B6D80043939F /* viewTitleLabel + Extension.swift */; };
+		0F86DD3F2B19B6D80043939F /* ViewTitleLabel + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F86DD3E2B19B6D80043939F /* ViewTitleLabel + Extension.swift */; };
 		0F86DD412B19BC270043939F /* JournalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F86DD402B19BC270043939F /* JournalViewController.swift */; };
 		0F86DD432B19BCE60043939F /* JournalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F86DD422B19BCE60043939F /* JournalView.swift */; };
 		0F89F0EE2B1B57E200FECBCD /* HideKeyboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F89F0ED2B1B57E200FECBCD /* HideKeyboard+Extension.swift */; };
@@ -85,6 +85,12 @@
 		0F89F0F52B1B7AD600FECBCD /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F89F0F42B1B7AD600FECBCD /* SettingView.swift */; };
 		0F8ADAB62B1F57F6007CDB61 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8ADAB52B1F57F6007CDB61 /* SearchView.swift */; };
 		0FB732A52B2839540065AB5B /* loadImage + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB732A42B2839540065AB5B /* loadImage + Extension.swift */; };
+		0FB732A72B2865DC0065AB5B /* ProfileImageView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB732A62B2865DC0065AB5B /* ProfileImageView + Extension.swift */; };
+		0FB732A92B28679F0065AB5B /* NicknameLabel + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB732A82B28679F0065AB5B /* NicknameLabel + Extension.swift */; };
+		0FB732AB2B286AFC0065AB5B /* MoreButton + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB732AA2B286AFC0065AB5B /* MoreButton + Extension.swift */; };
+		0FB732AD2B286FC20065AB5B /* FiveButton + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB732AC2B286FC20065AB5B /* FiveButton + Extension.swift */; };
+		0FB732AF2B286FF00065AB5B /* CommentButton + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB732AE2B286FF00065AB5B /* CommentButton + Extension.swift */; };
+		0FB732B12B2870B00065AB5B /* ShareButton + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB732B02B2870B00065AB5B /* ShareButton + Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -169,9 +175,9 @@
 		0F7DB6A22B15C45200A48828 /* AuthInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInterceptor.swift; sourceTree = "<group>"; };
 		0F7DB6BE2B17499B00A48828 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		0F7DB6C02B174B2600A48828 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		0F86DD352B19A5C20043939F /* lineUIView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "lineUIView + Extension.swift"; sourceTree = "<group>"; };
+		0F86DD352B19A5C20043939F /* LineView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LineView + Extension.swift"; sourceTree = "<group>"; };
 		0F86DD3C2B19B6240043939F /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
-		0F86DD3E2B19B6D80043939F /* viewTitleLabel + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "viewTitleLabel + Extension.swift"; sourceTree = "<group>"; };
+		0F86DD3E2B19B6D80043939F /* ViewTitleLabel + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewTitleLabel + Extension.swift"; sourceTree = "<group>"; };
 		0F86DD402B19BC270043939F /* JournalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalViewController.swift; sourceTree = "<group>"; };
 		0F86DD422B19BCE60043939F /* JournalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalView.swift; sourceTree = "<group>"; };
 		0F89F0ED2B1B57E200FECBCD /* HideKeyboard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HideKeyboard+Extension.swift"; sourceTree = "<group>"; };
@@ -180,6 +186,12 @@
 		0F89F0F42B1B7AD600FECBCD /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		0F8ADAB52B1F57F6007CDB61 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		0FB732A42B2839540065AB5B /* loadImage + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "loadImage + Extension.swift"; sourceTree = "<group>"; };
+		0FB732A62B2865DC0065AB5B /* ProfileImageView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileImageView + Extension.swift"; sourceTree = "<group>"; };
+		0FB732A82B28679F0065AB5B /* NicknameLabel + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NicknameLabel + Extension.swift"; sourceTree = "<group>"; };
+		0FB732AA2B286AFC0065AB5B /* MoreButton + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoreButton + Extension.swift"; sourceTree = "<group>"; };
+		0FB732AC2B286FC20065AB5B /* FiveButton + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FiveButton + Extension.swift"; sourceTree = "<group>"; };
+		0FB732AE2B286FF00065AB5B /* CommentButton + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CommentButton + Extension.swift"; sourceTree = "<group>"; };
+		0FB732B02B2870B00065AB5B /* ShareButton + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShareButton + Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -459,7 +471,7 @@
 		0F64AF782B21A02C00ED4CBE /* UIView */ = {
 			isa = PBXGroup;
 			children = (
-				0F86DD352B19A5C20043939F /* lineUIView + Extension.swift */,
+				0F86DD352B19A5C20043939F /* LineView + Extension.swift */,
 			);
 			path = UIView;
 			sourceTree = "<group>";
@@ -467,7 +479,8 @@
 		0F64AF792B21A03A00ED4CBE /* UILabel */ = {
 			isa = PBXGroup;
 			children = (
-				0F86DD3E2B19B6D80043939F /* viewTitleLabel + Extension.swift */,
+				0F86DD3E2B19B6D80043939F /* ViewTitleLabel + Extension.swift */,
+				0FB732A82B28679F0065AB5B /* NicknameLabel + Extension.swift */,
 			);
 			path = UILabel;
 			sourceTree = "<group>";
@@ -548,6 +561,10 @@
 			isa = PBXGroup;
 			children = (
 				0F64AF882B21D45100ED4CBE /* FollowUIButton.swift */,
+				0FB732AA2B286AFC0065AB5B /* MoreButton + Extension.swift */,
+				0FB732AC2B286FC20065AB5B /* FiveButton + Extension.swift */,
+				0FB732AE2B286FF00065AB5B /* CommentButton + Extension.swift */,
+				0FB732B02B2870B00065AB5B /* ShareButton + Extension.swift */,
 			);
 			path = UIButton;
 			sourceTree = "<group>";
@@ -771,6 +788,7 @@
 			isa = PBXGroup;
 			children = (
 				0FB732A42B2839540065AB5B /* loadImage + Extension.swift */,
+				0FB732A62B2865DC0065AB5B /* ProfileImageView + Extension.swift */,
 			);
 			path = UIImage;
 			sourceTree = "<group>";
@@ -1051,7 +1069,7 @@
 				0F7DB67E2B13709200A48828 /* CustomIcon.swift in Sources */,
 				0F67CA402B1035B800259285 /* LoginViewController.swift in Sources */,
 				0F7DB6792B13639000A48828 /* FeedCollectionViewCell.swift in Sources */,
-				0F86DD3F2B19B6D80043939F /* viewTitleLabel + Extension.swift in Sources */,
+				0F86DD3F2B19B6D80043939F /* ViewTitleLabel + Extension.swift in Sources */,
 				0F89F0F32B1B79FD00FECBCD /* SettingViewController.swift in Sources */,
 				0F67CA5D2B10625700259285 /* NicknameViewController.swift in Sources */,
 				0F86DD432B19BCE60043939F /* JournalView.swift in Sources */,
@@ -1062,6 +1080,7 @@
 				0F67CA742B10656B00259285 /* FeedViewController.swift in Sources */,
 				0F67CA7D2B1065F700259285 /* APIKey.swift in Sources */,
 				0F67CA512B10617100259285 /* EmailViewController.swift in Sources */,
+				0FB732AD2B286FC20065AB5B /* FiveButton + Extension.swift in Sources */,
 				0F67CA422B1035C000259285 /* LoginView.swift in Sources */,
 				0F89F0F02B1B787200FECBCD /* ProfileViewModel.swift in Sources */,
 				0F64AF842B21B4CA00ED4CBE /* SearchTableViewCell.swift in Sources */,
@@ -1071,8 +1090,10 @@
 				0F86DD3D2B19B6240043939F /* SearchViewController.swift in Sources */,
 				0F89F0F52B1B7AD600FECBCD /* SettingView.swift in Sources */,
 				0F64AF8B2B21EE9C00ED4CBE /* PostViewController.swift in Sources */,
+				0FB732B12B2870B00065AB5B /* ShareButton + Extension.swift in Sources */,
 				0F89F0EE2B1B57E200FECBCD /* HideKeyboard+Extension.swift in Sources */,
 				0F67CA3A2B10353800259285 /* BaseViewController.swift in Sources */,
+				0FB732AF2B286FF00065AB5B /* CommentButton + Extension.swift in Sources */,
 				0F67CA572B1061B300259285 /* PasswordViewController.swift in Sources */,
 				0F86DD412B19BC270043939F /* JournalViewController.swift in Sources */,
 				0F56A5C02B1C5D3700C7FAD3 /* UnderlineSegmentedControl.swift in Sources */,
@@ -1089,9 +1110,11 @@
 				0F67CA8A2B10669700259285 /* OutputAPIModel.swift in Sources */,
 				0F7DB6A02B15B76500A48828 /* KeychainStorage.swift in Sources */,
 				0F7DB6A32B15C45200A48828 /* AuthInterceptor.swift in Sources */,
+				0FB732A72B2865DC0065AB5B /* ProfileImageView + Extension.swift in Sources */,
 				0F67CA012B0F7C5000259285 /* AppDelegate.swift in Sources */,
 				0F67CA612B10626900259285 /* NicknameViewModel.swift in Sources */,
 				0F67CA8E2B10677200259285 /* APIManager.swift in Sources */,
+				0FB732AB2B286AFC0065AB5B /* MoreButton + Extension.swift in Sources */,
 				0F7DB6BF2B17499B00A48828 /* CustomTabBarController.swift in Sources */,
 				0F7DB6772B133FE400A48828 /* BaseCollectionViewCell.swift in Sources */,
 				0F67CA882B10667100259285 /* FiveAPI.swift in Sources */,
@@ -1100,12 +1123,13 @@
 				0F67CA552B10619800259285 /* EmailViewModel.swift in Sources */,
 				0F67CA5F2B10626000259285 /* NicknameView.swift in Sources */,
 				0F67CA7F2B10660500259285 /* BaseURL.swift in Sources */,
+				0FB732A92B28679F0065AB5B /* NicknameLabel + Extension.swift in Sources */,
 				0F67CA8C2B1066A500259285 /* InputAPIModel.swift in Sources */,
 				0F7DB6C12B174B2600A48828 /* ProfileViewController.swift in Sources */,
 				0F7DB6822B13A80B00A48828 /* ContentViewController.swift in Sources */,
 				0F6C76032B18B02F00077831 /* ContentTextView+Extension.swift in Sources */,
 				0F8ADAB62B1F57F6007CDB61 /* SearchView.swift in Sources */,
-				0F86DD362B19A5C20043939F /* lineUIView + Extension.swift in Sources */,
+				0F86DD362B19A5C20043939F /* LineView + Extension.swift in Sources */,
 				0F56A5C42B1CA8FF00C7FAD3 /* CommentView.swift in Sources */,
 				0F67CA532B10618200259285 /* EmailView.swift in Sources */,
 			);
