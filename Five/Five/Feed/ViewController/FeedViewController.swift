@@ -18,7 +18,13 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
     let viewModel = FeedViewModel() //뷰모델
     
     let disposeBag = DisposeBag()
+    
+    private lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshingData), for: .valueChanged)
+        return refreshControl
         
+    }()
     
     override func loadView() {
         self.view = mainView
@@ -29,16 +35,29 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
         view.backgroundColor = CustomColor.backgroundColor
         
         setNavigationController()
-        
         bind()
+        
+        mainView.feedCollectionView.refreshControl = refreshControl
+        
                 
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-//        bind()
+        mainView.feedCollectionView.reloadData()
     }
+    
+    
+    //MARK: - 화면 로딩
+    
+    @objc private func refreshingData() {
+
+        refreshControl.endRefreshing()
+        
+        print("refreshing view")
+
+   }
     
 
     //MARK: - Bind
@@ -47,6 +66,7 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
         
         let input = FeedViewModel.Input(addContentButtonTap: mainView.addContentButton.rx.tap)
         let output = viewModel.transform(input: input)
+        
         
         //작성하기 버튼 작동
         input.addContentButtonTap
@@ -57,7 +77,9 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
             }
             .disposed(by: disposeBag)
         
+        
         output.items
+            .observe(on: MainScheduler.instance)
             .bind(to: mainView.feedCollectionView.rx.items(cellIdentifier: "FeedCollectionViewCell", cellType: FeedCollectionViewCell.self)) { (row, element, cell) in
                 
                 //닉네임
@@ -71,44 +93,36 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
                 dateFormatter.locale = Locale(identifier: "en_US_POSIX")
 
                 if let date = dateFormatter.date(from: dateString) {
+                    
                     let formattedDate = DateFormatter.localizedString(from: date, dateStyle: .medium, timeStyle: .none)
-
                     cell.dateLabel.text = formattedDate
-//                    print(formattedDate)
+                    
                 } else {
                     print("유효하지 않은 날짜 형식: \(dateString)")
                 }
                 
-                
-                /*
-                 킹피셔 사용법:
-                 let url = URL(string: "https://example.com/image.png")
-                 imageView.kf.setImage(with: url)
-                 
-                 예시: uploads/posts/1702111403536.jpeg
-                 
-                 */
-                
+                //사진
                 let url = URL(string: "\(BaseURL.base)" + element.image.first!)
-                cell.imageView.kf.setImage(with: url)
+                cell.imageView.loadImage(from: url!, placeHolderImage: UIImage(named: "personal"))
                 
+
+        
                 
             }
             .disposed(by: disposeBag)
+
         
-//        Observable
-//            .zip(
-//                mainView.feedCollectionView.rx.modelSelected(ReadData.self),
-//                mainView.feedCollectionView.rx.itemSelected)
-//            .subscribe(with: self) { owner, value in
-//                <#code#>
-//            }
-//            .disposed(by: disposeBag)
-//
         mainView.feedCollectionView.rx.itemSelected
             .subscribe(with: self) { owner, indexPath in
-                
 
+            }
+            .disposed(by: disposeBag)
+        
+        
+        refreshControl.rx.controlEvent(.valueChanged)
+            .subscribe(with: self) { owner, _ in
+                owner.mainView.feedCollectionView.reloadData()
+                owner.refreshControl.endRefreshing()
             }
             .disposed(by: disposeBag)
         
@@ -147,26 +161,6 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
         present(vc, animated: true, completion: nil)
         
     }
-    
-    
-    //MARK: - 내용보기 버튼
-    
-    @objc func contentButtonTapped() {
-        
-        let vc = JournalViewController()
-        vc.modalPresentationStyle = .pageSheet
-        
-        if let sheet = vc.sheetPresentationController {
-            
-            sheet.detents = [.medium()]
-            sheet.delegate = self
-            sheet.prefersGrabberVisible = true
-            
-        }
-        
-        present(vc, animated: true, completion: nil)
-    }
-    
     
     //MARK: - navigation+item
     
