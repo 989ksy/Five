@@ -6,15 +6,38 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
-class PostViewController : BaseViewController {
+final class PostViewController : BaseViewController {
     
+    var transitedDataFromFeed = BehaviorRelay(value: CreatePostResponse(id: "", time: "", content: "", productId: "", likes: [], image: [], creator: Creator.init(id: "", nick: "")))
     
+    let mainView = PostView()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    override func loadView() {
+        self.view = mainView
     }
+
+        override func viewDidLoad() {
+            super.viewDidLoad()
+            view.backgroundColor = CustomColor.backgroundColor
+            
+            navigationItem.titleView = mainView.titleStackView
+        }
+
+        override func viewWillLayoutSubviews() {
+            super.viewWillLayoutSubviews()
+
+            if view.traitCollection.horizontalSizeClass == .compact {
+                mainView.titleStackView.axis = .vertical
+                mainView.titleStackView.spacing = UIStackView.spacingUseDefault
+            } else {
+                mainView.titleStackView.axis = .horizontal
+                mainView.titleStackView.spacing = 20.0
+            }
+        }
+
     
     
     
