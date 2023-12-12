@@ -1,13 +1,13 @@
 //
-//  viewTitleLabel + Extension.swift
+//  CommentButton.swift
 //  Five
 //
-//  Created by Seungyeon Kim on 12/1/23.
+//  Created by Seungyeon Kim on 12/12/23.
 //
 
 import UIKit
 
-class ViewTitleLabel : UILabel {
+class CommentButton : UIButton {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -19,7 +19,8 @@ class ViewTitleLabel : UILabel {
     }
     
     func set() {
-        font = CustomFont.mediumGmarket15
+        setImage(UIImage(named: "comment")?.withTintColor(.black), for: .normal)
+        contentMode = .scaleAspectFill
     }
     
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class lineUIView : UIView {
+class LineView : UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -20,7 +20,7 @@ class lineUIView : UIView {
     
     func set() {
         layer.borderWidth = 1
-        layer.borderColor = UIColor.systemGray3.cgColor
+        layer.borderColor = UIColor.systemGray5.cgColor
     }
     
 }

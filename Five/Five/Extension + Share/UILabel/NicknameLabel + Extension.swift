@@ -1,13 +1,13 @@
 //
-//  viewTitleLabel + Extension.swift
+//  nicknameLabel + Extension.swift
 //  Five
 //
-//  Created by Seungyeon Kim on 12/1/23.
+//  Created by Seungyeon Kim on 12/12/23.
 //
 
 import UIKit
 
-class ViewTitleLabel : UILabel {
+class NicknameLabel : UILabel {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -20,6 +20,8 @@ class ViewTitleLabel : UILabel {
     
     func set() {
         font = CustomFont.mediumGmarket15
+        textColor = .black
+        text = "윙가르디움"
     }
     
 }

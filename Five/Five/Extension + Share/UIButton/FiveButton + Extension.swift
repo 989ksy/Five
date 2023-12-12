@@ -1,13 +1,13 @@
 //
-//  viewTitleLabel + Extension.swift
+//  FiveButton + Extension.swift
 //  Five
 //
-//  Created by Seungyeon Kim on 12/1/23.
+//  Created by Seungyeon Kim on 12/12/23.
 //
 
 import UIKit
 
-class ViewTitleLabel : UILabel {
+class FiveButton : UIButton {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -19,7 +19,7 @@ class ViewTitleLabel : UILabel {
     }
     
     func set() {
-        font = CustomFont.mediumGmarket15
+        setImage(UIImage(named: "five")?.withTintColor(.black), for: .normal)
     }
     
 }
