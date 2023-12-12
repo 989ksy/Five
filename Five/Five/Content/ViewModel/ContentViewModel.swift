@@ -31,7 +31,7 @@ class ContentViewModel {
 
         let validation = Observable.combineLatest(input.textContent, input.images) { text, image in
             
-            return text.count >= 1 && !image.isEmpty
+            return text.count >= 1 && !image.isEmpty && text != "  함께 파이브 하고 싶은 순간을 공유해보세요..."
             
         }
         
@@ -69,6 +69,7 @@ class ContentViewModel {
                 case .success(let response):
                     print("==Content 네트워크 성공: \(response)")
                     isSucceeded.onNext(true)
+                    
                 case .failure(let failure):
                     print("==Content 네트워크 실패: \(failure)")
                     isSucceeded.onNext(false)
