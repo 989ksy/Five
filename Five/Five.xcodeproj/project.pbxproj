@@ -84,6 +84,7 @@
 		0F89F0F32B1B79FD00FECBCD /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F89F0F22B1B79FD00FECBCD /* SettingViewController.swift */; };
 		0F89F0F52B1B7AD600FECBCD /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F89F0F42B1B7AD600FECBCD /* SettingView.swift */; };
 		0F8ADAB62B1F57F6007CDB61 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8ADAB52B1F57F6007CDB61 /* SearchView.swift */; };
+		0FB732A52B2839540065AB5B /* loadImage + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB732A42B2839540065AB5B /* loadImage + Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -178,6 +179,7 @@
 		0F89F0F22B1B79FD00FECBCD /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		0F89F0F42B1B7AD600FECBCD /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		0F8ADAB52B1F57F6007CDB61 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		0FB732A42B2839540065AB5B /* loadImage + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "loadImage + Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -765,6 +767,14 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		0F74D2AE2B27E7F40022C983 /* UIImage */ = {
+			isa = PBXGroup;
+			children = (
+				0FB732A42B2839540065AB5B /* loadImage + Extension.swift */,
+			);
+			path = UIImage;
+			sourceTree = "<group>";
+		};
 		0F7DB67C2B13708500A48828 /* Icon */ = {
 			isa = PBXGroup;
 			children = (
@@ -829,6 +839,7 @@
 		0F86DD342B19A5A40043939F /* Extension + Share */ = {
 			isa = PBXGroup;
 			children = (
+				0F74D2AE2B27E7F40022C983 /* UIImage */,
 				0F64AF872B21D42500ED4CBE /* UIButton */,
 				0F56A5BE2B1C5C8100C7FAD3 /* SegmentedControl */,
 				0F64AF792B21A03A00ED4CBE /* UILabel */,
@@ -1070,6 +1081,7 @@
 				0F6C76002B18A96800077831 /* ContentCollectionViewCell.swift in Sources */,
 				0F67CA442B1035CA00259285 /* LoginViewModel.swift in Sources */,
 				0F67CA832B10663700259285 /* FiveError.swift in Sources */,
+				0FB732A52B2839540065AB5B /* loadImage + Extension.swift in Sources */,
 				0F64AF892B21D45100ED4CBE /* FollowUIButton.swift in Sources */,
 				0F67CA3C2B10354200259285 /* BaseView.swift in Sources */,
 				0F64AF862B21C33E00ED4CBE /* BaseTableViewCell.swift in Sources */,
