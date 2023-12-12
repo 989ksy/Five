@@ -19,6 +19,8 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
     
     let disposeBag = DisposeBag()
     
+    var refresh = PublishSubject<Void>()
+    
     private lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshingData), for: .valueChanged)
@@ -46,6 +48,8 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
         super.viewWillAppear(animated)
         
         mainView.feedCollectionView.reloadData()
+        
+        refresh.onNext(Void())
     }
     
     
@@ -56,6 +60,9 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
         refreshControl.endRefreshing()
         
         print("refreshing view")
+        
+        refresh.onNext(Void())
+        
 
    }
     
@@ -64,7 +71,7 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
     
     func bind() {
         
-        let input = FeedViewModel.Input(addContentButtonTap: mainView.addContentButton.rx.tap)
+        let input = FeedViewModel.Input(addContentButtonTap: mainView.addContentButton.rx.tap, refresh: refresh)
         let output = viewModel.transform(input: input)
         
         
@@ -83,7 +90,7 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
             .bind(to: mainView.feedCollectionView.rx.items(cellIdentifier: "FeedCollectionViewCell", cellType: FeedCollectionViewCell.self)) { (row, element, cell) in
                 
                 //닉네임
-                cell.nicknameLabel.text = "\(element.creator.nick)"
+                cell.nickLabel.text = "\(element.creator.nick)"
                 
                 //날짜
                 let dateString = "\(element.time)"
@@ -105,9 +112,13 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
                 let url = URL(string: "\(BaseURL.base)" + element.image.first!)
                 cell.imageView.loadImage(from: url!, placeHolderImage: UIImage(named: "personal"))
                 
-
+            }
+            .disposed(by: disposeBag)
         
-                
+        
+        output.nextCursor
+            .subscribe(with: self) { owner, value in
+                owner.mainView.feedCollectionView.reloadData()
             }
             .disposed(by: disposeBag)
 
@@ -115,6 +126,9 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
         mainView.feedCollectionView.rx.itemSelected
             .subscribe(with: self) { owner, indexPath in
 
+                let vc = PostViewController()
+                owner.navigationController?.pushViewController(vc, animated: true)
+                
             }
             .disposed(by: disposeBag)
         
@@ -155,7 +169,6 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
             //시트 상단에 그래버 표시 (기본 값은 false)
             sheet.prefersGrabberVisible = true
             
-
         }
         
         present(vc, animated: true, completion: nil)

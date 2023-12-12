@@ -12,65 +12,64 @@ import RxCocoa
 class FeedViewModel {
     
     let disposeBag = DisposeBag()
-    
-//    func fetchData() {
-//        
-//        APIManager.shared.readPost(next: "", limit: "5", productId: "Five_Feed")
-//            .subscribe(with: self) { owner, value in
-//                switch value {
-//                case .success(let response):
-//                    print("===feedVC",response)
-//                    
-//                case .failure(let error):
-//                    print("\(error)")
-//                    
-//                }
-//            }
-//            .disposed(by: disposeBag)
-//    }
-//    
-//    
-    
+
     struct Input {
         
         //버튼
         let addContentButtonTap : ControlEvent<Void> //글작성버튼
-//        let nicknameButtonTap : ControlEvent<Void> //닉네임버튼
-//        let commentButtonTap : ControlEvent<Void> //댓글버튼
-//        let contentButtonTap : ControlEvent<Void> //내용버튼
-        
+        let refresh: PublishSubject<Void>
     }
     
     struct Output {
         
-//        let isSucceded : Observable<Bool>
         let items: PublishSubject<[ReadData]>
-        
+        let nextCursor: BehaviorSubject<String>
         
     }
     
     func transform (input: Input) -> Output {
         
-        let contentData = PublishSubject<[ReadData]>()
+        let FeedData = PublishSubject<[ReadData]>()
         
-        APIManager.shared.readPost(next: "", limit: "5", productId: "Five_Feed")
+        var nextCursor = BehaviorSubject(value: "")
+        let value = nextCursor.map{ $0 }
+                
+        
+        input.refresh
+            .flatMap {
+                APIManager.shared.readPost(next: "", limit: "", productId: "Five_Feed")
+            }
             .subscribe(with: self) { owner, value in
                 switch value {
                 case .success(let response):
                     print("===feedVC",response)
+                    FeedData.onNext(response.data)
+                    nextCursor.onNext(response.nextCursor)
                     
-                    contentData.onNext(response.data)
-                
                 case .failure(let error):
                     print("\(error)")
-                    
                 }
             }
             .disposed(by: disposeBag)
         
+        //네트워크 통신
+        APIManager.shared.readPost(next: "", limit: "", productId: "Five_Feed")
+            .subscribe(with: self) { owner, value in
+                switch value {
+                case .success(let response):
+                    print("===feedVC",response)
+                    FeedData.onNext(response.data)
+                    nextCursor.onNext(response.nextCursor)
+                    
+                case .failure(let error):
+                    print("\(error)")
+                }
+            }
+            .disposed(by: disposeBag)
         
-    return Output(items: contentData)
+        return Output(items: FeedData, nextCursor: nextCursor)
     }
     
     
 }
+
