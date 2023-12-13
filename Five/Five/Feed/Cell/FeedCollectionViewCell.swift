@@ -16,17 +16,8 @@ class FeedCollectionViewCell : BaseCollectionViewCell {
     
     var disposeBag = DisposeBag()
     
-    //MARK: - 큰틀
-    
-    let cellBackgroundView = {
-        let view = UIView()
-        view.layer.borderWidth = 1.1
-        view.layer.borderColor = UIColor.systemGray5.cgColor
-        view.layer.cornerRadius = 4
-        return view
-    }()
-    
     //MARK: - 프로필 + 이름 + 메뉴
+    
     let profileView = {
         let view = UIView()
         return view
@@ -34,7 +25,7 @@ class FeedCollectionViewCell : BaseCollectionViewCell {
     
     let profileViewBottomLine = {
         let view = UIView()
-        view.layer.borderWidth = 1.1
+        view.layer.borderWidth = 0.5
         view.layer.borderColor = UIColor.systemGray5.cgColor
         return view
     }()
@@ -63,29 +54,11 @@ class FeedCollectionViewCell : BaseCollectionViewCell {
     
     let imageView = {
         let view = UIImageView()
-        view.backgroundColor = .clear
-        view.contentMode = .scaleAspectFit
-        return view
-    }()
-    
-    let imageCollectionView = {
-        let view = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionLayout())
-        view.register(ContentCollectionViewCell.self, forCellWithReuseIdentifier: "ContentCollectionViewCell")
-        view.showsHorizontalScrollIndicator = false
         view.backgroundColor = CustomColor.backgroundColor
-        view.isPagingEnabled = true
+        view.contentMode = .scaleAspectFill
+        view.clipsToBounds = true
         return view
     }()
-    
-    static func configureCollectionLayout() -> UICollectionViewLayout {
-        let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 300, height: 180)
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        layout.minimumLineSpacing = 0
-        layout.minimumInteritemSpacing = 0
-        layout.scrollDirection = .horizontal
-        return layout
-    }
     
     let borderline = {
         let view = UIView()
@@ -127,30 +100,24 @@ class FeedCollectionViewCell : BaseCollectionViewCell {
     }
     
     override func configureView() {
-        contentView.addSubview(cellBackgroundView)
-        cellBackgroundView.addSubview(profileView)
-        cellBackgroundView.addSubview(imageView)
+        contentView.addSubview(profileView)
+        contentView.addSubview(imageView)
         profileView.addSubview(profilePic)
         profileView.addSubview(nickLabel)
         profileView.addSubview(nicknameButton)
         profileView.addSubview(optionButton)
         profileView.addSubview(profileViewBottomLine)
-        cellBackgroundView.addSubview(elementView)
+        contentView.addSubview(elementView)
         elementView.addSubview(borderline)
         elementView.addSubview(fiveButton)
         elementView.addSubview(commentButton)
         elementView.addSubview(shareButton)
         elementView.addSubview(dateLabel)
         
-        imageView.backgroundColor = .systemGray6
     }
     
     override func setConstraints() {
-        
-        cellBackgroundView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-        
+
         profileView.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.horizontalEdges.equalToSuperview()
@@ -190,7 +157,7 @@ class FeedCollectionViewCell : BaseCollectionViewCell {
         imageView.snp.makeConstraints { make in
             make.top.equalTo(profileView.snp.bottom)
             make.horizontalEdges.equalToSuperview()
-            make.height.equalTo(230)
+            make.bottom.equalTo(elementView.snp.top)
         }
         
         borderline.snp.makeConstraints { make in
@@ -200,9 +167,9 @@ class FeedCollectionViewCell : BaseCollectionViewCell {
         }
         
         elementView.snp.makeConstraints { make in
-            make.top.equalTo(borderline.snp.bottom)
+            make.bottom.equalToSuperview()
             make.horizontalEdges.equalToSuperview()
-            make.height.equalTo(36)
+            make.height.equalTo(50)
         }
         
         fiveButton.snp.makeConstraints { make in
