@@ -12,7 +12,8 @@ final class SearchView : BaseView {
     
     let searchBar = {
         let bar = UISearchBar()
-        bar.placeholder = "검색하고 싶은 유저의 닉네임을 입력하세요."
+        bar.placeholder = "토픽 또는 키워드를 검색해 보세요." //"검색"
+        bar.searchTextField.textAlignment = .center
         bar.searchTextField.font = CustomFont.mediumGmarket15
         return bar
     }()
@@ -21,7 +22,8 @@ final class SearchView : BaseView {
         let view = UITableView()
         view.register(SearchTableViewCell.self, forCellReuseIdentifier: "SearchTableViewCell")
         view.backgroundColor = CustomColor.backgroundColor
-        view.separatorStyle = .none
+        view.separatorStyle = .singleLine
+        view.rowHeight = 280
         return view
     }()
     
