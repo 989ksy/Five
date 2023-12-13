@@ -7,12 +7,14 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
 
 class FeedCollectionViewCell : BaseCollectionViewCell {
     
     static let identifier = "FeedCollectionViewCell"
     
-    var contentButtonTappedAction : (() -> Void)?
+    var disposeBag = DisposeBag()
     
     //MARK: - 큰틀
     
@@ -38,21 +40,12 @@ class FeedCollectionViewCell : BaseCollectionViewCell {
     }()
     
     let profilePic = {
-        let view = UIImageView()
-        view.layer.cornerRadius = 15
-        view.image = UIImage(systemName: "person.fill")
-        view.clipsToBounds = true
-        view.contentMode = .scaleAspectFit
-        view.layer.borderWidth = 1.1
-        view.layer.borderColor = UIColor.systemGray5.cgColor
+        let view = ProfileImageView(frame: .zero)
         return view
     }()
     
-    let nicknameLabel = {
-        let label = UILabel()
-        label.font = CustomFont.mediumGmarket15
-        label.textColor = .black
-        label.text = "레오나르도다빈치"
+    let nickLabel = {
+        let label = NicknameLabel()
         return label
     }()
     
@@ -61,9 +54,8 @@ class FeedCollectionViewCell : BaseCollectionViewCell {
         return btn
     }()
     
-    let moreButton = {
-        let btn = UIButton()
-        btn.setImage(UIImage(named:"more")?.withTintColor(.gray), for: .normal)
+    let optionButton = {
+        let btn = MoreButton()
         return btn
     }()
     
@@ -71,9 +63,29 @@ class FeedCollectionViewCell : BaseCollectionViewCell {
     
     let imageView = {
         let view = UIImageView()
-        view.backgroundColor = .lightGray
+        view.backgroundColor = .clear
+        view.contentMode = .scaleAspectFit
         return view
     }()
+    
+    let imageCollectionView = {
+        let view = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionLayout())
+        view.register(ContentCollectionViewCell.self, forCellWithReuseIdentifier: "ContentCollectionViewCell")
+        view.showsHorizontalScrollIndicator = false
+        view.backgroundColor = CustomColor.backgroundColor
+        view.isPagingEnabled = true
+        return view
+    }()
+    
+    static func configureCollectionLayout() -> UICollectionViewLayout {
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: 300, height: 180)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        layout.minimumLineSpacing = 0
+        layout.minimumInteritemSpacing = 0
+        layout.scrollDirection = .horizontal
+        return layout
+    }
     
     let borderline = {
         let view = UIView()
@@ -82,55 +94,52 @@ class FeedCollectionViewCell : BaseCollectionViewCell {
         return view
     }()
     
+    //MARK: - 버튼 영역
+    
     let elementView = {
         let view = UIView()
         return view
     }()
     
     let fiveButton = {
-        let btn = UIButton()
-        btn.setImage(UIImage(named: "five")?.withTintColor(.black), for: .normal)
+        let btn = FiveButton()
         return btn
     }()
     
     let commentButton = {
-        let btn = UIButton()
-        btn.setImage(UIImage(named: "comment")?.withTintColor(.black), for: .normal)
-        btn.contentMode = .scaleAspectFill
+        let btn = CommentButton()
         return btn
     }()
     
-    let contentButton = {
-        let btn = UIButton()
-        btn.setImage(UIImage(named: "content")?.withTintColor(.black), for: .normal)
-        btn.contentMode = .scaleAspectFill
+    let shareButton = {
+        let btn = ShareButton()
         return btn
     }()
     
     let dateLabel = {
-        let label = UILabel()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy년 MM월 dd일"
-        label.text = dateFormatter.dateFormat
-        label.font = CustomFont.lightGmarket11
-        label.textColor = .darkGray
+        let label = DateLabel()
         return label
     }()
+        
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
+    }
     
     override func configureView() {
-        addSubview(cellBackgroundView)
+        contentView.addSubview(cellBackgroundView)
         cellBackgroundView.addSubview(profileView)
         cellBackgroundView.addSubview(imageView)
         profileView.addSubview(profilePic)
-        profileView.addSubview(nicknameLabel)
+        profileView.addSubview(nickLabel)
         profileView.addSubview(nicknameButton)
-        profileView.addSubview(moreButton)
+        profileView.addSubview(optionButton)
         profileView.addSubview(profileViewBottomLine)
         cellBackgroundView.addSubview(elementView)
         elementView.addSubview(borderline)
         elementView.addSubview(fiveButton)
         elementView.addSubview(commentButton)
-        elementView.addSubview(contentButton)
+        elementView.addSubview(shareButton)
         elementView.addSubview(dateLabel)
         
         imageView.backgroundColor = .systemGray6
@@ -150,23 +159,23 @@ class FeedCollectionViewCell : BaseCollectionViewCell {
         
         profilePic.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(16)
-            make.size.equalTo(36)
+            make.size.equalTo(30)
             make.centerY.equalToSuperview()
         }
         
-        nicknameLabel.snp.makeConstraints { make in
+        nickLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.height.equalTo(40)
-            make.leading.equalTo(profilePic.snp.trailing).offset(16)
+            make.leading.equalTo(profilePic.snp.trailing).offset(12)
         }
         
         nicknameButton.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.size.equalTo(nicknameLabel)
-            make.leading.equalTo(nicknameLabel)
+            make.size.equalTo(nickLabel)
+            make.leading.equalTo(nickLabel)
         }
         
-        moreButton.snp.makeConstraints { make in
+        optionButton.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.size.equalTo(17)
             make.trailing.equalToSuperview().inset(10)
@@ -208,7 +217,7 @@ class FeedCollectionViewCell : BaseCollectionViewCell {
             make.centerY.equalToSuperview()
         }
         
-        contentButton.snp.makeConstraints { make in
+        shareButton.snp.makeConstraints { make in
             make.size.equalTo(23)
             make.leading.equalTo(commentButton.snp.trailing).offset(12)
             make.centerY.equalToSuperview()
