@@ -17,6 +17,7 @@ final class ContentViewController : BaseViewController {
     
     let disposeBag = DisposeBag()
     
+    //이미지 배열
     private lazy var selectedImage: [YPMediaPhoto] = []
 
     // Input으로 넣을 이미지 스트림
@@ -104,6 +105,7 @@ final class ContentViewController : BaseViewController {
     
     @objc func closeButtonTapped() {
         self.dismiss(animated: true)
+
     }
     
     //MARK: - 업로드 버튼 작동
@@ -117,12 +119,12 @@ final class ContentViewController : BaseViewController {
         )
         let output = viewModel.transform(input: input)
         
-        
-        
         output.isSucceeded
             .subscribe(with: self) { owner, bool in
                 if bool {
+                    NotificationCenter.default.post(name: NSNotification.Name("contentUploaded"), object: nil)
                     self.dismiss(animated: true)
+//                    NotificationCenter.default.post(name: NSNotification.Name("contentUploaded"), object: nil)
                 } else {
                     self.alertMessage(title: "알림", message: "포스트를 업로드 할 수 없습니다. 다시 시도해주세요.")
                 }
