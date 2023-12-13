@@ -21,7 +21,7 @@ class ProfileImageView : UIImageView {
     
     func set() {
         layer.cornerRadius = 15
-        image = UIImage(systemName: "person.fill")?.withTintColor(CustomColor.pointColor ?? .systemYellow)
+        image = UIImage(named: "personal")?.withTintColor(.black)
         clipsToBounds = true
         contentMode = .scaleAspectFit
         layer.borderWidth = 1.1
