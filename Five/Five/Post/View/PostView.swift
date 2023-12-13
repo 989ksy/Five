@@ -88,7 +88,7 @@ class PostView : BaseView {
     
     let imageCollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionLayout())
-        view.register(ContentCollectionViewCell.self, forCellWithReuseIdentifier: "ContentCollectionViewCell")
+        view.register(PostCollectionViewCell.self, forCellWithReuseIdentifier: "PostCollectionViewCell")
         view.showsHorizontalScrollIndicator = false
         view.backgroundColor = CustomColor.backgroundColor
         view.isPagingEnabled = true
@@ -97,7 +97,7 @@ class PostView : BaseView {
     
     static func configureCollectionLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 300, height: 180)
+        layout.itemSize = CGSize(width: UIScreen.main.bounds.width, height: 380)
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
@@ -129,7 +129,7 @@ class PostView : BaseView {
     
     let bookmarkButton = {
         let btn = UIButton()
-        btn.setImage(UIImage(named: "bookmarkCustom"), for: .normal)
+        btn.setImage(UIImage(named: "bookmarkCustom")?.withTintColor(.black), for: .normal)
         return btn
     }()
     
