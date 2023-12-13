@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F498AB92B29640400C02885 /* PostCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F498AB82B29640400C02885 /* PostCollectionViewCell.swift */; };
+		0F498ABB2B299EAF00C02885 /* DateFommaterLabel + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F498ABA2B299EAF00C02885 /* DateFommaterLabel + Extension.swift */; };
 		0F4AE4E42B24B06C007BA5EF /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 0F4AE4E32B24B06C007BA5EF /* Kingfisher */; };
 		0F4AE4E72B24CB48007BA5EF /* FiveCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F4AE4E62B24CB48007BA5EF /* FiveCollectionViewCell.swift */; };
 		0F56A5C02B1C5D3700C7FAD3 /* UnderlineSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F56A5BF2B1C5D3700C7FAD3 /* UnderlineSegmentedControl.swift */; };
@@ -112,6 +114,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F498AB82B29640400C02885 /* PostCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCollectionViewCell.swift; sourceTree = "<group>"; };
+		0F498ABA2B299EAF00C02885 /* DateFommaterLabel + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFommaterLabel + Extension.swift"; sourceTree = "<group>"; };
 		0F4AE4E62B24CB48007BA5EF /* FiveCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveCollectionViewCell.swift; sourceTree = "<group>"; };
 		0F56A5BF2B1C5D3700C7FAD3 /* UnderlineSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlineSegmentedControl.swift; sourceTree = "<group>"; };
 		0F56A5C12B1CA40100C7FAD3 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
@@ -228,6 +232,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0F498AB52B2963AF00C02885 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0F64AF8A2B21EE9C00ED4CBE /* PostViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		0F498AB62B2963BC00C02885 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0F64AF8C2B21EEB600ED4CBE /* PostView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0F498AB72B2963E300C02885 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				0F498AB82B29640400C02885 /* PostCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		0F4AE4E52B24CB2F007BA5EF /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -484,6 +512,7 @@
 				0F86DD3E2B19B6D80043939F /* ViewTitleLabel + Extension.swift */,
 				0FB732A82B28679F0065AB5B /* NicknameLabel + Extension.swift */,
 				0FB732B22B28BA340065AB5B /* DateLabel + Extension.swift */,
+				0F498ABA2B299EAF00C02885 /* DateFommaterLabel + Extension.swift */,
 			);
 			path = UILabel;
 			sourceTree = "<group>";
@@ -910,8 +939,9 @@
 		0F89F0F62B1B962E00FECBCD /* Post */ = {
 			isa = PBXGroup;
 			children = (
-				0F64AF8A2B21EE9C00ED4CBE /* PostViewController.swift */,
-				0F64AF8C2B21EEB600ED4CBE /* PostView.swift */,
+				0F498AB72B2963E300C02885 /* Cell */,
+				0F498AB62B2963BC00C02885 /* View */,
+				0F498AB52B2963AF00C02885 /* ViewController */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -1091,9 +1121,11 @@
 				0F6C76072B18ED0D00077831 /* ProfileView.swift in Sources */,
 				0F67CA592B1061C800259285 /* PasswordView.swift in Sources */,
 				0F86DD3D2B19B6240043939F /* SearchViewController.swift in Sources */,
+				0F498AB92B29640400C02885 /* PostCollectionViewCell.swift in Sources */,
 				0F89F0F52B1B7AD600FECBCD /* SettingView.swift in Sources */,
 				0F64AF8B2B21EE9C00ED4CBE /* PostViewController.swift in Sources */,
 				0FB732B12B2870B00065AB5B /* ShareButton + Extension.swift in Sources */,
+				0F498ABB2B299EAF00C02885 /* DateFommaterLabel + Extension.swift in Sources */,
 				0F89F0EE2B1B57E200FECBCD /* HideKeyboard+Extension.swift in Sources */,
 				0F67CA3A2B10353800259285 /* BaseViewController.swift in Sources */,
 				0FB732AF2B286FF00065AB5B /* CommentButton + Extension.swift in Sources */,
