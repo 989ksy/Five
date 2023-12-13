@@ -10,6 +10,7 @@ import SnapKit
 
 class FeedView: BaseView {
     
+    
     let feedCollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionLayout())
         view.register(FeedCollectionViewCell.self, forCellWithReuseIdentifier: "FeedCollectionViewCell")
@@ -30,18 +31,25 @@ class FeedView: BaseView {
         return btn
     }()
     
+    let profileViewUpperLine = {
+        let view = LineView()
+        return view
+    }()
+    
     static func configureCollectionLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewFlowLayout()
-        let spacing : CGFloat = 12
-        let width = UIScreen.main.bounds.width - (spacing)
-        layout.itemSize = CGSize(width: width , height: 320)
-        layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
+        let width = UIScreen.main.bounds.width
+        layout.itemSize = CGSize(width: width , height: 520)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        layout.minimumLineSpacing = 18
+        layout.minimumInteritemSpacing = 0
         
         return layout
     }
     
     override func configureView() {
         
+        addSubview(profileViewUpperLine)
         addSubview(feedCollectionView)
         addSubview(addContentButton)
         
@@ -49,9 +57,15 @@ class FeedView: BaseView {
     
     override func setConstraints() {
         
+        profileViewUpperLine.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide)
+            make.height.equalTo(1)
+            make.horizontalEdges.equalToSuperview()
+        }
 
         feedCollectionView.snp.makeConstraints { make in
-            make.edges.equalTo(safeAreaLayoutGuide)
+            make.top.equalTo(safeAreaLayoutGuide)
+            make.horizontalEdges.bottom.equalToSuperview()
         }
         
         addContentButton.snp.makeConstraints { make in
