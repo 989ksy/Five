@@ -93,7 +93,9 @@ class FeedCollectionViewCell : BaseCollectionViewCell {
         let label = DateLabel()
         return label
     }()
-        
+    
+    //MARK: - 셀 재사용
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         disposeBag = DisposeBag()
@@ -105,7 +107,7 @@ class FeedCollectionViewCell : BaseCollectionViewCell {
         profileView.addSubview(profilePic)
         profileView.addSubview(nickLabel)
         profileView.addSubview(nicknameButton)
-        profileView.addSubview(optionButton)
+//        profileView.addSubview(optionButton)
         profileView.addSubview(profileViewBottomLine)
         contentView.addSubview(elementView)
         elementView.addSubview(borderline)
@@ -142,11 +144,11 @@ class FeedCollectionViewCell : BaseCollectionViewCell {
             make.leading.equalTo(nickLabel)
         }
         
-        optionButton.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.size.equalTo(17)
-            make.trailing.equalToSuperview().inset(10)
-        }
+//        optionButton.snp.makeConstraints { make in
+//            make.centerY.equalToSuperview()
+//            make.size.equalTo(17)
+//            make.trailing.equalToSuperview().inset(10)
+//        }
         
         profileViewBottomLine.snp.makeConstraints { make in
             make.height.equalTo(1)
