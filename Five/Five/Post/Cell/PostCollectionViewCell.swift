@@ -58,9 +58,7 @@ class PostCollectionViewCell : BaseCollectionViewCell {
         countLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.centerX.equalToSuperview()
-//            make.top.equalToSuperview().offset(11)
-//            make.trailing.equalToSuperview().inset(14)
-//            make.height.equalTo(20)
+
         }
         
     }
