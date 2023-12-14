@@ -160,7 +160,6 @@ class PostView : BaseView {
     }()
     
     
-    
     //MARK: - 세팅
     
     override func configureView() {
@@ -187,8 +186,7 @@ class PostView : BaseView {
         contentView.addSubview(contentLabel)
         contentView.addSubview(showCommentButton)
         contentView.addSubview(dateLabel)
-        
-        
+                
     }
     
     override func setConstraints() {
@@ -291,7 +289,7 @@ class PostView : BaseView {
         
         showCommentButton.snp.makeConstraints { make in
             make.top.equalTo(contentLabel.snp.bottom).offset(8)
-            make.leading.equalToSuperview().offset(12)
+            make.leading.equalToSuperview().offset(10)
             make.height.equalTo(17)
             make.width.equalTo(100)
             make.bottom.equalTo(contentView.snp.bottom).offset(10)
