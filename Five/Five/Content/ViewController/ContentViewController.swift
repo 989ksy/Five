@@ -61,6 +61,7 @@ final class ContentViewController : BaseViewController {
         config.showsPhotoFilters = false // 카메리 필터 싫어
         config.library.isSquareByDefault = false
         config.shouldSaveNewPicturesToAlbum = false //새이미지를 라이브러리에 저장하지 않음.
+        config.library.skipSelectionsGallery = true
         
         //피커 설정
         let picker = YPImagePicker(configuration: config)
@@ -124,7 +125,7 @@ final class ContentViewController : BaseViewController {
                 if bool {
                     NotificationCenter.default.post(name: NSNotification.Name("contentUploaded"), object: nil)
                     self.dismiss(animated: true)
-//                    NotificationCenter.default.post(name: NSNotification.Name("contentUploaded"), object: nil)
+
                 } else {
                     self.alertMessage(title: "알림", message: "포스트를 업로드 할 수 없습니다. 다시 시도해주세요.")
                 }
