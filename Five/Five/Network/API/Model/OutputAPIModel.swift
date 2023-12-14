@@ -38,7 +38,7 @@ struct RefreshTokenResponse : Decodable {
 //MARK: - 포스트 작성
 
 struct CreatePostResponse: Decodable {
-
+    
     let id, time, content: String
     let productId : String
     let likes, image : [String]
@@ -53,7 +53,6 @@ struct CreatePostResponse: Decodable {
 }
 
 struct Creator: Decodable {
-    
     let id, nick : String
     
     enum CodingKeys: String, CodingKey {
@@ -68,7 +67,7 @@ struct Creator: Decodable {
 struct ReadPostResponse: Decodable {
     let data: [ReadData]
     let nextCursor: String
-
+    
     enum CodingKeys: String, CodingKey {
         case data
         case nextCursor = "next_cursor"
@@ -80,14 +79,34 @@ struct ReadData : Decodable {
     let id: String
     let creator: Creator
     let time, content, productID: String
-
+    
     enum CodingKeys: String, CodingKey {
         case likes, image
         case id = "_id"
         case creator, time, content
         case productID = "product_id"
     }
-    
-    
-    
 }
+
+//MARK: - 포스트 삭제
+
+struct DeletePostResponse: Decodable {
+    let id : String
+    
+    enum CodingKeys: String, CodingKey {
+        case id = "_id"
+    }
+}
+
+//MARK: - 좋아요
+
+struct LikePostResponse: Decodable{
+    let likeStatus : Bool
+    
+    enum CodingKeys: String, CodingKey {
+        case likeStatus = "like_status"
+    }
+}
+
+
+
