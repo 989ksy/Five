@@ -31,6 +31,7 @@ enum CustomFont {
     
     //Medium
     static let mediumGmarket12 = UIFont(name: "GmarketSansTTFMedium", size: 12)
+    static let mediumGmarket14 = UIFont(name: "GmarketSansTTFMedium", size: 14)
     static let mediumGmarket15 = UIFont(name: "GmarketSansTTFMedium", size: 15)
     static let mediumGmarket17 = UIFont(name: "GmarketSansTTFMedium", size: 17)
     static let mediumGmarket18 = UIFont(name: "GmarketSansTTFMedium", size: 25)
