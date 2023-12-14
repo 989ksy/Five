@@ -76,7 +76,7 @@
 		0F7DB6A32B15C45200A48828 /* AuthInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7DB6A22B15C45200A48828 /* AuthInterceptor.swift */; };
 		0F7DB6BF2B17499B00A48828 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7DB6BE2B17499B00A48828 /* CustomTabBarController.swift */; };
 		0F7DB6C12B174B2600A48828 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7DB6C02B174B2600A48828 /* ProfileViewController.swift */; };
-		0F835F572B2AB53E003E73C8 /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F835F562B2AB53E003E73C8 /* FeedItem.swift */; };
+		0F835F5A2B2AD9BF003E73C8 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F835F592B2AD9BF003E73C8 /* PostViewModel.swift */; };
 		0F86DD362B19A5C20043939F /* LineView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F86DD352B19A5C20043939F /* LineView + Extension.swift */; };
 		0F86DD3D2B19B6240043939F /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F86DD3C2B19B6240043939F /* SearchViewController.swift */; };
 		0F86DD3F2B19B6D80043939F /* ViewTitleLabel + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F86DD3E2B19B6D80043939F /* ViewTitleLabel + Extension.swift */; };
@@ -181,7 +181,7 @@
 		0F7DB6A22B15C45200A48828 /* AuthInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInterceptor.swift; sourceTree = "<group>"; };
 		0F7DB6BE2B17499B00A48828 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		0F7DB6C02B174B2600A48828 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		0F835F562B2AB53E003E73C8 /* FeedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItem.swift; sourceTree = "<group>"; };
+		0F835F592B2AD9BF003E73C8 /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 		0F86DD352B19A5C20043939F /* LineView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LineView + Extension.swift"; sourceTree = "<group>"; };
 		0F86DD3C2B19B6240043939F /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		0F86DD3E2B19B6D80043939F /* ViewTitleLabel + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewTitleLabel + Extension.swift"; sourceTree = "<group>"; };
@@ -351,7 +351,6 @@
 			isa = PBXGroup;
 			children = (
 				0F7DB6782B13639000A48828 /* FeedCollectionViewCell.swift */,
-				0F835F562B2AB53E003E73C8 /* FeedItem.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -889,6 +888,14 @@
 			path = Tabbar;
 			sourceTree = "<group>";
 		};
+		0F835F582B2AD9B1003E73C8 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0F835F592B2AD9BF003E73C8 /* PostViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		0F86DD342B19A5A40043939F /* Extension + Share */ = {
 			isa = PBXGroup;
 			children = (
@@ -942,6 +949,7 @@
 		0F89F0F62B1B962E00FECBCD /* Post */ = {
 			isa = PBXGroup;
 			children = (
+				0F835F582B2AD9B1003E73C8 /* ViewModel */,
 				0F498AB72B2963E300C02885 /* Cell */,
 				0F498AB62B2963BC00C02885 /* View */,
 				0F498AB52B2963AF00C02885 /* ViewController */,
@@ -1114,7 +1122,6 @@
 				0F67CA682B10633D00259285 /* CustomColor.swift in Sources */,
 				0F67CA5B2B1061DB00259285 /* PasswordViewModel.swift in Sources */,
 				0F67CA742B10656B00259285 /* FeedViewController.swift in Sources */,
-				0F835F572B2AB53E003E73C8 /* FeedItem.swift in Sources */,
 				0F67CA7D2B1065F700259285 /* APIKey.swift in Sources */,
 				0F67CA512B10617100259285 /* EmailViewController.swift in Sources */,
 				0FB732AD2B286FC20065AB5B /* FiveButton + Extension.swift in Sources */,
@@ -1125,6 +1132,7 @@
 				0F6C76072B18ED0D00077831 /* ProfileView.swift in Sources */,
 				0F67CA592B1061C800259285 /* PasswordView.swift in Sources */,
 				0F86DD3D2B19B6240043939F /* SearchViewController.swift in Sources */,
+				0F835F5A2B2AD9BF003E73C8 /* PostViewModel.swift in Sources */,
 				0F498AB92B29640400C02885 /* PostCollectionViewCell.swift in Sources */,
 				0F89F0F52B1B7AD600FECBCD /* SettingView.swift in Sources */,
 				0F64AF8B2B21EE9C00ED4CBE /* PostViewController.swift in Sources */,
