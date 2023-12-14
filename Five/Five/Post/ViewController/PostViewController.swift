@@ -76,9 +76,12 @@ final class PostViewController : BaseViewController {
         var items: [UIAction] {
             let delete = UIAction(
                 title: "삭제",
-                image: UIImage(named: "Trash_Custom"),
+                image: UIImage(systemName: "trash"),
                 handler: { [unowned self] _ in
                     print("tapped?")
+                    
+                    self.navigationController?.popViewController(animated: true)
+                    
                 })
             let Items = [delete]
             return Items
