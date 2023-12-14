@@ -22,6 +22,37 @@ final class APIManager {
 
     private let disposeBag = DisposeBag()
     
+    //MARK: - 좋아요
+    
+    func likePost(id: String) -> Single<Result<LikePostResponse, FiveError>>{
+        
+        return Single.create { single in
+            self.provider.request(.likePost(_id: id)) { result in
+                switch result {
+                case .success(let response):
+                    do {
+                        let data = try JSONDecoder().decode(LikePostResponse.self, from: response.data)
+                        single(.success(.success(data)))
+                    } catch {
+                        single(.success(.failure(.decodingError)))
+                    }
+                    
+                case .failure(let error) :
+                    print("=======네트워크 실패의 실패 from APIManager : \(error.response?.request)")
+                    
+                    guard let customError = FiveError(rawValue: error.response?.statusCode ??  1) else { return }
+                    single(.success(.failure(customError)))
+                }
+            }
+            return Disposables.create()
+        }
+        
+    }
+    
+    
+    //MARK: - 포스트 삭제
+
+    
     
     //MARK: - 포스트 조회
     
@@ -38,7 +69,6 @@ final class APIManager {
                         single(.success(.failure(.decodingError)))
                     }
                 case .failure(let error):
-                    print("=======\(error.response?.request)")
                     guard let customError = FiveError(rawValue: error.response?.statusCode ??  1) else {
                         return
                     }
@@ -69,7 +99,7 @@ final class APIManager {
                         single(.success(.failure(.decodingError)))
                     }
                 case .failure(let error) :
-                    print("=======\(error.response?.request)")
+//                    print("=======\(error.response?.request)")
                     guard let customError = FiveError(rawValue: error.response?.statusCode ??  1) else {
                         return
                     }
