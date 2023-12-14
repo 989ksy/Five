@@ -15,7 +15,7 @@ class PostCollectionViewCell : BaseCollectionViewCell {
     let uploadedImaegView = {
         let view = UIImageView()
         view.image = UIImage(systemName: "heart")
-        view.contentMode = .scaleAspectFit
+        view.contentMode = .scaleAspectFill
         return view
     }()
     
