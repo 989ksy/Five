@@ -32,7 +32,9 @@ final class PostViewController : BaseViewController {
         
         bindData()
         setMenu()
+        optionButtonStatus()
     }
+    
     
     /// 네비게이션바 타이틀 위치 설정 (닉네임 - 게시글)
     override func viewWillLayoutSubviews() {
@@ -47,9 +49,16 @@ final class PostViewController : BaseViewController {
         }
     }
     
-    @objc func buttonHandler(_ sender: UIButton) {
-        
+    ///옵션버튼 상태
+    func optionButtonStatus() {
+        // 전달받은 ID값과 로그인 시 저장되어 있는 ID값이 다르면 옵션 키 숨기기
+        // 자기 게시글만 삭제 접근 권한 필요하니까.
+        if transitedData.value.creator.id != KeychainStorage.shared.userID {
+            mainView.optionButton.isHidden = true
         }
+    }
+    
+    @objc func buttonHandler(_ sender: UIButton) {}
     
     
     func bindData() {
@@ -78,6 +87,8 @@ final class PostViewController : BaseViewController {
                 title: "삭제",
                 image: UIImage(systemName: "trash"),
                 handler: { [unowned self] _ in
+                    //버튼 눌렀을 때 실행할 로직
+                    
                     print("tapped?")
                     
                     self.navigationController?.popViewController(animated: true)
