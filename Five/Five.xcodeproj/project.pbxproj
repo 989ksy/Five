@@ -14,6 +14,9 @@
 		0F56A5C02B1C5D3700C7FAD3 /* UnderlineSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F56A5BF2B1C5D3700C7FAD3 /* UnderlineSegmentedControl.swift */; };
 		0F56A5C22B1CA40100C7FAD3 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F56A5C12B1CA40100C7FAD3 /* CommentViewController.swift */; };
 		0F56A5C42B1CA8FF00C7FAD3 /* CommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F56A5C32B1CA8FF00C7FAD3 /* CommentView.swift */; };
+		0F6142182B2C3AB3004C888F /* ReactionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6142172B2C3AB3004C888F /* ReactionCollectionViewCell.swift */; };
+		0F61421A2B2C3BB2004C888F /* Reaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6142192B2C3BB2004C888F /* Reaction.swift */; };
+		0F61421D2B2C4309004C888F /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0F61421C2B2C4309004C888F /* IQKeyboardManagerSwift */; };
 		0F64AF842B21B4CA00ED4CBE /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F64AF832B21B4CA00ED4CBE /* SearchTableViewCell.swift */; };
 		0F64AF862B21C33E00ED4CBE /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F64AF852B21C33E00ED4CBE /* BaseTableViewCell.swift */; };
 		0F64AF892B21D45100ED4CBE /* FollowUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F64AF882B21D45100ED4CBE /* FollowUIButton.swift */; };
@@ -121,6 +124,8 @@
 		0F56A5BF2B1C5D3700C7FAD3 /* UnderlineSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlineSegmentedControl.swift; sourceTree = "<group>"; };
 		0F56A5C12B1CA40100C7FAD3 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		0F56A5C32B1CA8FF00C7FAD3 /* CommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
+		0F6142172B2C3AB3004C888F /* ReactionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionCollectionViewCell.swift; sourceTree = "<group>"; };
+		0F6142192B2C3BB2004C888F /* Reaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reaction.swift; sourceTree = "<group>"; };
 		0F64AF832B21B4CA00ED4CBE /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		0F64AF852B21C33E00ED4CBE /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		0F64AF882B21D45100ED4CBE /* FollowUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowUIButton.swift; sourceTree = "<group>"; };
@@ -208,6 +213,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F7DB6952B148F2900A48828 /* RxCocoa in Frameworks */,
+				0F61421D2B2C4309004C888F /* IQKeyboardManagerSwift in Frameworks */,
 				0F6C75FE2B18986A00077831 /* YPImagePicker in Frameworks */,
 				0F4AE4E42B24B06C007BA5EF /* Kingfisher in Frameworks */,
 				0F67CA862B10664C00259285 /* Moya in Frameworks */,
@@ -272,6 +278,15 @@
 				0F56A5BF2B1C5D3700C7FAD3 /* UnderlineSegmentedControl.swift */,
 			);
 			path = SegmentedControl;
+			sourceTree = "<group>";
+		};
+		0F6142162B2C3A9E004C888F /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				0F6142172B2C3AB3004C888F /* ReactionCollectionViewCell.swift */,
+				0F6142192B2C3BB2004C888F /* Reaction.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		0F64AF5A2B219CEA00ED4CBE /* ViewController */ = {
@@ -912,6 +927,7 @@
 		0F86DD392B19B5540043939F /* Comment */ = {
 			isa = PBXGroup;
 			children = (
+				0F6142162B2C3A9E004C888F /* Cell */,
 				0F64AF7B2B21A05000ED4CBE /* View */,
 				0F64AF7A2B21A04700ED4CBE /* ViewController */,
 			);
@@ -981,6 +997,7 @@
 				0F7DB69C2B15B46900A48828 /* SwiftKeychainWrapper */,
 				0F6C75FD2B18986A00077831 /* YPImagePicker */,
 				0F4AE4E32B24B06C007BA5EF /* Kingfisher */,
+				0F61421C2B2C4309004C888F /* IQKeyboardManagerSwift */,
 			);
 			productName = Five;
 			productReference = 0F67C9FD2B0F7C5000259285 /* Five.app */;
@@ -1061,6 +1078,7 @@
 				0F7DB69B2B15B46900A48828 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
 				0F6C75FC2B18986A00077831 /* XCRemoteSwiftPackageReference "YPImagePicker" */,
 				0F4AE4E22B24B06C007BA5EF /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				0F61421B2B2C4309004C888F /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
 			productRefGroup = 0F67C9FE2B0F7C5000259285 /* Products */;
 			projectDirPath = "";
@@ -1121,6 +1139,7 @@
 				0F7DB6842B13A83400A48828 /* ContentView.swift in Sources */,
 				0F67CA682B10633D00259285 /* CustomColor.swift in Sources */,
 				0F67CA5B2B1061DB00259285 /* PasswordViewModel.swift in Sources */,
+				0F61421A2B2C3BB2004C888F /* Reaction.swift in Sources */,
 				0F67CA742B10656B00259285 /* FeedViewController.swift in Sources */,
 				0F67CA7D2B1065F700259285 /* APIKey.swift in Sources */,
 				0F67CA512B10617100259285 /* EmailViewController.swift in Sources */,
@@ -1163,6 +1182,7 @@
 				0F67CA8E2B10677200259285 /* APIManager.swift in Sources */,
 				0FB732AB2B286AFC0065AB5B /* MoreButton + Extension.swift in Sources */,
 				0F7DB6BF2B17499B00A48828 /* CustomTabBarController.swift in Sources */,
+				0F6142182B2C3AB3004C888F /* ReactionCollectionViewCell.swift in Sources */,
 				0F7DB6772B133FE400A48828 /* BaseCollectionViewCell.swift in Sources */,
 				0F67CA882B10667100259285 /* FiveAPI.swift in Sources */,
 				0F67CA032B0F7C5000259285 /* SceneDelegate.swift in Sources */,
@@ -1534,6 +1554,14 @@
 				minimumVersion = 7.10.1;
 			};
 		};
+		0F61421B2B2C4309004C888F /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.5.16;
+			};
+		};
 		0F67CA452B1036B100259285 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -1581,6 +1609,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0F4AE4E22B24B06C007BA5EF /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		0F61421C2B2C4309004C888F /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0F61421B2B2C4309004C888F /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
 		};
 		0F67CA462B1036B100259285 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
