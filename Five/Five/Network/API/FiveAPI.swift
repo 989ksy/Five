@@ -17,6 +17,9 @@ enum FiveAPI {
     
     case createPost (model: CreatePost)
     case readPost (next: String, limit: String, product_id: String)
+    case deletePost (id: String)
+    
+    case likePost (id: String)
 }
 
 extension FiveAPI : TargetType {
@@ -44,11 +47,17 @@ extension FiveAPI : TargetType {
             return "refresh"
         case .withdraw:
             return "withdraw"
+            
             //포스트
-        case .createPost:
+        case .createPost: //작성
             return "post"
-        case .readPost:
+        case .readPost: //조회
             return "post"
+        case .deletePost(let id): //삭제
+            return "post"
+            
+        case .likePost(let id):
+            return "post/like/\(id)"
         }
     }
     
@@ -56,10 +65,12 @@ extension FiveAPI : TargetType {
     ///specify which method our calls should use.
     var method: Moya.Method {
         switch self {
-        case .signUp, .login, .emailValidation, .createPost:
+        case .signUp, .login, .emailValidation, .createPost, .likePost:
             return .post
         case .tokenRefresh, .withdraw, .readPost:
             return .get
+        case .deletePost:
+            return .delete
         }
     }
     
@@ -113,6 +124,11 @@ extension FiveAPI : TargetType {
             
         case .readPost(let next, let limit, let product_id ):
             return .requestParameters(parameters: ["next" : next, "limit" : limit, "product_id" : product_id], encoding: URLEncoding.queryString)
+        case .deletePost(let _id):
+            return .requestParameters(parameters: ["_id" : _id], encoding: URLEncoding.queryString)
+            
+        case .likePost(_):
+            return .requestPlain
         }
     }
     
@@ -123,30 +139,40 @@ extension FiveAPI : TargetType {
     var headers: [String : String]? {
         
         switch self {
-            //회원가입-로그인-탈퇴
-        case .signUp:
+        case .signUp: //회원가입
             return ["Content-Type" : "application/json",
                     "SesacKey" : "\(APIKey.sesacKey)"]
-        case .login:
+            
+        case .login: //로그인
             return ["Content-Type" : "application/json",
                     "SesacKey" : "\(APIKey.sesacKey)"]
-        case .emailValidation:
+            
+        case .emailValidation: //이메일 중복확인
             return ["Content-Type" : "application/json",
                     "SesacKey" : "\(APIKey.sesacKey)"]
-        case .tokenRefresh :
+            
+        case .tokenRefresh : //토큰 갱신
             return ["Content-Type" : "application/json",
                     "SesacKey" : "\(APIKey.sesacKey)"]
-        case .withdraw:
+            
+        case .withdraw: //회원탈퇴
             return ["SesacKey" : "\(APIKey.sesacKey)"]
             
-            //포스트조회-업로드
-        case .createPost:
+        case .createPost: //포스트 생성
+            return ["Authorization" : "\(KeychainStorage.shared.userToken!)", 
+                    "Content-Type" : "multipart/form-data",
+                    "SesacKey" : "\(APIKey.sesacKey)"]
             
-            print("===FiveAPI_Key:\(KeychainStorage.shared.userToken!)")
-            
-            return ["Authorization" : "\(KeychainStorage.shared.userToken!)", "Content-Type" : "multipart/form-data", "SesacKey" : "\(APIKey.sesacKey)"] //"Authorization" : "\(KeychainStorage.shared.userToken!)",
-        case .readPost:
+        case .readPost: //포스트 조회
             return ["SesacKey" : "\(APIKey.sesacKey)"]
+            
+        case .deletePost: //포스트 삭제
+            return ["Authorization" : "\(KeychainStorage.shared.userToken!)", 
+                    "SesacKey" : "\(APIKey.sesacKey)"]
+            
+        case .likePost: //좋아요
+            return ["Authorization" : "\(KeychainStorage.shared.userToken!)",
+                    "SesacKey" : "\(APIKey.sesacKey)"]
         }
         
     }
