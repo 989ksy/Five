@@ -18,6 +18,7 @@
 		0F61421A2B2C3BB2004C888F /* Reaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6142192B2C3BB2004C888F /* Reaction.swift */; };
 		0F61421D2B2C4309004C888F /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0F61421C2B2C4309004C888F /* IQKeyboardManagerSwift */; };
 		0F61421F2B2C604B004C888F /* ReactionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F61421E2B2C604B004C888F /* ReactionList.swift */; };
+		0F6142212B2C862D004C888F /* OptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6142202B2C862D004C888F /* OptionViewController.swift */; };
 		0F64AF842B21B4CA00ED4CBE /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F64AF832B21B4CA00ED4CBE /* SearchTableViewCell.swift */; };
 		0F64AF862B21C33E00ED4CBE /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F64AF852B21C33E00ED4CBE /* BaseTableViewCell.swift */; };
 		0F64AF892B21D45100ED4CBE /* FollowUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F64AF882B21D45100ED4CBE /* FollowUIButton.swift */; };
@@ -128,6 +129,7 @@
 		0F6142172B2C3AB3004C888F /* ReactionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionCollectionViewCell.swift; sourceTree = "<group>"; };
 		0F6142192B2C3BB2004C888F /* Reaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reaction.swift; sourceTree = "<group>"; };
 		0F61421E2B2C604B004C888F /* ReactionList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionList.swift; sourceTree = "<group>"; };
+		0F6142202B2C862D004C888F /* OptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionViewController.swift; sourceTree = "<group>"; };
 		0F64AF832B21B4CA00ED4CBE /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		0F64AF852B21C33E00ED4CBE /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		0F64AF882B21D45100ED4CBE /* FollowUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowUIButton.swift; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 			isa = PBXGroup;
 			children = (
 				0F64AF8A2B21EE9C00ED4CBE /* PostViewController.swift */,
+				0F6142202B2C862D004C888F /* OptionViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1186,6 +1189,7 @@
 				0F67CA8E2B10677200259285 /* APIManager.swift in Sources */,
 				0FB732AB2B286AFC0065AB5B /* MoreButton + Extension.swift in Sources */,
 				0F7DB6BF2B17499B00A48828 /* CustomTabBarController.swift in Sources */,
+				0F6142212B2C862D004C888F /* OptionViewController.swift in Sources */,
 				0F6142182B2C3AB3004C888F /* ReactionCollectionViewCell.swift in Sources */,
 				0F7DB6772B133FE400A48828 /* BaseCollectionViewCell.swift in Sources */,
 				0F67CA882B10667100259285 /* FiveAPI.swift in Sources */,

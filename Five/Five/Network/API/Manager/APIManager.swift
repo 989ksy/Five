@@ -49,6 +49,30 @@ final class APIManager {
     
     
     //MARK: - 포스트 삭제
+    
+    func deletePost(id: String) -> Single<Result<DeletePostResponse, FiveError>> {
+        
+        return Single.create { single in
+            self.provider.request(.deletePost(id: id)) { result in
+                switch result {
+                case .success(let response):
+                    do {
+                        let data = try JSONDecoder().decode(DeletePostResponse.self, from: response.data)
+                        single(.success(.success(data)))
+                    } catch {
+                        single(.success(.failure(.decodingError)))
+                    }
+                case.failure(let error):
+                    guard let customError = FiveError(rawValue: error.response?.statusCode ??  1) else {
+                        return
+                    }
+                    single(.success(.failure(customError)))
+                }
+            }
+            return Disposables.create()
+        }
+        
+    }
 
     
     
