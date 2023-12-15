@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-final class PostViewController : BaseViewController {
+final class PostViewController : BaseViewController, UISheetPresentationControllerDelegate {
     
     var transitedData = BehaviorRelay(value: ReadData(likes: [], image: [], id: "", creator: Creator.init(id: "", nick: ""), time: "", content: "", productID: ""))
     
@@ -31,8 +31,10 @@ final class PostViewController : BaseViewController {
         mainView.imageCollectionView.delegate = self
         
         bindData()
-        setMenu()
-        optionButtonStatus()
+        optionButtonStatus()//고유id를 기준으로 삭제권한 확인
+        optionButtonTapped()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(deleteTappedInOptionVC), name: NSNotification.Name("VCTransited"), object: nil)
     }
     
     
@@ -49,7 +51,7 @@ final class PostViewController : BaseViewController {
         }
     }
     
-    ///옵션버튼 상태
+    ///옵션버튼 상태 (삭제 권한자 확인)
     func optionButtonStatus() {
         // 전달받은 ID값과 로그인 시 저장되어 있는 ID값이 다르면 옵션 키 숨기기
         // 자기 게시글만 삭제 접근 권한 필요하니까.
@@ -57,9 +59,6 @@ final class PostViewController : BaseViewController {
             mainView.optionButton.isHidden = true
         }
     }
-    
-    @objc func buttonHandler(_ sender: UIButton) {}
-    
     
     func bindData() {
         transitedData
@@ -80,32 +79,46 @@ final class PostViewController : BaseViewController {
         
     }
     
-    func setMenu() {
+    func optionButtonTapped() {
         
-        var items: [UIAction] {
-            let delete = UIAction(
-                title: "삭제",
-                image: UIImage(systemName: "trash"),
-                handler: { [unowned self] _ in
-                    //버튼 눌렀을 때 실행할 로직
+        mainView.optionButton
+            .rx
+            .tap
+            .subscribe(with: self) { owner, _ in
+                print("tapped")
+                
+                let vc = OptionViewController()
+                vc.modalPresentationStyle = .pageSheet
+                vc.postId = self.transitedData.value.id
+                
+                let smallDetentId = UISheetPresentationController.Detent.Identifier("small")
+                let smallDetent = UISheetPresentationController.Detent.custom(identifier: smallDetentId) { context in
+                    return 180
+                }
+                self.sheetPresentationController?.detents = [smallDetent, .medium(), .large()]
+                
+                if let sheet = vc.sheetPresentationController {
+                    //지원할 크기 지정
+                    sheet.detents = [smallDetent]
+                    //크기 변하는거 감지
+                    sheet.delegate = self
                     
-                    print("tapped?")
-                    
-                    self.navigationController?.popViewController(animated: true)
-                    
-                })
-            let Items = [delete]
-            return Items
-        }
-        
-        let menu = UIMenu(title: "",
-                          children: items)
-        
-        mainView.optionButton.menu = menu
-        mainView.optionButton.showsMenuAsPrimaryAction = true
+                    //시트 상단에 그래버 표시 (기본 값은 false)
+                    sheet.prefersGrabberVisible = true
+                }
+                
+                self.present(vc, animated: true, completion: nil)
+
+            }
+            .disposed(by: disposeBag)
         
     }
     
+    
+    @objc func deleteTappedInOptionVC() {
+        NotificationCenter.default.post(name: NSNotification.Name("contentUploaded"), object: nil)
+        self.navigationController?.popViewController(animated: true)
+    }
     
     
 }
