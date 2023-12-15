@@ -16,8 +16,6 @@ final class APIManager {
     private init() {}
     
     private let provider = MoyaProvider<FiveAPI>(session: Session(interceptor: AuthInterceptor.shared))
-    
-//    private let provider = MoyaProvider<FiveAPI>(plugins: [NetworkLoggerPlugin(configuration: .init(logOptions: .verbose))])
 
 
     private let disposeBag = DisposeBag()
@@ -27,7 +25,7 @@ final class APIManager {
     func likePost(id: String) -> Single<Result<LikePostResponse, FiveError>>{
         
         return Single.create { single in
-            self.provider.request(.likePost(_id: id)) { result in
+            self.provider.request(.likePost(id: id)) { result in
                 switch result {
                 case .success(let response):
                     do {
