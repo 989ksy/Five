@@ -21,6 +21,13 @@ struct SignupResponse : Decodable {
 struct LoginResponse: Decodable {
     let token: String
     let refreshToken: String
+    let id : String
+    
+    enum CodingKeys: String, CodingKey {
+        case token, refreshToken
+        case id = "_id"
+    }
+    
 }
 
 //MARK: - 이메일 중복 확인

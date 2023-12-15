@@ -17,6 +17,7 @@
 		0F6142182B2C3AB3004C888F /* ReactionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6142172B2C3AB3004C888F /* ReactionCollectionViewCell.swift */; };
 		0F61421A2B2C3BB2004C888F /* Reaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6142192B2C3BB2004C888F /* Reaction.swift */; };
 		0F61421D2B2C4309004C888F /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0F61421C2B2C4309004C888F /* IQKeyboardManagerSwift */; };
+		0F61421F2B2C604B004C888F /* ReactionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F61421E2B2C604B004C888F /* ReactionList.swift */; };
 		0F64AF842B21B4CA00ED4CBE /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F64AF832B21B4CA00ED4CBE /* SearchTableViewCell.swift */; };
 		0F64AF862B21C33E00ED4CBE /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F64AF852B21C33E00ED4CBE /* BaseTableViewCell.swift */; };
 		0F64AF892B21D45100ED4CBE /* FollowUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F64AF882B21D45100ED4CBE /* FollowUIButton.swift */; };
@@ -126,6 +127,7 @@
 		0F56A5C32B1CA8FF00C7FAD3 /* CommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
 		0F6142172B2C3AB3004C888F /* ReactionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionCollectionViewCell.swift; sourceTree = "<group>"; };
 		0F6142192B2C3BB2004C888F /* Reaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reaction.swift; sourceTree = "<group>"; };
+		0F61421E2B2C604B004C888F /* ReactionList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionList.swift; sourceTree = "<group>"; };
 		0F64AF832B21B4CA00ED4CBE /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		0F64AF852B21C33E00ED4CBE /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		0F64AF882B21D45100ED4CBE /* FollowUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowUIButton.swift; sourceTree = "<group>"; };
@@ -285,6 +287,7 @@
 			children = (
 				0F6142172B2C3AB3004C888F /* ReactionCollectionViewCell.swift */,
 				0F6142192B2C3BB2004C888F /* Reaction.swift */,
+				0F61421E2B2C604B004C888F /* ReactionList.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1159,6 +1162,7 @@
 				0F498ABB2B299EAF00C02885 /* DateFormatterLabel + Extension.swift in Sources */,
 				0F89F0EE2B1B57E200FECBCD /* HideKeyboard+Extension.swift in Sources */,
 				0F67CA3A2B10353800259285 /* BaseViewController.swift in Sources */,
+				0F61421F2B2C604B004C888F /* ReactionList.swift in Sources */,
 				0FB732AF2B286FF00065AB5B /* CommentButton + Extension.swift in Sources */,
 				0F67CA572B1061B300259285 /* PasswordViewController.swift in Sources */,
 				0F86DD412B19BC270043939F /* JournalViewController.swift in Sources */,
