@@ -74,6 +74,9 @@ class LoginViewModel {
                     
                     print("==*LoginVM*==RefreshToken: 갱신토큰이 성공적으로 저장되었습니다.")
                     
+                    KeychainStorage.shared.userID = response.id
+                    print("==*LoginVM*==UserID: userId가 성공적으로 저장되었습니다.")
+                    
                 case .failure(let failure):
                     isSucceeded.onNext(false)
                     print("==*LoginVM*===login failure: \(failure.errorDescription ?? "APIManager error")")
