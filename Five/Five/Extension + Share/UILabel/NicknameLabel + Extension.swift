@@ -21,7 +21,7 @@ class NicknameLabel : UILabel {
     func set() {
         font = CustomFont.mediumGmarket15
         textColor = .black
-        text = "윙가르디움"
+        text = "Guest"
     }
     
 }
