@@ -54,7 +54,7 @@ extension FiveAPI : TargetType {
         case .readPost: //조회
             return "post"
         case .deletePost(let id): //삭제
-            return "post"
+            return "post/\(id)"
             
         case .likePost(let id):
             return "post/like/\(id)"
@@ -124,8 +124,9 @@ extension FiveAPI : TargetType {
             
         case .readPost(let next, let limit, let product_id ):
             return .requestParameters(parameters: ["next" : next, "limit" : limit, "product_id" : product_id], encoding: URLEncoding.queryString)
-        case .deletePost(let _id):
-            return .requestParameters(parameters: ["_id" : _id], encoding: URLEncoding.queryString)
+            
+        case .deletePost(_):
+            return .requestPlain
             
         case .likePost(_):
             return .requestPlain
