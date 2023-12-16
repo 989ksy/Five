@@ -14,7 +14,7 @@ class OptionViewController: BaseViewController {
     
     var postId : String? //전달 받은 포스트 id값
     let disposebag = DisposeBag()
-        
+    
     let deleteResult = BehaviorSubject<String>(value: "") //네트워크 값 담을 곳
     
     //MARK: - UI
@@ -93,27 +93,41 @@ class OptionViewController: BaseViewController {
             }
             .disposed(by: disposebag)
         
-        //네트워크 결과
-        //화면전환
-        deleteResult
-            .subscribe(with: self) { owner, string in
-                if id == string {
+        deleteButton
+            .rx
+            .tap
+            .subscribe(with: self) { owner, _ in
+                let alert = UIAlertController(title: "안내", message: "정말로 삭제하시겠습니까?", preferredStyle: .alert)
+                let ok = UIAlertAction(title: "예", style:.default) { _ in
                     
-                    let alert = UIAlertController(title: "안내", message: "정말로 삭제하시겠습니까?", preferredStyle: .alert)
-                    let ok = UIAlertAction(title: "예", style:.default) { _ in
-                        NotificationCenter.default.post(name: NSNotification.Name("VCTransited"), object: nil)
-                        self.dismiss(animated: true)
-                    }
-                    let cancel = UIAlertAction(title: "아니오", style: .cancel)
-                    
-                    alert.addAction(cancel)
-                    alert.addAction(ok)
-                    
-                    self.present(alert, animated: true)
-                    
+                    //네트워크 결과
+                    //화면전환
+                    self.deleteResult
+                        .subscribe(with: self) { owner, string in
+                            if id == string {
+                                
+                                NotificationCenter.default.post(name: NSNotification.Name("VCTransited"), object: nil)
+                                self.dismiss(animated: true)
+                            }
+                        }
+                        .disposed(by: self.disposebag)
                 }
+                
+                let cancel = UIAlertAction(title: "아니오", style: .cancel) { _ in
+                    self.dismiss(animated: true)
+                }
+                
+                alert.addAction(cancel)
+                alert.addAction(ok)
+                
+                self.present(alert, animated: true)
             }
             .disposed(by: disposebag)
+        
+        
+        
+        
+        
         
     }
     
