@@ -20,6 +20,33 @@ final class APIManager {
 
     private let disposeBag = DisposeBag()
     
+    //MARK: - 내 프로필 조회
+    
+    func myProfile() -> Single<Result<myProfileResponse, FiveError>> {
+        
+        return Single.create { single in
+            
+            self.provider.request(.myProfile) { result in
+                
+                switch result {
+                case .success(let response) :
+                    do {
+                        let data = try JSONDecoder().decode(myProfileResponse.self, from: response.data)
+                        single(.success(.success(data)))
+                    } catch {
+                        single(.success(.failure(.decodingError)))
+                    }
+                case .failure(let error) :
+                  
+                    guard let customError = FiveError(rawValue: error.response?.statusCode ??  1) else { return }
+                    single(.success(.failure(customError)))
+                }
+            }
+            return Disposables.create()
+        }
+    }
+    
+    
     //MARK: - 좋아요
     
     func likePost(id: String) -> Single<Result<LikePostResponse, FiveError>>{
