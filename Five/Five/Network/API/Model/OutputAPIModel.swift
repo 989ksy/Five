@@ -115,5 +115,21 @@ struct LikePostResponse: Decodable{
     }
 }
 
+//MARK: - 내 프로필 조회
+
+struct myProfileResponse : Decodable {
+    let post : [String]
+    let followers: [String]
+    let following: [String]
+    let id : String
+    let email : String
+    let nick : String
+    
+    enum CodingKeys: String, CodingKey {
+        case post, followers, following
+        case email, nick
+        case id = "_id"
+    }
+}
 
 
