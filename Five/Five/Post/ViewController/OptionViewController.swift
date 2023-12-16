@@ -23,7 +23,6 @@ class OptionViewController: BaseViewController {
         let view = UIView()
         return view
     }()
-    
     let deleteImageView = {
         let view = UIImageView()
         view.image = UIImage(systemName: "trash")?.withTintColor(.systemRed)
@@ -31,7 +30,6 @@ class OptionViewController: BaseViewController {
         view.tintColor = .systemRed
         return view
     }()
-    
     let deleteLabel = {
         let view = UILabel()
         view.text = "삭제"
@@ -39,12 +37,10 @@ class OptionViewController: BaseViewController {
         view.font = CustomFont.mediumGmarket17
         return view
     }()
-    
     let deleteButton = {
         let view = UIButton()
         return view
     }()
-    
     let dismissButton = {
         let btn = UIButton()
         btn.setTitle("취소", for: .normal)
@@ -63,6 +59,7 @@ class OptionViewController: BaseViewController {
         view.backgroundColor = CustomColor.backgroundColor
         
         dismissButton.addTarget(self, action: #selector(dismissButtonTapped), for: .touchUpInside)
+        
         bind()
     }
     
@@ -93,11 +90,15 @@ class OptionViewController: BaseViewController {
             }
             .disposed(by: disposebag)
         
+        //삭제 버튼 선택 시
+        //얼럿 띄우고 선택에 따라 삭제 & 화면갱신 or 취소
         deleteButton
             .rx
             .tap
             .subscribe(with: self) { owner, _ in
+                
                 let alert = UIAlertController(title: "안내", message: "정말로 삭제하시겠습니까?", preferredStyle: .alert)
+                
                 let ok = UIAlertAction(title: "예", style:.default) { _ in
                     
                     //네트워크 결과
@@ -105,7 +106,6 @@ class OptionViewController: BaseViewController {
                     self.deleteResult
                         .subscribe(with: self) { owner, string in
                             if id == string {
-                                
                                 NotificationCenter.default.post(name: NSNotification.Name("VCTransited"), object: nil)
                                 self.dismiss(animated: true)
                             }
@@ -123,11 +123,6 @@ class OptionViewController: BaseViewController {
                 self.present(alert, animated: true)
             }
             .disposed(by: disposebag)
-        
-        
-        
-        
-        
         
     }
     
@@ -148,7 +143,6 @@ class OptionViewController: BaseViewController {
         deleteBtnView.addSubview(deleteLabel)
         deleteBtnView.addSubview(deleteButton)
     }
-    
     override func setConstraints() {
         
         deleteBtnView.snp.makeConstraints { make in

@@ -9,17 +9,23 @@ import Foundation
 import Moya
 
 enum FiveAPI {
+    //회원가입 & 로그인
     case signUp (model: Signup)
     case login (model: Login)
     case emailValidation (model: CheckEmail)
     case tokenRefresh
     case withdraw
     
+    //포스트
     case createPost (model: CreatePost)
     case readPost (next: String, limit: String, product_id: String)
     case deletePost (id: String)
     
+    //좋아요
     case likePost (id: String)
+    
+    //프로필
+    case myProfile
 }
 
 extension FiveAPI : TargetType {
@@ -58,6 +64,8 @@ extension FiveAPI : TargetType {
             
         case .likePost(let id):
             return "post/like/\(id)"
+        case .myProfile:
+            return "profile/me"
         }
     }
     
@@ -67,7 +75,7 @@ extension FiveAPI : TargetType {
         switch self {
         case .signUp, .login, .emailValidation, .createPost, .likePost:
             return .post
-        case .tokenRefresh, .withdraw, .readPost:
+        case .tokenRefresh, .withdraw, .readPost, .myProfile:
             return .get
         case .deletePost:
             return .delete
@@ -130,6 +138,8 @@ extension FiveAPI : TargetType {
             
         case .likePost(_):
             return .requestPlain
+        case .myProfile:
+            return .requestPlain
         }
     }
     
@@ -172,6 +182,9 @@ extension FiveAPI : TargetType {
                     "SesacKey" : "\(APIKey.sesacKey)"]
             
         case .likePost: //좋아요
+            return ["Authorization" : "\(KeychainStorage.shared.userToken!)",
+                    "SesacKey" : "\(APIKey.sesacKey)"]
+        case .myProfile:
             return ["Authorization" : "\(KeychainStorage.shared.userToken!)",
                     "SesacKey" : "\(APIKey.sesacKey)"]
         }
