@@ -12,15 +12,15 @@ import RxCocoa
 class FeedViewModel {
 
     let disposeBag = DisposeBag()
-
+//    let items = BehaviorSubject<[ReadData]>(value: [])
+    
     struct Input {
         
         //버튼
         let addContentButtonTap : ControlEvent<Void> //글작성버튼
-        let refresh: PublishSubject<Void>
+        let refresh: PublishSubject<Void> //갱신
         
-        let prefetchItem: ControlEvent<[IndexPath]>
-        
+        let prefetchItem: ControlEvent<[IndexPath]> //페이지네이션
     }
     
     struct Output {
@@ -30,7 +30,7 @@ class FeedViewModel {
     func transform (input: Input) -> Output {
         
         let feedData = BehaviorSubject<[ReadData]>(value: [])
-
+        
         //MARK: - 페이지네이션
         
         // 페이지네이션 요소
@@ -42,6 +42,7 @@ class FeedViewModel {
         //조건: 배열의 마지막쯤이 되었을 때 = 네트워크 콜
         input.prefetchItem
             .subscribe(with: self) { owner , value in
+                
                 let itemCount = try! feedData.value().count
                 
                 if value.contains(where: { $0.row == itemCount - 1 }) {
@@ -56,7 +57,7 @@ class FeedViewModel {
         // 커서값이 바뀔 때(변화가 감지 될 때) 실행
         nextCursor
             .flatMap {_ in
-                APIManager.shared.readPost(next: nextCursorItem, limit: "4", productId: "Five_Feed")
+                APIManager.shared.readPost(next: nextCursorItem, limit: "10", productId: "Five_Feed")
             }
             .subscribe(with: self) { owner , response in
 
@@ -81,7 +82,7 @@ class FeedViewModel {
         
         input.refresh
             .flatMap {
-                APIManager.shared.readPost(next: "", limit: "4", productId: "Five_Feed")
+                APIManager.shared.readPost(next: "", limit: "10", productId: "Five_Feed")
             }
             .subscribe(with: self) { owner, value in
                 switch value {
@@ -99,12 +100,13 @@ class FeedViewModel {
         
         //MARK: - 게시글 조회 (최초)
         //네트워크 통신
-        APIManager.shared.readPost(next: "", limit: "4", productId: "Five_Feed")
+        APIManager.shared.readPost(next: "", limit: "10", productId: "Five_Feed")
             .subscribe(with: self) { owner, value in
                 switch value {
                 case .success(let response):
                     print("===최초 feedVC",response)
                     feedData.onNext(response.data)
+                    
                     
                 case .failure(let error):
                     print("\(error)")
