@@ -19,6 +19,9 @@
 		0F61421D2B2C4309004C888F /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0F61421C2B2C4309004C888F /* IQKeyboardManagerSwift */; };
 		0F61421F2B2C604B004C888F /* ReactionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F61421E2B2C604B004C888F /* ReactionList.swift */; };
 		0F6142212B2C862D004C888F /* OptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6142202B2C862D004C888F /* OptionViewController.swift */; };
+		0F6142252B2E05D5004C888F /* ProfileFirstCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6142242B2E05D5004C888F /* ProfileFirstCell.swift */; };
+		0F6142292B2E0C25004C888F /* ProfileSecondCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6142282B2E0C25004C888F /* ProfileSecondCell.swift */; };
+		0F61422B2B2ED2CC004C888F /* ProfileLabel + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F61422A2B2ED2CC004C888F /* ProfileLabel + Extension.swift */; };
 		0F64AF842B21B4CA00ED4CBE /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F64AF832B21B4CA00ED4CBE /* SearchTableViewCell.swift */; };
 		0F64AF862B21C33E00ED4CBE /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F64AF852B21C33E00ED4CBE /* BaseTableViewCell.swift */; };
 		0F64AF892B21D45100ED4CBE /* FollowUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F64AF882B21D45100ED4CBE /* FollowUIButton.swift */; };
@@ -130,6 +133,9 @@
 		0F6142192B2C3BB2004C888F /* Reaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reaction.swift; sourceTree = "<group>"; };
 		0F61421E2B2C604B004C888F /* ReactionList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionList.swift; sourceTree = "<group>"; };
 		0F6142202B2C862D004C888F /* OptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionViewController.swift; sourceTree = "<group>"; };
+		0F6142242B2E05D5004C888F /* ProfileFirstCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFirstCell.swift; sourceTree = "<group>"; };
+		0F6142282B2E0C25004C888F /* ProfileSecondCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSecondCell.swift; sourceTree = "<group>"; };
+		0F61422A2B2ED2CC004C888F /* ProfileLabel + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileLabel + Extension.swift"; sourceTree = "<group>"; };
 		0F64AF832B21B4CA00ED4CBE /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		0F64AF852B21C33E00ED4CBE /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		0F64AF882B21D45100ED4CBE /* FollowUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowUIButton.swift; sourceTree = "<group>"; };
@@ -273,6 +279,8 @@
 			isa = PBXGroup;
 			children = (
 				0F4AE4E62B24CB48007BA5EF /* FiveCollectionViewCell.swift */,
+				0F6142242B2E05D5004C888F /* ProfileFirstCell.swift */,
+				0F6142282B2E0C25004C888F /* ProfileSecondCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -536,6 +544,7 @@
 				0FB732A82B28679F0065AB5B /* NicknameLabel + Extension.swift */,
 				0FB732B22B28BA340065AB5B /* DateLabel + Extension.swift */,
 				0F498ABA2B299EAF00C02885 /* DateFormatterLabel + Extension.swift */,
+				0F61422A2B2ED2CC004C888F /* ProfileLabel + Extension.swift */,
 			);
 			path = UILabel;
 			sourceTree = "<group>";
@@ -1143,6 +1152,7 @@
 				0F86DD432B19BCE60043939F /* JournalView.swift in Sources */,
 				0F56A5C22B1CA40100C7FAD3 /* CommentViewController.swift in Sources */,
 				0F7DB6842B13A83400A48828 /* ContentView.swift in Sources */,
+				0F6142292B2E0C25004C888F /* ProfileSecondCell.swift in Sources */,
 				0F67CA682B10633D00259285 /* CustomColor.swift in Sources */,
 				0F67CA5B2B1061DB00259285 /* PasswordViewModel.swift in Sources */,
 				0F61421A2B2C3BB2004C888F /* Reaction.swift in Sources */,
@@ -1164,6 +1174,7 @@
 				0FB732B12B2870B00065AB5B /* ShareButton + Extension.swift in Sources */,
 				0F498ABB2B299EAF00C02885 /* DateFormatterLabel + Extension.swift in Sources */,
 				0F89F0EE2B1B57E200FECBCD /* HideKeyboard+Extension.swift in Sources */,
+				0F61422B2B2ED2CC004C888F /* ProfileLabel + Extension.swift in Sources */,
 				0F67CA3A2B10353800259285 /* BaseViewController.swift in Sources */,
 				0F61421F2B2C604B004C888F /* ReactionList.swift in Sources */,
 				0FB732AF2B286FF00065AB5B /* CommentButton + Extension.swift in Sources */,
@@ -1178,6 +1189,7 @@
 				0FB732A52B2839540065AB5B /* loadImage + Extension.swift in Sources */,
 				0F64AF892B21D45100ED4CBE /* FollowUIButton.swift in Sources */,
 				0F67CA3C2B10354200259285 /* BaseView.swift in Sources */,
+				0F6142252B2E05D5004C888F /* ProfileFirstCell.swift in Sources */,
 				0F64AF862B21C33E00ED4CBE /* BaseTableViewCell.swift in Sources */,
 				0F67CA782B10657D00259285 /* FeedViewModel.swift in Sources */,
 				0F67CA8A2B10669700259285 /* OutputAPIModel.swift in Sources */,
