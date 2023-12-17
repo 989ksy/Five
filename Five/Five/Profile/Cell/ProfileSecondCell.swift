@@ -62,6 +62,14 @@ class ProfileSecondCell : BaseTableViewCell {
         setSegmentedControl()
         bind()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(uploadView), name: NSNotification.Name("needToUpdate"), object: nil)
+        
+    }
+    
+    //MARK: - update view
+    
+    @objc func uploadView() {
+        self.fiveCollectionView.reloadData()
     }
     
     //MARK: - cell
@@ -82,6 +90,8 @@ class ProfileSecondCell : BaseTableViewCell {
                 
                 if element.image.count < 2 {
                     cell.moreIconImageView.isHidden = true
+                } else {
+                    cell.moreIconImageView.isHidden = false
                 }
                 
             }
@@ -112,7 +122,6 @@ class ProfileSecondCell : BaseTableViewCell {
     @objc private func didChangeValue(segment: UISegmentedControl) {
         self.shouldHideFirstView = segment.selectedSegmentIndex != 0
     }
-    
     
     func setSegmentedControl() {
         
