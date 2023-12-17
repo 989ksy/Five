@@ -107,6 +107,7 @@ class OptionViewController: BaseViewController {
                         .subscribe(with: self) { owner, string in
                             if id == string {
                                 NotificationCenter.default.post(name: NSNotification.Name("VCTransited"), object: nil)
+                                NotificationCenter.default.post(name: NSNotification.Name("contentUploaded"), object: nil)
                                 self.dismiss(animated: true)
                             }
                         }
