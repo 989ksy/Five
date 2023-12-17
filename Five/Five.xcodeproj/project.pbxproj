@@ -23,6 +23,7 @@
 		0F6142292B2E0C25004C888F /* ProfileSecondCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6142282B2E0C25004C888F /* ProfileSecondCell.swift */; };
 		0F61422B2B2ED2CC004C888F /* ProfileLabel + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F61422A2B2ED2CC004C888F /* ProfileLabel + Extension.swift */; };
 		0F61422D2B2EFD6E004C888F /* ProfileSecondCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F61422C2B2EFD6E004C888F /* ProfileSecondCellViewModel.swift */; };
+		0F61422F2B2F0EBA004C888F /* AddContentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F61422E2B2F0EBA004C888F /* AddContentButton.swift */; };
 		0F64AF842B21B4CA00ED4CBE /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F64AF832B21B4CA00ED4CBE /* SearchTableViewCell.swift */; };
 		0F64AF862B21C33E00ED4CBE /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F64AF852B21C33E00ED4CBE /* BaseTableViewCell.swift */; };
 		0F64AF892B21D45100ED4CBE /* FollowUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F64AF882B21D45100ED4CBE /* FollowUIButton.swift */; };
@@ -138,6 +139,7 @@
 		0F6142282B2E0C25004C888F /* ProfileSecondCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSecondCell.swift; sourceTree = "<group>"; };
 		0F61422A2B2ED2CC004C888F /* ProfileLabel + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileLabel + Extension.swift"; sourceTree = "<group>"; };
 		0F61422C2B2EFD6E004C888F /* ProfileSecondCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSecondCellViewModel.swift; sourceTree = "<group>"; };
+		0F61422E2B2F0EBA004C888F /* AddContentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddContentButton.swift; sourceTree = "<group>"; };
 		0F64AF832B21B4CA00ED4CBE /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		0F64AF852B21C33E00ED4CBE /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		0F64AF882B21D45100ED4CBE /* FollowUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowUIButton.swift; sourceTree = "<group>"; };
@@ -632,6 +634,7 @@
 				0FB732AC2B286FC20065AB5B /* FiveButton + Extension.swift */,
 				0FB732AE2B286FF00065AB5B /* CommentButton + Extension.swift */,
 				0FB732B02B2870B00065AB5B /* ShareButton + Extension.swift */,
+				0F61422E2B2F0EBA004C888F /* AddContentButton.swift */,
 			);
 			path = UIButton;
 			sourceTree = "<group>";
@@ -1146,6 +1149,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F67CA762B10657300259285 /* FeedView.swift in Sources */,
+				0F61422F2B2F0EBA004C888F /* AddContentButton.swift in Sources */,
 				0F7DB67E2B13709200A48828 /* CustomIcon.swift in Sources */,
 				0F67CA402B1035B800259285 /* LoginViewController.swift in Sources */,
 				0F7DB6792B13639000A48828 /* FeedCollectionViewCell.swift in Sources */,

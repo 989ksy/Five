@@ -35,17 +35,17 @@ class CustomTabBarController: UITabBarController {
         firstVC.tabBarItem.title = "Five"
         firstVC.tabBarItem.image = UIImage(named: "home")
         
-        let secondVC = UINavigationController(rootViewController: SearchViewController())
-        secondVC.tabBarItem.selectedImage = UIImage(named: "searchIcon")
-        secondVC.tabBarItem.image = UIImage(named: "searchIcon")
-        secondVC.tabBarItem.title = "Search"
+//        let secondVC = UINavigationController(rootViewController: SearchViewController())
+//        secondVC.tabBarItem.selectedImage = UIImage(named: "searchIcon")
+//        secondVC.tabBarItem.image = UIImage(named: "searchIcon")
+//        secondVC.tabBarItem.title = "Search"
         
         let thirdVC = UINavigationController(rootViewController: ProfileViewController())
         thirdVC.tabBarItem.selectedImage = UIImage(named: "personal")
         thirdVC.tabBarItem.image = UIImage(named: "personal")
         thirdVC.tabBarItem.title = "My"
 
-        viewControllers = [firstVC, secondVC, thirdVC]
+        viewControllers = [firstVC, thirdVC]
         
     }
 
