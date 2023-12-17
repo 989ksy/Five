@@ -23,6 +23,7 @@ final class ProfileViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = CustomColor.backgroundColor
         
         mainView.ProfiletableView.dataSource = self
         mainView.ProfiletableView.delegate = self
