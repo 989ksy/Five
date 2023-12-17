@@ -11,16 +11,32 @@ import RxCocoa
 
 class ProfileViewModel {
     
-    struct Input {
-        
-        let settingTap : ControlEvent<Void>
-        
-        
+    let loadData = BehaviorSubject<[myProfileResponse]>(value: [])
+    
+    var profileData : [myProfileResponse] = [myProfileResponse(posts: [], followers: [], following: [], id: "", email: "", nick: "")]
+    
+    
+    let disposeBag = DisposeBag()
+    
+    
+    func fetchData(Completion: @escaping (Result<myProfileResponse, FiveError>) -> Void) {
+        APIManager.shared.myProfile()
+            .subscribe(with: self) { owner, response in
+                switch response {
+                case .success(let data) :
+                Completion(.success(data))
+                    
+                case .failure(let error) :
+                    print("myProfile failed",error.rawValue)
+                    print(error.errorDescription!)
+                }
+            }
+            .disposed(by: disposeBag)
     }
     
-    struct Output {
-        
-    }
     
+    struct Input {}
+    struct Output {}
+
     
 }
