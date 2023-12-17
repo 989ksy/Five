@@ -15,7 +15,17 @@ final class ProfileViewController: BaseViewController {
     let mainView = ProfileView()
     let viewModel = ProfileViewModel()
     
+    var refresh = PublishSubject<Void>()
+    
     let disposeBag = DisposeBag()
+    
+    //리프레싱 컨트롤 생성
+    private lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshingData), for: .valueChanged)
+        return refreshControl
+        
+    }()
     
     override func loadView() {
         self.view = mainView
@@ -25,12 +35,21 @@ final class ProfileViewController: BaseViewController {
         super.viewDidLoad()
         view.backgroundColor = CustomColor.backgroundColor
         
+        //테이블뷰
         mainView.ProfiletableView.dataSource = self
         mainView.ProfiletableView.delegate = self
         
+        //리프레싱
+        mainView.ProfiletableView.refreshControl = refreshControl
+        
+        //업데이트
+        NotificationCenter.default.addObserver(self, selector: #selector(uploadView), name: NSNotification.Name("needToUpdate"), object: nil)
+
+        
         //        navigationController?.navigationBar.isHidden = true
         
-        profileNetwork()
+        profileNetwork() //프로필조회
+        bind() //컨텐츠버튼
         
     }
     
@@ -48,6 +67,45 @@ final class ProfileViewController: BaseViewController {
                 print(failure)
             }
         }
+    }
+    
+    
+    ///컨텐츠 추가버튼
+    func bind() {
+        
+        let input = ProfileViewModel.Input(addContentTapp: mainView.addContentButton.rx.tap, refresh: refresh)
+        
+        input.addContentTapp
+            .subscribe(with: self) { owner, _ in
+                let vc = ContentViewController()
+                vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true)
+            }
+            .disposed(by: disposeBag)
+        
+        refreshControl
+            .rx
+            .controlEvent(.valueChanged)
+            .subscribe(with: self) { owner, _ in
+                owner.mainView.ProfiletableView.reloadData()
+                owner.refreshControl.endRefreshing()
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    
+    //MARK: - 새 포스트 갱신
+    
+    @objc func uploadView() {
+        refresh.onNext(Void())
+    }
+    
+    
+    //MARK: - 화면 로딩
+    
+    @objc private func refreshingData() {
+        refreshControl.endRefreshing()
+        refresh.onNext(Void())
     }
     
     
@@ -125,7 +183,6 @@ extension ProfileViewController : UITableViewDelegate, UITableViewDataSource {
     ///설정버튼 눌렀을 때
     @objc func settingButonTapped() {
         let vc = SettingViewController()
-        //        self.present(vc, animated: true)
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
