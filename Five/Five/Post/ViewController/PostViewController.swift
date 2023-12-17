@@ -74,6 +74,14 @@ final class PostViewController : BaseViewController, UISheetPresentationControll
                 owner.mainView.contentLabel.text = response.content
                 //날짜
                 owner.mainView.dateLabel.customDateFormat(initialText: response.time)
+                
+                //좋아요 상태 전달
+                if response.likes.contains(KeychainStorage.shared.userID!) {
+                    owner.mainView.fiveButton.setImage(UIImage(named: "five.fill")?.withTintColor(CustomColor.pointColor ?? .systemYellow), for: .normal)
+                } else {
+                    owner.mainView.fiveButton.setImage(UIImage(named: "five"), for: .normal)
+                }
+                
             }
             .disposed(by: disposeBag)
         
@@ -116,7 +124,7 @@ final class PostViewController : BaseViewController, UISheetPresentationControll
     
     
     @objc func deleteTappedInOptionVC() {
-        NotificationCenter.default.post(name: NSNotification.Name("contentUploaded"), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name("needToUpdate"), object: nil)
         self.navigationController?.popViewController(animated: true)
     }
     
