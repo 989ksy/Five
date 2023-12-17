@@ -7,26 +7,21 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
 
 class ProfileSecondCell : BaseTableViewCell {
     
+    //MARK: - identifier 등록
     static let identifier = "ProfileSecondCell"
     
-    var shouldHideFirstView: Bool? {
-        didSet {
-            guard let shouldHideFirstView = self.shouldHideFirstView else { return }
-            fiveView.isHidden = shouldHideFirstView
-            fivedView.isHidden = !self.fiveView.isHidden
-        }
-    }
+    let disposeBag = DisposeBag()
+    let viewModel = ProfileSecondCellViewModel()
     
-    let segmentedControl = {
-        let control = UnderlineSegmentedControl(items: ["Five","Fived"])
-        control.translatesAutoresizingMaskIntoConstraints = false
-        return control
-    }()
+
+    //MARK: - UI
     
-    let fiveView = {
+    let fiveCollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionLayout())
         view.register(FiveCollectionViewCell.self, forCellWithReuseIdentifier: "FiveCollectionViewCell")
         return view
@@ -61,20 +56,65 @@ class ProfileSecondCell : BaseTableViewCell {
     override func configureView() {
         contentView.addSubview(segmentedControl)
         contentView.addSubview(fivedView)
-        contentView.addSubview(fiveView)
+        contentView.addSubview(fiveCollectionView)
         
-        fiveView.dataSource = self
-        fiveView.delegate = self
+//        fiveCollectionView.dataSource = self
+//        fiveCollectionView.delegate = self
         
         setSegmentedControl()
+        bind()
         
     }
+    
+    //MARK: - cell
+    
+    func bind() {
+        
+        let input = ProfileSecondCellViewModel.Input(prefetchItem: fiveCollectionView.rx.prefetchItems)
+        
+        let output = viewModel.transform(input: input)
+        
+        output.profileItems
+            .observe(on: MainScheduler.instance)
+            .bind(to: fiveCollectionView.rx.items(cellIdentifier: "FiveCollectionViewCell", cellType: FiveCollectionViewCell.self)
+            ) { (row, element, cell) in
+                
+                let url = URL(string: "\(BaseURL.base)" + element.image.first!)
+                cell.firstImageView.loadImage(from: url!, placeHolderImage: UIImage(named: "strar.fill"))
+                
+                if element.image.count < 2 {
+                    cell.moreIconImageView.isHidden = true
+                }
+                
+            }
+            .disposed(by: disposeBag)
+        
+    }
+    
+    
+    
+    //MARK: - SegmentedControl 설정
+    
+    var shouldHideFirstView: Bool? {
+        didSet {
+            guard let shouldHideFirstView = self.shouldHideFirstView else { return }
+            fiveCollectionView.isHidden = shouldHideFirstView
+            fivedView.isHidden = !self.fiveCollectionView.isHidden
+        }
+    }
+    
+    let segmentedControl = {
+        let control = UnderlineSegmentedControl(items: ["Five","Fived"])
+        control.translatesAutoresizingMaskIntoConstraints = false
+        return control
+    }()
     
     
     
     @objc private func didChangeValue(segment: UISegmentedControl) {
         self.shouldHideFirstView = segment.selectedSegmentIndex != 0
     }
+    
     
     func setSegmentedControl() {
         
@@ -92,6 +132,7 @@ class ProfileSecondCell : BaseTableViewCell {
         
     }
     
+    //MARK: - 레이아웃
     
     override func setConstraints() {
         
@@ -101,7 +142,7 @@ class ProfileSecondCell : BaseTableViewCell {
             make.height.equalTo(40)
         }
         
-        fiveView.snp.makeConstraints { make in
+        fiveCollectionView.snp.makeConstraints { make in
             make.top.equalTo(segmentedControl.snp.bottom).offset(12)
             make.horizontalEdges.equalToSuperview()
             make.bottom.equalToSuperview()
@@ -114,21 +155,24 @@ class ProfileSecondCell : BaseTableViewCell {
         }
         
     }
+    
 }
 
 
-extension ProfileSecondCell : UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FiveCollectionViewCell", for: indexPath) as? FiveCollectionViewCell else {return UICollectionViewCell()}
-        
-        cell.backgroundColor = .yellow
-        
-        return cell
-    }
-    
-    
-}
+//
+//extension ProfileSecondCell : UICollectionViewDelegate, UICollectionViewDataSource {
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return 20
+//    }
+//    
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FiveCollectionViewCell", for: indexPath) as? FiveCollectionViewCell else {return UICollectionViewCell()}
+//
+//        
+//        cell.backgroundColor = .yellow
+//        
+//        return cell
+//    }
+//    
+//    
+//}

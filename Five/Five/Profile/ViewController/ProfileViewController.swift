@@ -27,7 +27,7 @@ final class ProfileViewController: BaseViewController {
         mainView.ProfiletableView.dataSource = self
         mainView.ProfiletableView.delegate = self
         
-//        navigationController?.navigationBar.isHidden = true
+        //        navigationController?.navigationBar.isHidden = true
         
         profileNetwork()
         
@@ -106,7 +106,7 @@ extension ProfileViewController : UITableViewDelegate, UITableViewDataSource {
             
             let rectForSection0 = tableView.rect(forSection: 0)
             let remainingHeight = tableView.bounds.height - rectForSection0.origin.y - rectForSection0.height
-
+            
             return remainingHeight
         }
         
@@ -124,7 +124,7 @@ extension ProfileViewController : UITableViewDelegate, UITableViewDataSource {
     ///설정버튼 눌렀을 때
     @objc func settingButonTapped() {
         let vc = SettingViewController()
-//        self.present(vc, animated: true)
+        //        self.present(vc, animated: true)
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
