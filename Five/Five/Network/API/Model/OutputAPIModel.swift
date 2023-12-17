@@ -132,3 +132,16 @@ struct myProfileResponse : Decodable {
     }
     
 }
+
+
+//MARK: - 유저별 포스트 조회
+
+struct readUserPostResponse : Decodable {
+    let data: [ReadData]
+    let nextCursor: String
+    
+    enum CodingKeys: String, CodingKey {
+        case data
+        case nextCursor = "next_cursor"
+    }
+}
