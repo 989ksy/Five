@@ -11,21 +11,12 @@ import RxCocoa
 
 final class ProfileViewController: BaseViewController {
     
+    
     let mainView = ProfileView()
     let viewModel = ProfileViewModel()
     
     let disposeBag = DisposeBag()
     
-    var shouldHideFirstView: Bool? {
-      didSet {
-        guard let shouldHideFirstView = self.shouldHideFirstView else { return }
-          self.mainView.fiveView.isHidden = shouldHideFirstView
-          self.mainView.fivedView.isHidden = !self.mainView.fiveView.isHidden
-      }
-    }
-    
-    
-        
     override func loadView() {
         self.view = mainView
     }
@@ -33,69 +24,111 @@ final class ProfileViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        bind()
-        setSegmentedControl()
+        mainView.ProfiletableView.dataSource = self
+        mainView.ProfiletableView.delegate = self
         
-        mainView.fiveView.delegate = self
-        mainView.fiveView.dataSource = self
+//        navigationController?.navigationBar.isHidden = true
         
-    }
-
-    
-    @objc private func didChangeValue(segment: UISegmentedControl) {
-        self.shouldHideFirstView = segment.selectedSegmentIndex != 0
-      }
-    
-    func setSegmentedControl() {
-        
-        self.mainView.segmentedControl.addTarget(self, action: #selector(didChangeValue(segment: )), for: .valueChanged)
-        self.mainView.segmentedControl.selectedSegmentIndex = 0
-        self.mainView.segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.gray], for: .normal)
-            self.mainView.segmentedControl.setTitleTextAttributes(
-              [
-                NSAttributedString.Key.foregroundColor: CustomColor.pointColor ?? .systemYellow,
-                .font: CustomFont.mediumGmarket15 ?? .systemFont(ofSize: 15)
-              ],
-              for: .selected
-            )
-            self.mainView.segmentedControl.selectedSegmentIndex = 0
-        
-
+        profileNetwork()
         
     }
     
-    
-    //MARK: - 버튼 동작 RxSwift
-    
-    func bind() {
+    ///네트워크 통신
+    ///성공 시 내프로필 조회값을 profileData에 넣어줌
+    func profileNetwork() {
         
-        let input = ProfileViewModel.Input(settingTap: mainView.settingButton.rx.tap)
-        
-        mainView.settingButton.rx.tap
-            .subscribe(with: self) { owner, _ in
-                let vc = SettingViewController()
-                self.navigationController?.pushViewController(vc, animated: true)
+        viewModel.fetchData { [self] result in
+            switch result {
+            case .success(let data):
+                viewModel.profileData = [data]
+                mainView.ProfiletableView.reloadData()
+                print(data)
+            case .failure(let failure):
+                print(failure)
             }
-            .disposed(by: disposeBag)
+        }
     }
+    
     
     
 }
 
-
-
-extension ProfileViewController : UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+extension ProfileViewController : UITableViewDelegate, UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FiveCollectionViewCell", for: indexPath) as? FiveCollectionViewCell else {return UICollectionViewCell()}
-
-        cell.backgroundColor = .yellow
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return cell
+        if section == 0 {
+            return 1
+        } else if section == 1{
+            return 1
+        }
+        
+        return 0
+    }
+    
+    ///셀 데이터
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if indexPath.section == 0 {
+            
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileFirstCell", for: indexPath) as? ProfileFirstCell else {return UITableViewCell()}
+            
+            cell.nicknameLabel.text = viewModel.profileData.first?.nick
+            cell.emailLabel.text = viewModel.profileData.first?.email
+            cell.settingButton.addTarget(self, action: #selector(settingButonTapped), for: .touchUpInside)
+            cell.followDataLabel.text = "\(viewModel.profileData.first?.followers.count ?? 555)"
+            cell.followingDataLabel.text = "\(viewModel.profileData.first?.following.count ?? 666)"
+            
+            return cell
+            
+        } else if indexPath.section == 1 {
+            
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileSecondCell", for: indexPath) as? ProfileSecondCell else {return UITableViewCell()}
+
+            return cell
+        }
+        return UITableViewCell()
+    }
+    
+    ///섹션별 셀 높이
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if indexPath.section == 0 {
+            
+            return 200
+            
+        } else if indexPath.section == 1 {
+            
+            let rectForSection0 = tableView.rect(forSection: 0)
+            let remainingHeight = tableView.bounds.height - rectForSection0.origin.y - rectForSection0.height
+
+            return remainingHeight
+        }
+        
+        return 44
     }
     
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        //선택 시 회색셀렉션 제거
+        tableView.reloadRows(at: [indexPath], with: .none)
+    }
+    
+    
+    ///설정버튼 눌렀을 때
+    @objc func settingButonTapped() {
+        let vc = SettingViewController()
+//        self.present(vc, animated: true)
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    
+    
 }
+
