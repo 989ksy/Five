@@ -123,7 +123,7 @@ final class ContentViewController : BaseViewController {
         output.isSucceeded
             .subscribe(with: self) { owner, bool in
                 if bool {
-                    NotificationCenter.default.post(name: NSNotification.Name("contentUploaded"), object: nil)
+                    NotificationCenter.default.post(name: NSNotification.Name("needToUpdate"), object: nil)
                     self.dismiss(animated: true)
 
                 } else {

@@ -12,6 +12,8 @@ import Kingfisher
 
 final class FeedViewController : BaseViewController, UISheetPresentationControllerDelegate {
     
+
+    
     //MARK: - 기본세팅
     
     let mainView = FeedView() //메인 뷰
@@ -29,6 +31,9 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
         
     }()
     
+    
+    //MARK: - View
+    
     override func loadView() {
         self.view = mainView
     }
@@ -43,17 +48,9 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
         //리프레싱
         mainView.feedCollectionView.refreshControl = refreshControl
         
-        NotificationCenter.default.addObserver(self, selector: #selector(uploadView), name: NSNotification.Name("contentUploaded"), object: nil)
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(uploadView), name: NSNotification.Name("needToUpdate"), object: nil)
         
     }
-    
-    //    override func viewWillAppear(_ animated: Bool) {
-    //        super.viewWillAppear(animated)
-    //
-    //        refresh.onNext(Void())
-    //    }
-    
     
     //MARK: - 새 포스트 갱신
     
@@ -103,13 +100,60 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
                 
                 //닉네임
                 cell.nickLabel.text = "\(element.creator.nick)"
-                
                 //날짜
                 cell.dateLabel.customDateFormat(initialText: element.time)
                 
                 //사진
                 let url = URL(string: "\(BaseURL.base)" + element.image.first!)
                 cell.imageView.loadImage(from: url!, placeHolderImage: UIImage(named: "personal"))
+                
+                //좋아요 버튼
+                
+                //1.[좋아요] 배열에서 내 아이디 확인
+                // 있으면 색칠, 없으면 무색
+                guard let userID = KeychainStorage.shared.userID else {return }
+                
+                if element.likes.contains(userID) {
+                    cell.fiveButton
+                        .setImage(UIImage(named: "five.fill")?
+                            .withTintColor(CustomColor.pointColor ?? .systemYellow), for: .normal)
+                } else {
+                    cell.fiveButton
+                        .setImage(UIImage(named: "five"), for: .normal)
+                }
+
+                //2. 파이브 버튼 누를 때 네트워크 통신
+                cell.fiveButton
+                    .rx
+                    .tap
+                    .flatMap {
+                        APIManager.shared.likePost(id: element.id)
+                    }
+                    .subscribe(with: self) { owner, response in
+                        switch response {
+                        case .success(let response):
+                            cell.likeStatus = response.likeStatus
+                                                    
+                            if cell.likeStatus == true {
+                                
+                                cell.fiveButton.setImage(UIImage(named: "five.fill")?
+                                    .withTintColor(CustomColor.pointColor ?? .systemYellow), for: .normal)
+                                
+                            } else {
+                                cell.fiveButton
+                                    .setImage(UIImage(named: "five"), for: .normal)
+                            }
+                            
+                            NotificationCenter.default.post(name: NSNotification.Name("needToUpdate"), object: nil)
+                            
+                            print(response) // response.likeStatus 는 bool값
+                        case .failure(let failure):
+                            print("좋아요 버튼 통신문제:",failure)
+                            print("error:", failure.errorDescription!)
+                        }
+                    }
+                    .disposed(by: cell.disposeBag)
+                
                 
                 //댓글 버튼
                 cell.commentButton
@@ -133,6 +177,7 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
                     }
                     .disposed(by: cell.disposeBag)
                 
+                
                 //닉네임 버튼
                 cell.nicknameButton
                     .rx
@@ -142,8 +187,12 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
                         self.navigationController?.pushViewController(vc, animated: true)
                     }
                     .disposed(by: cell.disposeBag)
+                
+                
             }
             .disposed(by: disposeBag)
+        
+        
         
         //CellDidSelected
         mainView.feedCollectionView
@@ -153,13 +202,11 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
             .subscribe(with: self) { owner, data in
                 let vc = PostViewController()
                 vc.transitedData.accept(data)
-                
-                vc.mainView.nickLabel.text = data.creator.nick
-                vc.mainView.contentLabel.text = data.content
 
                 self.navigationController?.pushViewController(vc, animated: true)
             }
             .disposed(by: disposeBag)
+        
         
         //CollectionView 갱신
         refreshControl
@@ -195,13 +242,10 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
         appearance.backgroundColor = CustomColor.backgroundColor
         appearance.configureWithTransparentBackground()
         self.navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        
-        
-        
+
     }
     
     
     
     
 }
-
