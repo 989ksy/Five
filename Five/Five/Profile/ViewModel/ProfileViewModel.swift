@@ -11,10 +11,7 @@ import RxCocoa
 
 class ProfileViewModel {
     
-    let loadData = BehaviorSubject<[myProfileResponse]>(value: [])
-    
     var profileData : [myProfileResponse] = [myProfileResponse(posts: [], followers: [], following: [], id: "", email: "", nick: "")]
-    
     
     let disposeBag = DisposeBag()
     
