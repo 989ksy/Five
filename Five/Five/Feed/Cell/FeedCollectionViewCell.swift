@@ -13,8 +13,9 @@ import RxCocoa
 class FeedCollectionViewCell : BaseCollectionViewCell {
     
     static let identifier = "FeedCollectionViewCell"
-    
     var disposeBag = DisposeBag()
+    
+    var likeStatus : Bool?
     
     //MARK: - 프로필 + 이름 + 메뉴
     
@@ -99,6 +100,7 @@ class FeedCollectionViewCell : BaseCollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         disposeBag = DisposeBag()
+        likeStatus = nil
     }
     
     override func configureView() {
