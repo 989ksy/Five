@@ -20,15 +20,18 @@ enum FiveAPI {
     case createPost (model: CreatePost)
     case readPost (next: String, limit: String, product_id: String)
     case deletePost (id: String)
+    case readUserPost (id: String, next: String, limit: String, product_id: String)
     
     //좋아요
     case likePost (id: String)
     
     //프로필
     case myProfile
+    
 }
 
 extension FiveAPI : TargetType {
+    
     
     //MARK: - BaseURL
     ///the base URL we'll be using, typically our server.
@@ -61,12 +64,16 @@ extension FiveAPI : TargetType {
             return "post"
         case .deletePost(let id): //삭제
             return "post/\(id)"
+        case .readUserPost(let id, let next, let limit, let product_id):
+            return "post/user/\(id)"
             
         case .likePost(let id):
             return "post/like/\(id)"
         case .myProfile:
             return "profile/me"
         }
+        
+            
     }
     
     //MARK: - method
@@ -75,7 +82,7 @@ extension FiveAPI : TargetType {
         switch self {
         case .signUp, .login, .emailValidation, .createPost, .likePost:
             return .post
-        case .tokenRefresh, .withdraw, .readPost, .myProfile:
+        case .tokenRefresh, .withdraw, .readPost, .myProfile, .readUserPost:
             return .get
         case .deletePost:
             return .delete
@@ -135,10 +142,15 @@ extension FiveAPI : TargetType {
             
         case .deletePost(_):
             return .requestPlain
+            
         case .likePost(_):
             return .requestPlain
+            
         case .myProfile:
             return .requestPlain
+        
+        case .readUserPost(let id, let next, let limit, let product_id):
+            return .requestParameters(parameters: ["next" : next, "limit" : limit, "product_id" : product_id], encoding: URLEncoding.queryString)
         }
     }
     
@@ -178,6 +190,10 @@ extension FiveAPI : TargetType {
             
         case .deletePost: //포스트 삭제
             return ["Authorization" : "\(KeychainStorage.shared.userToken!)", 
+                    "SesacKey" : "\(APIKey.sesacKey)"]
+            
+        case .readUserPost(id: let id, next: let next, limit: let limit, product_id: let product_id):
+            return ["Authorization" : "\(KeychainStorage.shared.userToken!)",
                     "SesacKey" : "\(APIKey.sesacKey)"]
             
         case .likePost: //좋아요

@@ -22,6 +22,7 @@
 		0F6142252B2E05D5004C888F /* ProfileFirstCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6142242B2E05D5004C888F /* ProfileFirstCell.swift */; };
 		0F6142292B2E0C25004C888F /* ProfileSecondCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6142282B2E0C25004C888F /* ProfileSecondCell.swift */; };
 		0F61422B2B2ED2CC004C888F /* ProfileLabel + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F61422A2B2ED2CC004C888F /* ProfileLabel + Extension.swift */; };
+		0F61422D2B2EFD6E004C888F /* ProfileSecondCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F61422C2B2EFD6E004C888F /* ProfileSecondCellViewModel.swift */; };
 		0F64AF842B21B4CA00ED4CBE /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F64AF832B21B4CA00ED4CBE /* SearchTableViewCell.swift */; };
 		0F64AF862B21C33E00ED4CBE /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F64AF852B21C33E00ED4CBE /* BaseTableViewCell.swift */; };
 		0F64AF892B21D45100ED4CBE /* FollowUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F64AF882B21D45100ED4CBE /* FollowUIButton.swift */; };
@@ -136,6 +137,7 @@
 		0F6142242B2E05D5004C888F /* ProfileFirstCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFirstCell.swift; sourceTree = "<group>"; };
 		0F6142282B2E0C25004C888F /* ProfileSecondCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSecondCell.swift; sourceTree = "<group>"; };
 		0F61422A2B2ED2CC004C888F /* ProfileLabel + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileLabel + Extension.swift"; sourceTree = "<group>"; };
+		0F61422C2B2EFD6E004C888F /* ProfileSecondCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSecondCellViewModel.swift; sourceTree = "<group>"; };
 		0F64AF832B21B4CA00ED4CBE /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		0F64AF852B21C33E00ED4CBE /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		0F64AF882B21D45100ED4CBE /* FollowUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowUIButton.swift; sourceTree = "<group>"; };
@@ -404,6 +406,7 @@
 			isa = PBXGroup;
 			children = (
 				0F89F0EF2B1B787200FECBCD /* ProfileViewModel.swift */,
+				0F61422C2B2EFD6E004C888F /* ProfileSecondCellViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1190,6 +1193,7 @@
 				0F64AF892B21D45100ED4CBE /* FollowUIButton.swift in Sources */,
 				0F67CA3C2B10354200259285 /* BaseView.swift in Sources */,
 				0F6142252B2E05D5004C888F /* ProfileFirstCell.swift in Sources */,
+				0F61422D2B2EFD6E004C888F /* ProfileSecondCellViewModel.swift in Sources */,
 				0F64AF862B21C33E00ED4CBE /* BaseTableViewCell.swift in Sources */,
 				0F67CA782B10657D00259285 /* FeedViewModel.swift in Sources */,
 				0F67CA8A2B10669700259285 /* OutputAPIModel.swift in Sources */,
