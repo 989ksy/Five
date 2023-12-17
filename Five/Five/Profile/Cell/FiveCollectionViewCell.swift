@@ -7,15 +7,19 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
 
 class FiveCollectionViewCell : BaseCollectionViewCell {
     
     static let identifier = "FiveCollectionViewCell"
     
+    var disposeBag = DisposeBag()
+    
     let firstImageView = {
         let view = UIImageView()
         view.image = UIImage(named: "test_image")
-        view.contentMode = .scaleAspectFit
+        view.contentMode = .scaleAspectFill
         view.layer.cornerRadius = 3
         view.clipsToBounds = true
         view.layer.borderColor = UIColor.systemGray4.cgColor
@@ -38,6 +42,11 @@ class FiveCollectionViewCell : BaseCollectionViewCell {
         addSubview(firstImageView)
         firstImageView.addSubview(moreIconImageView)
         
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
     }
     
     override func setConstraints() {
