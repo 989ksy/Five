@@ -37,7 +37,6 @@ final class APIManager {
                         single(.success(.failure(.decodingError)))
                     }
                 case .failure(let error) :
-                  
                     guard let customError = FiveError(rawValue: error.response?.statusCode ??  1) else { return }
                     single(.success(.failure(customError)))
                 }

@@ -135,7 +135,6 @@ extension FiveAPI : TargetType {
             
         case .deletePost(_):
             return .requestPlain
-            
         case .likePost(_):
             return .requestPlain
         case .myProfile:
