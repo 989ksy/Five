@@ -19,15 +19,7 @@ class FeedView: BaseView {
     }()
     
     let addContentButton = {
-        let btn = UIButton()
-        btn.setImage(UIImage(named: "customPlus")?.withTintColor(.white), for: .normal)
-        btn.backgroundColor = CustomColor.pointColor
-        btn.layer.cornerRadius = 30
-        btn.layer.shadowColor = UIColor.gray.cgColor
-        btn.layer.shadowOpacity = 0.3
-        btn.layer.shadowOffset = CGSize.zero
-        btn.layer.shadowRadius = 6
-        btn.translatesAutoresizingMaskIntoConstraints = false
+        let btn = AddContentButton()
         return btn
     }()
     
@@ -71,7 +63,7 @@ class FeedView: BaseView {
         addContentButton.snp.makeConstraints { make in
             make.size.equalTo(60)
             make.trailing.equalToSuperview().inset(16)
-            make.bottom.equalToSuperview().inset(27)
+            make.bottom.equalToSuperview().inset(20)
         }
 
         
