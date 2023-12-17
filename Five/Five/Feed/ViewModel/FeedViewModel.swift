@@ -12,7 +12,8 @@ import RxCocoa
 class FeedViewModel {
 
     let disposeBag = DisposeBag()
-//    let items = BehaviorSubject<[ReadData]>(value: [])
+    
+    let feedData = BehaviorSubject<[ReadData]>(value: [])
     
     struct Input {
         
@@ -28,9 +29,7 @@ class FeedViewModel {
     }
     
     func transform (input: Input) -> Output {
-        
-        let feedData = BehaviorSubject<[ReadData]>(value: [])
-        
+                
         //MARK: - 페이지네이션
         
         // 페이지네이션 요소
@@ -43,7 +42,7 @@ class FeedViewModel {
         input.prefetchItem
             .subscribe(with: self) { owner , value in
                 
-                let itemCount = try! feedData.value().count
+                let itemCount = try! self.feedData.value().count
                 
                 if value.contains(where: { $0.row == itemCount - 1 }) {
                     if nextCursorItem != "0" {
@@ -64,9 +63,9 @@ class FeedViewModel {
                 switch response {
                 case .success(let success) :
                     
-                    var itemArray = try! feedData.value() //원래 배열
+                    var itemArray = try! self.feedData.value() //원래 배열
                     itemArray.append(contentsOf: success.data )
-                    feedData.onNext(itemArray) // 원래 + 새로움 = 갈아
+                    self.feedData.onNext(itemArray) // 원래 + 새로움 = 갈아
                     
                     nextCursorItem = success.nextCursor // 페이지네이션에 쓸 넥스트 커서를 저장해
                 
@@ -88,7 +87,7 @@ class FeedViewModel {
                 switch value {
                 case .success(let response):
                     print("===갱신 feedVC",response)
-                    feedData.onNext(response.data)
+                    self.feedData.onNext(response.data)
 
                     
                 case .failure(let error):
@@ -105,8 +104,7 @@ class FeedViewModel {
                 switch value {
                 case .success(let response):
                     print("===최초 feedVC",response)
-                    feedData.onNext(response.data)
-                    
+                    self.feedData.onNext(response.data)
                     
                 case .failure(let error):
                     print("\(error)")
