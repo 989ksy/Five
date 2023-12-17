@@ -18,8 +18,14 @@ class ProfileView : BaseView {
         return view
     }()
     
+    let addContentButton = {
+        let btn = AddContentButton()
+        return btn
+    }()
+    
     override func configureView() {
         addSubview(ProfiletableView)
+        addSubview(addContentButton)
     }
     
     override func setConstraints() {
@@ -27,6 +33,12 @@ class ProfileView : BaseView {
         ProfiletableView.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide)
             make.horizontalEdges.bottom.equalToSuperview()
+        }
+        
+        addContentButton.snp.makeConstraints { make in
+            make.size.equalTo(60)
+            make.trailing.equalToSuperview().inset(16)
+            make.bottom.equalToSuperview().inset(20)
         }
     
         
