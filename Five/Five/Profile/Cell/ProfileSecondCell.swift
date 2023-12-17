@@ -24,6 +24,7 @@ class ProfileSecondCell : BaseTableViewCell {
     let fiveCollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionLayout())
         view.register(FiveCollectionViewCell.self, forCellWithReuseIdentifier: "FiveCollectionViewCell")
+        view.backgroundColor = CustomColor.backgroundColor
         return view
     }()
     
@@ -57,9 +58,6 @@ class ProfileSecondCell : BaseTableViewCell {
         contentView.addSubview(segmentedControl)
         contentView.addSubview(fivedView)
         contentView.addSubview(fiveCollectionView)
-        
-//        fiveCollectionView.dataSource = self
-//        fiveCollectionView.delegate = self
         
         setSegmentedControl()
         bind()
@@ -157,22 +155,3 @@ class ProfileSecondCell : BaseTableViewCell {
     }
     
 }
-
-
-//
-//extension ProfileSecondCell : UICollectionViewDelegate, UICollectionViewDataSource {
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return 20
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FiveCollectionViewCell", for: indexPath) as? FiveCollectionViewCell else {return UICollectionViewCell()}
-//
-//        
-//        cell.backgroundColor = .yellow
-//        
-//        return cell
-//    }
-//    
-//    
-//}
