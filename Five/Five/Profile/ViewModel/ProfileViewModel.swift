@@ -16,6 +16,14 @@ class ProfileViewModel {
     let disposeBag = DisposeBag()
     
     
+    struct Input {
+        let addContentTapp : ControlEvent<Void>
+        let refresh: PublishSubject<Void> //갱신
+    }
+    
+    struct Output {}
+    
+    
     func fetchData(Completion: @escaping (Result<myProfileResponse, FiveError>) -> Void) {
         APIManager.shared.myProfile()
             .subscribe(with: self) { owner, response in
@@ -30,10 +38,6 @@ class ProfileViewModel {
             }
             .disposed(by: disposeBag)
     }
-    
-    
-    struct Input {}
-    struct Output {}
 
     
 }
