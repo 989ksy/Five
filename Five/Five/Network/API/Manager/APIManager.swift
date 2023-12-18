@@ -16,9 +16,34 @@ final class APIManager {
     private init() {}
     
     private let provider = MoyaProvider<FiveAPI>(session: Session(interceptor: AuthInterceptor.shared))
-
-
+    
+    
     private let disposeBag = DisposeBag()
+    
+    //MARK: - 댓글 작성
+    
+    func createComment(id: String, content: String) -> Single<Result<CreateCommentResponse, FiveError>> {
+        return Single.create { single in
+            
+            let data = CreateComment(content: content)
+            self.provider.request(.createComment(model: data, id: id)) { result in
+                switch result {
+                case .success(let response):
+                    do {
+                        let data = try JSONDecoder().decode(CreateCommentResponse.self, from: response.data)
+                        single(.success(.success(data)))
+                    } catch {
+                        single(.success(.failure(.decodingError)))
+                    }
+                case .failure(let failure) :
+                    print(failure)
+                    print(failure.errorDescription!)
+                    print(failure.errorCode)
+                }
+            }
+            return Disposables.create()
+        }
+    }
     
     
     //MARK: - 유저별 포스트 조회
@@ -53,7 +78,7 @@ final class APIManager {
     
     //MARK: - 내 프로필 조회
     
-    func myProfile() -> Single<Result<myProfileResponse, FiveError>> {
+    func myProfile() -> Single<Result<MyProfileResponse, FiveError>> {
         
         return Single.create { single in
             
@@ -62,7 +87,7 @@ final class APIManager {
                 switch result {
                 case .success(let response) :
                     do {
-                        let data = try JSONDecoder().decode(myProfileResponse.self, from: response.data)
+                        let data = try JSONDecoder().decode(MyProfileResponse.self, from: response.data)
                         single(.success(.success(data)))
                     } catch {
                         single(.success(.failure(.decodingError)))
