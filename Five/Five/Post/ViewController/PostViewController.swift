@@ -16,6 +16,8 @@ final class PostViewController : BaseViewController, UISheetPresentationControll
     let mainView = PostView()
     let disposeBag = DisposeBag()
     
+    var isliked : Bool?
+    
     override func loadView() {
         self.view = mainView
     }
@@ -30,7 +32,7 @@ final class PostViewController : BaseViewController, UISheetPresentationControll
         mainView.imageCollectionView.dataSource = self
         mainView.imageCollectionView.delegate = self
         
-        bindData()
+        configureTransitedData()
         optionButtonStatus()//고유id를 기준으로 삭제권한 확인
         optionButtonTapped()
         
@@ -60,7 +62,7 @@ final class PostViewController : BaseViewController, UISheetPresentationControll
         }
     }
     
-    func bindData() {
+    func configureTransitedData() {
         transitedData
             .bind(with: self) { owner, response in
                 
@@ -76,17 +78,49 @@ final class PostViewController : BaseViewController, UISheetPresentationControll
                 owner.mainView.dateLabel.customDateFormat(initialText: response.time)
                 
                 //좋아요 상태 전달
+                //받아온 상태값에 따라 손바닥 색 유무 파단
                 if response.likes.contains(KeychainStorage.shared.userID!) {
                     owner.mainView.fiveButton.setImage(UIImage(named: "five.fill")?.withTintColor(CustomColor.pointColor ?? .systemYellow), for: .normal)
                 } else {
                     owner.mainView.fiveButton.setImage(UIImage(named: "five"), for: .normal)
                 }
                 
+                //좋아요 버튼 상태 바꾸기
+                
+                owner.mainView.fiveButton
+                    .rx
+                    .tap
+                    .flatMap{
+                        APIManager.shared.likePost(id: self.transitedData.value.id)
+                    }
+                    .subscribe(with: self) { owner, result in
+                        switch result {
+                        case .success(let response):
+                            self.isliked = response.likeStatus
+                            
+                            if self.isliked == true {
+                                owner.mainView.fiveButton.setImage(UIImage(named: "five.fill")?.withTintColor(CustomColor.pointColor ?? .systemYellow), for: .normal)
+                            } else {
+                                owner.mainView.fiveButton.setImage(UIImage(named: "five"), for: .normal)
+                            }
+                            
+                            NotificationCenter.default.post(name: NSNotification.Name("needToUpdate"), object: nil)
+                            
+                        case .failure(let failure):
+                            print("like error: \(failure)")
+                            print(failure.errorDescription!)
+                        }
+                    }
+                    .disposed(by: self.disposeBag)
+                
+                
             }
             .disposed(by: disposeBag)
         
     }
     
+    ///옵션 버튼 선택
+    ///게시글 삭제하는 곳으로 화면전환
     func optionButtonTapped() {
         
         mainView.optionButton
