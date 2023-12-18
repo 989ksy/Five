@@ -194,11 +194,11 @@ class PostView : BaseView {
         //MARK: - 스크롤뷰
         
         postScrollView.snp.makeConstraints { make in
-            make.edges.equalTo(safeAreaLayoutGuide)
+            make.edges.equalToSuperview()
         }
         
         contentView.snp.makeConstraints { make in
-            make.verticalEdges.equalTo(postScrollView.contentLayoutGuide)
+            make.verticalEdges.equalTo(postScrollView)
             make.width.equalTo(postScrollView.snp.width)
         }
         
