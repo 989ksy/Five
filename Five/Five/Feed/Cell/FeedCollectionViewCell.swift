@@ -141,16 +141,8 @@ class FeedCollectionViewCell : BaseCollectionViewCell {
         }
         
         nicknameButton.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.size.equalTo(nickLabel)
-            make.leading.equalTo(nickLabel)
+            make.edges.equalTo(profileView)
         }
-        
-//        optionButton.snp.makeConstraints { make in
-//            make.centerY.equalToSuperview()
-//            make.size.equalTo(17)
-//            make.trailing.equalToSuperview().inset(10)
-//        }
         
         profileViewBottomLine.snp.makeConstraints { make in
             make.height.equalTo(1)
