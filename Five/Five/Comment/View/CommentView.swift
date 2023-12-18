@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 
 class CommentView : BaseView {
+    
     let contentLabel = {
         let label = ViewTitleLabel()
         label.text = "댓글"
@@ -27,6 +28,7 @@ class CommentView : BaseView {
         view.register(CommentTableViewCell.self, forCellReuseIdentifier: "CommentTableViewCell")
         view.backgroundColor = CustomColor.backgroundColor
         view.rowHeight = 60
+        view.separatorStyle = .none
         return view
     }()
     
@@ -35,6 +37,8 @@ class CommentView : BaseView {
         let view = LineView()
         return view
     }()
+    
+    //
     
     let reactionStackView = {
         let view = UIStackView()
@@ -110,8 +114,6 @@ class CommentView : BaseView {
         txt.layer.cornerRadius = 16
         txt.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 16.0, height: 0.0))
         txt.leftViewMode = .always
-//        txt.rightView = button
-//        txt.rightViewMode = .unlessEditing
         return txt
     }()
     
