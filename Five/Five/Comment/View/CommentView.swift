@@ -24,6 +24,9 @@ class CommentView : BaseView {
     
     let commentTableView = {
         let view = UITableView()
+        view.register(CommentTableViewCell.self, forCellReuseIdentifier: "CommentTableViewCell")
+        view.backgroundColor = CustomColor.backgroundColor
+        view.rowHeight = 60
         return view
     }()
     
@@ -33,11 +36,64 @@ class CommentView : BaseView {
         return view
     }()
     
-    let reactionCollectionView = {
+    let reactionStackView = {
         let view = UIStackView()
         view.axis = .horizontal
+        view.distribution = .fillEqually
         return view
     }()
+    
+    let heartButton = {
+        let btn = UIButton()
+        btn.setTitle("❤️", for: .normal)
+        return btn
+    }()
+    
+    let handsUpButton = {
+        let btn = UIButton()
+        btn.setTitle("🙌", for: .normal)
+        return btn
+    }()
+    
+    let fireButton = {
+        let btn = UIButton()
+        btn.setTitle("🔥", for: .normal)
+        return btn
+    }()
+    
+    let clapButton = {
+        let btn = UIButton()
+        btn.setTitle("👏", for: .normal)
+        return btn
+    }()
+    
+    let tearButton = {
+        let btn = UIButton()
+        btn.setTitle("🥲", for: .normal)
+        return btn
+    }()
+    
+    let loveItButton = {
+        let btn = UIButton()
+        btn.setTitle("😍", for: .normal)
+        return btn
+    }()
+    
+    let wowButton = {
+        let btn = UIButton()
+        btn.setTitle("😮", for: .normal)
+        return btn
+    }()
+    
+    let lolButton = {
+        let btn = UIButton()
+        btn.setTitle("😂", for: .normal)
+        return btn
+    }()
+    
+    
+    
+    //
     
     let commentTextfieldBox = {
         let view = UIView()
@@ -54,19 +110,34 @@ class CommentView : BaseView {
         txt.layer.cornerRadius = 16
         txt.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 16.0, height: 0.0))
         txt.leftViewMode = .always
+//        txt.rightView = button
+//        txt.rightViewMode = .unlessEditing
         return txt
     }()
     
+    let sentButton = {
+        let btn = UIButton()
+        btn.setImage(UIImage(named: "content")?.withTintColor(.darkGray), for: .normal)
+        return btn
+    }()
     
     override func configureView() {
         addSubview(contentLabel)
         addSubview(upperLine)
         addSubview(commentTableView)
         addSubview(commentTextfieldBox)
-        addSubview(reactionCollectionView)
-        reactionCollectionView.backgroundColor = .orange
+        addSubview(reactionStackView)
+        reactionStackView.addArrangedSubview(heartButton)
+        reactionStackView.addArrangedSubview(handsUpButton)
+        reactionStackView.addArrangedSubview(fireButton)
+        reactionStackView.addArrangedSubview(clapButton)
+        reactionStackView.addArrangedSubview(tearButton)
+        reactionStackView.addArrangedSubview(loveItButton)
+        reactionStackView.addArrangedSubview(wowButton)
+        reactionStackView.addArrangedSubview(lolButton)
         addSubview(boxLine)
         addSubview(commentTextField)
+        addSubview(sentButton)
     }
     
     override func setConstraints() {
@@ -94,9 +165,9 @@ class CommentView : BaseView {
             make.height.equalTo(174)
         }
         
-        reactionCollectionView.snp.makeConstraints { make in
+        reactionStackView.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview()
-            make.height.equalTo(58)
+            make.height.equalTo(50)
             make.top.equalTo(commentTextfieldBox.snp.top)
         }
         
@@ -107,10 +178,18 @@ class CommentView : BaseView {
         }
         
         commentTextField.snp.makeConstraints { make in
-            make.horizontalEdges.equalToSuperview().inset(15)
+            make.leading.equalToSuperview().inset(15)
+            make.trailing.equalToSuperview().inset(46)
             make.height.equalTo(38)
-            make.top.equalTo(reactionCollectionView.snp.bottom).offset(8)
+            make.top.equalTo(reactionStackView.snp.bottom).offset(8)
             make.bottom.greaterThanOrEqualTo(keyboardLayoutGuide.snp.top).offset(-8)
+        }
+        
+        sentButton.snp.makeConstraints { make in
+            make.centerY.equalTo(commentTextField)
+            make.trailing.equalToSuperview().inset(10)
+            make.size.equalTo(32)
+            
         }
         
     }
