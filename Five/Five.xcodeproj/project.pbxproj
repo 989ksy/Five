@@ -14,16 +14,14 @@
 		0F56A5C02B1C5D3700C7FAD3 /* UnderlineSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F56A5BF2B1C5D3700C7FAD3 /* UnderlineSegmentedControl.swift */; };
 		0F56A5C22B1CA40100C7FAD3 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F56A5C12B1CA40100C7FAD3 /* CommentViewController.swift */; };
 		0F56A5C42B1CA8FF00C7FAD3 /* CommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F56A5C32B1CA8FF00C7FAD3 /* CommentView.swift */; };
-		0F6142182B2C3AB3004C888F /* ReactionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6142172B2C3AB3004C888F /* ReactionCollectionViewCell.swift */; };
-		0F61421A2B2C3BB2004C888F /* Reaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6142192B2C3BB2004C888F /* Reaction.swift */; };
 		0F61421D2B2C4309004C888F /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0F61421C2B2C4309004C888F /* IQKeyboardManagerSwift */; };
-		0F61421F2B2C604B004C888F /* ReactionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F61421E2B2C604B004C888F /* ReactionList.swift */; };
 		0F6142212B2C862D004C888F /* OptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6142202B2C862D004C888F /* OptionViewController.swift */; };
 		0F6142252B2E05D5004C888F /* ProfileFirstCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6142242B2E05D5004C888F /* ProfileFirstCell.swift */; };
 		0F6142292B2E0C25004C888F /* ProfileSecondCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6142282B2E0C25004C888F /* ProfileSecondCell.swift */; };
 		0F61422B2B2ED2CC004C888F /* ProfileLabel + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F61422A2B2ED2CC004C888F /* ProfileLabel + Extension.swift */; };
 		0F61422D2B2EFD6E004C888F /* ProfileSecondCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F61422C2B2EFD6E004C888F /* ProfileSecondCellViewModel.swift */; };
 		0F61422F2B2F0EBA004C888F /* AddContentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F61422E2B2F0EBA004C888F /* AddContentButton.swift */; };
+		0F6142372B305A5B004C888F /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6142362B305A5B004C888F /* CommentTableViewCell.swift */; };
 		0F64AF842B21B4CA00ED4CBE /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F64AF832B21B4CA00ED4CBE /* SearchTableViewCell.swift */; };
 		0F64AF862B21C33E00ED4CBE /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F64AF852B21C33E00ED4CBE /* BaseTableViewCell.swift */; };
 		0F64AF892B21D45100ED4CBE /* FollowUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F64AF882B21D45100ED4CBE /* FollowUIButton.swift */; };
@@ -131,15 +129,13 @@
 		0F56A5BF2B1C5D3700C7FAD3 /* UnderlineSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlineSegmentedControl.swift; sourceTree = "<group>"; };
 		0F56A5C12B1CA40100C7FAD3 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		0F56A5C32B1CA8FF00C7FAD3 /* CommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
-		0F6142172B2C3AB3004C888F /* ReactionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionCollectionViewCell.swift; sourceTree = "<group>"; };
-		0F6142192B2C3BB2004C888F /* Reaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reaction.swift; sourceTree = "<group>"; };
-		0F61421E2B2C604B004C888F /* ReactionList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionList.swift; sourceTree = "<group>"; };
 		0F6142202B2C862D004C888F /* OptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionViewController.swift; sourceTree = "<group>"; };
 		0F6142242B2E05D5004C888F /* ProfileFirstCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFirstCell.swift; sourceTree = "<group>"; };
 		0F6142282B2E0C25004C888F /* ProfileSecondCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSecondCell.swift; sourceTree = "<group>"; };
 		0F61422A2B2ED2CC004C888F /* ProfileLabel + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileLabel + Extension.swift"; sourceTree = "<group>"; };
 		0F61422C2B2EFD6E004C888F /* ProfileSecondCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSecondCellViewModel.swift; sourceTree = "<group>"; };
 		0F61422E2B2F0EBA004C888F /* AddContentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddContentButton.swift; sourceTree = "<group>"; };
+		0F6142362B305A5B004C888F /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		0F64AF832B21B4CA00ED4CBE /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		0F64AF852B21C33E00ED4CBE /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		0F64AF882B21D45100ED4CBE /* FollowUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowUIButton.swift; sourceTree = "<group>"; };
@@ -300,9 +296,7 @@
 		0F6142162B2C3A9E004C888F /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				0F6142172B2C3AB3004C888F /* ReactionCollectionViewCell.swift */,
-				0F6142192B2C3BB2004C888F /* Reaction.swift */,
-				0F61421E2B2C604B004C888F /* ReactionList.swift */,
+				0F6142362B305A5B004C888F /* CommentTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1162,7 +1156,6 @@
 				0F6142292B2E0C25004C888F /* ProfileSecondCell.swift in Sources */,
 				0F67CA682B10633D00259285 /* CustomColor.swift in Sources */,
 				0F67CA5B2B1061DB00259285 /* PasswordViewModel.swift in Sources */,
-				0F61421A2B2C3BB2004C888F /* Reaction.swift in Sources */,
 				0F67CA742B10656B00259285 /* FeedViewController.swift in Sources */,
 				0F67CA7D2B1065F700259285 /* APIKey.swift in Sources */,
 				0F67CA512B10617100259285 /* EmailViewController.swift in Sources */,
@@ -1183,7 +1176,6 @@
 				0F89F0EE2B1B57E200FECBCD /* HideKeyboard+Extension.swift in Sources */,
 				0F61422B2B2ED2CC004C888F /* ProfileLabel + Extension.swift in Sources */,
 				0F67CA3A2B10353800259285 /* BaseViewController.swift in Sources */,
-				0F61421F2B2C604B004C888F /* ReactionList.swift in Sources */,
 				0FB732AF2B286FF00065AB5B /* CommentButton + Extension.swift in Sources */,
 				0F67CA572B1061B300259285 /* PasswordViewController.swift in Sources */,
 				0F86DD412B19BC270043939F /* JournalViewController.swift in Sources */,
@@ -1192,6 +1184,7 @@
 				0F67CA6A2B10641000259285 /* CustomFont.swift in Sources */,
 				0F6C76002B18A96800077831 /* ContentCollectionViewCell.swift in Sources */,
 				0F67CA442B1035CA00259285 /* LoginViewModel.swift in Sources */,
+				0F6142372B305A5B004C888F /* CommentTableViewCell.swift in Sources */,
 				0F67CA832B10663700259285 /* FiveError.swift in Sources */,
 				0FB732A52B2839540065AB5B /* loadImage + Extension.swift in Sources */,
 				0F64AF892B21D45100ED4CBE /* FollowUIButton.swift in Sources */,
@@ -1210,7 +1203,6 @@
 				0FB732AB2B286AFC0065AB5B /* MoreButton + Extension.swift in Sources */,
 				0F7DB6BF2B17499B00A48828 /* CustomTabBarController.swift in Sources */,
 				0F6142212B2C862D004C888F /* OptionViewController.swift in Sources */,
-				0F6142182B2C3AB3004C888F /* ReactionCollectionViewCell.swift in Sources */,
 				0F7DB6772B133FE400A48828 /* BaseCollectionViewCell.swift in Sources */,
 				0F67CA882B10667100259285 /* FiveAPI.swift in Sources */,
 				0F67CA032B0F7C5000259285 /* SceneDelegate.swift in Sources */,
