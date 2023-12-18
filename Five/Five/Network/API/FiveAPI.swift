@@ -28,6 +28,9 @@ enum FiveAPI {
     //프로필
     case myProfile
     
+    //댓글
+    case createComment (model: CreateComment, id: String)
+    
 }
 
 extension FiveAPI : TargetType {
@@ -71,6 +74,9 @@ extension FiveAPI : TargetType {
             return "post/like/\(id)"
         case .myProfile:
             return "profile/me"
+            
+        case .createComment(_, let id):
+            return "post/\(id)/comment"
         }
         
             
@@ -80,9 +86,18 @@ extension FiveAPI : TargetType {
     ///specify which method our calls should use.
     var method: Moya.Method {
         switch self {
-        case .signUp, .login, .emailValidation, .createPost, .likePost:
+        case .signUp,
+                .login,
+                .emailValidation,
+                .createPost,
+                .likePost,
+                .createComment:
             return .post
-        case .tokenRefresh, .withdraw, .readPost, .myProfile, .readUserPost:
+        case .tokenRefresh, 
+                .withdraw,
+                .readPost,
+                .myProfile,
+                .readUserPost:
             return .get
         case .deletePost:
             return .delete
@@ -151,6 +166,9 @@ extension FiveAPI : TargetType {
         
         case .readUserPost(let id, let next, let limit, let product_id):
             return .requestParameters(parameters: ["next" : next, "limit" : limit, "product_id" : product_id], encoding: URLEncoding.queryString)
+            
+        case .createComment(let data, _):
+            return .requestJSONEncodable(data)
         }
     }
     
@@ -201,6 +219,11 @@ extension FiveAPI : TargetType {
                     "SesacKey" : "\(APIKey.sesacKey)"]
         case .myProfile:
             return ["Authorization" : "\(KeychainStorage.shared.userToken!)",
+                    "SesacKey" : "\(APIKey.sesacKey)"]
+            
+        case .createComment:
+            return ["Authorization" : "\(KeychainStorage.shared.userToken!)",
+                    "Content-Type" : "application/json",
                     "SesacKey" : "\(APIKey.sesacKey)"]
         }
         

@@ -23,6 +23,8 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
     
     var refresh = PublishSubject<Void>()
     
+//    var likeList: [String] = ["1", "5"]
+    
     //리프레싱 컨트롤 생성
     private lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -98,6 +100,12 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
                     cellType: FeedCollectionViewCell.self)
             ) { (row, element, cell) in
                 
+//                if likeList.contains(element.id) {
+//                    fill
+//                } else {
+//                    heart
+//                }
+                
                 //닉네임
                 cell.nickLabel.text = "\(element.creator.nick)"
                 //날짜
@@ -133,7 +141,8 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
                         switch response {
                         case .success(let response):
                             cell.likeStatus = response.likeStatus
-                                                    
+                                     
+//                            likeList.append(element.id)
                             if cell.likeStatus == true {
                                 
                                 cell.fiveButton.setImage(UIImage(named: "five.fill")?
