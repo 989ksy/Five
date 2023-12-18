@@ -37,3 +37,9 @@ struct CreatePost: Encodable {
     let file : [Data]?
     let product_id : String
 }
+
+//MARK: - 댓글 작성
+
+struct CreateComment: Encodable {
+    let content : String?
+}
