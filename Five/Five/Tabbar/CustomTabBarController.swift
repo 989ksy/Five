@@ -12,6 +12,8 @@ class CustomTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        delegate = self
+        
         let appearance = UITabBarAppearance()
         appearance.configureWithOpaqueBackground()
         
@@ -49,4 +51,18 @@ class CustomTabBarController: UITabBarController {
         
     }
 
+}
+
+extension CustomTabBarController: UITabBarControllerDelegate {
+    
+    func tabBarController(
+        _ tabBarController: UITabBarController,
+        shouldSelect viewController: UIViewController
+    ) -> Bool {
+        if let vc = tabBarController.viewControllers?.last {
+            vc.navigationController?.isNavigationBarHidden = true
+        }
+        
+        return true
+    }
 }

@@ -30,6 +30,13 @@ class CommentTableViewCell : BaseTableViewCell {
         return view
     }()
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        nicknameLabel.text = nil
+        commentLabel.text = nil
+    }
+    
     override func configureView() {
         
         contentView.addSubview(nicknameLabel)
