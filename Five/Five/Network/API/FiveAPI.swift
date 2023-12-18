@@ -86,6 +86,7 @@ extension FiveAPI : TargetType {
     ///specify which method our calls should use.
     var method: Moya.Method {
         switch self {
+            
         case .signUp,
                 .login,
                 .emailValidation,
@@ -93,12 +94,14 @@ extension FiveAPI : TargetType {
                 .likePost,
                 .createComment:
             return .post
-        case .tokenRefresh, 
+            
+        case .tokenRefresh,
                 .withdraw,
                 .readPost,
                 .myProfile,
                 .readUserPost:
             return .get
+            
         case .deletePost:
             return .delete
         }
