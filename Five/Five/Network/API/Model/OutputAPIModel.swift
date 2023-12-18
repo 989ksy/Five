@@ -117,7 +117,7 @@ struct LikePostResponse: Decodable{
 
 //MARK: - 내 프로필 조회
 
-struct myProfileResponse : Decodable {
+struct MyProfileResponse : Decodable {
     let posts : [String]
     let followers: [String]
     let following: [String]
@@ -145,3 +145,15 @@ struct readUserPostResponse : Decodable {
         case nextCursor = "next_cursor"
     }
 }
+
+//MARK: - 댓글 작성
+
+struct CreateCommentResponse : Decodable {
+        let id, content, time: String
+        let creator: Creator
+
+        enum CodingKeys: String, CodingKey {
+            case id = "_id"
+            case content, time, creator
+        }
+    }
