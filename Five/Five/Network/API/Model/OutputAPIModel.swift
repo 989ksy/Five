@@ -83,12 +83,13 @@ struct ReadPostResponse: Decodable {
 
 struct ReadData : Decodable {
     let likes, image: [String]
+    let comments: [CreateCommentResponse]
     let id: String
     let creator: Creator
     let time, content, productID: String
     
     enum CodingKeys: String, CodingKey {
-        case likes, image
+        case likes, image, comments
         case id = "_id"
         case creator, time, content
         case productID = "product_id"

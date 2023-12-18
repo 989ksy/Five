@@ -11,7 +11,7 @@ import RxCocoa
 
 final class PostViewController : BaseViewController, UISheetPresentationControllerDelegate {
     
-    var transitedData = BehaviorRelay(value: ReadData(likes: [], image: [], id: "", creator: Creator.init(id: "", nick: ""), time: "", content: "", productID: ""))
+    var transitedData = BehaviorRelay(value: ReadData(likes: [], image: [], comments: [], id: "", creator: Creator(id: "", nick: ""), time: "", content: "", productID: ""))
     
     let mainView = PostView()
     let disposeBag = DisposeBag()
@@ -37,6 +37,7 @@ final class PostViewController : BaseViewController, UISheetPresentationControll
         optionButtonTapped()
         
         NotificationCenter.default.addObserver(self, selector: #selector(deleteTappedInOptionVC), name: NSNotification.Name("VCTransited"), object: nil)
+        
     }
     
     
