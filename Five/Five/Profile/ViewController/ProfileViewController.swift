@@ -46,11 +46,20 @@ final class ProfileViewController: BaseViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(uploadView), name: NSNotification.Name("needToUpdate"), object: nil)
 
         
-        //        navigationController?.navigationBar.isHidden = true
+//                navigationController?.navigationBar.isHidden = true
         
         profileNetwork() //프로필조회
         bind() //컨텐츠버튼
         
+    }
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//        navigationController?.navigationBar.isHidden = true
+//
+//    }
+//    
+    override func viewWillDisappear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = false
     }
     
     ///네트워크 통신
