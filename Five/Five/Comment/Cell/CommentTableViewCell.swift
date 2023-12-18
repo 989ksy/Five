@@ -12,6 +12,16 @@ class CommentTableViewCell : BaseTableViewCell {
     
     static let identifier = "CommentTableViewCell"
     
+    let profileImageView = {
+        let view = UIImageView()
+        view.image = UIImage(named: "commentProfile")
+        view.contentMode = .scaleAspectFit
+        view.layer.cornerRadius = 13
+        view.layer.borderWidth = 1
+        view.layer.borderColor = UIColor.systemGray5.cgColor
+        return view
+    }()
+    
     let nicknameLabel = {
         let view = UILabel()
         view.font = CustomFont.mediumGmarket14
@@ -39,6 +49,7 @@ class CommentTableViewCell : BaseTableViewCell {
     
     override func configureView() {
         
+        contentView.addSubview(profileImageView)
         contentView.addSubview(nicknameLabel)
         contentView.addSubview(commentLabel)
         
@@ -48,15 +59,22 @@ class CommentTableViewCell : BaseTableViewCell {
     
     override func setConstraints() {
         
+        profileImageView.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.size.equalTo(26)
+            make.leading.equalToSuperview().offset(18)
+        }
+        
         nicknameLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(8)
-            make.leading.equalToSuperview().offset(14)
+            make.top.equalToSuperview().offset(10)
+            make.leading.equalTo(profileImageView.snp.trailing).offset(10)
             make.height.equalTo(15)
         }
         
         commentLabel.snp.makeConstraints { make in
             make.top.equalTo(nicknameLabel.snp.bottom).offset(4)
-            make.horizontalEdges.equalToSuperview().inset(14)
+            make.leading.equalTo(profileImageView.snp.trailing).offset(10)
+            make.trailing.equalToSuperview().inset(18)
             make.bottom.equalToSuperview().inset(8)
         }
         
