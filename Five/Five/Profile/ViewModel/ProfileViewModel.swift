@@ -11,7 +11,7 @@ import RxCocoa
 
 class ProfileViewModel {
     
-    var profileData : [myProfileResponse] = [myProfileResponse(posts: [], followers: [], following: [], id: "", email: "", nick: "")]
+    var profileData : [MyProfileResponse] = [MyProfileResponse(posts: [], followers: [], following: [], id: "", email: "", nick: "")]
     
     let disposeBag = DisposeBag()
     
@@ -24,7 +24,7 @@ class ProfileViewModel {
     struct Output {}
     
     
-    func fetchData(Completion: @escaping (Result<myProfileResponse, FiveError>) -> Void) {
+    func fetchData(Completion: @escaping (Result<MyProfileResponse, FiveError>) -> Void) {
         APIManager.shared.myProfile()
             .subscribe(with: self) { owner, response in
                 switch response {
