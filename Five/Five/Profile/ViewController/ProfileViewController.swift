@@ -108,8 +108,6 @@ final class ProfileViewController: BaseViewController {
         refresh.onNext(Void())
     }
     
-    
-    
 }
 
 extension ProfileViewController : UITableViewDelegate, UITableViewDataSource {
@@ -142,6 +140,10 @@ extension ProfileViewController : UITableViewDelegate, UITableViewDataSource {
             cell.settingButton.addTarget(self, action: #selector(settingButonTapped), for: .touchUpInside)
             cell.followDataLabel.text = "\(viewModel.profileData.first?.followers.count ?? 555)"
             cell.followingDataLabel.text = "\(viewModel.profileData.first?.following.count ?? 666)"
+            
+//            if viewModel.profileData.first?.id != KeychainStorage.shared.userID {
+//                cell.settingButton.isHidden = true
+//            }
             
             return cell
             
@@ -183,6 +185,7 @@ extension ProfileViewController : UITableViewDelegate, UITableViewDataSource {
     ///설정버튼 눌렀을 때
     @objc func settingButonTapped() {
         let vc = SettingViewController()
+        vc.transitedData.accept(viewModel.profileData)
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
