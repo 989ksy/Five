@@ -35,12 +35,17 @@ final class ProfileViewController: BaseViewController {
         super.viewDidLoad()
         view.backgroundColor = CustomColor.backgroundColor
         
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.view.backgroundColor = .clear
+        
         //테이블뷰
-        mainView.ProfiletableView.dataSource = self
-        mainView.ProfiletableView.delegate = self
+        mainView.profiletableView.dataSource = self
+        mainView.profiletableView.delegate = self
         
         //리프레싱
-        mainView.ProfiletableView.refreshControl = refreshControl
+        mainView.profiletableView.refreshControl = refreshControl
         
         //업데이트
         NotificationCenter.default.addObserver(self, selector: #selector(uploadView), name: NSNotification.Name("needToUpdate"), object: nil)
@@ -70,7 +75,7 @@ final class ProfileViewController: BaseViewController {
             switch result {
             case .success(let data):
                 viewModel.profileData = [data]
-                mainView.ProfiletableView.reloadData()
+                mainView.profiletableView.reloadData()
                 print(data)
             case .failure(let failure):
                 print(failure)
@@ -96,7 +101,7 @@ final class ProfileViewController: BaseViewController {
             .rx
             .controlEvent(.valueChanged)
             .subscribe(with: self) { owner, _ in
-                owner.mainView.ProfiletableView.reloadData()
+                owner.mainView.profiletableView.reloadData()
                 owner.refreshControl.endRefreshing()
             }
             .disposed(by: disposeBag)
@@ -195,8 +200,11 @@ extension ProfileViewController : UITableViewDelegate, UITableViewDataSource {
     @objc func settingButonTapped() {
         let vc = SettingViewController()
         vc.transitedData.accept(viewModel.profileData)
+        vc.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    
+    
     
     
     
