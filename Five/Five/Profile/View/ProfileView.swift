@@ -31,8 +31,7 @@ class ProfileView : BaseView {
     override func setConstraints() {
         
         ProfiletableView.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide)
-            make.horizontalEdges.bottom.equalToSuperview()
+            make.edges.equalToSuperview()
         }
         
         addContentButton.snp.makeConstraints { make in
