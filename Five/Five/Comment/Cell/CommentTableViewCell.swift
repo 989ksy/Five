@@ -40,11 +40,27 @@ class CommentTableViewCell : BaseTableViewCell {
         return view
     }()
     
+    let dateLabel = {
+        let view = UILabel()
+        view.font = CustomFont.mediumGmarket12
+        view.textColor = .lightGray
+        return view
+    }()
+    
+    let writerLabel = {
+        let view = UILabel()
+        view.text = "· 작성자"
+        view.font = CustomFont.mediumGmarket13
+        view.textColor = .darkGray
+        return view
+    }()
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         
         nicknameLabel.text = nil
         commentLabel.text = nil
+        dateLabel.text = nil
     }
     
     override func configureView() {
@@ -52,6 +68,8 @@ class CommentTableViewCell : BaseTableViewCell {
         contentView.addSubview(profileImageView)
         contentView.addSubview(nicknameLabel)
         contentView.addSubview(commentLabel)
+        contentView.addSubview(dateLabel)
+        contentView.addSubview(writerLabel)
         
         contentView.backgroundColor = CustomColor.backgroundColor
         
@@ -75,9 +93,20 @@ class CommentTableViewCell : BaseTableViewCell {
             make.top.equalTo(nicknameLabel.snp.bottom).offset(4)
             make.leading.equalTo(profileImageView.snp.trailing).offset(10)
             make.trailing.equalToSuperview().inset(18)
-            make.bottom.equalToSuperview().inset(8)
+            make.bottom.equalToSuperview().offset(2)
         }
         
+        writerLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(nicknameLabel)
+            make.leading.equalTo(nicknameLabel.snp.trailing).offset(6)
+            make.height.equalTo(15)
+        }
+        
+        dateLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(nicknameLabel)
+            make.trailing.equalToSuperview().inset(8)
+            make.height.equalTo(15)
+        }
         
     }
     

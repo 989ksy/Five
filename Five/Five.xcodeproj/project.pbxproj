@@ -67,6 +67,7 @@
 		0F67CA8A2B10669700259285 /* OutputAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CA892B10669700259285 /* OutputAPIModel.swift */; };
 		0F67CA8C2B1066A500259285 /* InputAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CA8B2B1066A500259285 /* InputAPIModel.swift */; };
 		0F67CA8E2B10677200259285 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CA8D2B10677200259285 /* APIManager.swift */; };
+		0F6867742B31D65900825EE6 /* SettingButton + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6867732B31D65900825EE6 /* SettingButton + Extension.swift */; };
 		0F6C75FB2B1872D600077831 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6C75FA2B1872D600077831 /* ContentViewModel.swift */; };
 		0F6C75FE2B18986A00077831 /* YPImagePicker in Frameworks */ = {isa = PBXBuildFile; productRef = 0F6C75FD2B18986A00077831 /* YPImagePicker */; };
 		0F6C76002B18A96800077831 /* ContentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6C75FF2B18A96800077831 /* ContentCollectionViewCell.swift */; };
@@ -183,6 +184,7 @@
 		0F67CA892B10669700259285 /* OutputAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputAPIModel.swift; sourceTree = "<group>"; };
 		0F67CA8B2B1066A500259285 /* InputAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputAPIModel.swift; sourceTree = "<group>"; };
 		0F67CA8D2B10677200259285 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		0F6867732B31D65900825EE6 /* SettingButton + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingButton + Extension.swift"; sourceTree = "<group>"; };
 		0F6C75FA2B1872D600077831 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		0F6C75FF2B18A96800077831 /* ContentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCollectionViewCell.swift; sourceTree = "<group>"; };
 		0F6C76022B18B02F00077831 /* ContentTextView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContentTextView+Extension.swift"; sourceTree = "<group>"; };
@@ -629,6 +631,7 @@
 				0FB732AE2B286FF00065AB5B /* CommentButton + Extension.swift */,
 				0FB732B02B2870B00065AB5B /* ShareButton + Extension.swift */,
 				0F61422E2B2F0EBA004C888F /* AddContentButton.swift */,
+				0F6867732B31D65900825EE6 /* SettingButton + Extension.swift */,
 			);
 			path = UIButton;
 			sourceTree = "<group>";
@@ -1209,6 +1212,7 @@
 				0F4AE4E72B24CB48007BA5EF /* FiveCollectionViewCell.swift in Sources */,
 				0F67CA552B10619800259285 /* EmailViewModel.swift in Sources */,
 				0F67CA5F2B10626000259285 /* NicknameView.swift in Sources */,
+				0F6867742B31D65900825EE6 /* SettingButton + Extension.swift in Sources */,
 				0F67CA7F2B10660500259285 /* BaseURL.swift in Sources */,
 				0FB732A92B28679F0065AB5B /* NicknameLabel + Extension.swift in Sources */,
 				0F67CA8C2B1066A500259285 /* InputAPIModel.swift in Sources */,
