@@ -10,7 +10,7 @@ import SnapKit
 
 class ProfileView : BaseView {
     
-    let ProfiletableView = {
+    let profiletableView = {
         let view = UITableView()
         view.register(ProfileSecondCell.self, forCellReuseIdentifier: "ProfileSecondCell")
         view.register(ProfileFirstCell.self, forCellReuseIdentifier: "ProfileFirstCell")
@@ -24,13 +24,13 @@ class ProfileView : BaseView {
     }()
     
     override func configureView() {
-        addSubview(ProfiletableView)
+        addSubview(profiletableView)
         addSubview(addContentButton)
     }
     
     override func setConstraints() {
         
-        ProfiletableView.snp.makeConstraints { make in
+        profiletableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         
