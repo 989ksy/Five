@@ -68,6 +68,10 @@
 		0F67CA8C2B1066A500259285 /* InputAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CA8B2B1066A500259285 /* InputAPIModel.swift */; };
 		0F67CA8E2B10677200259285 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F67CA8D2B10677200259285 /* APIManager.swift */; };
 		0F6867742B31D65900825EE6 /* SettingButton + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6867732B31D65900825EE6 /* SettingButton + Extension.swift */; };
+		0F6867762B31E46E00825EE6 /* SettingMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6867752B31E46E00825EE6 /* SettingMenu.swift */; };
+		0F68677A2B31E74700825EE6 /* OutButton + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6867792B31E74700825EE6 /* OutButton + Extension.swift */; };
+		0F68677D2B31EE1800825EE6 /* SettingTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F68677C2B31EE1800825EE6 /* SettingTableCell.swift */; };
+		0F68677F2B31FBDF00825EE6 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F68677E2B31FBDF00825EE6 /* Setting.swift */; };
 		0F6C75FB2B1872D600077831 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6C75FA2B1872D600077831 /* ContentViewModel.swift */; };
 		0F6C75FE2B18986A00077831 /* YPImagePicker in Frameworks */ = {isa = PBXBuildFile; productRef = 0F6C75FD2B18986A00077831 /* YPImagePicker */; };
 		0F6C76002B18A96800077831 /* ContentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6C75FF2B18A96800077831 /* ContentCollectionViewCell.swift */; };
@@ -185,6 +189,10 @@
 		0F67CA8B2B1066A500259285 /* InputAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputAPIModel.swift; sourceTree = "<group>"; };
 		0F67CA8D2B10677200259285 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		0F6867732B31D65900825EE6 /* SettingButton + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingButton + Extension.swift"; sourceTree = "<group>"; };
+		0F6867752B31E46E00825EE6 /* SettingMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingMenu.swift; sourceTree = "<group>"; };
+		0F6867792B31E74700825EE6 /* OutButton + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OutButton + Extension.swift"; sourceTree = "<group>"; };
+		0F68677C2B31EE1800825EE6 /* SettingTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableCell.swift; sourceTree = "<group>"; };
+		0F68677E2B31FBDF00825EE6 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		0F6C75FA2B1872D600077831 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		0F6C75FF2B18A96800077831 /* ContentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCollectionViewCell.swift; sourceTree = "<group>"; };
 		0F6C76022B18B02F00077831 /* ContentTextView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContentTextView+Extension.swift"; sourceTree = "<group>"; };
@@ -632,6 +640,7 @@
 				0FB732B02B2870B00065AB5B /* ShareButton + Extension.swift */,
 				0F61422E2B2F0EBA004C888F /* AddContentButton.swift */,
 				0F6867732B31D65900825EE6 /* SettingButton + Extension.swift */,
+				0F6867792B31E74700825EE6 /* OutButton + Extension.swift */,
 			);
 			path = UIButton;
 			sourceTree = "<group>";
@@ -843,6 +852,14 @@
 			path = API;
 			sourceTree = "<group>";
 		};
+		0F68677B2B31EE0A00825EE6 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				0F68677C2B31EE1800825EE6 /* SettingTableCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		0F6C76012B18B00900077831 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -974,8 +991,11 @@
 		0F89F0F12B1B79EF00FECBCD /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				0F68677B2B31EE0A00825EE6 /* Cell */,
 				0F64AF812B21A08900ED4CBE /* View */,
 				0F64AF802B21A08000ED4CBE /* ViewController */,
+				0F6867752B31E46E00825EE6 /* SettingMenu.swift */,
+				0F68677E2B31FBDF00825EE6 /* Setting.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -1147,6 +1167,7 @@
 			files = (
 				0F67CA762B10657300259285 /* FeedView.swift in Sources */,
 				0F61422F2B2F0EBA004C888F /* AddContentButton.swift in Sources */,
+				0F68677A2B31E74700825EE6 /* OutButton + Extension.swift in Sources */,
 				0F7DB67E2B13709200A48828 /* CustomIcon.swift in Sources */,
 				0F67CA402B1035B800259285 /* LoginViewController.swift in Sources */,
 				0F7DB6792B13639000A48828 /* FeedCollectionViewCell.swift in Sources */,
@@ -1183,6 +1204,7 @@
 				0F67CA572B1061B300259285 /* PasswordViewController.swift in Sources */,
 				0F86DD412B19BC270043939F /* JournalViewController.swift in Sources */,
 				0F56A5C02B1C5D3700C7FAD3 /* UnderlineSegmentedControl.swift in Sources */,
+				0F68677D2B31EE1800825EE6 /* SettingTableCell.swift in Sources */,
 				0F64AF8D2B21EEB600ED4CBE /* PostView.swift in Sources */,
 				0F67CA6A2B10641000259285 /* CustomFont.swift in Sources */,
 				0F6C76002B18A96800077831 /* ContentCollectionViewCell.swift in Sources */,
@@ -1192,9 +1214,11 @@
 				0FB732A52B2839540065AB5B /* loadImage + Extension.swift in Sources */,
 				0F64AF892B21D45100ED4CBE /* FollowUIButton.swift in Sources */,
 				0F67CA3C2B10354200259285 /* BaseView.swift in Sources */,
+				0F6867762B31E46E00825EE6 /* SettingMenu.swift in Sources */,
 				0F6142252B2E05D5004C888F /* ProfileFirstCell.swift in Sources */,
 				0F61422D2B2EFD6E004C888F /* ProfileSecondCellViewModel.swift in Sources */,
 				0F64AF862B21C33E00ED4CBE /* BaseTableViewCell.swift in Sources */,
+				0F68677F2B31FBDF00825EE6 /* Setting.swift in Sources */,
 				0F67CA782B10657D00259285 /* FeedViewModel.swift in Sources */,
 				0F67CA8A2B10669700259285 /* OutputAPIModel.swift in Sources */,
 				0F7DB6A02B15B76500A48828 /* KeychainStorage.swift in Sources */,
