@@ -19,13 +19,7 @@ class ProfileFirstCell : BaseTableViewCell {
     }()
     
     let settingButton = {
-        let btn = UIButton()
-        btn.setImage(UIImage(named: "setting")?.withRenderingMode(.alwaysTemplate).withTintColor(.white), for: .normal)
-        btn.layer.cornerRadius = 16
-        btn.layer.borderWidth = 1
-        btn.layer.borderColor = UIColor.systemGray4.cgColor
-        btn.tintColor = .darkGray
-        btn.backgroundColor = CustomColor.backgroundColor
+        let btn = SettingButton()
         return btn
     }()
     
@@ -111,8 +105,7 @@ class ProfileFirstCell : BaseTableViewCell {
     override func setConstraints() {
         
         profileColorBackgroundView.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.horizontalEdges.equalToSuperview()
+            make.top.horizontalEdges.equalToSuperview()
             make.height.equalTo(74)
         }
         profileImage.snp.makeConstraints { make in
