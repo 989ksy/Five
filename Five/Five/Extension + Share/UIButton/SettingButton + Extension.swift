@@ -21,8 +21,6 @@ class SettingButton : UIButton {
     func set() {
         setImage(UIImage(named: "setting")?.withRenderingMode(.alwaysTemplate).withTintColor(.white), for: .normal)
         layer.cornerRadius = 16
-        layer.borderWidth = 1
-        layer.borderColor = UIColor.systemGray4.cgColor
         tintColor = .darkGray
         backgroundColor = CustomColor.backgroundColor
     }
