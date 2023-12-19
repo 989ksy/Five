@@ -20,6 +20,9 @@ class ProfileFirstCell : BaseTableViewCell {
     
     let settingButton = {
         let btn = SettingButton()
+        btn.layer.borderColor = UIColor.systemGray4.cgColor
+        btn.layer.borderWidth = 1
+
         return btn
     }()
     
@@ -106,7 +109,7 @@ class ProfileFirstCell : BaseTableViewCell {
         
         profileColorBackgroundView.snp.makeConstraints { make in
             make.top.horizontalEdges.equalToSuperview()
-            make.height.equalTo(74)
+            make.height.equalTo(78)
         }
         profileImage.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide).offset(50)
