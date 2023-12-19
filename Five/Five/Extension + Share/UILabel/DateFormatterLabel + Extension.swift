@@ -24,5 +24,29 @@ extension UILabel {
         }
     }
     
+    func customDateFormat2(initialText: String) {
+        let dateString = initialText
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+            dateFormatter.locale = Locale(identifier: "ko_KR")
+            
+            if let date = dateFormatter.date(from: dateString) {
+                // 연도를 뺀 날짜를 구성
+                let calendar = Calendar.current
+                let components = calendar.dateComponents([.year, .month, .day], from: date)
+                
+                // 재구성된 날짜를 포맷팅
+                if let formattedDate = calendar.date(from: components) {
+                    let resultDateString = DateFormatter.localizedString(from: formattedDate, dateStyle: .short, timeStyle: .none)
+                    self.text = resultDateString
+                } else {
+                    print("Faile")
+                }
+            } else {
+                print("Invalid date format: \(dateString)")
+            }
+    }
+    
     
 }
