@@ -156,7 +156,7 @@ class CommentView : BaseView {
         }
         
         commentTableView.snp.makeConstraints { make in
-            make.top.equalTo(upperLine.snp.bottom)
+            make.top.equalTo(upperLine.snp.bottom).offset(4)
             make.horizontalEdges.equalToSuperview()
             make.bottom.equalTo(commentTextfieldBox.snp.top)
         }

@@ -79,7 +79,7 @@
 		0F6C76072B18ED0D00077831 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6C76062B18ED0D00077831 /* ProfileView.swift */; };
 		0F78F1202B32A44E00D9974F /* NickSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F78F11F2B32A44E00D9974F /* NickSettingViewController.swift */; };
 		0F78F1222B32BFEC00D9974F /* NickSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F78F1212B32BFEC00D9974F /* NickSettingView.swift */; };
-		0F78F1242B3312CC00D9974F /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F78F1232B3312CC00D9974F /* TestViewController.swift */; };
+		0F78F1272B33393000D9974F /* CommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F78F1262B33393000D9974F /* CommentViewModel.swift */; };
 		0F7DB6772B133FE400A48828 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7DB6762B133FE400A48828 /* BaseCollectionViewCell.swift */; };
 		0F7DB6792B13639000A48828 /* FeedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7DB6782B13639000A48828 /* FeedCollectionViewCell.swift */; };
 		0F7DB67E2B13709200A48828 /* CustomIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7DB67D2B13709200A48828 /* CustomIcon.swift */; };
@@ -202,7 +202,7 @@
 		0F6C76062B18ED0D00077831 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		0F78F11F2B32A44E00D9974F /* NickSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickSettingViewController.swift; sourceTree = "<group>"; };
 		0F78F1212B32BFEC00D9974F /* NickSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickSettingView.swift; sourceTree = "<group>"; };
-		0F78F1232B3312CC00D9974F /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		0F78F1262B33393000D9974F /* CommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewModel.swift; sourceTree = "<group>"; };
 		0F7DB6762B133FE400A48828 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		0F7DB6782B13639000A48828 /* FeedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCollectionViewCell.swift; sourceTree = "<group>"; };
 		0F7DB67D2B13709200A48828 /* CustomIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomIcon.swift; sourceTree = "<group>"; };
@@ -402,7 +402,6 @@
 			isa = PBXGroup;
 			children = (
 				0F7DB6C02B174B2600A48828 /* ProfileViewController.swift */,
-				0F78F1232B3312CC00D9974F /* TestViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -895,6 +894,14 @@
 			path = Struct;
 			sourceTree = "<group>";
 		};
+		0F78F1252B33392100D9974F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0F78F1262B33393000D9974F /* CommentViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		0F7DB67C2B13708500A48828 /* Icon */ = {
 			isa = PBXGroup;
 			children = (
@@ -980,6 +987,7 @@
 		0F86DD392B19B5540043939F /* Comment */ = {
 			isa = PBXGroup;
 			children = (
+				0F78F1252B33392100D9974F /* ViewModel */,
 				0F6142162B2C3A9E004C888F /* Cell */,
 				0F64AF7B2B21A05000ED4CBE /* View */,
 				0F64AF7A2B21A04700ED4CBE /* ViewController */,
@@ -1220,6 +1228,7 @@
 				0F67CA3A2B10353800259285 /* BaseViewController.swift in Sources */,
 				0FB732AF2B286FF00065AB5B /* CommentButton + Extension.swift in Sources */,
 				0F67CA572B1061B300259285 /* PasswordViewController.swift in Sources */,
+				0F78F1272B33393000D9974F /* CommentViewModel.swift in Sources */,
 				0F86DD412B19BC270043939F /* JournalViewController.swift in Sources */,
 				0F56A5C02B1C5D3700C7FAD3 /* UnderlineSegmentedControl.swift in Sources */,
 				0F68677D2B31EE1800825EE6 /* SettingTableCell.swift in Sources */,
@@ -1232,7 +1241,6 @@
 				0F67CA832B10663700259285 /* FiveError.swift in Sources */,
 				0FB732A52B2839540065AB5B /* loadImage + Extension.swift in Sources */,
 				0F64AF892B21D45100ED4CBE /* FollowUIButton.swift in Sources */,
-				0F78F1242B3312CC00D9974F /* TestViewController.swift in Sources */,
 				0F67CA3C2B10354200259285 /* BaseView.swift in Sources */,
 				0F6867762B31E46E00825EE6 /* SettingMenu.swift in Sources */,
 				0F6142252B2E05D5004C888F /* ProfileFirstCell.swift in Sources */,
