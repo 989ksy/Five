@@ -43,3 +43,10 @@ struct CreatePost: Encodable {
 struct CreateComment: Encodable {
     let content : String?
 }
+
+//MARK: - 프로필 변경
+
+struct UpdateProfile: Encodable {
+    let nick : String
+    let profile : Data?
+}
