@@ -12,10 +12,10 @@ import RxCocoa
 final class CommentViewController : BaseViewController {
     
     let mainView = CommentView()
+    let viewModel = CommentViewModel()
     let disposeBag = DisposeBag()
         
     var commentList : [CreateCommentResponse]?
-    
     var postId : String?
     
     override func loadView() {
@@ -37,7 +37,7 @@ final class CommentViewController : BaseViewController {
         
         guard let id = postId else { return }
         
-
+        //댓글 전송버튼 눌렀을때
         mainView.sentButton
             .rx
             .tap
@@ -103,6 +103,25 @@ extension CommentViewController : UITableViewDelegate, UITableViewDataSource {
            
         return cell
         
+    }
+    
+    ///댓글 삭제구현
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            
+            guard let postID = postId else {return}
+            guard let commentID = commentList?[indexPath.row].id else { return }
+            
+            viewModel.fetchDeleteComment(postId: postID, commentId: commentID) { response in
+                print("==댓글삭제 함", response)
+                NotificationCenter.default.post(name: NSNotification.Name("needToUpdate"), object: nil)
+            }
+            
+            commentList?.removeAll { $0.id == commentID }
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            
+        } else if editingStyle == .insert {
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
