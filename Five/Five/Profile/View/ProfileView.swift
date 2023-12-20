@@ -15,6 +15,7 @@ class ProfileView : BaseView {
         view.register(ProfileSecondCell.self, forCellReuseIdentifier: "ProfileSecondCell")
         view.register(ProfileFirstCell.self, forCellReuseIdentifier: "ProfileFirstCell")
         view.separatorStyle = .none
+        view.showsVerticalScrollIndicator = false
         return view
     }()
     
@@ -24,6 +25,7 @@ class ProfileView : BaseView {
     }()
     
     override func configureView() {
+//        backgroundColor = .red
         addSubview(profiletableView)
         addSubview(addContentButton)
     }
