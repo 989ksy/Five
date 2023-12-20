@@ -69,7 +69,7 @@ class ProfileSecondCell : BaseTableViewCell {
     //MARK: - update view
     
     @objc func uploadView() {
-        self.fiveCollectionView.reloadData()
+//        self.fiveCollectionView.reloadData()
     }
     
     //MARK: - cell

@@ -11,7 +11,7 @@ import RxCocoa
 
 final class PostViewController : BaseViewController, UISheetPresentationControllerDelegate {
     
-    var transitedData = BehaviorRelay(value: ReadData(likes: [], image: [], comments: [], id: "", creator: Creator(id: "", nick: ""), time: "", content: "", productID: ""))
+    var transitedData = BehaviorRelay(value: ReadData(likes: [], image: [], comments: [], id: "", creator: Creator(id: "", nick: "", profile: ""), time: "", content: "", productID: ""))
     
     let mainView = PostView()
     let disposeBag = DisposeBag()
