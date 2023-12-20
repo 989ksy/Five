@@ -27,9 +27,11 @@ enum FiveAPI {
     
     //프로필
     case myProfile
+    case updateProfile (model: UpdateProfile)
     
     //댓글
     case createComment (model: CreateComment, id: String)
+    case deleteComment (postId: String, commentId: String)
     
 }
 
@@ -70,13 +72,19 @@ extension FiveAPI : TargetType {
         case .readUserPost(let id, let next, let limit, let product_id):
             return "post/user/\(id)"
             
+            //좋아요
         case .likePost(let id):
             return "post/like/\(id)"
+            
         case .myProfile:
+            return "profile/me"
+        case .updateProfile(model: let model):
             return "profile/me"
             
         case .createComment(_, let id):
             return "post/\(id)/comment"
+        case .deleteComment(postId: let postId, commentId: let commentId):
+            return "post/\(postId)/comment/\(commentId)"
         }
         
             
@@ -102,8 +110,12 @@ extension FiveAPI : TargetType {
                 .readUserPost:
             return .get
             
-        case .deletePost:
+        case .deletePost,
+                .deleteComment:
             return .delete
+            
+        case .updateProfile(model: let model):
+            return .put
         }
     }
     
@@ -172,6 +184,42 @@ extension FiveAPI : TargetType {
             
         case .createComment(let data, _):
             return .requestJSONEncodable(data)
+            
+        case .updateProfile(model: let data):
+            var multipartData: [MultipartFormData] = []
+
+//            if let file = data.profile {
+//                for item in file {
+//                    let multi = MultipartFormData(
+//                        provider: .data(item),
+//                        name: "file",
+//                        fileName: "\(Date()).jpeg",
+//                        mimeType: "image/jpeg"
+//                    )
+//                    multipartData.append(multi)
+//                }
+//            }
+            
+            if let file = data.profile {
+                let multi = MultipartFormData(
+                    provider: .data(file),
+                    name: "file",
+                    fileName: "\(Date()).jpeg",
+                    mimeType: "image/jpeg"
+                )
+                multipartData.append(multi)
+            }
+            
+            let nicknData = data.nick
+            let multi = MultipartFormData(
+                provider: .data(nicknData.data(using: .utf8)!),
+                name: "nick"
+            )
+                multipartData.append(multi)
+            print("multipartData", multipartData)
+            return .uploadMultipart(multipartData)
+        case .deleteComment(postId: let postId, commentId: let commentId):
+            return .requestPlain
         }
     }
     
@@ -228,6 +276,15 @@ extension FiveAPI : TargetType {
             return ["Authorization" : "\(KeychainStorage.shared.userToken!)",
                     "Content-Type" : "application/json",
                     "SesacKey" : "\(APIKey.sesacKey)"]
+            
+        case .updateProfile:
+            return ["Authorization" : "\(KeychainStorage.shared.userToken!)",
+                    "Content-Type" : "multipart/form-data",
+                    "SesacKey" : "\(APIKey.sesacKey)"]
+        case .deleteComment:
+            return  ["Authorization" : "\(KeychainStorage.shared.userToken!)",
+                     "SesacKey" : "\(APIKey.sesacKey)"]
+
         }
         
     }
