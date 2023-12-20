@@ -11,7 +11,7 @@ import RxCocoa
 
 class ProfileViewModel {
     
-    var profileData : [MyProfileResponse] = [MyProfileResponse(posts: [], followers: [], following: [], id: "", email: "", nick: "")]
+    var profileData : MyProfileResponse = MyProfileResponse(posts: [], followers: [], following: [], id: "", email: "", nick: "")
     
     let disposeBag = DisposeBag()
     
