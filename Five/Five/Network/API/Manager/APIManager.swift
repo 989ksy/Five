@@ -20,6 +20,65 @@ final class APIManager {
     
     private let disposeBag = DisposeBag()
     
+    
+    //MARK: - 댓글 삭제
+    
+    func deleteComment(postId: String, commentId: String) -> Single<Result<DeleteCommentResponse, FiveError>> {
+        
+        return Single.create { single in
+            
+            self.provider.request(.deleteComment(postId: postId, commentId: commentId)) { result in
+                switch result {
+                case .success(let response):
+                    do {
+                        let data = try JSONDecoder().decode(DeleteCommentResponse.self, from: response.data)
+                        single(.success(.success(data)))
+                    } catch {
+                        single(.success(.failure(.decodingError)))
+                    }
+                case .failure(let error):
+                    guard let customError = FiveError(rawValue: error.response?.statusCode ??  1) else {
+                        return
+                    }
+                    single(.success(.failure(customError)))
+                }
+            }
+            return Disposables.create()
+        }
+        
+        
+    }
+    
+    //MARK: - 프로필 수정
+    
+    func updateProfile(nick: String, profile: Data) -> Single<Result<UpdateProfileResponse, FiveError>> {
+        
+        let data = UpdateProfile(nick: nick, profile: profile)
+        
+        return Single.create { single in
+            self.provider.request(.updateProfile(model: data)) { result in
+                switch result {
+                case .success(let response):
+                    print("===APIManager for updateProfile, StatusCode == \(response.statusCode), == response: \(response)")
+                    
+                    do {
+                        let data = try JSONDecoder().decode(UpdateProfileResponse.self, from: response.data)
+                        single(.success(.success(data)))
+                    } catch {
+                        single(.success(.failure(.decodingError)))
+                    }
+                case .failure(let error):
+                    guard let customError = FiveError(rawValue: error.response?.statusCode ??  1) else {
+                        return
+                    }
+                    single(.success(.failure(customError)))
+                }
+            }
+            return Disposables.create()
+        }
+    }
+    
+    
     //MARK: - 댓글 작성
     
     func createComment(id: String, content: String) -> Single<Result<CreateCommentResponse, FiveError>> {
