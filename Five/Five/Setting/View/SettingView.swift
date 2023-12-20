@@ -17,7 +17,7 @@ class SettingView : BaseView {
         view.layer.cornerRadius = 50
         view.layer.borderWidth = 1
         view.layer.borderColor = UIColor.systemGray4.cgColor
-        view.image = UIImage(named: "test_image")
+        view.image = UIImage(named: "commentProfile")
         return view
     }()
     
@@ -36,6 +36,7 @@ class SettingView : BaseView {
         view.backgroundColor = CustomColor.backgroundColor
         view.separatorStyle = .none
         view.register(SettingTableCell.self, forCellReuseIdentifier: "SettingTableCell")
+        view.isScrollEnabled = false
         return view
     }()
     
