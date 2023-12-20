@@ -60,11 +60,12 @@ struct CreatePostResponse: Decodable {
 }
 
 struct Creator: Decodable {
-    let id, nick : String
+    let id, nick: String
+    let  profile : String?
     
     enum CodingKeys: String, CodingKey {
         case id = "_id"
-        case nick
+        case nick, profile
     }
     
 }
@@ -124,7 +125,7 @@ struct MyProfileResponse : Decodable {
     let following: [String]
     let id : String
     let email : String
-    let nick : String
+    var nick : String
     
     enum CodingKeys: String, CodingKey {
         case posts, followers, following
@@ -158,3 +159,19 @@ struct CreateCommentResponse : Decodable {
             case content, time, creator
         }
     }
+
+//MARK: - 프로필 업데이트
+
+struct UpdateProfileResponse : Decodable {
+    
+    let posts: [String]
+    let followers, following: [String]
+    let id, email, nick, profile: String
+    
+    enum CodingKeys: String, CodingKey {
+        case posts, followers, following
+        case id = "_id"
+        case email, nick, profile
+        
+    }
+}
