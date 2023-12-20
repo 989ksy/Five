@@ -84,7 +84,7 @@ class CommentTableViewCell : BaseTableViewCell {
         }
         
         nicknameLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(10)
+            make.top.equalToSuperview().offset(3)
             make.leading.equalTo(profileImageView.snp.trailing).offset(10)
             make.height.equalTo(15)
         }
@@ -93,7 +93,7 @@ class CommentTableViewCell : BaseTableViewCell {
             make.top.equalTo(nicknameLabel.snp.bottom).offset(4)
             make.leading.equalTo(profileImageView.snp.trailing).offset(10)
             make.trailing.equalToSuperview().inset(18)
-            make.bottom.equalToSuperview().offset(2)
+            make.bottom.lessThanOrEqualToSuperview().inset(3)
         }
         
         writerLabel.snp.makeConstraints { make in
