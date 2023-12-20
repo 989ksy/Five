@@ -41,6 +41,10 @@ class SettingTableCell : BaseTableViewCell {
     
     override func configureView() {
         
+        contentView.backgroundColor = CustomColor.backgroundColor
+        contentView.layer.borderColor = UIColor.systemGray5.cgColor
+        contentView.layer.borderWidth = 0.5
+        
         contentView.addSubview(emptyView)
         emptyView.addSubview(defaultLabel)
         emptyView.addSubview(chevronImageView)
