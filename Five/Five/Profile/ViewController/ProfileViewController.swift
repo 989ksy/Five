@@ -33,7 +33,6 @@ final class ProfileViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = CustomColor.backgroundColor
         
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
@@ -49,20 +48,12 @@ final class ProfileViewController: BaseViewController {
         
         //업데이트
         NotificationCenter.default.addObserver(self, selector: #selector(uploadView), name: NSNotification.Name("needToUpdate"), object: nil)
-
-        
-//                navigationController?.navigationBar.isHidden = true
         
         profileNetwork() //프로필조회
         bind() //컨텐츠버튼
         
     }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        navigationController?.navigationBar.isHidden = true
-//
-//    }
-//    
     override func viewWillDisappear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = false
     }
@@ -74,9 +65,8 @@ final class ProfileViewController: BaseViewController {
         viewModel.fetchData { [self] result in
             switch result {
             case .success(let data):
-                viewModel.profileData = [data]
+                viewModel.profileData = data
                 mainView.profiletableView.reloadData()
-                print(data)
             case .failure(let failure):
                 print(failure)
             }
@@ -149,11 +139,11 @@ extension ProfileViewController : UITableViewDelegate, UITableViewDataSource {
             
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileFirstCell", for: indexPath) as? ProfileFirstCell else {return UITableViewCell()}
             
-            cell.nicknameLabel.text = viewModel.profileData.first?.nick
-            cell.emailLabel.text = viewModel.profileData.first?.email
+            cell.nicknameLabel.text = viewModel.profileData.nick
+            cell.emailLabel.text = viewModel.profileData.email
             cell.settingButton.addTarget(self, action: #selector(settingButonTapped), for: .touchUpInside)
-            cell.followDataLabel.text = "\(viewModel.profileData.first?.followers.count ?? 555)"
-            cell.followingDataLabel.text = "\(viewModel.profileData.first?.following.count ?? 666)"
+            cell.followDataLabel.text = "\(viewModel.profileData.followers.count )"
+            cell.followingDataLabel.text = "\(viewModel.profileData.following.count)"
             
 //            if viewModel.profileData.first?.id != KeychainStorage.shared.userID {
 //                cell.settingButton.isHidden = true
