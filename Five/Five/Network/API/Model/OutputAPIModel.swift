@@ -160,6 +160,12 @@ struct CreateCommentResponse : Decodable {
         }
     }
 
+//MARK: - 댓글 삭제
+
+struct DeleteCommentResponse : Decodable {
+    let postID, commentID : String
+}
+
 //MARK: - 프로필 업데이트
 
 struct UpdateProfileResponse : Decodable {
