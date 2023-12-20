@@ -24,12 +24,12 @@ class ProfileViewModel {
     struct Output {}
     
     
-    func fetchData(Completion: @escaping (Result<MyProfileResponse, FiveError>) -> Void) {
+    func fetchData(completion: @escaping (Result<MyProfileResponse, FiveError>) -> Void) {
         APIManager.shared.myProfile()
             .subscribe(with: self) { owner, response in
                 switch response {
                 case .success(let data) :
-                Completion(.success(data))
+                completion(.success(data))
                     
                 case .failure(let error) :
                     print("myProfile failed",error.rawValue)
