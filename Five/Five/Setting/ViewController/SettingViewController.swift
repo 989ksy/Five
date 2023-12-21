@@ -17,10 +17,8 @@ final class SettingViewController : BaseViewController {
     let menuList = SettingMenu() //메뉴 리스트
     
     //프로필 화면에서 전달받은 값
-    var transitedData = BehaviorRelay(value: MyProfileResponse(posts: [], followers: [], following: [], id: "", email: "", nick: ""))
-    
-    var imageInput: Data? //PublishRelay<Data>.init()
-    
+    var transitedData = MyProfileResponse(posts: [], followers: [], following: [], id: "", email: "", nick: "")
+        
     let disposeBag = DisposeBag()
     
     override func loadView() {
@@ -37,47 +35,32 @@ final class SettingViewController : BaseViewController {
         //테이블뷰
         mainView.settingTableView.delegate = self
         mainView.settingTableView.dataSource = self
-                
-        //PHPicker (이미지)
-        mainView.imageChangeButton.addTarget(self, action: #selector(imageChangeButtonTapped), for: .touchUpInside)
         
         //키보드설정
         self.hideKeyboardWhenTappedAround()
+        
+        //바인드
+        bind()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         title = "개인설정"
     }
     
-    //네트워크통신!
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-//        APIManager.shared.updateProfile(nick: transitedData.value.nick, profile: imageInput ?? <#default value#>)
-//            .subscribe(with: self) { owner, response in
-//                print(response)
-//            }
-//            .disposed(by: disposeBag)
-        
-        
-    } 
     
+    //MARK: - 프로필 변경하기
     
-    //MARK: - 프로필 이미지 설정
-    
-    @objc func imageChangeButtonTapped() {
-
-        var configuration = PHPickerConfiguration()
-        configuration.selectionLimit = 1
-        configuration.filter = .images
+    func bind() {
         
-        let picker = PHPickerViewController(configuration: configuration)
-        picker.delegate = self
-        
-        self.present(picker, animated: true, completion: nil)
+        mainView.changeButton.rx.tap
+            .subscribe(with: self) { owner, _ in
+                let vc = ChangeSettingViewController()
+                self.present(vc, animated: true)
+            }
+            .disposed(by: disposeBag)
         
     }
-
+    
     //MARK: - 네비게이션 설정
     func setNavigation() {
         self.title = "개인설정"
@@ -85,6 +68,8 @@ final class SettingViewController : BaseViewController {
         navigationItem.titleView?.tintColor = .black
         navigationController?.navigationBar.tintColor = .black
     }
+    
+    
     
     
 }
@@ -105,9 +90,10 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
         cell.defaultLabel.text = data.label
         
         if indexPath.row == 0 {
-            cell.detailLabel.text = transitedData.value.nick
+            cell.detailLabel.text = transitedData.nick
+            print(transitedData.nick)
         } else if indexPath.row == 1 {
-            cell.detailLabel.text = transitedData.value.email
+            cell.detailLabel.text = transitedData.email
         } else {
             cell.detailLabel.text = "휴대폰 번호 미등록"
         }
@@ -119,53 +105,22 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if indexPath.row == 0 {
-            let vc = NickSettingViewController()
-            vc.nickname = transitedData.value.nick
-            vc.newNicknameCompletion = { [weak self] name in
-                
-                var updatedData = self?.transitedData.value
-                updatedData?.nick = name
-                self?.transitedData.accept(updatedData!)
-                self?.mainView.settingTableView.reloadData()
-                print("+++++", name)
-            }
-            navigationController?.pushViewController(vc, animated: true)
+            let vc = ChangeSettingViewController()
+//            vc.nickname = transitedData.value.nick
+//            vc.newNicknameCompletion = { [weak self] name in
+//                
+//                var updatedData = self?.transitedData.value
+//                updatedData?.nick = name
+//                self?.transitedData.accept(updatedData!)
+//                self?.mainView.settingTableView.reloadData()
+//                print("+++++", name)
+//            }
         }
         
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
-    }
-    
-    
-}
-
-
-//MARK: - 이미지 설정
-
-extension SettingViewController: PHPickerViewControllerDelegate {
-    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-                
-        for result in results {
-            result.itemProvider.loadObject(ofClass: UIImage.self) { (object, error) in
-                if let image = object as? UIImage{
-                    DispatchQueue.main.async {
-                        self.mainView.profileImageView.image = image
-                    }
-                }
-            }
-        }
-        
-        let mappedImage = self.mainView.profileImageView.image.map { $0.jpegData(compressionQuality: 0.1)
-        }.flatMap{ $0 }
-
-        self.imageInput?.append(mappedImage!)
-        
-        
-        picker.dismiss(animated: true, completion: nil)
-
-        
     }
     
     
