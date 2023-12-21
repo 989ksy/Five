@@ -54,6 +54,7 @@ final class CommentViewController : BaseViewController {
                         
                     self.commentList?.insert(response, at: 0)
                     owner.mainView.commentTextField.text = ""
+                    owner.mainView.commentTextField.placeholder = "댓글을 남겨보세요."
                     
                     NotificationCenter.default.post(name: NSNotification.Name("needToUpdate"), object: nil)
                     
