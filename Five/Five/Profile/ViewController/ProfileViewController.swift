@@ -11,73 +11,90 @@ import RxCocoa
 
 final class ProfileViewController: BaseViewController {
     
-    
     let mainView = ProfileView()
-    let viewModel = ProfileViewModel()
+    let headerView = ProfileCollectionHeaderView()
+    var profileData : MyProfileResponse = MyProfileResponse(posts: [], followers: [], following: [], id: "", email: "", nick: "")
     
+    let viewModel = ProfileViewModel()
+
     var refresh = PublishSubject<Void>()
     
     let disposeBag = DisposeBag()
     
-    //리프레싱 컨트롤 생성
-    private lazy var refreshControl: UIRefreshControl = {
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(refreshingData), for: .valueChanged)
-        return refreshControl
-        
-    }()
     
+    
+    //MARK: - SegmentedControl 설정
+    
+    var shouldHideFirstView: Bool? {
+        didSet {
+            guard let shouldHideFirstView = self.shouldHideFirstView else { return }
+            mainView.fiveCollectionView.isHidden = shouldHideFirstView
+            mainView.fivedView.isHidden = !self.mainView.fiveCollectionView.isHidden
+        }
+    }
+    
+    
+    
+    @objc private func didChangeValue(segment: UISegmentedControl) {
+        self.shouldHideFirstView = segment.selectedSegmentIndex != 0
+    }
+    
+    func setSegmentedControl() {
+        
+        headerView.segmentedControl.addTarget(self, action: #selector(didChangeValue(segment: )), for: .valueChanged)
+        headerView.segmentedControl.selectedSegmentIndex = 0
+        headerView.segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.gray], for: .normal)
+        headerView.segmentedControl.setTitleTextAttributes(
+            [
+                NSAttributedString.Key.foregroundColor: CustomColor.pointColor ?? .systemYellow,
+                .font: CustomFont.mediumGmarket15 ?? .systemFont(ofSize: 15)
+            ],
+            for: .selected
+        )
+        headerView.segmentedControl.selectedSegmentIndex = 0
+        
+    }
+
     override func loadView() {
         self.view = mainView
     }
-    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.isTranslucent = true
-        self.navigationController?.view.backgroundColor = .clear
-        
-        //테이블뷰
-        mainView.profiletableView.dataSource = self
-        mainView.profiletableView.delegate = self
-        
-        //리프레싱
-        mainView.profiletableView.refreshControl = refreshControl
+        //컬렉션뷰
+        mainView.fiveCollectionView.dataSource = self
+        mainView.fiveCollectionView.rx.setDelegate(self)
+            .disposed(by: disposeBag)
         
         //업데이트
-        NotificationCenter.default.addObserver(self, selector: #selector(uploadView), name: NSNotification.Name("needToUpdate"), object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(uploadView), name: NSNotification.Name("needToUpdate"), object: nil)
         
-        profileNetwork() //프로필조회
+        setSegmentedControl()
+        fetchReadData()
+        
         bind() //컨텐츠버튼
-        
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        navigationController?.navigationBar.isHidden = false
-    }
-    
-    ///네트워크 통신
-    ///성공 시 내프로필 조회값을 profileData에 넣어줌
-    func profileNetwork() {
+    func fetchReadData() {
         
-        viewModel.fetchData { [self] result in
-            switch result {
+        viewModel.readData { response in
+            switch response {
             case .success(let data):
-                viewModel.profileData = data
-                mainView.profiletableView.reloadData()
+                self.viewModel.data = data.data
+                self.mainView.fiveCollectionView.reloadData()
             case .failure(let failure):
-                print(failure)
+                print("===profile_readData",failure.errorDescription!)
             }
         }
+        
     }
     
     
     ///컨텐츠 추가버튼
     func bind() {
         
-        let input = ProfileViewModel.Input(addContentTapp: mainView.addContentButton.rx.tap, refresh: refresh)
+        let input = ProfileViewModel.Input(addContentTapp: mainView.addContentButton.rx.tap, refresh: refresh, prefetchItem: mainView.fiveCollectionView.rx.prefetchItems)
         
         input.addContentTapp
             .subscribe(with: self) { owner, _ in
@@ -87,116 +104,89 @@ final class ProfileViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
-        refreshControl
-            .rx
-            .controlEvent(.valueChanged)
-            .subscribe(with: self) { owner, _ in
-                owner.mainView.profiletableView.reloadData()
-                owner.refreshControl.endRefreshing()
-            }
-            .disposed(by: disposeBag)
-    }
-    
-    
-    //MARK: - 새 포스트 갱신
-    
-    @objc func uploadView() {
-        refresh.onNext(Void())
-    }
-    
-    
-    //MARK: - 화면 로딩
-    
-    @objc private func refreshingData() {
-        refreshControl.endRefreshing()
-        refresh.onNext(Void())
-    }
-    
-}
 
-extension ProfileViewController : UITableViewDelegate, UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
     }
     
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        if section == 0 {
-            return 1
-        } else if section == 1{
-            return 1
-        }
-        
-        return 0
-    }
-    
-    ///셀 데이터
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        if indexPath.section == 0 {
-            
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileFirstCell", for: indexPath) as? ProfileFirstCell else {return UITableViewCell()}
-            
-            cell.nicknameLabel.text = viewModel.profileData.nick
-            cell.emailLabel.text = viewModel.profileData.email
-            cell.settingButton.addTarget(self, action: #selector(settingButonTapped), for: .touchUpInside)
-            cell.followDataLabel.text = "\(viewModel.profileData.followers.count )"
-            cell.followingDataLabel.text = "\(viewModel.profileData.following.count)"
-            
-//            if viewModel.profileData.first?.id != KeychainStorage.shared.userID {
-//                cell.settingButton.isHidden = true
-//            }
-            
-            return cell
-            
-        } else if indexPath.section == 1 {
-            
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileSecondCell", for: indexPath) as? ProfileSecondCell else {return UITableViewCell()}
-
-            return cell
-        }
-        return UITableViewCell()
-    }
-    
-    ///섹션별 셀 높이
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        if indexPath.section == 0 {
-            
-            return 200
-            
-        } else if indexPath.section == 1 {
-            
-            let rectForSection0 = tableView.rect(forSection: 0)
-            let remainingHeight = tableView.bounds.height - rectForSection0.origin.y - rectForSection0.height
-            
-            return remainingHeight
-        }
-        
-        return 44
-    }
-    
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        //선택 시 회색셀렉션 제거
-        tableView.reloadRows(at: [indexPath], with: .none)
-    }
-    
-    
-    ///설정버튼 눌렀을 때
-    @objc func settingButonTapped() {
+    ///세팅버튼 선택 시...
+    @objc func settingButtonTapped() {
         let vc = SettingViewController()
-        vc.transitedData.accept(viewModel.profileData)
-        vc.hidesBottomBarWhenPushed = true
+        vc.transitedData = profileData
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    
-    
-    
-    
+
 }
 
+
+
+extension ProfileViewController : UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        return viewModel.data.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FiveCollectionViewCell.identifier, for: indexPath) as?  FiveCollectionViewCell else { return UICollectionViewCell() }
+        
+        let data = viewModel.data[indexPath.item]
+        
+        let url = URL(string: "\(BaseURL.base)" + (data.image.first ?? ""))
+        cell.firstImageView.loadImage(from: url!, placeHolderImage: UIImage(named: "strar.fill"))
+        
+        if data.image.count < 2 {
+            cell.moreIconImageView.isHidden = true
+        } else {
+            cell.moreIconImageView.isHidden = false
+        }
+            return cell
+        
+    }
+        
+        func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+            
+            if kind == UICollectionView.elementKindSectionHeader {
+                
+                guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ProfileCollectionHeaderView.identifier, for: indexPath) as? ProfileCollectionHeaderView
+                        
+                else {
+                    return ProfileCollectionHeaderView()
+                }
+                
+                //HeaderView UI + Layout
+                header.configureView()
+                header.setConstraints()
+                
+                //HeaderView Data ... 통신 성공 시
+                viewModel.fetchData { response in
+                    switch response {
+                    case .success(let data):
+                        
+                        header.emailLabel.text = data.email
+                        header.nicknameLabel.text = data.nick
+                        header.followDataLabel.text = "\(data.followers.count)"
+                        header.followingDataLabel.text = "\(data.following.count)"
+                        
+                        self.profileData = data
+                        
+                        header.settingButton.addTarget(self, action: #selector(self.settingButtonTapped), for: .touchUpInside)
+                        
+                    case .failure(let failure):
+                        print("myProfile failed",failure.rawValue)
+                        print(failure.errorDescription!)
+                    }
+                }
+                return header
+                
+            } else {
+                return UICollectionReusableView()
+            }
+        }
+        
+        
+}
