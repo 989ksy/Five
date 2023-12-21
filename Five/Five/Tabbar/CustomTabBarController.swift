@@ -12,17 +12,17 @@ class CustomTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        delegate = self
-        
-        let appearance = UITabBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        
-        appearance.shadowColor = .clear
-        appearance.backgroundColor = CustomColor.backgroundColor
-        tabBarItem.standardAppearance = appearance
-        
-        tabBarItem.scrollEdgeAppearance = tabBarItem.standardAppearance
-        
+//        delegate = self
+//        
+//        let appearance = UITabBarAppearance()
+//        appearance.configureWithOpaqueBackground()
+//        
+//        appearance.shadowColor = .clear
+//        appearance.backgroundColor = CustomColor.backgroundColor
+//        tabBarItem.standardAppearance = appearance
+//        
+//        tabBarItem.scrollEdgeAppearance = tabBarItem.standardAppearance
+//        
         
     //기본 컬러세팅
         
@@ -53,16 +53,16 @@ class CustomTabBarController: UITabBarController {
 
 }
 
-extension CustomTabBarController: UITabBarControllerDelegate {
-    
-    func tabBarController(
-        _ tabBarController: UITabBarController,
-        shouldSelect viewController: UIViewController
-    ) -> Bool {
-        if let vc = tabBarController.viewControllers?.last {
-            vc.navigationController?.isNavigationBarHidden = true
-        }
-        
-        return true
-    }
-}
+//extension CustomTabBarController: UITabBarControllerDelegate {
+//    
+//    func tabBarController(
+//        _ tabBarController: UITabBarController,
+//        shouldSelect viewController: UIViewController
+//    ) -> Bool {
+//        if let vc = tabBarController.viewControllers?.last {
+//            vc.navigationController?.isNavigationBarHidden = true
+//        }
+//        
+//        return true
+//    }
+//}
