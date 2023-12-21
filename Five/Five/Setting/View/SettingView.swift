@@ -21,13 +21,6 @@ class SettingView : BaseView {
         return view
     }()
     
-    let imageChangeButton = {
-        let btn = SettingButton()
-        btn.layer.borderColor = CustomColor.backgroundColor?.cgColor
-        btn.layer.borderWidth = 3
-        return btn
-    }()
-    
     let settingTableView = {
         let view = UITableView()
         view.layer.cornerRadius = 18
@@ -37,6 +30,18 @@ class SettingView : BaseView {
         view.separatorStyle = .none
         view.register(SettingTableCell.self, forCellReuseIdentifier: "SettingTableCell")
         view.isScrollEnabled = false
+        return view
+    }()
+    
+    let changeButton = {
+        let view = UIButton()
+        view.layer.cornerRadius = 18
+        view.layer.borderColor = UIColor.systemGray4.cgColor
+        view.layer.borderWidth = 1
+        view.backgroundColor = CustomColor.backgroundColor
+        view.setTitle("개인설정 변경하기", for: .normal)
+        view.titleLabel?.font = CustomFont.mediumGmarket15
+        view.setTitleColor(.darkGray, for: .normal)
         return view
     }()
     
@@ -72,8 +77,8 @@ class SettingView : BaseView {
     
     override func configureView() {
         addSubview(profileImageView)
-        addSubview(imageChangeButton)
         addSubview(settingTableView)
+        addSubview(changeButton)
         addSubview(buttonStackView)
         buttonStackView.addArrangedSubview(logoutButton)
         buttonStackView.addArrangedSubview(seperatorLabel)
@@ -88,16 +93,16 @@ class SettingView : BaseView {
             make.centerX.equalToSuperview()
         }
         
-        imageChangeButton.snp.makeConstraints { make in
-            make.leading.equalTo(profileImageView.snp.trailing).inset(28)
-            make.size.equalTo(32)
-            make.bottom.equalTo(profileImageView.snp.bottom).inset(4)
-        }
-        
         settingTableView.snp.makeConstraints { make in
             make.top.equalTo(profileImageView.snp.bottom).offset(34)
             make.horizontalEdges.equalToSuperview().inset(14)
             make.height.equalTo(240)
+        }
+        
+        changeButton.snp.makeConstraints { make in
+            make.top.equalTo(settingTableView.snp.bottom).offset(20)
+            make.horizontalEdges.equalToSuperview().inset(14)
+            make.height.equalTo(80)
         }
         
         buttonStackView.snp.makeConstraints { make in
