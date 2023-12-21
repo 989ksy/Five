@@ -18,7 +18,7 @@ final class SettingViewController : BaseViewController {
     
     //프로필 화면에서 전달받은 값
     var transitedData = MyProfileResponse(posts: [], followers: [], following: [], id: "", email: "", nick: "")
-        
+    
     let disposeBag = DisposeBag()
     
     override func loadView() {
@@ -52,12 +52,40 @@ final class SettingViewController : BaseViewController {
     
     func bind() {
         
+        //변경하기 버튼
         mainView.changeButton.rx.tap
             .subscribe(with: self) { owner, _ in
                 let vc = ChangeSettingViewController()
                 self.present(vc, animated: true)
             }
             .disposed(by: disposeBag)
+        
+        
+        self.mainView.logoutButton.rx.tap
+            .subscribe(with: self) { owner, _ in
+                
+                
+                let alert = UIAlertController(title: "확인", message: "정말로 로그아웃 하시겠습니까?", preferredStyle: .alert)
+                let ok = UIAlertAction(title: "예", style:.default) { _ in
+                    let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+                    let SceneDelegate = windowScene?.delegate as? SceneDelegate
+                    
+                    let vc = LoginViewController()
+                    
+                    SceneDelegate?.window?.rootViewController = vc
+                    SceneDelegate?.window?.makeKeyAndVisible()
+                }
+                let cancel = UIAlertAction(title: "아니오", style: .cancel)
+                
+                alert.addAction(cancel)
+                alert.addAction(ok)
+                
+                self.present(alert, animated: true)
+                
+                
+            }
+            .disposed(by: self.disposeBag)
+        
         
     }
     
@@ -84,7 +112,7 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingTableCell.identifier, for: indexPath) as? SettingTableCell else { return UITableViewCell() }
-                
+        
         let data = menuList.list[indexPath.row]
         
         cell.defaultLabel.text = data.label
@@ -97,25 +125,8 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
         } else {
             cell.detailLabel.text = "휴대폰 번호 미등록"
         }
-
+        
         return cell
-        
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        if indexPath.row == 0 {
-            let vc = ChangeSettingViewController()
-//            vc.nickname = transitedData.value.nick
-//            vc.newNicknameCompletion = { [weak self] name in
-//                
-//                var updatedData = self?.transitedData.value
-//                updatedData?.nick = name
-//                self?.transitedData.accept(updatedData!)
-//                self?.mainView.settingTableView.reloadData()
-//                print("+++++", name)
-//            }
-        }
         
     }
     
