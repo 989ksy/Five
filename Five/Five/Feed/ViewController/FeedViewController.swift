@@ -23,7 +23,7 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
     
     var refresh = PublishSubject<Void>()
     
-//    var likeList: [String] = ["1", "5"]
+//    var likeList: [String] = []
     
     //리프레싱 컨트롤 생성
     private lazy var refreshControl: UIRefreshControl = {
@@ -100,10 +100,13 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
                     cellType: FeedCollectionViewCell.self)
             ) { (row, element, cell) in
                 
-//                if likeList.contains(element.id) {
-//                    fill
+//                if self.likeList.contains(element.id) {
+//                    cell.fiveButton
+//                        .setImage(UIImage(named: "five.fill")?
+//                            .withTintColor(CustomColor.pointColor ?? .systemYellow), for: .normal)
 //                } else {
-//                    heart
+//                    cell.fiveButton
+//                        .setImage(UIImage(named: "five"), for: .normal)
 //                }
                 
                 //닉네임
@@ -142,15 +145,15 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
                         case .success(let response):
                             cell.likeStatus = response.likeStatus
                                      
-//                            likeList.append(element.id)
                             if cell.likeStatus == true {
-                                
+//                                self.likeList.append(element.id)
                                 cell.fiveButton.setImage(UIImage(named: "five.fill")?
                                     .withTintColor(CustomColor.pointColor ?? .systemYellow), for: .normal)
                                 
                             } else {
                                 cell.fiveButton
                                     .setImage(UIImage(named: "five"), for: .normal)
+                            
                             }
                             
                             NotificationCenter.default.post(name: NSNotification.Name("needToUpdate"), object: nil)
@@ -170,6 +173,11 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
                     .tap
                     .subscribe(with: self) { owner, _ in
                         let vc = CommentViewController()
+                        
+                        //포스트 아이디 넘김
+                        vc.postId = element.id
+                        vc.commentList = element.comments
+                        
                         vc.modalPresentationStyle = .pageSheet
                         
                         if let sheet = vc.sheetPresentationController {
@@ -193,6 +201,7 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
                     .tap
                     .subscribe(with: self) { owner, _ in
                         let vc = ProfileViewController()
+                    
                         self.navigationController?.pushViewController(vc, animated: true)
                     }
                     .disposed(by: cell.disposeBag)
@@ -247,10 +256,6 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         
-        let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = CustomColor.backgroundColor
-        appearance.configureWithTransparentBackground()
-        self.navigationController?.navigationBar.scrollEdgeAppearance = appearance
 
     }
     
