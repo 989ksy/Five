@@ -16,13 +16,11 @@
 		0F56A5C42B1CA8FF00C7FAD3 /* CommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F56A5C32B1CA8FF00C7FAD3 /* CommentView.swift */; };
 		0F61421D2B2C4309004C888F /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0F61421C2B2C4309004C888F /* IQKeyboardManagerSwift */; };
 		0F6142212B2C862D004C888F /* OptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6142202B2C862D004C888F /* OptionViewController.swift */; };
-		0F6142252B2E05D5004C888F /* ProfileFirstCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6142242B2E05D5004C888F /* ProfileFirstCell.swift */; };
-		0F6142292B2E0C25004C888F /* ProfileSecondCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6142282B2E0C25004C888F /* ProfileSecondCell.swift */; };
+		0F6142252B2E05D5004C888F /* FivedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6142242B2E05D5004C888F /* FivedCollectionViewCell.swift */; };
 		0F61422B2B2ED2CC004C888F /* ProfileLabel + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F61422A2B2ED2CC004C888F /* ProfileLabel + Extension.swift */; };
-		0F61422D2B2EFD6E004C888F /* ProfileSecondCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F61422C2B2EFD6E004C888F /* ProfileSecondCellViewModel.swift */; };
 		0F61422F2B2F0EBA004C888F /* AddContentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F61422E2B2F0EBA004C888F /* AddContentButton.swift */; };
 		0F6142372B305A5B004C888F /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6142362B305A5B004C888F /* CommentTableViewCell.swift */; };
-		0F64AF842B21B4CA00ED4CBE /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F64AF832B21B4CA00ED4CBE /* SearchTableViewCell.swift */; };
+		0F64AF842B21B4CA00ED4CBE /* LoadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F64AF832B21B4CA00ED4CBE /* LoadCell.swift */; };
 		0F64AF862B21C33E00ED4CBE /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F64AF852B21C33E00ED4CBE /* BaseTableViewCell.swift */; };
 		0F64AF892B21D45100ED4CBE /* FollowUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F64AF882B21D45100ED4CBE /* FollowUIButton.swift */; };
 		0F64AF8B2B21EE9C00ED4CBE /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F64AF8A2B21EE9C00ED4CBE /* PostViewController.swift */; };
@@ -139,13 +137,11 @@
 		0F56A5C12B1CA40100C7FAD3 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		0F56A5C32B1CA8FF00C7FAD3 /* CommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
 		0F6142202B2C862D004C888F /* OptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionViewController.swift; sourceTree = "<group>"; };
-		0F6142242B2E05D5004C888F /* ProfileFirstCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFirstCell.swift; sourceTree = "<group>"; };
-		0F6142282B2E0C25004C888F /* ProfileSecondCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSecondCell.swift; sourceTree = "<group>"; };
+		0F6142242B2E05D5004C888F /* FivedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FivedCollectionViewCell.swift; sourceTree = "<group>"; };
 		0F61422A2B2ED2CC004C888F /* ProfileLabel + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileLabel + Extension.swift"; sourceTree = "<group>"; };
-		0F61422C2B2EFD6E004C888F /* ProfileSecondCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSecondCellViewModel.swift; sourceTree = "<group>"; };
 		0F61422E2B2F0EBA004C888F /* AddContentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddContentButton.swift; sourceTree = "<group>"; };
 		0F6142362B305A5B004C888F /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
-		0F64AF832B21B4CA00ED4CBE /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
+		0F64AF832B21B4CA00ED4CBE /* LoadCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadCell.swift; sourceTree = "<group>"; };
 		0F64AF852B21C33E00ED4CBE /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		0F64AF882B21D45100ED4CBE /* FollowUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowUIButton.swift; sourceTree = "<group>"; };
 		0F64AF8A2B21EE9C00ED4CBE /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
@@ -297,8 +293,7 @@
 			isa = PBXGroup;
 			children = (
 				0F4AE4E62B24CB48007BA5EF /* FiveCollectionViewCell.swift */,
-				0F6142242B2E05D5004C888F /* ProfileFirstCell.swift */,
-				0F6142282B2E0C25004C888F /* ProfileSecondCell.swift */,
+				0F6142242B2E05D5004C888F /* FivedCollectionViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -421,7 +416,6 @@
 			isa = PBXGroup;
 			children = (
 				0F89F0EF2B1B787200FECBCD /* ProfileViewModel.swift */,
-				0F61422C2B2EFD6E004C888F /* ProfileSecondCellViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -636,7 +630,7 @@
 		0F64AF822B21B49800ED4CBE /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				0F64AF832B21B4CA00ED4CBE /* SearchTableViewCell.swift */,
+				0F64AF832B21B4CA00ED4CBE /* LoadCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1205,7 +1199,6 @@
 				0F86DD432B19BCE60043939F /* JournalView.swift in Sources */,
 				0F56A5C22B1CA40100C7FAD3 /* CommentViewController.swift in Sources */,
 				0F7DB6842B13A83400A48828 /* ContentView.swift in Sources */,
-				0F6142292B2E0C25004C888F /* ProfileSecondCell.swift in Sources */,
 				0F67CA682B10633D00259285 /* CustomColor.swift in Sources */,
 				0F67CA5B2B1061DB00259285 /* PasswordViewModel.swift in Sources */,
 				0F67CA742B10656B00259285 /* FeedViewController.swift in Sources */,
@@ -1214,7 +1207,7 @@
 				0FB732AD2B286FC20065AB5B /* FiveButton + Extension.swift in Sources */,
 				0F67CA422B1035C000259285 /* LoginView.swift in Sources */,
 				0F89F0F02B1B787200FECBCD /* ProfileViewModel.swift in Sources */,
-				0F64AF842B21B4CA00ED4CBE /* SearchTableViewCell.swift in Sources */,
+				0F64AF842B21B4CA00ED4CBE /* LoadCell.swift in Sources */,
 				0F6C75FB2B1872D600077831 /* ContentViewModel.swift in Sources */,
 				0F6C76072B18ED0D00077831 /* ProfileView.swift in Sources */,
 				0F67CA592B1061C800259285 /* PasswordView.swift in Sources */,
@@ -1247,8 +1240,7 @@
 				0F64AF892B21D45100ED4CBE /* FollowUIButton.swift in Sources */,
 				0F67CA3C2B10354200259285 /* BaseView.swift in Sources */,
 				0F6867762B31E46E00825EE6 /* SettingMenu.swift in Sources */,
-				0F6142252B2E05D5004C888F /* ProfileFirstCell.swift in Sources */,
-				0F61422D2B2EFD6E004C888F /* ProfileSecondCellViewModel.swift in Sources */,
+				0F6142252B2E05D5004C888F /* FivedCollectionViewCell.swift in Sources */,
 				0F64AF862B21C33E00ED4CBE /* BaseTableViewCell.swift in Sources */,
 				0F68677F2B31FBDF00825EE6 /* Setting.swift in Sources */,
 				0F67CA782B10657D00259285 /* FeedViewModel.swift in Sources */,
