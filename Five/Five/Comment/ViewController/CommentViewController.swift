@@ -27,11 +27,35 @@ final class CommentViewController : BaseViewController {
         //테이블뷰 설정
         mainView.commentTableView.delegate = self
         mainView.commentTableView.dataSource = self
+        mainView.commentTableView.estimatedRowHeight = 120
         mainView.commentTableView.rowHeight = UITableView.automaticDimension
         
         bind()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
     }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height
+            UIView.animate(withDuration: 0.3) {
+                self.mainView.commentBoxBottomConstraint?.update(offset: -keyboardHeight)
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
+
+    @objc func keyboardWillHide(notification: NSNotification) {
+        UIView.animate(withDuration: 0.3) {
+            self.mainView.commentBoxBottomConstraint?.update(offset: 0)
+            self.view.layoutIfNeeded()
+        }
+    }
+    
     
     func bind() {
         
@@ -51,7 +75,8 @@ final class CommentViewController : BaseViewController {
             .subscribe(with: self, onNext: { owner, response in
                 switch response {
                 case .success(let response):
-                        
+                    
+                    self.commentList = self.commentList
                     self.commentList?.insert(response, at: 0)
                     owner.mainView.commentTextField.text = ""
                     owner.mainView.commentTextField.placeholder = "댓글을 남겨보세요."
@@ -66,7 +91,70 @@ final class CommentViewController : BaseViewController {
             })
             .disposed(by: disposeBag)
         
+        //버튼 동작
+        mainView.handsUpButton
+            .rx
+            .tap
+            .subscribe(with: self) { owner, _ in
+                owner.mainView.commentTextField.text = "🙌"
+            }
+            .disposed(by: disposeBag)
         
+        mainView.heartButton
+            .rx
+            .tap
+            .subscribe(with: self) { owner, _ in
+                owner.mainView.commentTextField.text = "❤️"
+            }
+            .disposed(by: disposeBag)
+        
+        mainView.fireButton
+            .rx
+            .tap
+            .subscribe(with: self) { owner, _ in
+                owner.mainView.commentTextField.text = "🔥"
+            }
+            .disposed(by: disposeBag)
+        
+        mainView.clapButton
+            .rx
+            .tap
+            .subscribe(with: self) { owner, _ in
+                owner.mainView.commentTextField.text = "👏"
+            }
+            .disposed(by: disposeBag)
+        
+        mainView.tearButton
+            .rx
+            .tap
+            .subscribe(with: self) { owner, _ in
+                owner.mainView.commentTextField.text = "🥲"
+            }
+            .disposed(by: disposeBag)
+        
+        mainView.loveItButton
+            .rx
+            .tap
+            .subscribe(with: self) { owner, _ in
+                owner.mainView.commentTextField.text = "😍"
+            }
+            .disposed(by: disposeBag)
+        
+        mainView.wowButton
+            .rx
+            .tap
+            .subscribe(with: self) { owner, _ in
+                owner.mainView.commentTextField.text = "😮"
+            }
+            .disposed(by: disposeBag)
+        
+        mainView.lolButton
+            .rx
+            .tap
+            .subscribe(with: self) { owner, _ in
+                owner.mainView.commentTextField.text = "😂"
+            }
+            .disposed(by: disposeBag)
         
         
         
@@ -101,7 +189,6 @@ extension CommentViewController : UITableViewDelegate, UITableViewDataSource {
             cell.writerLabel.isHidden = false
         }
 
-           
         return cell
         
     }

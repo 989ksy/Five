@@ -10,6 +10,8 @@ import SnapKit
 
 class CommentView : BaseView {
     
+    var commentBoxBottomConstraint: Constraint?
+    
     let contentLabel = {
         let label = ViewTitleLabel()
         label.text = "댓글"
@@ -27,7 +29,6 @@ class CommentView : BaseView {
         let view = UITableView()
         view.register(CommentTableViewCell.self, forCellReuseIdentifier: "CommentTableViewCell")
         view.backgroundColor = CustomColor.backgroundColor
-        view.rowHeight = 60
         view.separatorStyle = .none
         return view
     }()
@@ -164,7 +165,9 @@ class CommentView : BaseView {
         commentTextfieldBox.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview()
             make.bottom.equalToSuperview()
-            make.height.equalTo(174)
+            make.height.equalTo(140)
+            
+            commentBoxBottomConstraint = make.bottom.equalToSuperview().constraint
         }
         
         reactionStackView.snp.makeConstraints { make in
@@ -184,7 +187,7 @@ class CommentView : BaseView {
             make.trailing.equalToSuperview().inset(46)
             make.height.equalTo(38)
             make.top.equalTo(reactionStackView.snp.bottom).offset(8)
-            make.bottom.greaterThanOrEqualTo(keyboardLayoutGuide.snp.top).offset(-8)
+//            make.bottom.greaterThanOrEqualTo(keyboardLayoutGuide.snp.top).offset(-8)
         }
         
         sentButton.snp.makeConstraints { make in
