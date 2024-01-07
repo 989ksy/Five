@@ -103,13 +103,14 @@ class FeedCollectionViewCell : BaseCollectionViewCell {
         likeStatus = nil
     }
     
+    
     override func configureView() {
+        
         contentView.addSubview(profileView)
         contentView.addSubview(imageView)
         profileView.addSubview(profilePic)
         profileView.addSubview(nickLabel)
         profileView.addSubview(nicknameButton)
-//        profileView.addSubview(optionButton)
         profileView.addSubview(profileViewBottomLine)
         contentView.addSubview(elementView)
         elementView.addSubview(borderline)

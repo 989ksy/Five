@@ -23,7 +23,8 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
     
     var refresh = PublishSubject<Void>()
     
-//    var likeList: [String] = []
+    var likeList: [String] = []
+    var isLiked: Bool?
     
     //리프레싱 컨트롤 생성
     private lazy var refreshControl: UIRefreshControl = {
@@ -53,6 +54,14 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
         NotificationCenter.default.addObserver(self, selector: #selector(uploadView), name: NSNotification.Name("needToUpdate"), object: nil)
         
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(uploadView), name: NSNotification.Name("needToUpdate"), object: nil)
+        
+    }
+
     
     //MARK: - 새 포스트 갱신
     
@@ -100,14 +109,17 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
                     cellType: FeedCollectionViewCell.self)
             ) { (row, element, cell) in
                 
-//                if self.likeList.contains(element.id) {
-//                    cell.fiveButton
-//                        .setImage(UIImage(named: "five.fill")?
-//                            .withTintColor(CustomColor.pointColor ?? .systemYellow), for: .normal)
-//                } else {
-//                    cell.fiveButton
-//                        .setImage(UIImage(named: "five"), for: .normal)
-//                }
+                //좋아요 눈속임
+                if self.likeList.contains(element.id) {
+                    cell.fiveButton
+                        .setImage(UIImage(named: "five.fill")?
+                            .withTintColor(CustomColor.pointColor ?? .systemYellow), for: .normal)
+                } else {
+                    cell.fiveButton
+                        .setImage(UIImage(named: "five"), for: .normal)
+                }
+                
+                
                 
                 //닉네임
                 cell.nickLabel.text = "\(element.creator.nick)"
@@ -144,22 +156,26 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
                         switch response {
                         case .success(let response):
                             cell.likeStatus = response.likeStatus
-                                     
+                            self.isLiked = response.likeStatus
+                            
                             if cell.likeStatus == true {
-//                                self.likeList.append(element.id)
+                                self.likeList.append(element.id)
                                 cell.fiveButton.setImage(UIImage(named: "five.fill")?
                                     .withTintColor(CustomColor.pointColor ?? .systemYellow), for: .normal)
                                 
                             } else {
+                                self.likeList.removeAll { $0 == element.id }
                                 cell.fiveButton
                                     .setImage(UIImage(named: "five"), for: .normal)
                             
                             }
                             
-                            NotificationCenter.default.post(name: NSNotification.Name("needToUpdate"), object: nil)
+//                            NotificationCenter.default.post(name: NSNotification.Name("needToUpdate"), object: nil)
                             
                             print(response) // response.likeStatus 는 bool값
+                            
                         case .failure(let failure):
+                            
                             print("좋아요 버튼 통신문제:",failure)
                             print("error:", failure.errorDescription!)
                         }
@@ -195,13 +211,17 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
                     .disposed(by: cell.disposeBag)
                 
                 
-                //닉네임 버튼
+                //닉네임 버튼 (FeedVC -> ProfileVC)
                 cell.nicknameButton
                     .rx
                     .tap
                     .subscribe(with: self) { owner, _ in
                         let vc = ProfileViewController()
-                    
+                        
+                        vc.FeedUserId = element.creator.id
+                        vc.type = .selectedUser
+                        print("===feedUserID:",  element.creator.id)
+                        
                         self.navigationController?.pushViewController(vc, animated: true)
                     }
                     .disposed(by: cell.disposeBag)
@@ -218,8 +238,10 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
             .modelSelected(ReadData.self)
             .observe(on: MainScheduler.instance)
             .subscribe(with: self) { owner, data in
+                
                 let vc = PostViewController()
                 vc.transitedData.accept(data)
+                vc.isliked = self.isLiked
 
                 self.navigationController?.pushViewController(vc, animated: true)
             }
@@ -237,7 +259,7 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
             .disposed(by: disposeBag)
         
     }
-    
+
     
     //MARK: - navigation+item
     

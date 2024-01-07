@@ -14,17 +14,19 @@ class ProfileView : BaseView {
     let fiveCollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionLayout())
         view.register(FiveCollectionViewCell.self, forCellWithReuseIdentifier: "FiveCollectionViewCell")
+        view.register(FivedCollectionViewCell.self, forCellWithReuseIdentifier: "FivedCollectionViewCell")
         view.register(ProfileCollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ProfileCollectionHeaderView.identifier)
         view.backgroundColor = CustomColor.backgroundColor
         return view
     }()
     
-    let fivedView = {
-        let view = UIView()
-        view.backgroundColor = .blue
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
+    
+//    let fivedView = {
+//        let view = ()
+//        view.backgroundColor = .blue
+//        view.translatesAutoresizingMaskIntoConstraints = false
+//        return view
+//    }()
     
     static func configureCollectionLayout() -> UICollectionViewLayout {
         
@@ -59,7 +61,10 @@ class ProfileView : BaseView {
         ]
             .forEach { self.addSubview($0) }
         
+        
+        
     }
+    
     
     
     

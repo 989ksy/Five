@@ -72,7 +72,7 @@ struct Creator: Decodable {
 
 //MARK: - 포스트 조회
 
-struct ReadPostResponse: Decodable {
+struct ReadPostResponse: Decodable, Hashable {
     let data: [ReadData]
     let nextCursor: String
     
@@ -82,7 +82,8 @@ struct ReadPostResponse: Decodable {
     }
 }
 
-struct ReadData : Decodable {
+struct ReadData : Decodable, Hashable {
+    
     let likes, image: [String]
     let comments: [CreateCommentResponse]
     let id: String
@@ -95,6 +96,15 @@ struct ReadData : Decodable {
         case creator, time, content
         case productID = "product_id"
     }
+    
+    static func == (lhs: ReadData, rhs: ReadData) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+            hasher.combine(id)
+        }
+    
 }
 
 //MARK: - 포스트 삭제
@@ -119,7 +129,7 @@ struct LikePostResponse: Decodable{
 
 //MARK: - 내 프로필 조회
 
-struct MyProfileResponse : Decodable {
+struct MyProfileResponse: Decodable {
     let posts : [String]
     let followers: [String]
     let following: [String]
@@ -130,6 +140,23 @@ struct MyProfileResponse : Decodable {
     enum CodingKeys: String, CodingKey {
         case posts, followers, following
         case email, nick
+        case id = "_id"
+    }
+    
+}
+
+//MARK: - 다른유저 프로필 조회
+
+struct UserProfileResponse: Decodable {
+    let posts : [String]
+    let followers: [String]
+    let following: [String]
+    let id : String
+    var nick : String
+    
+    enum CodingKeys: String, CodingKey {
+        case posts, followers, following
+        case nick
         case id = "_id"
     }
     

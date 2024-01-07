@@ -111,6 +111,8 @@ class ProfileCollectionHeaderView: UICollectionReusableView {
         return btn
     }()
     
+    
+    
     func configureView() {
         
         addSubview(profileColorBackgroundView)
@@ -127,6 +129,8 @@ class ProfileCollectionHeaderView: UICollectionReusableView {
         addSubview(segmentedControl)
         
     }
+    
+    
     
     func setConstraints() {
         

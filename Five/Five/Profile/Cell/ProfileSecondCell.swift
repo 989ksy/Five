@@ -17,7 +17,7 @@ class ProfileSecondCell : BaseTableViewCell {
     
     let disposeBag = DisposeBag()
     let viewModel = ProfileSecondCellViewModel()
-    
+        
 
     //MARK: - UI
     
@@ -63,6 +63,7 @@ class ProfileSecondCell : BaseTableViewCell {
         bind()
         
         NotificationCenter.default.addObserver(self, selector: #selector(uploadView), name: NSNotification.Name("needToUpdate"), object: nil)
+        
         
     }
     
@@ -164,3 +165,4 @@ class ProfileSecondCell : BaseTableViewCell {
     }
     
 }
+

@@ -11,11 +11,26 @@ import RxCocoa
 
 class ProfileViewModel {
     
-    var profileData : MyProfileResponse = MyProfileResponse(posts: [], followers: [], following: [], id: "", email: "", nick: "")
+    //내 프로필 조회
+    var myProfileData : MyProfileResponse = MyProfileResponse(posts: [], followers: [], following: [], id: "", email: "", nick: "")
     
-    let readData = BehaviorSubject<[ReadData]>(value: [])
+    var userProfileData: UserProfileResponse = UserProfileResponse(posts: [], followers: [], following: [], id: "", nick: "")
     
-    var data : [ReadData] = [ReadData(likes: [], image: [], comments: [], id: "", creator: Creator(id: "", nick: "", profile: ""), time: "", content: "", productID: "")]
+    //내 게시글 조회
+    var readMyData: [ReadData] = [ReadData(likes: [], image: [], comments: [], id: "", creator: Creator(id: "", nick: "", profile: ""), time: "", content: "", productID: "")]
+    
+    //유저 게시글 조회
+    var readUserData: [ReadData] = [ReadData(likes: [], image: [], comments: [], id: "", creator: Creator(id: "", nick: "", profile: ""), time: "", content: "", productID: "")]
+    
+    //프로파일VC -> 포스트VC 값전달 때 사용
+    var userData = BehaviorRelay(value: ReadData(likes: [], image: [], comments: [], id: "", creator: Creator(id: "", nick: "", profile: ""), time: "", content: "", productID: ""))
+    
+    let readDataForMe = BehaviorSubject<[ReadData]>(value: [])
+    let readDataForOther = BehaviorSubject<[ReadData]>(value: [])
+    
+    var currentSegment: BehaviorRelay<Int> = BehaviorRelay(value: 0)
+    
+    var userId: String? //FeedVC 에서 받아온 값
     
     let disposeBag = DisposeBag()
     
@@ -27,7 +42,6 @@ class ProfileViewModel {
     
     struct Output {
         let profileItems: BehaviorSubject<[ReadData]>
-        let items: [ReadData]
     }
     
     
@@ -48,8 +62,25 @@ class ProfileViewModel {
             .disposed(by: disposeBag)
     }
     
+    func readDataForUser(userID: String, completion: @escaping (Result<readUserPostResponse, FiveError>) -> Void)
+    {
+        APIManager.shared.readUserPost(id: userID, next: "", limit: "12", productId: "Five_Feed")
+            .subscribe(with: self) { owner, response in
+                switch response {
+                case .success(let data) :
+                completion(.success(data))
+                    print("*** readUserPostResponse in VM", data)
+                    
+                case .failure(let error) :
+                    print("readUserPostResponse failed",error.rawValue)
+                    print(error.errorDescription!)
+                }
+            }
+            .disposed(by: disposeBag)
+    }
     
-    func fetchData(completion: @escaping (Result<MyProfileResponse, FiveError>) -> Void) {
+    //내 프로필 조회
+    func fetchMyProfileData(completion: @escaping (Result<MyProfileResponse, FiveError>) -> Void) {
         APIManager.shared.myProfile()
             .subscribe(with: self) { owner, response in
                 switch response {
@@ -64,6 +95,24 @@ class ProfileViewModel {
             .disposed(by: disposeBag)
     }
     
+    //유저 프로필조회
+    func fetchUserProfileData(userID:String, completion: @escaping (Result<UserProfileResponse, FiveError>) -> Void) {
+        
+        APIManager.shared.userProfile(id: userID)
+            .subscribe(with: self) { owner, response in
+                switch response {
+                case .success(let data) :
+                completion(.success(data))
+                    
+                case .failure(let error) :
+                    print("UserProfile failed",error.rawValue)
+                    print(error.errorDescription!)
+                }
+            }
+            .disposed(by: disposeBag)
+        
+    }
+    
     
     
     func transform(input: Input) -> Output {
@@ -76,7 +125,7 @@ class ProfileViewModel {
         input.prefetchItem
             .subscribe(with: self) { owner , value in
                 
-                let itemCount = self.data.count /*try!*/ /*self.readData.value().count*/
+                let itemCount = self.readMyData.count
                 
                 if value.contains(where: { $0.row == itemCount - 1 }) {
                     if nextCursorItem != "0" {
@@ -97,10 +146,9 @@ class ProfileViewModel {
                 switch response {
                 case .success(let success) :
                     
-                    var itemArray = try! self.readData.value() //원래 배열
+                    var itemArray = try! self.readDataForMe.value() //원래 배열
                     itemArray.append(contentsOf: success.data )
-                    self.readData.onNext(itemArray)
-                    self.data.append(contentsOf: itemArray)
+                    self.readDataForMe.onNext(itemArray)
                     nextCursorItem = success.nextCursor
                 
                 case .failure(let failure) :
@@ -116,15 +164,32 @@ class ProfileViewModel {
                 switch value {
                 case .success(let response):
 //                    print("===최초 Profile",response)
-                    self.readData.onNext(response.data)
-                    self.data.append(contentsOf: response.data)
+                    self.readDataForMe.onNext(response.data)
+                    
                 case .failure(let error):
                     print("\(error)")
                 }
             }
             .disposed(by: disposeBag)
         
-        return Output(profileItems: readData, items: data)
+        //다른 유저의 게시글 조회
+        
+        if let userId = userId {
+            APIManager.shared.readUserPost(id: userId, next: "", limit: "12", productId: "Five_Feed")
+                .subscribe(with: self) { owner, value in
+                    switch value {
+                    case .success(let response):
+                        self.readDataForOther.onNext(response.data)
+                        
+                    case .failure(let error):
+                        print("\(error)")
+                    }
+                }
+                .disposed(by: disposeBag)
+        }
+
+        
+        return Output(profileItems: readDataForMe)
     }
 
     

@@ -28,6 +28,7 @@ enum FiveAPI {
     //프로필
     case myProfile
     case updateProfile (model: UpdateProfile)
+    case userProfile (id: String)
     
     //댓글
     case createComment (model: CreateComment, id: String)
@@ -80,6 +81,8 @@ extension FiveAPI : TargetType {
             return "profile/me"
         case .updateProfile(model: let model):
             return "profile/me"
+        case .userProfile(let id):
+            return "profile/\(id)"
             
         case .createComment(_, let id):
             return "post/\(id)/comment"
@@ -107,7 +110,8 @@ extension FiveAPI : TargetType {
                 .withdraw,
                 .readPost,
                 .myProfile,
-                .readUserPost:
+                .readUserPost,
+                .userProfile:
             return .get
             
         case .deletePost,
@@ -177,6 +181,9 @@ extension FiveAPI : TargetType {
             return .requestPlain
             
         case .myProfile:
+            return .requestPlain
+            
+        case .userProfile(let id):
             return .requestPlain
         
         case .readUserPost(let id, let next, let limit, let product_id):
@@ -268,7 +275,12 @@ extension FiveAPI : TargetType {
         case .likePost: //좋아요
             return ["Authorization" : "\(KeychainStorage.shared.userToken!)",
                     "SesacKey" : "\(APIKey.sesacKey)"]
+            
         case .myProfile:
+            return ["Authorization" : "\(KeychainStorage.shared.userToken!)",
+                    "SesacKey" : "\(APIKey.sesacKey)"]
+            
+        case .userProfile :
             return ["Authorization" : "\(KeychainStorage.shared.userToken!)",
                     "SesacKey" : "\(APIKey.sesacKey)"]
             
@@ -281,6 +293,7 @@ extension FiveAPI : TargetType {
             return ["Authorization" : "\(KeychainStorage.shared.userToken!)",
                     "Content-Type" : "multipart/form-data",
                     "SesacKey" : "\(APIKey.sesacKey)"]
+            
         case .deleteComment:
             return  ["Authorization" : "\(KeychainStorage.shared.userToken!)",
                      "SesacKey" : "\(APIKey.sesacKey)"]

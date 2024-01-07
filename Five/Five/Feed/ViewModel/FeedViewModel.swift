@@ -15,6 +15,7 @@ class FeedViewModel {
     
     let feedData = BehaviorSubject<[ReadData]>(value: [])
     
+    
     struct Input {
         
         //버튼

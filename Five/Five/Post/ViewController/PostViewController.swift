@@ -9,9 +9,20 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+enum PostTransitionType: String {
+    case feed
+    case profile
+}
+
+
 final class PostViewController : BaseViewController, UISheetPresentationControllerDelegate {
     
+    var type : PostTransitionType = .feed
+    
     var transitedData = BehaviorRelay(value: ReadData(likes: [], image: [], comments: [], id: "", creator: Creator(id: "", nick: "", profile: ""), time: "", content: "", productID: ""))
+    
+    //프로파일VC -> 포스트VC 값전달 때 사용
+    var profileTransitedData = BehaviorRelay(value: ReadData(likes: [], image: [], comments: [], id: "", creator: Creator(id: "", nick: "", profile: ""), time: "", content: "", productID: ""))
     
     let mainView = PostView()
     let disposeBag = DisposeBag()
@@ -32,11 +43,12 @@ final class PostViewController : BaseViewController, UISheetPresentationControll
         mainView.imageCollectionView.dataSource = self
         mainView.imageCollectionView.delegate = self
         
-        configureTransitedData()
+        configureData()
         optionButtonStatus()//고유id를 기준으로 삭제권한 확인
         optionButtonTapped()
         
         NotificationCenter.default.addObserver(self, selector: #selector(deleteTappedInOptionVC), name: NSNotification.Name("VCTransited"), object: nil)
+        
         
     }
     
@@ -58,102 +70,211 @@ final class PostViewController : BaseViewController, UISheetPresentationControll
     func optionButtonStatus() {
         // 전달받은 ID값과 로그인 시 저장되어 있는 ID값이 다르면 옵션 키 숨기기
         // 자기 게시글만 삭제 접근 권한 필요하니까.
-        if transitedData.value.creator.id != KeychainStorage.shared.userID {
-            mainView.optionButton.isHidden = true
-        }
-    }
-    
-    func configureTransitedData() {
-        transitedData
-            .bind(with: self) { owner, response in
-                
-                //닉네임 (네비게이션바)
-                if let titleLabel = owner.mainView.titleStackView.arrangedSubviews[0] as? UILabel {
-                    titleLabel.text = "@\(response.creator.nick)"
-                }
-                //닉네임 (프로필바)
-                owner.mainView.nickLabel.text = response.creator.nick
-                //내용
-                owner.mainView.contentLabel.text = response.content
-                //날짜
-                owner.mainView.dateLabel.customDateFormat(initialText: response.time)
-                
-                //좋아요 상태 전달
-                //받아온 상태값에 따라 손바닥 색 유무 파단
-                if response.likes.contains(KeychainStorage.shared.userID!) {
-                    owner.mainView.fiveButton.setImage(UIImage(named: "five.fill")?.withTintColor(CustomColor.pointColor ?? .systemYellow), for: .normal)
-                } else {
-                    owner.mainView.fiveButton.setImage(UIImage(named: "five"), for: .normal)
-                }
-                
-                //좋아요 버튼 상태 바꾸기
-                
-                owner.mainView.fiveButton
-                    .rx
-                    .tap
-                    .flatMap{
-                        APIManager.shared.likePost(id: self.transitedData.value.id)
-                    }
-                    .subscribe(with: self) { owner, result in
-                        switch result {
-                        case .success(let response):
-                            self.isliked = response.likeStatus
-                            
-                            if self.isliked == true {
-                                owner.mainView.fiveButton.setImage(UIImage(named: "five.fill")?.withTintColor(CustomColor.pointColor ?? .systemYellow), for: .normal)
-                            } else {
-                                owner.mainView.fiveButton.setImage(UIImage(named: "five"), for: .normal)
-                            }
-                            
-                            NotificationCenter.default.post(name: NSNotification.Name("needToUpdate"), object: nil)
-                            
-                        case .failure(let failure):
-                            print("like error: \(failure)")
-                            print(failure.errorDescription!)
-                        }
-                    }
-                    .disposed(by: self.disposeBag)
-                
-                
+        
+        switch type {
+        case .feed:
+            if transitedData.value.creator.id != KeychainStorage.shared.userID {
+                mainView.optionButton.isHidden = true
             }
-            .disposed(by: disposeBag)
+        case .profile:
+            if profileTransitedData.value.creator.id != KeychainStorage.shared.userID {
+                mainView.optionButton.isHidden = true
+            }
+        }
         
     }
+    
+    func configureData() {
+        
+        switch type {
+        case .feed:
+            transitedData
+                .bind(with: self) { owner, response in
+                    
+                    //닉네임 (네비게이션바)
+                    if let titleLabel = owner.mainView.titleStackView.arrangedSubviews[0] as? UILabel {
+                        titleLabel.text = "@\(response.creator.nick)"
+                    }
+                    //닉네임 (프로필바)
+                    owner.mainView.nickLabel.text = response.creator.nick
+                    //내용
+                    owner.mainView.contentLabel.text = response.content
+                    //날짜
+                    owner.mainView.dateLabel.customDateFormat(initialText: response.time)
+                    
+                    //좋아요 상태 전달
+                    //받아온 상태값에 따라 손바닥 색 유무 파단
+                    if response.likes.contains(KeychainStorage.shared.userID!) {
+                        owner.mainView.fiveButton.setImage(UIImage(named: "five.fill")?.withTintColor(CustomColor.pointColor ?? .systemYellow), for: .normal)
+                    } else {
+                        owner.mainView.fiveButton.setImage(UIImage(named: "five"), for: .normal)
+                    }
+                    
+                    //좋아요 버튼 상태 바꾸기
+                    
+                    owner.mainView.fiveButton
+                        .rx
+                        .tap
+                        .flatMap{
+                            APIManager.shared.likePost(id: self.transitedData.value.id)
+                        }
+                        .subscribe(with: self) { owner, result in
+                            switch result {
+                            case .success(let response):
+                                self.isliked = response.likeStatus
+                                
+                                if self.isliked == true {
+                                    owner.mainView.fiveButton.setImage(UIImage(named: "five.fill")?.withTintColor(CustomColor.pointColor ?? .systemYellow), for: .normal)
+                                } else {
+                                    owner.mainView.fiveButton.setImage(UIImage(named: "five"), for: .normal)
+                                }
+                                
+                                NotificationCenter.default.post(name: NSNotification.Name("needToUpdate"), object: nil)
+                                
+                            case .failure(let failure):
+                                print("like error: \(failure)")
+                                print(failure.errorDescription!)
+                            }
+                        }
+                        .disposed(by: self.disposeBag)
+                    
+                    
+                }
+                .disposed(by: disposeBag)
+            
+        case .profile:
+            
+            print("프로파일 입성")
+            profileTransitedData
+                .bind(with: self) { owner, response in
+                    
+                    //닉네임 (네비게이션바)
+                    if let titleLabel = owner.mainView.titleStackView.arrangedSubviews[0] as? UILabel {
+                        titleLabel.text = "@\(response.creator.nick)"
+                    }
+                    //닉네임 (프로필바)
+                    owner.mainView.nickLabel.text = response.creator.nick
+                    //내용
+                    owner.mainView.contentLabel.text = response.content
+                    //날짜
+                    owner.mainView.dateLabel.customDateFormat(initialText: response.time)
+                    
+                    //좋아요 상태 전달
+                    //받아온 상태값에 따라 손바닥 색 유무 파단
+                    if response.likes.contains(KeychainStorage.shared.userID!) {
+                        owner.mainView.fiveButton.setImage(UIImage(named: "five.fill")?.withTintColor(CustomColor.pointColor ?? .systemYellow), for: .normal)
+                    } else {
+                        owner.mainView.fiveButton.setImage(UIImage(named: "five"), for: .normal)
+                    }
+                    
+                    //좋아요 버튼 상태 바꾸기
+                    
+                    owner.mainView.fiveButton
+                        .rx
+                        .tap
+                        .flatMap{
+                            APIManager.shared.likePost(id: self.transitedData.value.id)
+                        }
+                        .subscribe(with: self) { owner, result in
+                            switch result {
+                            case .success(let response):
+                                self.isliked = response.likeStatus
+                                
+                                if self.isliked == true {
+                                    owner.mainView.fiveButton.setImage(UIImage(named: "five.fill")?.withTintColor(CustomColor.pointColor ?? .systemYellow), for: .normal)
+                                } else {
+                                    owner.mainView.fiveButton.setImage(UIImage(named: "five"), for: .normal)
+                                }
+                                
+                                NotificationCenter.default.post(name: NSNotification.Name("needToUpdate"), object: nil)
+                                
+                            case .failure(let failure):
+                                print("like error: \(failure)")
+                                print(failure.errorDescription!)
+                            }
+                        }
+                        .disposed(by: self.disposeBag)
+                    
+                    
+                }
+                .disposed(by: disposeBag)
+        }
+        
+        
+    }
+    
+    
     
     ///옵션 버튼 선택
     ///게시글 삭제하는 곳으로 화면전환
     func optionButtonTapped() {
         
-        mainView.optionButton
-            .rx
-            .tap
-            .subscribe(with: self) { owner, _ in
-                print("tapped")
-                
-                let vc = OptionViewController()
-                vc.modalPresentationStyle = .pageSheet
-                vc.postId = self.transitedData.value.id
-                
-                let smallDetentId = UISheetPresentationController.Detent.Identifier("small")
-                let smallDetent = UISheetPresentationController.Detent.custom(identifier: smallDetentId) { context in
-                    return 180
-                }
-                self.sheetPresentationController?.detents = [smallDetent, .medium(), .large()]
-                
-                if let sheet = vc.sheetPresentationController {
-                    //지원할 크기 지정
-                    sheet.detents = [smallDetent]
-                    //크기 변하는거 감지
-                    sheet.delegate = self
+        switch type {
+        case .feed:
+            mainView.optionButton
+                .rx
+                .tap
+                .subscribe(with: self) { owner, _ in
+                    print("tapped")
                     
-                    //시트 상단에 그래버 표시 (기본 값은 false)
-                    sheet.prefersGrabberVisible = true
+                    let vc = OptionViewController()
+                    vc.modalPresentationStyle = .pageSheet
+                    vc.postId = self.transitedData.value.id
+                    
+                    let smallDetentId = UISheetPresentationController.Detent.Identifier("small")
+                    let smallDetent = UISheetPresentationController.Detent.custom(identifier: smallDetentId) { context in
+                        return 180
+                    }
+                    self.sheetPresentationController?.detents = [smallDetent, .medium(), .large()]
+                    
+                    if let sheet = vc.sheetPresentationController {
+                        //지원할 크기 지정
+                        sheet.detents = [smallDetent]
+                        //크기 변하는거 감지
+                        sheet.delegate = self
+                        
+                        //시트 상단에 그래버 표시 (기본 값은 false)
+                        sheet.prefersGrabberVisible = true
+                    }
+                    
+                    self.present(vc, animated: true, completion: nil)
+                    
                 }
-                
-                self.present(vc, animated: true, completion: nil)
-
-            }
-            .disposed(by: disposeBag)
+                .disposed(by: disposeBag)
+            
+        case .profile:
+            mainView.optionButton
+                .rx
+                .tap
+                .subscribe(with: self) { owner, _ in
+                    print("tapped")
+                    
+                    let vc = OptionViewController()
+                    vc.modalPresentationStyle = .pageSheet
+                    vc.postId = self.profileTransitedData.value.id
+                    
+                    let smallDetentId = UISheetPresentationController.Detent.Identifier("small")
+                    let smallDetent = UISheetPresentationController.Detent.custom(identifier: smallDetentId) { context in
+                        return 180
+                    }
+                    self.sheetPresentationController?.detents = [smallDetent, .medium(), .large()]
+                    
+                    if let sheet = vc.sheetPresentationController {
+                        //지원할 크기 지정
+                        sheet.detents = [smallDetent]
+                        //크기 변하는거 감지
+                        sheet.delegate = self
+                        
+                        //시트 상단에 그래버 표시 (기본 값은 false)
+                        sheet.prefersGrabberVisible = true
+                    }
+                    
+                    self.present(vc, animated: true, completion: nil)
+                    
+                }
+                .disposed(by: disposeBag)
+            
+        }
         
     }
     
@@ -174,7 +295,14 @@ extension PostViewController : UICollectionViewDelegate, UICollectionViewDataSou
     //MARK: - 이미지
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return transitedData.value.image.count
+        
+        switch type {
+        case .feed :
+            return transitedData.value.image.count
+        case .profile :
+            return profileTransitedData.value.image.count
+        }
+        
     }
     
     
@@ -182,17 +310,35 @@ extension PostViewController : UICollectionViewDelegate, UICollectionViewDataSou
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PostCollectionViewCell", for: indexPath) as? PostCollectionViewCell else { return UICollectionViewCell() }
         
-        cell.countLabel.text = "\(indexPath.row + 1)/\(transitedData.value.image.count)"
         
-        let imageUrls = transitedData.value.image[indexPath.item]
-
-           let imageUrlString = String(imageUrls)
-
-           let pic = URL(string: "\(BaseURL.base)" + imageUrlString)
-
-           cell.uploadedImaegView.loadImage(from: pic!, placeHolderImage: UIImage(named: "personal"))
-
-        return cell
+        switch type{
+        case .feed :
+            cell.countLabel.text = "\(indexPath.row + 1)/\(transitedData.value.image.count)"
+            
+            let imageUrls = transitedData.value.image[indexPath.item]
+            
+            let imageUrlString = String(imageUrls)
+            
+            let pic = URL(string: "\(BaseURL.base)" + imageUrlString)
+            
+            cell.uploadedImaegView.loadImage(from: pic!, placeHolderImage: UIImage(named: "personal"))
+            
+            return cell
+            
+        case .profile :
+            cell.countLabel.text = "\(indexPath.row + 1)/\(profileTransitedData.value.image.count ?? 0)"
+            
+            let url = profileTransitedData.value.image[indexPath.item]
+            
+            let imageUrlString = "\(url)"
+            
+            let pic = URL(string: "\(BaseURL.base)" + imageUrlString)
+            
+            cell.uploadedImaegView.loadImage(from: pic!, placeHolderImage: UIImage(named: "personal"))
+            
+            return cell
+        }
+        
     }
     
     

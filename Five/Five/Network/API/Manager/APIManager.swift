@@ -20,6 +20,33 @@ final class APIManager {
     
     private let disposeBag = DisposeBag()
     
+    //MARK: - 다른 유저 프로필 조회
+    
+    func userProfile(id: String) -> Single<Result<UserProfileResponse, FiveError>>{
+        
+        return Single.create { single in
+            self.provider.request(.userProfile(id: id)) { result in
+                switch result {
+                case .success(let response):
+                    do {
+                        let data = try JSONDecoder().decode(UserProfileResponse.self, from: response.data)
+                        single(.success(.success(data)))
+                    } catch {
+                        single(.success(.failure(.decodingError)))
+                    }
+                    
+                case .failure(let error) :
+                    print("=======네트워크 실패의 실패 from APIManager : \(error.response?.request)")
+                    
+                    guard let customError = FiveError(rawValue: error.response?.statusCode ??  1) else { return }
+                    single(.success(.failure(customError)))
+                }
+            }
+            return Disposables.create()
+        }
+        
+    }
+    
     
     //MARK: - 댓글 삭제
     

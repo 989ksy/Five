@@ -9,51 +9,27 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+enum ProfileTransitionType: String {
+    case loggedInUser // 로그인한 사용자의 프로필
+    case selectedUser // 선택한 사용자의 프로필
+}
+
 final class ProfileViewController: BaseViewController {
     
-    let mainView = ProfileView()
-    let headerView = ProfileCollectionHeaderView()
-    var profileData : MyProfileResponse = MyProfileResponse(posts: [], followers: [], following: [], id: "", email: "", nick: "")
+    var type: ProfileTransitionType = .loggedInUser
     
+    let mainView = ProfileView()
     let viewModel = ProfileViewModel()
+    let headerView = ProfileCollectionHeaderView()
 
+    //FeedVC -> ProfileVC userID
+    var FeedUserId: String?
+    
+    //갱신
     var refresh = PublishSubject<Void>()
     
     let disposeBag = DisposeBag()
     
-    
-    
-    //MARK: - SegmentedControl 설정
-    
-    var shouldHideFirstView: Bool? {
-        didSet {
-            guard let shouldHideFirstView = self.shouldHideFirstView else { return }
-            mainView.fiveCollectionView.isHidden = shouldHideFirstView
-            mainView.fivedView.isHidden = !self.mainView.fiveCollectionView.isHidden
-        }
-    }
-    
-    
-    
-    @objc private func didChangeValue(segment: UISegmentedControl) {
-        self.shouldHideFirstView = segment.selectedSegmentIndex != 0
-    }
-    
-    func setSegmentedControl() {
-        
-        headerView.segmentedControl.addTarget(self, action: #selector(didChangeValue(segment: )), for: .valueChanged)
-        headerView.segmentedControl.selectedSegmentIndex = 0
-        headerView.segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.gray], for: .normal)
-        headerView.segmentedControl.setTitleTextAttributes(
-            [
-                NSAttributedString.Key.foregroundColor: CustomColor.pointColor ?? .systemYellow,
-                .font: CustomFont.mediumGmarket15 ?? .systemFont(ofSize: 15)
-            ],
-            for: .selected
-        )
-        headerView.segmentedControl.selectedSegmentIndex = 0
-        
-    }
 
     override func loadView() {
         self.view = mainView
@@ -61,6 +37,7 @@ final class ProfileViewController: BaseViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         //컬렉션뷰
         mainView.fiveCollectionView.dataSource = self
@@ -70,26 +47,61 @@ final class ProfileViewController: BaseViewController {
         //업데이트
 //        NotificationCenter.default.addObserver(self, selector: #selector(uploadView), name: NSNotification.Name("needToUpdate"), object: nil)
         
-        setSegmentedControl()
+        //작성게시글 조회
         fetchReadData()
+        
+        headerView.segmentedControl.selectedSegmentIndex = 0
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(segmentValueChanged), name: NSNotification.Name("segmentValueChanged"), object: nil)
+        
+        //네비게이션 세팅
+        self.navigationController?.navigationBar.topItem?.title = ""
+        self.navigationController?.navigationBar.tintColor = .black
         
         bind() //컨텐츠버튼
     }
     
+    ///작성게시글 조회
     func fetchReadData() {
         
-        viewModel.readData { response in
-            switch response {
-            case .success(let data):
-                self.viewModel.data = data.data
-                self.mainView.fiveCollectionView.reloadData()
-            case .failure(let failure):
-                print("===profile_readData",failure.errorDescription!)
+        switch type {
+            
+        case .loggedInUser: //내가 작성한 게시글 조회
+            viewModel.readData { response in
+                switch response {
+                case .success(let data):
+                    self.viewModel.readMyData = data.data
+                    self.mainView.fiveCollectionView.reloadData()
+                case .failure(let failure):
+                    print("===profile_readData",failure.errorDescription!)
+                }
+            }
+            
+        case .selectedUser: //다른 유저 게시글 조회
+            
+            print("다른 유저 게시글 조회 1")
+            
+            viewModel.readDataForUser(userID: FeedUserId!) {
+                response in
+                print("다른유저 게시글 조회2")
+                switch response {
+                case .success(let data):
+                    
+                    print("다른 유저 게시글:",data.data)
+
+                    self.viewModel.readUserData = data.data
+                    
+                    print("데이터 잘 들어감?",self.viewModel.readUserData )
+                    self.mainView.fiveCollectionView.reloadData()
+                    
+                    print("다른유저 게시글 조회 성공3")
+                case .failure(let failure):
+                    print("===profile_readData",failure.errorDescription!)
+                }
             }
         }
         
     }
-    
     
     ///컨텐츠 추가버튼
     func bind() {
@@ -103,16 +115,25 @@ final class ProfileViewController: BaseViewController {
                 self.present(vc, animated: true)
             }
             .disposed(by: disposeBag)
-        
 
     }
+
     
     ///세팅버튼 선택 시...
     @objc func settingButtonTapped() {
         let vc = SettingViewController()
-        vc.transitedData = profileData
+        vc.transitedData = viewModel.myProfileData
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    
+  
+//    //MARK: - SegmentedControl 설정
+    
+    @objc func segmentValueChanged(_ notification: Notification) {
+        guard notification.object is UISegmentedControl else { return }
+           mainView.fiveCollectionView.reloadData()
+        
+       }
     
 
 }
@@ -127,65 +148,236 @@ extension ProfileViewController : UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return viewModel.data.count
+        switch type {
+        case .loggedInUser:
+            return viewModel.readMyData.count
+            
+        case .selectedUser:
+            print("=====몇개야..!!",viewModel.readUserData.count)
+            print("=====피드에서 넘어옴",viewModel.readUserData)
+            return viewModel.readUserData.count
+        }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FiveCollectionViewCell.identifier, for: indexPath) as?  FiveCollectionViewCell else { return UICollectionViewCell() }
-        
-        let data = viewModel.data[indexPath.item]
-        
-        let url = URL(string: "\(BaseURL.base)" + (data.image.first ?? ""))
-        cell.firstImageView.loadImage(from: url!, placeHolderImage: UIImage(named: "strar.fill"))
-        
-        if data.image.count < 2 {
-            cell.moreIconImageView.isHidden = true
-        } else {
-            cell.moreIconImageView.isHidden = false
+        switch type {
+        case .loggedInUser:
+            
+            if  headerView.segmentedControl.selectedSegmentIndex == 0 {
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FiveCollectionViewCell.identifier, for: indexPath) as?  FiveCollectionViewCell else { return UICollectionViewCell() }
+                
+                let data = viewModel.readMyData[indexPath.item]
+                let url = URL(string: "\(BaseURL.base)" + (data.image.first ?? ""))
+                cell.firstImageView.loadImage(from: url!, placeHolderImage: UIImage(named: "strar.fill"))
+                
+                if data.image.count < 2 {
+                    cell.moreIconImageView.isHidden = true
+                } else {
+                    cell.moreIconImageView.isHidden = false
+                }
+                
+                return cell
+                
+            } else if headerView.segmentedControl.selectedSegmentIndex == 1 {
+                
+                NotificationCenter.default.post(name: NSNotification.Name("segmentValueChanged"), object: nil)
+                
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FivedCollectionViewCell.identifier, for: indexPath) as?  FivedCollectionViewCell else { return UICollectionViewCell() }
+                
+                cell.firstImageView.image = UIImage(systemName: "heart")
+                
+                return cell
+                
+            }
+            
+            return UICollectionViewCell()
+            
+        case .selectedUser:
+            
+            if  headerView.segmentedControl.selectedSegmentIndex == 0 {
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FiveCollectionViewCell.identifier, for: indexPath) as?  FiveCollectionViewCell else { return UICollectionViewCell() }
+                
+                let data = viewModel.readUserData[indexPath.item]
+                
+                let url = URL(string: "\(BaseURL.base)" + (data.image.first ?? ""))
+                
+                cell.firstImageView.loadImage(from: url!, placeHolderImage: UIImage(named: "strar.fill"))
+                
+                if data.image.count < 2 {
+                    cell.moreIconImageView.isHidden = true
+                } else {
+                    cell.moreIconImageView.isHidden = false
+                }
+                
+                return cell
+                
+            } else if headerView.segmentedControl.selectedSegmentIndex == 1 {
+                
+                NotificationCenter.default.post(name: NSNotification.Name("segmentValueChanged"), object: nil)
+                
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FivedCollectionViewCell.identifier, for: indexPath) as?  FivedCollectionViewCell else { return UICollectionViewCell() }
+                
+                cell.firstImageView.image = UIImage(systemName: "heart")
+                
+                return cell
+                
+            }
+            
+            return UICollectionViewCell()
+            
+            
         }
-            return cell
         
     }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        switch type {
+        case .loggedInUser:
+            
+            let vc = PostViewController()
+            vc.profileTransitedData.accept(viewModel.readMyData[indexPath.item])
+            vc.type = .profile
+            
+            navigationController?.pushViewController(vc, animated: true)
+            
+        case .selectedUser:
+            let vc = PostViewController()
+            vc.profileTransitedData.accept(viewModel.readUserData[indexPath.item])
+            vc.type = .profile
+            
+            navigationController?.pushViewController(vc, animated: true)
+        }
+        
+    }
+    
         
         func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
             
-            if kind == UICollectionView.elementKindSectionHeader {
+            switch type {
                 
-                guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ProfileCollectionHeaderView.identifier, for: indexPath) as? ProfileCollectionHeaderView
-                        
-                else {
-                    return ProfileCollectionHeaderView()
-                }
+            case .loggedInUser:
                 
-                //HeaderView UI + Layout
-                header.configureView()
-                header.setConstraints()
-                
-                //HeaderView Data ... 통신 성공 시
-                viewModel.fetchData { response in
-                    switch response {
-                    case .success(let data):
-                        
-                        header.emailLabel.text = data.email
-                        header.nicknameLabel.text = data.nick
-                        header.followDataLabel.text = "\(data.followers.count)"
-                        header.followingDataLabel.text = "\(data.following.count)"
-                        
-                        self.profileData = data
-                        
-                        header.settingButton.addTarget(self, action: #selector(self.settingButtonTapped), for: .touchUpInside)
-                        
-                    case .failure(let failure):
-                        print("myProfile failed",failure.rawValue)
-                        print(failure.errorDescription!)
+                if kind == UICollectionView.elementKindSectionHeader {
+                    
+                    guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ProfileCollectionHeaderView.identifier, for: indexPath) as? ProfileCollectionHeaderView
+                            
+                    else {
+                        return ProfileCollectionHeaderView()
                     }
+                    
+                    //HeaderView UI + Layout
+                    header.configureView()
+                    header.setConstraints()
+                    
+                    
+                    //HeaderView Data ... 통신 성공 시
+                    viewModel.fetchMyProfileData { response in
+                        switch response {
+                        case .success(let data):
+                            
+                            header.emailLabel.text = data.email
+                            header.nicknameLabel.text = data.nick
+                            header.followDataLabel.text = "\(data.followers.count)"
+                            header.followingDataLabel.text = "\(data.following.count)"
+                            
+                            if KeychainStorage.shared.userID == self.viewModel.myProfileData.id {
+                                header.settingButton.isHidden = false
+                            } else {
+                                header.settingButton.isHidden = true
+                            }
+                            
+                            self.viewModel.myProfileData = data
+                            
+                            ///
+                            
+                            header.settingButton.addTarget(self, action: #selector(self.settingButtonTapped), for: .touchUpInside)
+                            
+                                header.segmentedControl.selectedSegmentIndex = 0
+                                header.segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.gray], for: .normal)
+                                header.segmentedControl.setTitleTextAttributes(
+                                    [
+                                        NSAttributedString.Key.foregroundColor: CustomColor.pointColor ?? .systemYellow,
+                                        .font: CustomFont.mediumGmarket15 ?? .systemFont(ofSize: 15)
+                                    ],
+                                    for: .selected
+                                )
+
+                        case .failure(let failure):
+                            print("myProfile failed",failure.rawValue)
+                            print(failure.errorDescription!)
+                        }
+                    }
+                    return header
+                    
+                } else {
+                    return UICollectionReusableView()
                 }
-                return header
                 
-            } else {
-                return UICollectionReusableView()
+            case .selectedUser:
+                
+                if kind == UICollectionView.elementKindSectionHeader {
+                    
+                    guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ProfileCollectionHeaderView.identifier, for: indexPath) as? ProfileCollectionHeaderView
+                            
+                    else {
+                        return ProfileCollectionHeaderView()
+                    }
+                    
+                    //HeaderView UI + Layout
+                    header.configureView()
+                    header.setConstraints()
+                    
+                    
+                    //HeaderView Data ... 통신 성공 시
+                    viewModel.fetchUserProfileData(userID: FeedUserId!) { response in
+                        switch response {
+                        case .success(let data):
+                            
+                            header.nicknameLabel.text = data.nick
+                            header.followDataLabel.text = "\(data.followers.count)"
+                            header.followingDataLabel.text = "\(data.following.count)"
+                            header.emailLabel.text = "wow@naver.com"
+                            
+                            if KeychainStorage.shared.userID == self.viewModel.myProfileData.id {
+                                header.settingButton.isHidden = false
+                            } else {
+                                header.settingButton.isHidden = true
+                            }
+                            
+                            self.viewModel.userProfileData = data
+                            
+                            ///
+                            
+                            header.settingButton.addTarget(self, action: #selector(self.settingButtonTapped), for: .touchUpInside)
+                            
+                                header.segmentedControl.selectedSegmentIndex = 0
+                                header.segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.gray], for: .normal)
+                                header.segmentedControl.setTitleTextAttributes(
+                                    [
+                                        NSAttributedString.Key.foregroundColor: CustomColor.pointColor ?? .systemYellow,
+                                        .font: CustomFont.mediumGmarket15 ?? .systemFont(ofSize: 15)
+                                    ],
+                                    for: .selected
+                                )
+
+                        case .failure(let failure):
+                            print("myProfile failed",failure.rawValue)
+                            print(failure.errorDescription!)
+                        }
+                    }
+                    return header
+                    
+                } else {
+                    return UICollectionReusableView()
+                }
+                
             }
+            
+           
         }
         
         
