@@ -110,7 +110,6 @@ class ProfileViewModel {
                 }
             }
             .disposed(by: disposeBag)
-        
     }
     
     

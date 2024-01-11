@@ -178,6 +178,7 @@ extension ProfileViewController : UICollectionViewDelegate, UICollectionViewData
                     cell.moreIconImageView.isHidden = false
                 }
                 
+                
                 return cell
                 
             } else if headerView.segmentedControl.selectedSegmentIndex == 1 {
@@ -210,6 +211,8 @@ extension ProfileViewController : UICollectionViewDelegate, UICollectionViewData
                 } else {
                     cell.moreIconImageView.isHidden = false
                 }
+                
+                
                 
                 return cell
                 
@@ -286,8 +289,10 @@ extension ProfileViewController : UICollectionViewDelegate, UICollectionViewData
                             
                             if KeychainStorage.shared.userID == self.viewModel.myProfileData.id {
                                 header.settingButton.isHidden = false
+                                header.followButton.isHidden = true
                             } else {
                                 header.settingButton.isHidden = true
+                                header.settingButton.isHidden = false
                             }
                             
                             self.viewModel.myProfileData = data
@@ -344,8 +349,10 @@ extension ProfileViewController : UICollectionViewDelegate, UICollectionViewData
                             
                             if KeychainStorage.shared.userID == self.viewModel.myProfileData.id {
                                 header.settingButton.isHidden = false
+                                header.followButton.isHidden = true
                             } else {
                                 header.settingButton.isHidden = true
+                                header.followButton.isHidden = false
                             }
                             
                             self.viewModel.userProfileData = data

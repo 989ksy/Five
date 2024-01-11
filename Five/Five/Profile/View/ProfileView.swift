@@ -20,14 +20,6 @@ class ProfileView : BaseView {
         return view
     }()
     
-    
-//    let fivedView = {
-//        let view = ()
-//        view.backgroundColor = .blue
-//        view.translatesAutoresizingMaskIntoConstraints = false
-//        return view
-//    }()
-    
     static func configureCollectionLayout() -> UICollectionViewLayout {
         
         let layout = UICollectionViewFlowLayout()

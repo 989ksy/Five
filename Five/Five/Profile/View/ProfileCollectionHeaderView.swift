@@ -41,8 +41,8 @@ class ProfileCollectionHeaderView: UICollectionReusableView {
     
     let settingButton = {
         let btn = SettingButton()
-        btn.layer.borderColor = UIColor.systemGray4.cgColor
-        btn.layer.borderWidth = 1
+        btn.layer.borderColor = CustomColor.backgroundColor?.cgColor
+        btn.layer.borderWidth = 5
         
         return btn
     }()
@@ -145,9 +145,9 @@ class ProfileCollectionHeaderView: UICollectionReusableView {
         }
         
         settingButton.snp.makeConstraints { make in
-            make.size.equalTo(32)
-            make.trailing.equalTo(followButton.snp.leading).offset(-8)
-            make.centerY.equalTo(followButton)
+            make.size.equalTo(30)
+            make.leading.equalTo(profileImage.snp.trailing).offset(-20)
+            make.bottom.equalTo(nicknameLabel.snp.top).offset(-12)
         }
         
         nicknameLabel.snp.makeConstraints { make in
