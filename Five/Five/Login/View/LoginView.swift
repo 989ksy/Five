@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class LoginView : BaseView {
+final class LoginView : BaseView {
     
     let titleLabel = {
         let view = UILabel()
@@ -21,8 +21,13 @@ class LoginView : BaseView {
     let emailTextField = {
         let view = UITextField()
         view.placeholder = "이메일을 입력해주세요."
-        view.borderStyle = .roundedRect
+        view.borderStyle = .none
+        view.layer.cornerRadius = 12
+        view.layer.borderWidth = 1
+        view.layer.borderColor = UIColor.systemGray5.cgColor
         view.font = CustomFont.lightGmarket15
+        view.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 8.0, height: 0.0))
+        view.leftViewMode = .always
         view.autocapitalizationType = .none
         return view
     }()
@@ -30,8 +35,13 @@ class LoginView : BaseView {
     let passwordTextField = {
         let view = UITextField()
         view.placeholder = "비밀번호를 입력해주세요."
-        view.borderStyle = .roundedRect
+        view.borderStyle = .none
+        view.layer.cornerRadius = 12
+        view.layer.borderWidth = 1
+        view.layer.borderColor = UIColor.systemGray5.cgColor
         view.font = CustomFont.lightGmarket15
+        view.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 8.0, height: 0.0))
+        view.leftViewMode = .always
         view.autocapitalizationType = .none
         view.isSecureTextEntry = true
         return view

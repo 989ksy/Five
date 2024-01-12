@@ -12,6 +12,7 @@ private struct KeychainKeys {
     static let userTokenKey: String = "User.Token.Key"
     static let userRefreshTokenKey: String = "User.RefeshToken.Key"
     static let userIDKey : String = "User.ID.Key"
+    static let userEmailKey: String = "User.Email.Key"
 }
 
 final class KeychainStorage {
@@ -61,6 +62,21 @@ final class KeychainStorage {
                 KeychainWrapper.standard.set(value, forKey: KeychainKeys.userIDKey)
             } else {
                 KeychainWrapper.standard.removeObject(forKey: KeychainKeys.userIDKey)
+            }
+        }
+    }
+    
+    //MARK: - USer Email
+    
+    var userEmail: String? {
+        get {
+            KeychainWrapper.standard.string(forKey: KeychainKeys.userEmailKey)
+        }
+        set {
+            if let value = newValue {
+                KeychainWrapper.standard.set(value, forKey: KeychainKeys.userEmailKey)
+            } else {
+                KeychainWrapper.standard.removeObject(forKey: KeychainKeys.userEmailKey)
             }
         }
     }
