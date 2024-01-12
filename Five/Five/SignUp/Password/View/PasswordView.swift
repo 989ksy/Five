@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PasswordView : BaseView {
+final class PasswordView : BaseView {
     
     let guideLabel = {
         let view = UILabel()

@@ -47,6 +47,7 @@ final class PostViewController : BaseViewController, UISheetPresentationControll
         mainView.imageCollectionView.dataSource = self
         mainView.imageCollectionView.delegate = self
         
+        
         configureData()
         optionButtonStatus()//고유id를 기준으로 삭제권한 확인
         optionButtonTapped()

@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 
 
-class ProfileCollectionHeaderView: UICollectionReusableView {
+final class ProfileCollectionHeaderView: UICollectionReusableView {
     
     static let identifier = "ProfileCollectionHeaderView"
     

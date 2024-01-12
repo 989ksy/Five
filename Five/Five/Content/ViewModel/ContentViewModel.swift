@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 import UIKit
 
-class ContentViewModel {
+final class ContentViewModel {
     
     let disposeBag = DisposeBag()
     

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OutButton : UIButton {
+final class OutButton : UIButton {
     
     override init(frame: CGRect) {
         super.init(frame: frame)

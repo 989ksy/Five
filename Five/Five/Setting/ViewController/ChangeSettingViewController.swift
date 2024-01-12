@@ -10,7 +10,7 @@ import SnapKit
 
 import PhotosUI
 
-class ChangeSettingViewController: BaseViewController {
+final class ChangeSettingViewController: BaseViewController {
     
     var nickname: String?
 //    var newNicknameCompletion : ((String) -> Void)?

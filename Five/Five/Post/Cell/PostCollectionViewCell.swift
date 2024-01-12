@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class PostCollectionViewCell : BaseCollectionViewCell {
+final class PostCollectionViewCell : BaseCollectionViewCell {
     
     static let identifier = "PostCollectionViewCell"
     

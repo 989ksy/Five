@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class NicknameViewModel {
+final class NicknameViewModel {
     
     let directionText = BehaviorRelay(value: "30자 이내로 입력해주세요.")
     let disposeBag = DisposeBag()

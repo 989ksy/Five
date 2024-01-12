@@ -10,7 +10,7 @@ import SnapKit
 import RxSwift
 import RxCocoa
 
-class OptionViewController: BaseViewController {
+final class OptionViewController: BaseViewController {
     
     var postId : String? //전달 받은 포스트 id값
     let disposebag = DisposeBag()

@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 import SwiftKeychainWrapper
 
-class LoginViewModel {
+final class LoginViewModel {
     
     let emailRegex = #"^([a-zA-Z0-9._-])+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,20}$"#
     let passwordRegex = "[A-Za-z0-9!_@$%^&+=]{8,20}"

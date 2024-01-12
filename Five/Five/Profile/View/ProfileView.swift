@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class ProfileView : BaseView {
+final class ProfileView : BaseView {
 
     
     let fiveCollectionView = {

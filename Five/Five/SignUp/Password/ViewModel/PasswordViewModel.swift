@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class PasswordViewModel {
+final class PasswordViewModel {
     
     let firstGuideText = BehaviorRelay(value: "✓ 영문 및 숫자 8-20자 이내")
     let secondGuideText = BehaviorRelay(value: "✓ 비밀번호 일치")

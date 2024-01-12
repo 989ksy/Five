@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class FeedViewModel {
+final class FeedViewModel {
 
     let disposeBag = DisposeBag()
     

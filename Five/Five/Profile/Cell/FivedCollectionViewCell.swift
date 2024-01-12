@@ -10,7 +10,7 @@ import SnapKit
 import RxSwift
 import RxCocoa
 
-class FivedCollectionViewCell : BaseCollectionViewCell {
+final class FivedCollectionViewCell : BaseCollectionViewCell {
     
     static let identifier = "FivedCollectionViewCell"
     

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FiveButton : UIButton {
+final class FiveButton : UIButton {
     
     override init(frame: CGRect) {
         super.init(frame: frame)

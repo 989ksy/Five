@@ -15,7 +15,7 @@ protocol LoginViewControllerAttributed {
     func loginAlertForFailure(message: String)
 }
 
-class LoginViewController : BaseViewController {
+final class LoginViewController : BaseViewController, UITextFieldDelegate {
     
     private let mainView = LoginView()
     private let viewModel = LoginViewModel()
@@ -29,6 +29,10 @@ class LoginViewController : BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        mainView.emailTextField.delegate = self
+        mainView.passwordTextField.delegate = self
+        self.hideKeyboardWhenTappedAround()
         
         bind()
     }
@@ -63,11 +67,12 @@ class LoginViewController : BaseViewController {
                 
                 if bool {
                     //로그인 성공 -> 피드 화면전환
-                    
                     let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
                     let SceneDelegate = windowScene?.delegate as? SceneDelegate
                     
                     let vc = CustomTabBarController()
+                    
+                    KeychainStorage.shared.userEmail = self.mainView.emailTextField.text ?? "yeah@gmail.com"
                     
                     SceneDelegate?.window?.rootViewController = vc
                     SceneDelegate?.window?.makeKeyAndVisible()
@@ -104,6 +109,32 @@ class LoginViewController : BaseViewController {
                 owner.mainView.eyeButton.tintColor = .clear
             }
             .disposed(by: disposeBag)
+        
+        // UITextField의 활성화 상태를 감시하고 borderColor 변경
+                mainView.emailTextField.rx.controlEvent([.editingDidBegin])
+                    .subscribe(onNext: { [weak self] in
+                        self?.mainView.emailTextField.layer.borderColor = CustomColor.pointColor?.cgColor
+                    })
+                    .disposed(by: disposeBag)
+                
+                mainView.emailTextField.rx.controlEvent([.editingDidEnd])
+                    .subscribe(onNext: { [weak self] in
+                        self?.mainView.emailTextField.layer.borderColor = UIColor.systemGray4.cgColor
+                    })
+                    .disposed(by: disposeBag)
+                
+                mainView.passwordTextField.rx.controlEvent([.editingDidBegin])
+                    .subscribe(onNext: { [weak self] in
+                        self?.mainView.passwordTextField.layer.borderColor = CustomColor.pointColor?.cgColor
+                    })
+                    .disposed(by: disposeBag)
+                
+                mainView.passwordTextField.rx.controlEvent([.editingDidEnd])
+                    .subscribe(onNext: { [weak self] in
+                        self?.mainView.passwordTextField.layer.borderColor = UIColor.systemGray4.cgColor
+                    })
+                    .disposed(by: disposeBag)
+        
     }
     
     
@@ -125,4 +156,3 @@ class LoginViewController : BaseViewController {
     
     
 }
-

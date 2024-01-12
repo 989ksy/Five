@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class SettingTableCell : BaseTableViewCell {
+final class SettingTableCell : BaseTableViewCell {
     
     static let identifier = "SettingTableCell"
     

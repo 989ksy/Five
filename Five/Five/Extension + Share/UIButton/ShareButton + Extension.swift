@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ShareButton : UIButton {
+final class ShareButton : UIButton {
     
     override init(frame: CGRect) {
         super.init(frame: frame)

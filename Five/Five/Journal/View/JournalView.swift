@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class JournalView : BaseView {
+final class JournalView : BaseView {
     
     let contentLabel = {
         let label = ViewTitleLabel()

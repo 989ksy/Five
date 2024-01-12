@@ -7,8 +7,7 @@
 
 import UIKit
 
-
-class UnderlineSegmentedControl: UISegmentedControl {
+final  class UnderlineSegmentedControl: UISegmentedControl {
     
     override init(frame: CGRect) {
       super.init(frame: frame)

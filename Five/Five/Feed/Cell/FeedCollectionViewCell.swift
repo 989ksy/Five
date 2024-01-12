@@ -10,7 +10,7 @@ import SnapKit
 import RxSwift
 import RxCocoa
 
-class FeedCollectionViewCell : BaseCollectionViewCell {
+final class FeedCollectionViewCell : BaseCollectionViewCell {
     
     static let identifier = "FeedCollectionViewCell"
     var disposeBag = DisposeBag()

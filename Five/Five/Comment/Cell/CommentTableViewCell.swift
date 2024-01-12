@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class CommentTableViewCell : BaseTableViewCell {
+final class CommentTableViewCell : BaseTableViewCell {
     
     static let identifier = "CommentTableViewCell"
     

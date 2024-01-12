@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class ContentCollectionViewCell : BaseCollectionViewCell {
+final class ContentCollectionViewCell : BaseCollectionViewCell {
     
     static let ContentCollectionViewCell = "ContentCollectionViewCell"
     

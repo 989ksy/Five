@@ -7,7 +7,7 @@
 
 import UIKit
 
-class NicknameView : BaseView {
+final class NicknameView : BaseView {
     
     //MARK: - 가이드
     

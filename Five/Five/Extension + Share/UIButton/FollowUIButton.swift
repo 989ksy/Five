@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FollowUIButton : UIButton {
+final class FollowUIButton : UIButton {
     
     override init(frame: CGRect) {
         super.init(frame: frame)

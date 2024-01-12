@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class CommentView : BaseView {
+final class CommentView : BaseView {
     
     var commentBoxBottomConstraint: Constraint?
     

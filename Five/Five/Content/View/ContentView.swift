@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class ContentView : BaseView {
+final class ContentView : BaseView {
     
     let upperView = {
         let view = UIView()

@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class EmailView : BaseView {
+final class EmailView : BaseView {
     
     //MARK: - 가이드
     

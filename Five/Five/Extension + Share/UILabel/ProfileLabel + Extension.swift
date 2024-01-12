@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileLabel : UILabel {
+final class ProfileLabel : UILabel {
     
     override init(frame: CGRect) {
         super.init(frame: frame)

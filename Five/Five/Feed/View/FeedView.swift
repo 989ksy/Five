@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class FeedView: BaseView {
+final class FeedView: BaseView {
     
     
     let feedCollectionView = {

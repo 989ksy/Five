@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class ChangeSettingView: BaseView {
+final class ChangeSettingView: BaseView {
     
     let profileImageView = {
         let view = UIImageView()

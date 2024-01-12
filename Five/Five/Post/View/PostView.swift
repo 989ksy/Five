@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class PostView : BaseView {
+final class PostView : BaseView {
     
     //MARK: - 스크롤뷰
     

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DateLabel : UILabel {
+final class DateLabel : UILabel {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
