@@ -1,5 +1,5 @@
 //
-//  HashViewController.swift
+//  exploreViewController.swift
 //  Five
 //
 //  Created by Seungyeon Kim on 12/1/23.
@@ -9,7 +9,7 @@ import UIKit
 import Kingfisher
 import RxSwift
 
-final class HashViewController: BaseViewController {
+final class exploreViewController: BaseViewController {
     
     let searchBar = {
         let bar = UISearchBar()
@@ -28,7 +28,6 @@ final class HashViewController: BaseViewController {
     
     
     
-//    let mainView = HashView()
     let viewModel = HashViewModel()
     
     var dataSource : UICollectionViewDiffableDataSource<Int, ReadData>!
@@ -37,15 +36,9 @@ final class HashViewController: BaseViewController {
     
     let disposeBag = DisposeBag()
     
-//    override func loadView() {
-//        self.view = mainView
-//    }
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = CustomColor.backgroundColor
-//        self.navigationItem.titleView = mainView.searchBar
         self.navigationItem.titleView = self.searchBar
 
         
@@ -53,10 +46,39 @@ final class HashViewController: BaseViewController {
         
         configureDataSource()
         snapshot()
+        
         self.hideKeyboardWhenTappedAround()
         
     }
     
+    
+    
+//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+//        
+//        Network.shared.requestConvertible(type: Photo.self, api: .search(query: searchBar.text!)) { response in
+//            switch response {
+//            case .success(let success):
+//                //데이터 + UI스냅샷
+//                
+//                let ratios = success.results.map{ Ratio(ratio: $0.width / $0.height) }
+//                // 데이터가 가지고 있는 비율을 가져와서 계산
+//                
+//                let layout = PinterestLayout(columnsCount: 2, itemRatios: ratios, spacing: 10, contentWidth: self.view.frame.width)
+//                
+//                
+//                self.collectionView.collectionViewLayout = UICollectionViewCompositionalLayout(section: layout.section)
+//                self.configureSnapshot(success)
+//                
+//                dump(success)
+//            case .failure(let failure):
+//                print(failure.localizedDescription) //원래 얼럿이나, 토스트알림 띄워야함.
+//            }
+//        }
+//    }
+    
+    
+    
+    //explore뷰컨 들어왔을 때 보여줄 전체 데이터
     func fetchAllData() {
         
         viewModel.fetchReadData { response in
@@ -92,8 +114,8 @@ final class HashViewController: BaseViewController {
     }
     
     
-    
-    func configureDataSource() { //cellForItem
+    //cellForItem
+    func configureDataSource() {
         
         let cellRegistration = UICollectionView.CellRegistration<LoadCell, ReadData> { cell, indexPath, itemIdentifier in
             
@@ -123,12 +145,8 @@ final class HashViewController: BaseViewController {
         
         //** item이 필요한 요소
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .estimated(150))
-        // **width + .estimated: 그룹사이즈의 반만큼만 너비를 차지할거고, 높이가 그때그때 달라질거야~
-        // groupSize의 반만 가져갈게.
         
-       
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-
         
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(150))
         
@@ -152,10 +170,7 @@ final class HashViewController: BaseViewController {
     
     
     override func configureView() {
-        
         view.addSubview(loadCollectionView)
-
-        
     }
     
     override func setConstraints() {

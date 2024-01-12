@@ -24,7 +24,7 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
     var refresh = PublishSubject<Void>()
     
     var likeList: [String] = []
-    var isLiked: Bool?
+    var isFived: Bool?
     
     //리프레싱 컨트롤 생성
     private lazy var refreshControl: UIRefreshControl = {
@@ -52,7 +52,7 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
         mainView.feedCollectionView.refreshControl = refreshControl
         
         NotificationCenter.default.addObserver(self, selector: #selector(uploadView), name: NSNotification.Name("needToUpdate"), object: nil)
-        
+                
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -120,7 +120,6 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
                 }
                 
                 
-                
                 //닉네임
                 cell.nickLabel.text = "\(element.creator.nick)"
                 //날짜
@@ -135,11 +134,12 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
                 //1.[좋아요] 배열에서 내 아이디 확인
                 // 있으면 색칠, 없으면 무색
                 guard let userID = KeychainStorage.shared.userID else {return }
-                
+
                 if element.likes.contains(userID) {
                     cell.fiveButton
                         .setImage(UIImage(named: "five.fill")?
                             .withTintColor(CustomColor.pointColor ?? .systemYellow), for: .normal)
+                    
                 } else {
                     cell.fiveButton
                         .setImage(UIImage(named: "five"), for: .normal)
@@ -156,8 +156,10 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
                         switch response {
                         case .success(let response):
                             cell.likeStatus = response.likeStatus
-                            self.isLiked = response.likeStatus
+                            self.isFived = cell.likeStatus
                             
+                            print("====버튼 눌렀을때", self.isFived)
+                                                        
                             if cell.likeStatus == true {
                                 self.likeList.append(element.id)
                                 cell.fiveButton.setImage(UIImage(named: "five.fill")?
@@ -167,12 +169,11 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
                                 self.likeList.removeAll { $0 == element.id }
                                 cell.fiveButton
                                     .setImage(UIImage(named: "five"), for: .normal)
-                            
                             }
                             
 //                            NotificationCenter.default.post(name: NSNotification.Name("needToUpdate"), object: nil)
                             
-                            print(response) // response.likeStatus 는 bool값
+                            print(response)
                             
                         case .failure(let failure):
                             
@@ -193,6 +194,7 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
                         //포스트 아이디 넘김
                         vc.postId = element.id
                         vc.commentList = element.comments
+                        
                         
                         vc.modalPresentationStyle = .pageSheet
                         
@@ -241,7 +243,8 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
                 
                 let vc = PostViewController()
                 vc.transitedData.accept(data)
-                vc.isliked = self.isLiked
+                vc.isFived = self.isFived
+                print("===값 전달:", self.isFived)
 
                 self.navigationController?.pushViewController(vc, animated: true)
             }

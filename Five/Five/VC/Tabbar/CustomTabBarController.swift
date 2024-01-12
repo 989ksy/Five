@@ -37,7 +37,7 @@ final class CustomTabBarController: UITabBarController {
         firstVC.tabBarItem.title = "Five"
         firstVC.tabBarItem.image = UIImage(named: "home")
         
-        let secondVC = UINavigationController(rootViewController: HashViewController())
+        let secondVC = UINavigationController(rootViewController: exploreViewController())
         secondVC.tabBarItem.selectedImage = UIImage(named: "hash.Custom")
         secondVC.tabBarItem.image = UIImage(named: "hash.Custom")
         secondVC.tabBarItem.title = "Explore"
