@@ -11,7 +11,7 @@ import RxCocoa
 
 class NicknameViewModel {
     
-    let directionText = BehaviorRelay(value: "8자 이내의 닉네임을 입력해주세요.")
+    let directionText = BehaviorRelay(value: "30자 이내로 입력해주세요.")
     let disposeBag = DisposeBag()
     
     struct Input {
@@ -29,7 +29,7 @@ class NicknameViewModel {
     func transform (input: Input) -> Output {
         
         let nicknameCountValidation = input.nicknameText
-            .map { $0.count <= 8 && $0.count >= 1 }
+            .map { $0.count <= 30 && $0.count >= 1 }
         
         let isSucceeded = PublishSubject<Bool>()
         

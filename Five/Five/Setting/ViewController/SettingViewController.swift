@@ -56,17 +56,18 @@ final class SettingViewController : BaseViewController {
         mainView.changeButton.rx.tap
             .subscribe(with: self) { owner, _ in
                 let vc = ChangeSettingViewController()
+                vc.nickname = self.transitedData.nick
                 self.present(vc, animated: true)
             }
             .disposed(by: disposeBag)
         
         
+        //로그아웃 버튼
         self.mainView.logoutButton.rx.tap
             .subscribe(with: self) { owner, _ in
-                
-                
                 let alert = UIAlertController(title: "확인", message: "정말로 로그아웃 하시겠습니까?", preferredStyle: .alert)
                 let ok = UIAlertAction(title: "예", style:.default) { _ in
+                    
                     let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
                     let SceneDelegate = windowScene?.delegate as? SceneDelegate
                     

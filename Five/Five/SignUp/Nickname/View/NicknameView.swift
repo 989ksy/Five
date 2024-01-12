@@ -13,7 +13,7 @@ class NicknameView : BaseView {
     
     let guideLabel = {
         let view = UILabel()
-        view.text = "사용하실\n닉네임을 입력해주세요."
+        view.text = "사용하실\n이름을 입력해주세요."
         view.font = CustomFont.mediumGmarket18
         view.numberOfLines = 0
         return view

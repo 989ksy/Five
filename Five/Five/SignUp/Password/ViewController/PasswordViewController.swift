@@ -33,9 +33,7 @@ final class PasswordViewController : BaseViewController {
         
         bind()
         setNavigation()
-        
-        //dummy
-        mainView.passwordTextfield.text = "#gokiaV11"
+
     }
     
     override func configureView() {}

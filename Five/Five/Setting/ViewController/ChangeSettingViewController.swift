@@ -12,7 +12,7 @@ import PhotosUI
 
 class ChangeSettingViewController: BaseViewController {
     
-//    var nickname: String?
+    var nickname: String?
 //    var newNicknameCompletion : ((String) -> Void)?
     
     var imageInput: Data? //PublishRelay<Data>.init()
@@ -34,7 +34,10 @@ class ChangeSettingViewController: BaseViewController {
         //PHPicker (이미지)
         mainView.imageChangeButton.addTarget(self, action: #selector(imageChangeButtonTapped), for: .touchUpInside)
         
-//        mainView.nicknameTextfield.placeholder = nickname
+        //창닫기
+        mainView.doneButton.addTarget(self, action: #selector(doneButtonTapped), for: .touchUpInside)
+        
+        mainView.nicknameTextfield.placeholder = nickname
     }
     
     
@@ -43,7 +46,6 @@ class ChangeSettingViewController: BaseViewController {
     @objc func doneButtonTapped() {
         
         guard let newNick = mainView.nicknameTextfield.text else { return }
-//        newNicknameCompletion?(newNick)
         
         self.dismiss(animated: true)
 
