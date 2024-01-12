@@ -12,16 +12,6 @@ class CommentTableViewCell : BaseTableViewCell {
     
     static let identifier = "CommentTableViewCell"
     
-    let profileImageView = {
-        let view = UIImageView()
-        view.image = UIImage(named: "commentProfile")
-        view.contentMode = .scaleAspectFit
-        view.layer.cornerRadius = 13
-        view.layer.borderWidth = 1
-        view.layer.borderColor = UIColor.systemGray5.cgColor
-        return view
-    }()
-    
     let nicknameLabel = {
         let view = UILabel()
         view.font = CustomFont.mediumGmarket14
@@ -65,11 +55,10 @@ class CommentTableViewCell : BaseTableViewCell {
     
     override func configureView() {
         
-        contentView.addSubview(profileImageView)
         contentView.addSubview(nicknameLabel)
+        contentView.addSubview(writerLabel)
         contentView.addSubview(commentLabel)
         contentView.addSubview(dateLabel)
-        contentView.addSubview(writerLabel)
         
         contentView.backgroundColor = CustomColor.backgroundColor
         
@@ -77,29 +66,25 @@ class CommentTableViewCell : BaseTableViewCell {
     
     override func setConstraints() {
         
-        profileImageView.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.size.equalTo(26)
-            make.leading.equalToSuperview().offset(18)
-        }
         
         nicknameLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(3)
-            make.leading.equalTo(profileImageView.snp.trailing).offset(10)
+            make.leading.equalTo(contentView.snp.leading).offset(12)
             make.height.equalTo(15)
-        }
-        
-        commentLabel.snp.makeConstraints { make in
-            make.top.equalTo(nicknameLabel.snp.bottom).offset(4)
-            make.leading.equalTo(profileImageView.snp.trailing).offset(10)
-            make.trailing.equalToSuperview().inset(18)
-            make.bottom.lessThanOrEqualToSuperview().inset(3)
         }
         
         writerLabel.snp.makeConstraints { make in
             make.centerY.equalTo(nicknameLabel)
             make.leading.equalTo(nicknameLabel.snp.trailing).offset(6)
             make.height.equalTo(15)
+        }
+        
+        commentLabel.snp.makeConstraints { make in
+            make.top.equalTo(nicknameLabel.snp.bottom).offset(4)
+            make.leading.equalTo(contentView.snp.leading).offset(12)
+            make.trailing.equalToSuperview().inset(12)
+            make.bottom.equalTo(contentView.snp.bottom).inset(4)
+//            make.height.greaterThanOrEqualTo(30)
         }
         
         dateLabel.snp.makeConstraints { make in

@@ -117,21 +117,19 @@ class PostView : BaseView {
         return btn
     }()
     
-    let commentButton = {
-        let btn = CommentButton()
-        return btn
+    let fiveCountLabel = {
+        let label = UILabel()
+        label.text = "공감 0개"
+        label.font = CustomFont.mediumGmarket14
+        label.textColor = .black
+        return label
     }()
     
     let shareButton = {
         let btn = ShareButton()
         return btn
     }()
-    
-    let bookmarkButton = {
-        let btn = UIButton()
-        btn.setImage(UIImage(named: "bookmarkCustom")?.withTintColor(.black), for: .normal)
-        return btn
-    }()
+
     
     //MARK: - 하단부 (내용 + 댓글)
     
@@ -179,9 +177,10 @@ class PostView : BaseView {
         
         contentView.addSubview(elementView)
         elementView.addSubview(fiveButton)
-        elementView.addSubview(commentButton)
+        elementView.addSubview(fiveCountLabel)
+//        elementView.addSubview(commentButton)
         elementView.addSubview(shareButton)
-        elementView.addSubview(bookmarkButton)
+//        elementView.addSubview(bookmarkButton)
         
         contentView.addSubview(contentLabel)
         contentView.addSubview(showCommentButton)
@@ -250,9 +249,9 @@ class PostView : BaseView {
         //MARK: - 버튼 영역
         
         elementView.snp.makeConstraints { make in
-            make.top.equalTo(imageCollectionView.snp.bottom).offset(12)
+            make.top.equalTo(imageCollectionView.snp.bottom).offset(8)
             make.horizontalEdges.equalToSuperview()
-            make.height.equalTo(38)
+            make.height.equalTo(36)
         }
         
         fiveButton.snp.makeConstraints { make in
@@ -261,29 +260,22 @@ class PostView : BaseView {
             make.centerY.equalToSuperview()
         }
         
-        commentButton.snp.makeConstraints { make in
-            make.size.equalTo(32)
-            make.leading.equalTo(fiveButton.snp.trailing).offset(12)
+        fiveCountLabel.snp.makeConstraints { make in
+            make.height.equalTo(30)
+            make.leading.equalTo(fiveButton.snp.trailing).offset(2)
             make.centerY.equalToSuperview()
         }
         
         shareButton.snp.makeConstraints { make in
-            make.size.equalTo(32)
-            make.leading.equalTo(commentButton.snp.trailing).offset(12)
-            make.centerY.equalToSuperview()
-        }
-        
-        bookmarkButton.snp.makeConstraints { make in
-            make.size.equalTo(32)
+            make.size.equalTo(30)
             make.trailing.equalTo(elementView.snp.trailing).inset(12)
             make.centerY.equalToSuperview()
-
         }
         
         //MARK: - 하단영역
         
         contentLabel.snp.makeConstraints { make in
-            make.top.equalTo(elementView.snp.bottom).offset(12)
+            make.top.equalTo(elementView.snp.bottom).offset(6)
             make.horizontalEdges.equalToSuperview().inset(14)
         }
         

@@ -17,13 +17,13 @@ class ProfileViewModel {
     var userProfileData: UserProfileResponse = UserProfileResponse(posts: [], followers: [], following: [], id: "", nick: "")
     
     //내 게시글 조회
-    var readMyData: [ReadData] = [ReadData(likes: [], image: [], comments: [], id: "", creator: Creator(id: "", nick: "", profile: ""), time: "", content: "", productID: "")]
+    var readMyData: [ReadData] = [ReadData(likes: [], image: [], hashTags: [], comments: [], id: "", creator: Creator(id: "", nick: "", profile: ""), time: "", content: "", productID: "", ratio: "")]
     
     //유저 게시글 조회
-    var readUserData: [ReadData] = [ReadData(likes: [], image: [], comments: [], id: "", creator: Creator(id: "", nick: "", profile: ""), time: "", content: "", productID: "")]
+    var readUserData: [ReadData] = [ReadData(likes: [], image: [], hashTags: [], comments: [], id: "", creator: Creator(id: "", nick: "", profile: ""), time: "", content: "", productID: "", ratio: "")]
     
     //프로파일VC -> 포스트VC 값전달 때 사용
-    var userData = BehaviorRelay(value: ReadData(likes: [], image: [], comments: [], id: "", creator: Creator(id: "", nick: "", profile: ""), time: "", content: "", productID: ""))
+    var userData = BehaviorRelay(value: ReadData(likes: [], image: [], hashTags: [], comments: [], id: "", creator: Creator(id: "", nick: "", profile: ""), time: "", content: "", productID: "", ratio: ""))
     
     let readDataForMe = BehaviorSubject<[ReadData]>(value: [])
     let readDataForOther = BehaviorSubject<[ReadData]>(value: [])

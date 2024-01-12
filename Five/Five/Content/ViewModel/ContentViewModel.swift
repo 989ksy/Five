@@ -8,14 +8,15 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import UIKit
 
 class ContentViewModel {
     
     let disposeBag = DisposeBag()
     
     struct Input {
-        let uploadTap : ControlEvent<Void>
-        let textContent : ControlProperty<String>
+        let uploadTap: ControlEvent<Void>
+        let textContent: ControlProperty<String>
         let images : Observable<[Data]>
         
     }
@@ -45,6 +46,7 @@ class ContentViewModel {
             text
         )
         
+        
         input.uploadTap
             .throttle(.seconds(1), scheduler: MainScheduler.instance)
             .withLatestFrom(value, resultSelector: { _, value in
@@ -54,13 +56,19 @@ class ContentViewModel {
                 let datas = value.0
                 let text = value.1
                 
-                return (images: datas, text: text)
+                let preview = datas.first ?? Data()
+                let image = UIImage(data: preview) ?? UIImage()
+                let imageSize = image.size
+                let ratio = imageSize.width / imageSize.height
+                
+                return (images: datas, text: text, ratio: ratio)
             }
             .flatMap {
                 APIManager.shared.createPost(
                     content: $0.text,
                     file: $0.images,
-                    productID: "Five_Feed"
+                    productID: "Five_Feed",
+                    content1: "\($0.ratio)"
                 )
             }
             .subscribe(with: self) { owner, result in

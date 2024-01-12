@@ -47,6 +47,8 @@ class FivedCollectionViewCell : BaseCollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         disposeBag = DisposeBag()
+        firstImageView.image = nil
+        moreIconImageView.image = nil
     }
     
     override func setConstraints() {

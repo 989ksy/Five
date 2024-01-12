@@ -345,14 +345,18 @@ extension ProfileViewController : UICollectionViewDelegate, UICollectionViewData
                             header.nicknameLabel.text = data.nick
                             header.followDataLabel.text = "\(data.followers.count)"
                             header.followingDataLabel.text = "\(data.following.count)"
-                            header.emailLabel.text = "wow@naver.com"
                             
-                            if KeychainStorage.shared.userID == self.viewModel.myProfileData.id {
+                            //self.viewModel.myProfileData.id
+                            
+                            if KeychainStorage.shared.userID == data.id
+                            {
                                 header.settingButton.isHidden = false
                                 header.followButton.isHidden = true
+                                header.emailLabel.text = KeychainStorage.shared.userEmail//"yeah@gmail.com"
                             } else {
                                 header.settingButton.isHidden = true
                                 header.followButton.isHidden = false
+                                header.emailLabel.text = "wow@gmail.com"
                             }
                             
                             self.viewModel.userProfileData = data

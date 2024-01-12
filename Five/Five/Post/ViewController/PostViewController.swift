@@ -19,15 +19,19 @@ final class PostViewController : BaseViewController, UISheetPresentationControll
     
     var type : PostTransitionType = .feed
     
-    var transitedData = BehaviorRelay(value: ReadData(likes: [], image: [], comments: [], id: "", creator: Creator(id: "", nick: "", profile: ""), time: "", content: "", productID: ""))
+    var transitedData = BehaviorRelay(value: ReadData(likes: [], image: [], hashTags: [], comments: [], id: "", creator: Creator(id: "", nick: "", profile: ""), time: "", content: "", productID: "", ratio: ""))
+    var fiveSatus = BehaviorSubject(value: false)
     
     //프로파일VC -> 포스트VC 값전달 때 사용
-    var profileTransitedData = BehaviorRelay(value: ReadData(likes: [], image: [], comments: [], id: "", creator: Creator(id: "", nick: "", profile: ""), time: "", content: "", productID: ""))
+    var profileTransitedData = BehaviorRelay(value: ReadData(likes: [], image: [], hashTags: [], comments: [], id: "", creator: Creator(id: "", nick: "", profile: ""), time: "", content: "", productID: "", ratio: ""))
     
     let mainView = PostView()
     let disposeBag = DisposeBag()
     
-    var isliked : Bool?
+    var isliked: Bool? //PostVC
+    var isFived: Bool? //FeedVC 전달값
+
+    var likeCount: Int? //포스트VC 좋아요갯수 저장소
     
     override func loadView() {
         self.view = mainView
@@ -48,8 +52,7 @@ final class PostViewController : BaseViewController, UISheetPresentationControll
         optionButtonTapped()
         
         NotificationCenter.default.addObserver(self, selector: #selector(deleteTappedInOptionVC), name: NSNotification.Name("VCTransited"), object: nil)
-        
-        
+
     }
     
     
@@ -64,6 +67,7 @@ final class PostViewController : BaseViewController, UISheetPresentationControll
             mainView.titleStackView.axis = .horizontal
             mainView.titleStackView.spacing = 20.0
         }
+        
     }
     
     ///옵션버튼 상태 (삭제 권한자 확인)
@@ -102,6 +106,11 @@ final class PostViewController : BaseViewController, UISheetPresentationControll
                     //날짜
                     owner.mainView.dateLabel.customDateFormat(initialText: response.time)
                     
+                    //좋아요 갯수
+                    owner.mainView.fiveCountLabel.text = "공감 \(response.likes.count)개"
+                    self.likeCount = response.likes.count
+                    
+                    
                     //좋아요 상태 전달
                     //받아온 상태값에 따라 손바닥 색 유무 파단
                     if response.likes.contains(KeychainStorage.shared.userID!) {
@@ -125,8 +134,10 @@ final class PostViewController : BaseViewController, UISheetPresentationControll
                                 
                                 if self.isliked == true {
                                     owner.mainView.fiveButton.setImage(UIImage(named: "five.fill")?.withTintColor(CustomColor.pointColor ?? .systemYellow), for: .normal)
+                                    owner.mainView.fiveCountLabel.text = "공감 \((self.likeCount ?? 0) + 1)개"
                                 } else {
                                     owner.mainView.fiveButton.setImage(UIImage(named: "five"), for: .normal)
+                                    owner.mainView.fiveCountLabel.text = (self.likeCount != 0) ? "공감 \((self.likeCount ?? 0) - 1)개" : "0개"
                                 }
                                 
                                 NotificationCenter.default.post(name: NSNotification.Name("needToUpdate"), object: nil)
