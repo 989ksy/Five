@@ -272,9 +272,9 @@ final class APIManager {
     
     //MARK: - 포스트 등록
     
-    func createPost(content: String, file: [Data], productID: String) -> Single<Result<CreatePostResponse, FiveError>> {
+    func createPost(content: String, file: [Data], productID: String, content1: String) -> Single<Result<CreatePostResponse, FiveError>> {
         
-        let data = CreatePost(content: content, file: file, product_id: productID)
+        let data = CreatePost(content: content, file: file, product_id: productID, content1: content1)
         
         return Single.create { single in
             self.provider.request(.createPost(model: data)) { result in

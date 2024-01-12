@@ -33,9 +33,10 @@ struct CheckEmail: Encodable {
 //MARK: - 포스트 작성
 
 struct CreatePost: Encodable {
-    let content : String?
-    let file : [Data]?
-    let product_id : String
+    let content: String? //작성내용
+    let file: [Data]? //사진
+    let product_id: String
+    let content1: String //비율
 }
 
 //MARK: - 댓글 작성

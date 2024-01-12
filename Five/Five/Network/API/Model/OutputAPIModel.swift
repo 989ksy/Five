@@ -48,14 +48,16 @@ struct CreatePostResponse: Decodable {
     
     let id, time, content: String
     let productId : String
-    let likes, image : [String]
+    let likes, image, hashTags : [String]
     let creator: Creator
+    let ratio: String //content1
     
     enum CodingKeys: String, CodingKey {
-        case likes, image
+        case likes, image, hashTags
         case id = "_id"
         case time, content, creator
         case productId = "product_id"
+        case ratio = "content1"
     }
 }
 
@@ -69,6 +71,35 @@ struct Creator: Decodable {
     }
     
 }
+
+//MARK: - 해시태그 검색
+
+struct Hashtag: Decodable {
+    let data: [HashData]
+    let nextCursor: String
+
+    enum CodingKeys: String, CodingKey {
+        case data
+        case nextCursor = "next_cursor"
+    }
+}
+
+struct HashData: Decodable {
+    let likes: [String]
+    let image, hashTags: [String]
+    let comments: [String]
+    let id: String
+    let creator: Creator
+    let time, content, productID: String
+
+    enum CodingKeys: String, CodingKey {
+        case likes, image, hashTags, comments
+        case id = "_id"
+        case creator, time, content
+        case productID = "product_id"
+    }
+}
+
 
 //MARK: - 포스트 조회
 
@@ -84,17 +115,19 @@ struct ReadPostResponse: Decodable, Hashable {
 
 struct ReadData : Decodable, Hashable {
     
-    let likes, image: [String]
+    let likes, image, hashTags: [String]
     let comments: [CreateCommentResponse]
     let id: String
     let creator: Creator
     let time, content, productID: String
+    let ratio: String?
     
     enum CodingKeys: String, CodingKey {
-        case likes, image, comments
+        case likes, image, comments, hashTags
         case id = "_id"
         case creator, time, content
         case productID = "product_id"
+        case ratio = "content1"
     }
     
     static func == (lhs: ReadData, rhs: ReadData) -> Bool {
@@ -104,7 +137,6 @@ struct ReadData : Decodable, Hashable {
     func hash(into hasher: inout Hasher) {
             hasher.combine(id)
         }
-    
 }
 
 //MARK: - 포스트 삭제
@@ -126,6 +158,7 @@ struct LikePostResponse: Decodable{
         case likeStatus = "like_status"
     }
 }
+
 
 //MARK: - 내 프로필 조회
 

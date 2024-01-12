@@ -34,6 +34,9 @@ enum FiveAPI {
     case createComment (model: CreateComment, id: String)
     case deleteComment (postId: String, commentId: String)
     
+    //해시태그
+    case hashtag (next: String, limit: String, product_id: String, hashTag: String)
+    
 }
 
 extension FiveAPI : TargetType {
@@ -77,17 +80,23 @@ extension FiveAPI : TargetType {
         case .likePost(let id):
             return "post/like/\(id)"
             
+            //프로필
         case .myProfile:
             return "profile/me"
-        case .updateProfile(model: let model):
+        case .updateProfile:
             return "profile/me"
         case .userProfile(let id):
             return "profile/\(id)"
             
+            //댓글
         case .createComment(_, let id):
             return "post/\(id)/comment"
         case .deleteComment(postId: let postId, commentId: let commentId):
             return "post/\(postId)/comment/\(commentId)"
+            
+            //해시태그
+        case .hashtag:
+            return "post/hashtag"
         }
         
             
@@ -98,6 +107,7 @@ extension FiveAPI : TargetType {
     var method: Moya.Method {
         switch self {
             
+            //포스트
         case .signUp,
                 .login,
                 .emailValidation,
@@ -106,19 +116,23 @@ extension FiveAPI : TargetType {
                 .createComment:
             return .post
             
+            //겟
         case .tokenRefresh,
                 .withdraw,
                 .readPost,
                 .myProfile,
                 .readUserPost,
-                .userProfile:
+                .userProfile,
+                .hashtag:
             return .get
             
+            //딜리트
         case .deletePost,
                 .deleteComment:
             return .delete
             
-        case .updateProfile(model: let model):
+            //풋
+        case .updateProfile:
             return .put
         }
     }
@@ -145,11 +159,11 @@ extension FiveAPI : TargetType {
         case .withdraw:
             return .requestPlain
             
-            //포스트 작성-조회
+            //포스트 작성
         case .createPost(let data):
             
             var multipartData: [MultipartFormData] = []
-
+            
             if let file = data.file {
                 for item in file {
                     let multi = MultipartFormData(
@@ -162,13 +176,21 @@ extension FiveAPI : TargetType {
                 }
             }
             
+            
             let productIdData = MultipartFormData(provider: .data(data.product_id.data(using: .utf8)!), name: "product_id")
             multipartData.append(productIdData)
+            
             if let contentData = data.content {
                 let multi = MultipartFormData(provider: .data(contentData.data(using: .utf8)!), name: "content")
                 multipartData.append(multi)
             }
+            
+            let content1Data = MultipartFormData(provider: .data(data.content1.data(using: .utf8)!), name: "content1")
+                multipartData.append(content1Data)
+
+            
             print("multipartData", multipartData)
+            
             return .uploadMultipart(multipartData)
             
         case .readPost(let next, let limit, let product_id ):
@@ -183,7 +205,7 @@ extension FiveAPI : TargetType {
         case .myProfile:
             return .requestPlain
             
-        case .userProfile(let id):
+        case .userProfile:
             return .requestPlain
         
         case .readUserPost(let id, let next, let limit, let product_id):
@@ -227,6 +249,9 @@ extension FiveAPI : TargetType {
             return .uploadMultipart(multipartData)
         case .deleteComment(postId: let postId, commentId: let commentId):
             return .requestPlain
+            
+        case .hashtag(let next, let limit, let product_id, let hashTag):
+            return .requestParameters(parameters: ["next" : next, "limit" : limit, "product_id" : product_id, "hashTag": hashTag], encoding: URLEncoding.queryString)
         }
     }
     
@@ -297,6 +322,10 @@ extension FiveAPI : TargetType {
         case .deleteComment:
             return  ["Authorization" : "\(KeychainStorage.shared.userToken!)",
                      "SesacKey" : "\(APIKey.sesacKey)"]
+            
+        case .hashtag:
+            return ["Authorization" : "\(KeychainStorage.shared.userToken!)",
+                    "SesacKey" : "\(APIKey.sesacKey)"]
 
         }
         
