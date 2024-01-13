@@ -17,8 +17,34 @@ final class APIManager {
     
     private let provider = MoyaProvider<FiveAPI>(session: Session(interceptor: AuthInterceptor.shared))
     
-    
     private let disposeBag = DisposeBag()
+    
+    
+    //MARK: - 해시태그 검색
+    
+    func getHashtagResult(next: String, limit: String, productID: String, hashtag: String) -> Single<Result<HashtagResponse, FiveError>> {
+        
+        return Single.create { single in
+            
+            self.provider.request(.hashtag(next: next, limit: limit, product_id: productID, hashTag: hashtag)) { result in
+                switch result {
+                case .success(let response):
+                    do {
+                        let data = try JSONDecoder().decode(HashtagResponse.self, from: response.data)
+                        single(.success(.success(data)))
+                    } catch {
+                        single(.success(.failure(.decodingError)))
+                    }
+                case .failure(let error):
+                    print("=======네트워크 실패의 실패 from APIManager : \(error.response?.request)")
+    
+                    guard let customError = FiveError(rawValue: error.response?.statusCode ??  1) else { return }
+                    single(.success(.failure(customError)))
+                }
+            }
+            return Disposables.create()
+        }
+    }
     
     //MARK: - 다른 유저 프로필 조회
     

@@ -74,7 +74,7 @@ struct Creator: Decodable {
 
 //MARK: - 해시태그 검색
 
-struct Hashtag: Decodable {
+struct HashtagResponse: Decodable {
     let data: [HashData]
     let nextCursor: String
 

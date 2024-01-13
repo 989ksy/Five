@@ -23,7 +23,7 @@ final class ProfileImageView : UIImageView {
         layer.cornerRadius = 15
         image = UIImage(named: "personal")?.withTintColor(.black)
         clipsToBounds = true
-        contentMode = .scaleAspectFit
+        contentMode = .scaleAspectFill
         layer.borderWidth = 1.1
         layer.borderColor = UIColor.systemGray5.cgColor
     }

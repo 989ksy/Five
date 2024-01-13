@@ -216,23 +216,11 @@ extension FiveAPI : TargetType {
             
         case .updateProfile(model: let data):
             var multipartData: [MultipartFormData] = []
-
-//            if let file = data.profile {
-//                for item in file {
-//                    let multi = MultipartFormData(
-//                        provider: .data(item),
-//                        name: "file",
-//                        fileName: "\(Date()).jpeg",
-//                        mimeType: "image/jpeg"
-//                    )
-//                    multipartData.append(multi)
-//                }
-//            }
             
             if let file = data.profile {
                 let multi = MultipartFormData(
                     provider: .data(file),
-                    name: "file",
+                    name: "profile",
                     fileName: "\(Date()).jpeg",
                     mimeType: "image/jpeg"
                 )
@@ -244,10 +232,13 @@ extension FiveAPI : TargetType {
                 provider: .data(nicknData.data(using: .utf8)!),
                 name: "nick"
             )
-                multipartData.append(multi)
+            multipartData.append(multi)
+            
             print("multipartData", multipartData)
+            
             return .uploadMultipart(multipartData)
-        case .deleteComment(postId: let postId, commentId: let commentId):
+            
+        case .deleteComment:
             return .requestPlain
             
         case .hashtag(let next, let limit, let product_id, let hashTag):
@@ -262,71 +253,41 @@ extension FiveAPI : TargetType {
     var headers: [String : String]? {
         
         switch self {
-        case .signUp: //회원가입
+            
+            // [content-type, SesacKey]
+
+        case .signUp, //회원가입
+                .login, //로그인
+                .emailValidation, //이메일 중복확인
+                .tokenRefresh:
             return ["Content-Type" : "application/json",
                     "SesacKey" : "\(APIKey.sesacKey)"]
-            
-        case .login: //로그인
-            return ["Content-Type" : "application/json",
-                    "SesacKey" : "\(APIKey.sesacKey)"]
-            
-        case .emailValidation: //이메일 중복확인
-            return ["Content-Type" : "application/json",
-                    "SesacKey" : "\(APIKey.sesacKey)"]
-            
-        case .tokenRefresh : //토큰 갱신
-            return ["Content-Type" : "application/json",
-                    "SesacKey" : "\(APIKey.sesacKey)"]
-            
-        case .withdraw: //회원탈퇴
-            return ["SesacKey" : "\(APIKey.sesacKey)"]
             
         case .createPost: //포스트 생성
             return ["Authorization" : "\(KeychainStorage.shared.userToken!)", 
                     "Content-Type" : "multipart/form-data",
                     "SesacKey" : "\(APIKey.sesacKey)"]
             
-        case .readPost: //포스트 조회
-            return ["SesacKey" : "\(APIKey.sesacKey)"]
-            
-        case .deletePost: //포스트 삭제
-            return ["Authorization" : "\(KeychainStorage.shared.userToken!)", 
-                    "SesacKey" : "\(APIKey.sesacKey)"]
-            
-        case .readUserPost(id: let id, next: let next, limit: let limit, product_id: let product_id):
-            return ["Authorization" : "\(KeychainStorage.shared.userToken!)",
-                    "SesacKey" : "\(APIKey.sesacKey)"]
-            
-        case .likePost: //좋아요
-            return ["Authorization" : "\(KeychainStorage.shared.userToken!)",
-                    "SesacKey" : "\(APIKey.sesacKey)"]
-            
-        case .myProfile:
-            return ["Authorization" : "\(KeychainStorage.shared.userToken!)",
-                    "SesacKey" : "\(APIKey.sesacKey)"]
-            
-        case .userProfile :
-            return ["Authorization" : "\(KeychainStorage.shared.userToken!)",
-                    "SesacKey" : "\(APIKey.sesacKey)"]
-            
-        case .createComment:
+        case .createComment,
+                .updateProfile:
             return ["Authorization" : "\(KeychainStorage.shared.userToken!)",
                     "Content-Type" : "application/json",
                     "SesacKey" : "\(APIKey.sesacKey)"]
             
-        case .updateProfile:
-            return ["Authorization" : "\(KeychainStorage.shared.userToken!)",
-                    "Content-Type" : "multipart/form-data",
-                    "SesacKey" : "\(APIKey.sesacKey)"]
+        case .readPost,
+                .withdraw: //포스트 조회
+            return ["SesacKey" : "\(APIKey.sesacKey)"]
             
-        case .deleteComment:
-            return  ["Authorization" : "\(KeychainStorage.shared.userToken!)",
-                     "SesacKey" : "\(APIKey.sesacKey)"]
-            
-        case .hashtag:
+        case .readUserPost,
+                .myProfile, //내 프로필
+                .deletePost, //포스트 삭제
+                .likePost, //좋아요
+                .userProfile,
+                .deleteComment,
+                .hashtag:
             return ["Authorization" : "\(KeychainStorage.shared.userToken!)",
                     "SesacKey" : "\(APIKey.sesacKey)"]
-
+                        
         }
         
     }
