@@ -9,7 +9,9 @@ import UIKit
 import Kingfisher
 import RxSwift
 
-final class exploreViewController: BaseViewController {
+final class exploreViewController: BaseViewController, UISearchBarDelegate {
+    
+    //MARK: - UI
     
     let searchBar = {
         let bar = UISearchBar()
@@ -19,30 +21,39 @@ final class exploreViewController: BaseViewController {
         return bar
     }()
     
-    lazy var loadCollectionView = {
+    lazy var exploreCollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: configurePinterestLayout())
         view.register(LoadCell.self, forCellWithReuseIdentifier: LoadCell.identifier)
         view.backgroundColor = CustomColor.backgroundColor
         return view
     }()
     
-    
+    //MARK: - 선언
     
     let viewModel = HashViewModel()
     
-    var dataSource : UICollectionViewDiffableDataSource<Int, ReadData>!
+    var dataSource: UICollectionViewDiffableDataSource<Int, ReadData>!
     
-    var fetchData : [ReadData] = [ReadData(likes: [], image: [], hashTags: [], comments: [], id: "", creator: Creator(id: "", nick: "", profile: ""), time: "", content: "", productID: "", ratio: "")]
+    //전체 데이터
+    var fetchData: [ReadData] = [ReadData(likes: [], image: [], hashTags: [], comments: [], id: "", creator: Creator(id: "", nick: "", profile: ""), time: "", content: "", productID: "", ratio: "")]
+    
+    //해시태그 데이터
+    var hashData: [HashData] = [HashData(likes: [], image: [], hashTags: [], comments: [], id: "", creator: Creator(id: "", nick: "", profile: ""), time: "", content: "", productID: "")]
     
     let disposeBag = DisposeBag()
     
+    
+    //MARK: - 시점
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         view.backgroundColor = CustomColor.backgroundColor
         self.navigationItem.titleView = self.searchBar
-
         
-        fetchAllData()
+        searchBar.delegate = self
+        
+        fetchAllData()//전체데이터 불러옴
         
         configureDataSource()
         snapshot()
@@ -52,30 +63,7 @@ final class exploreViewController: BaseViewController {
     }
     
     
-    
-//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-//        
-//        Network.shared.requestConvertible(type: Photo.self, api: .search(query: searchBar.text!)) { response in
-//            switch response {
-//            case .success(let success):
-//                //데이터 + UI스냅샷
-//                
-//                let ratios = success.results.map{ Ratio(ratio: $0.width / $0.height) }
-//                // 데이터가 가지고 있는 비율을 가져와서 계산
-//                
-//                let layout = PinterestLayout(columnsCount: 2, itemRatios: ratios, spacing: 10, contentWidth: self.view.frame.width)
-//                
-//                
-//                self.collectionView.collectionViewLayout = UICollectionViewCompositionalLayout(section: layout.section)
-//                self.configureSnapshot(success)
-//                
-//                dump(success)
-//            case .failure(let failure):
-//                print(failure.localizedDescription) //원래 얼럿이나, 토스트알림 띄워야함.
-//            }
-//        }
-//    }
-    
+    //MARK: - 네트워크 통신
     
     
     //explore뷰컨 들어왔을 때 보여줄 전체 데이터
@@ -91,7 +79,7 @@ final class exploreViewController: BaseViewController {
                 let ratios = success.data.map{
                     Ratio(ratio: Double($0.ratio ?? "") ?? 1.0)
                 }
-
+                
                 let layout = PinterestLayout(
                     columnsCount: 2,
                     itemRatios: ratios,
@@ -99,7 +87,7 @@ final class exploreViewController: BaseViewController {
                     contentWidth: self.view.frame.width
                 )
                 
-                self.loadCollectionView.collectionViewLayout = UICollectionViewCompositionalLayout(section: layout.section)
+                self.exploreCollectionView.collectionViewLayout = UICollectionViewCompositionalLayout(section: layout.section)
                 
                 self.snapshot()
                 
@@ -114,6 +102,54 @@ final class exploreViewController: BaseViewController {
     }
     
     
+    //검색했을 때
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+        guard let hashword = searchBar.text else { return }
+        
+        
+        viewModel.fetchHashData(hashtag: hashword) { response in
+            
+            print("000000000000000", response)
+            
+            switch response {
+                
+            case .success(let success):
+                self.hashData = success.data
+                
+                //컨텐츠1어디감진짜
+                
+                //                let ratios = success.data.map{
+                //                    Ratio(ratio: Double($0.ratio ?? "") ?? 1.0)
+                //                }
+                //
+                //                let layout = PinterestLayout(
+                //                    columnsCount: 2,
+                //                    itemRatios: ratios,
+                //                    spacing: 10,
+                //                    contentWidth: self.view.frame.width
+                //                )
+                //
+                //                self.loadCollectionView.collectionViewLayout = UICollectionViewCompositionalLayout(section: layout.section)
+                
+                self.snapshot()
+                
+                print("------전체 해시태그 데이터 로딩 중:", self.hashData)
+                
+            case .failure(let failure):
+                print("fetchAllData failed",failure.rawValue)
+                print(failure.errorDescription!)
+                
+            }
+        }
+        
+        
+    }
+    
+    
+    
+    //MARK: - DiffableDataSource 설정
+    
     //cellForItem
     func configureDataSource() {
         
@@ -125,13 +161,14 @@ final class exploreViewController: BaseViewController {
         }
         
         //데이터소스
-        dataSource = UICollectionViewDiffableDataSource(collectionView: self.loadCollectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
+        dataSource = UICollectionViewDiffableDataSource(collectionView: self.exploreCollectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
             
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
         })
         
     }
     
+    //갱신
     func snapshot() {
         //reloadData role
         var snapshot = NSDiffableDataSourceSnapshot<Int, ReadData>()
@@ -140,7 +177,7 @@ final class exploreViewController: BaseViewController {
         dataSource.apply(snapshot)
     }
     
-    
+    //컬렉션뷰 레이아웃
     func configurePinterestLayout() -> UICollectionViewLayout {
         
         //** item이 필요한 요소
@@ -154,7 +191,7 @@ final class exploreViewController: BaseViewController {
         group.interItemSpacing = .fixed(2)
         
         let section = NSCollectionLayoutSection(group: group)
-       
+        
         section.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 2, bottom: 2, trailing: 2)
         section.interGroupSpacing = 2
         
@@ -162,19 +199,21 @@ final class exploreViewController: BaseViewController {
         configuration.scrollDirection = .vertical
         
         let layout = UICollectionViewCompositionalLayout(section: section)
-
+        
         layout.configuration = configuration
         
         return layout
     }
     
     
+    //MARK: - UI 등록 + 레이아웃 설정
+    
     override func configureView() {
-        view.addSubview(loadCollectionView)
+        view.addSubview(exploreCollectionView)
     }
     
     override func setConstraints() {
-        loadCollectionView.snp.makeConstraints { make in
+        exploreCollectionView.snp.makeConstraints { make in
             make.horizontalEdges.bottom.equalToSuperview()
             make.top.equalTo(view.safeAreaLayoutGuide)
         }
