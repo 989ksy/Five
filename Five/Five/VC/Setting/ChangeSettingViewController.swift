@@ -7,6 +7,8 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
 
 import PhotosUI
 
@@ -35,9 +37,12 @@ final class ChangeSettingViewController: BaseViewController {
         mainView.imageChangeButton.addTarget(self, action: #selector(imageChangeButtonTapped), for: .touchUpInside)
         
         //창닫기
-        mainView.doneButton.addTarget(self, action: #selector(doneButtonTapped), for: .touchUpInside)
+//        mainView.doneButton.addTarget(self, action: #selector(doneButtonTapped), for: .touchUpInside)
         
         mainView.nicknameTextfield.placeholder = nickname
+        
+        
+        bind()
     }
     
     
@@ -49,6 +54,26 @@ final class ChangeSettingViewController: BaseViewController {
         
         self.dismiss(animated: true)
 
+    }
+    
+    let disposeBag = DisposeBag()
+    
+    func bind() {
+        
+        mainView.doneButton.rx.tap
+            .withLatestFrom(mainView.nicknameTextfield.rx.text.orEmpty)
+            .withUnretained(self)
+            .flatMap { owner, value in
+                return APIManager.shared.updateProfile(nick: value, profile: owner.imageInput!)
+            }
+            .subscribe(with: self , onNext: { owner , response in
+                print(response)
+            })
+            .disposed(by: disposeBag)
+        
+        
+        
+        
     }
     
     
@@ -80,17 +105,15 @@ extension ChangeSettingViewController: PHPickerViewControllerDelegate {
         for result in results {
             result.itemProvider.loadObject(ofClass: UIImage.self) { (object, error) in
                 if let image = object as? UIImage{
+                    
+                    self.imageInput = image.jpegData(compressionQuality: 0.01)
+                    
                     DispatchQueue.main.async {
                         self.mainView.profileImageView.image = image
                     }
                 }
             }
         }
-        
-        let mappedImage = self.mainView.profileImageView.image.map { $0.jpegData(compressionQuality: 0.1)
-        }.flatMap{ $0 }
-
-//        self.imageInput?.append(mappedImage!)
         
         
         picker.dismiss(animated: true, completion: nil)

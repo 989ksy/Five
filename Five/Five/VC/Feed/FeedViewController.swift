@@ -119,6 +119,13 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
                         .setImage(UIImage(named: "five"), for: .normal)
                 }
                 
+                //프로필 이미지
+                if element.creator.profile != nil {
+                    let profileUrl = URL(string: "\(BaseURL.base)" + (element.creator.profile ?? ""))
+                    cell.profilePic.loadImage(from: profileUrl!, placeHolderImage: UIImage(named: "personal"))
+                } else {
+                    cell.profilePic.image = UIImage(named: "personal")?.withTintColor(.black)
+                }
                 
                 //닉네임
                 cell.nickLabel.text = "\(element.creator.nick)"
