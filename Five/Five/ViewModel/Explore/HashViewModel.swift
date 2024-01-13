@@ -13,6 +13,28 @@ final class HashViewModel {
     
     let disposeBag = DisposeBag()
     
+    //해시태그 검색 데이터 가져오기
+    func fetchHashData(hashtag: String, completion: @escaping (Result<HashtagResponse, FiveError>) -> Void) {
+        
+        APIManager.shared.getHashtagResult(next: "", limit: "100", productID: "Five_Feed", hashtag: hashtag)
+            .subscribe(with: self) { owner, response in
+                
+                switch response {
+                case .success(let data):
+                    completion(.success(data))
+                    
+                    print("*** fetchHashData in VM", data)
+                    
+                case .failure(let error):
+                    print("fetchHashData failed",error.rawValue)
+                    print(error.errorDescription!)
+                }
+                
+            }
+            .disposed(by: disposeBag)
+        
+    }
+    
     
     //서버 전체 데이터 불러오기
     func fetchReadData(completion: @escaping (Result<ReadPostResponse, FiveError>) -> Void) {
