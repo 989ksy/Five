@@ -123,6 +123,7 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
                 if element.creator.profile != nil {
                     let profileUrl = URL(string: "\(BaseURL.base)" + (element.creator.profile ?? ""))
                     cell.profilePic.loadImage(from: profileUrl!, placeHolderImage: UIImage(named: "personal"))
+                    
                 } else {
                     cell.profilePic.image = UIImage(named: "personal")?.withTintColor(.black)
                 }
@@ -228,6 +229,7 @@ final class FeedViewController : BaseViewController, UISheetPresentationControll
                         let vc = ProfileViewController()
                         
                         vc.FeedUserId = element.creator.id
+                        vc.FeedUserProfile = element.creator.profile
                         vc.type = .selectedUser
                         print("===feedUserID:",  element.creator.id)
                         

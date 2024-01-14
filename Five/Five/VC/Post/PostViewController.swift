@@ -102,6 +102,15 @@ final class PostViewController : BaseViewController, UISheetPresentationControll
                     }
                     //닉네임 (프로필바)
                     owner.mainView.nickLabel.text = response.creator.nick
+                    
+                    //프로필 이미지
+                    if response.creator.profile != nil {
+                        let profileURL = URL(string: BaseURL.base + (response.creator.profile ?? ""))
+                        owner.mainView.profilePic.loadImage(from: profileURL!, placeHolderImage: UIImage(named: "personal"))
+                    } else {
+                        owner.mainView.profilePic.image = UIImage(named: "personal")
+                    }
+                
                     //내용
                     owner.mainView.contentLabel.text = response.content
                     //날짜
@@ -121,7 +130,6 @@ final class PostViewController : BaseViewController, UISheetPresentationControll
                     }
                     
                     //좋아요 버튼 상태 바꾸기
-                    
                     owner.mainView.fiveButton
                         .rx
                         .tap
@@ -171,6 +179,14 @@ final class PostViewController : BaseViewController, UISheetPresentationControll
                     //날짜
                     owner.mainView.dateLabel.customDateFormat(initialText: response.time)
                     
+                    //프로필 이미지
+                    if response.creator.profile != nil {
+                        let profileURL = URL(string: BaseURL.base + (response.creator.profile ?? ""))
+                        owner.mainView.profilePic.loadImage(from: profileURL!, placeHolderImage: UIImage(named: "personal"))
+                    } else {
+                        owner.mainView.profilePic.image = UIImage(named: "personal")
+                    }
+                    
                     //좋아요 상태 전달
                     //받아온 상태값에 따라 손바닥 색 유무 파단
                     if response.likes.contains(KeychainStorage.shared.userID!) {
@@ -180,7 +196,6 @@ final class PostViewController : BaseViewController, UISheetPresentationControll
                     }
                     
                     //좋아요 버튼 상태 바꾸기
-                    
                     owner.mainView.fiveButton
                         .rx
                         .tap

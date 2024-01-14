@@ -15,10 +15,11 @@ import PhotosUI
 final class ChangeSettingViewController: BaseViewController {
     
     var nickname: String?
-//    var newNicknameCompletion : ((String) -> Void)?
+    var imageInput: Data?
     
-    var imageInput: Data? //PublishRelay<Data>.init()
-    
+    var newNicknameCompletion : ((String) -> Void)?
+    var newProfileCompletion : ((String) -> Void)?
+        
     //MARK: - UI등록
    let mainView = ChangeSettingView()
     
@@ -35,10 +36,7 @@ final class ChangeSettingViewController: BaseViewController {
         
         //PHPicker (이미지)
         mainView.imageChangeButton.addTarget(self, action: #selector(imageChangeButtonTapped), for: .touchUpInside)
-        
-        //창닫기
-//        mainView.doneButton.addTarget(self, action: #selector(doneButtonTapped), for: .touchUpInside)
-        
+                
         mainView.nicknameTextfield.placeholder = nickname
         
         
@@ -47,14 +45,6 @@ final class ChangeSettingViewController: BaseViewController {
     
     
     //MARK: - 저장버튼
-    
-    @objc func doneButtonTapped() {
-        
-        guard let newNick = mainView.nicknameTextfield.text else { return }
-        
-        self.dismiss(animated: true)
-
-    }
     
     let disposeBag = DisposeBag()
     
@@ -67,7 +57,28 @@ final class ChangeSettingViewController: BaseViewController {
                 return APIManager.shared.updateProfile(nick: value, profile: owner.imageInput!)
             }
             .subscribe(with: self , onNext: { owner , response in
-                print(response)
+                
+                print("------ ✔︎ 변경 완료: ", response)
+                
+                switch response {
+                    
+                case .success(let result):
+                    
+                    NotificationCenter.default.post(name: NSNotification.Name("needToUpdate"), object: nil)
+                    
+                    UserDefaults.standard.set(result.profile, forKey: "newProfileImage")
+                    UserDefaults.standard.set(result.nick, forKey: "newNickname")
+                    
+                    let check = UserDefaults.standard.string(forKey: "newProfileImage")
+                    print("----------- 저장되고 있냐고", check)
+                                        
+                case .failure(let error):
+                    print(error)
+                }
+                
+                
+                self.dismiss(animated: true)
+                
             })
             .disposed(by: disposeBag)
         

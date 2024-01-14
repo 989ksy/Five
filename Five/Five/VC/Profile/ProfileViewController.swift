@@ -6,8 +6,11 @@
 //
 
 import UIKit
+
 import RxSwift
 import RxCocoa
+
+import Kingfisher
 
 enum ProfileTransitionType: String {
     case loggedInUser // 로그인한 사용자의 프로필
@@ -17,13 +20,15 @@ enum ProfileTransitionType: String {
 final class ProfileViewController: BaseViewController {
     
     var type: ProfileTransitionType = .loggedInUser
+    var profileImageEndpoint: String?
     
     let mainView = ProfileView()
     let viewModel = ProfileViewModel()
     let headerView = ProfileCollectionHeaderView()
 
-    //FeedVC -> ProfileVC userID
+    //FeedVC -> ProfileVC userID ?? userProfile
     var FeedUserId: String?
+    var FeedUserProfile: String?
     
     //갱신
     var refresh = PublishSubject<Void>()
@@ -45,7 +50,7 @@ final class ProfileViewController: BaseViewController {
             .disposed(by: disposeBag)
         
         //업데이트
-//        NotificationCenter.default.addObserver(self, selector: #selector(uploadView), name: NSNotification.Name("needToUpdate"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadCollectionView), name: NSNotification.Name("needToUpdate"), object: nil)
         
         //작성게시글 조회
         fetchReadData()
@@ -53,6 +58,8 @@ final class ProfileViewController: BaseViewController {
         headerView.segmentedControl.selectedSegmentIndex = 0
         
         NotificationCenter.default.addObserver(self, selector: #selector(segmentValueChanged), name: NSNotification.Name("segmentValueChanged"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadCollectionView), name: NSNotification.Name("VCTransited"), object: nil)
         
         //네비게이션 세팅
         self.navigationController?.navigationBar.topItem?.title = ""
@@ -71,6 +78,9 @@ final class ProfileViewController: BaseViewController {
                 switch response {
                 case .success(let data):
                     self.viewModel.readMyData = data.data
+                    
+                    self.profileImageEndpoint = data.data.first?.creator.profile
+                    
                     self.mainView.fiveCollectionView.reloadData()
                 case .failure(let failure):
                     print("===profile_readData",failure.errorDescription!)
@@ -127,13 +137,18 @@ final class ProfileViewController: BaseViewController {
     }
     
   
-//    //MARK: - SegmentedControl 설정
+    //MARK: - SegmentedControl 설정
     
     @objc func segmentValueChanged(_ notification: Notification) {
         guard notification.object is UISegmentedControl else { return }
            mainView.fiveCollectionView.reloadData()
-        
        }
+    
+    
+    @objc func reloadCollectionView() {
+        mainView.fiveCollectionView.reloadData()
+    }
+    
     
 
 }
@@ -172,6 +187,7 @@ extension ProfileViewController : UICollectionViewDelegate, UICollectionViewData
                 let url = URL(string: "\(BaseURL.base)" + (data.image.first ?? ""))
                 cell.firstImageView.loadImage(from: url!, placeHolderImage: UIImage(named: "strar.fill"))
                 
+                
                 if data.image.count < 2 {
                     cell.moreIconImageView.isHidden = true
                 } else {
@@ -203,7 +219,6 @@ extension ProfileViewController : UICollectionViewDelegate, UICollectionViewData
                 let data = viewModel.readUserData[indexPath.item]
                 
                 let url = URL(string: "\(BaseURL.base)" + (data.image.first ?? ""))
-                
                 cell.firstImageView.loadImage(from: url!, placeHolderImage: UIImage(named: "strar.fill"))
                 
                 if data.image.count < 2 {
@@ -287,6 +302,16 @@ extension ProfileViewController : UICollectionViewDelegate, UICollectionViewData
                             header.followDataLabel.text = "\(data.followers.count)"
                             header.followingDataLabel.text = "\(data.following.count)"
                             
+                            if self.profileImageEndpoint != nil {
+                                let profileUrl = URL (string: "\(BaseURL.base)" + (self.profileImageEndpoint ?? ""))
+                                
+                                print("----------🚨",profileUrl)
+                                
+                                header.profileImage.loadImage(from: profileUrl!, placeHolderImage: UIImage(named: "personal"))
+                            } else {
+                                header.profileImage.image = UIImage(named: "personal")
+                            }
+
                             if KeychainStorage.shared.userID == self.viewModel.myProfileData.id {
                                 header.settingButton.isHidden = false
                                 header.followButton.isHidden = true
@@ -346,6 +371,15 @@ extension ProfileViewController : UICollectionViewDelegate, UICollectionViewData
                             header.followDataLabel.text = "\(data.followers.count)"
                             header.followingDataLabel.text = "\(data.following.count)"
                             
+                            if self.FeedUserProfile != nil {
+                                let profileURL = URL(string: BaseURL.base + (self.FeedUserProfile ?? ""))
+                                header.profileImage.loadImage(from: profileURL!, placeHolderImage: UIImage(named: "personal"))
+
+                            } else {
+                                header.profileImage.image = UIImage(named: "personal")
+                            }
+                            
+    
                             //self.viewModel.myProfileData.id
                             
                             if KeychainStorage.shared.userID == data.id
@@ -360,8 +394,6 @@ extension ProfileViewController : UICollectionViewDelegate, UICollectionViewData
                             }
                             
                             self.viewModel.userProfileData = data
-                            
-                            ///
                             
                             header.settingButton.addTarget(self, action: #selector(self.settingButtonTapped), for: .touchUpInside)
                             

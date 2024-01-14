@@ -36,6 +36,8 @@ final class SettingViewController : BaseViewController {
         mainView.settingTableView.delegate = self
         mainView.settingTableView.dataSource = self
         
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView), name: NSNotification.Name("needToUpdate"), object: nil)
+        
         //키보드설정
         self.hideKeyboardWhenTappedAround()
         
@@ -56,7 +58,15 @@ final class SettingViewController : BaseViewController {
         mainView.changeButton.rx.tap
             .subscribe(with: self) { owner, _ in
                 let vc = ChangeSettingViewController()
+                
+                //닉네임 전달해줄게
                 vc.nickname = self.transitedData.nick
+                
+//                vc.newProfileCompletion! { c in
+//                    mainView.profileImageView.image = c
+//                }
+                
+                
                 self.present(vc, animated: true)
             }
             .disposed(by: disposeBag)
@@ -98,7 +108,10 @@ final class SettingViewController : BaseViewController {
         navigationController?.navigationBar.tintColor = .black
     }
     
-    
+    @objc
+    func reloadTableView() {
+        mainView.settingTableView.reloadData()
+    }
     
     
 }
