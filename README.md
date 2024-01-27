@@ -36,8 +36,8 @@
 - 설정에서 내 프로필 이미지 또는 이름을 변경할 수 있으며, 로그아웃 및 회원탈퇴 가능
 - 이미지, 텍스트를 포함한 포스트 등록 및 삭제
 - 모든 유저의 포스트 조회 및 개별 프로필 조회
-- 모든 포스트에 좋아요 및 취소, 댓글 작성 및 삭제 가능
-- 해시태그 검색
+- 모든 포스트에 좋아요 표시 및 취소, 댓글 작성 및 삭제 기능
+- 해시태그 검색 기능
 
 </br>
 
@@ -46,8 +46,8 @@
 - `UIKit`, `RxSWift`, `RxCocoa`
 - `CodeBaseUI`, `SnapKit`
 - `Moya`, `Kingfisher`
-- `SwiftKeychainWrapper`, `YPImagePicker`
-- `MVVM`, `Singleton`, `Input/Output`, `DiffableDatasource`, `Repository Pattern`
+- `SwiftKeychainWrapper`, `YPImagePicker`, `IQKeyboardManager`
+- `MVVM`, `Singleton`, `Input/Output`, `DiffableDatasource`, `CompositionalLayout`, `Repository Pattern`
 
 
 </br>
@@ -56,17 +56,18 @@
 
 - **회원가입 및 로그인**
   
-  - 이메일 중복 API를 활용하여 이메일 중복을 피함.
-  - 이메일 및 비밀번호 `정규표현식`을 통해 유효성 검증
+  - 이메일 중복 API를 활용하여 이메일 중복 방지
+  - 이메일 및 비밀번호 `정규표현식`을 통해 입력값에 대한 유효성 검증
 
 - **AccessToken 갱신**
   
-  - `Alamofire Intercepter`를 통해 AccessToken 만료 시 Refresh Token으로 갱신하는 `JWT` 인증 로직 구현
+  - `Alamofire Intercepter`를 통해 AccessToken 만료 시 Keychain에 저장된 Refresh Token으로 갱신하는 `JWT` 인증 로직 구현
 
 - **포스트 작성 및 조회**
   
-  - YPImagePicker 라이브러리를 사용하여 5장 이하의 이미지를 선택할 수 있음.
-  - `Offset-Based Pagination` 방식을 이용하여 최대 10개의 포스트를 실시간으로 조회
+  - YPImagePicker 라이브러리를 사용하여 최대 5장까지 이미지 선택 가능
+  - cursor based pagination 방식을 이용하여 최대 10개의 포스트를 실시간으로 조회
+  - RxSwift로 collectionView 표현 및 데이터 전달
  
 - **해시태그 검색**
   
@@ -83,7 +84,7 @@
 
 #### [해결방안]
 
-### 2. 
+### 2. RefreshToken?
 
 #### [문제사항]
 
@@ -92,3 +93,5 @@
  </br>
 
  ## 회고
+
+ 
