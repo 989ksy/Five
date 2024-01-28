@@ -74,7 +74,7 @@
 - **해시태그 검색**
   
   - 다양한 이미지 비율에 대응하는 레이아웃을 제공하기 위해 DiffableDatasource와 Compositional Layout을 활용하여 UICollectionView 구현
-    -  Compositional Layout으로 하나의 컬렉션뷰에 여러 layout을 구성하여 관련 구조와 코드 간결화, 메모리 사용량 개선
+  -  Compositional Layout으로 하나의 컬렉션뷰에 여러 layout을 구성하여 관련 구조와 코드 간결화, 메모리 사용량 개선
  
   
 </br>
@@ -89,8 +89,7 @@ String 또는 Int 값처럼 단순한 데이터로 보냈을 때처럼 Data타�
 
 #### [해결방안 1-1]
 
-이미지는 바이너리 데이터로 이루어져 있어서 서버에 post로 전송하기 위해서는 multipart/form-data 형식을 사용해야했다. 헤더에 "Content-Type" : "multipart/form-data"으로 요청 형식을 명시하고, Moya의 router 패턴인 task에
-이미지와 함께 서버에 전송해야하는 텍스트 데이터와 비율 데이터를 multipartFormData에 추가하여 유저의 게시글 데이터를 서버에 전송할 수 있었다.
+이미지는 바이너리 데이터로 이루어져 있어서, 서버에 업로드하기 위해서는 HTTP POST 요청을 multipart/form-data 형식으로 보내야 했다. 이를 위해 요청 헤더에 "Content-Type"을 "multipart/form-data"로 설정했다. 서버에 이미지를 전송할 때 게시글을 포스팅 할 때 필수조건인 텍스트와 이후 UI를 구성할 때 필요한 비율을 함께 보내야했다. 이미지 파일 외에도 텍스트 데이터와 비율 데이터를 함께 보내기 위해 multipartFormData에 해당 데이터를 추가했다. 게시글을 포스트하기 위해 필요한 데이터들은 Moya의 라우터 패턴을 사용하여 서버에 전송했다.
 
 ``` swift
 
@@ -122,6 +121,37 @@ String 또는 Int 값처럼 단순한 데이터로 보냈을 때처럼 Data타�
             return .uploadMultipart(multipartData)
             
 ```
+
+#### [문제사항 1-2]
+
+서버에서 get으로 받은 이미지를 kingfisher를 통해 로드하려고 하였으나, 이미지 로드에 실패했을 때 대응하려고 설정한 placeholder 이미지로 대체 되고 있었다.
+
+#### [문제해결 1-2]
+
+서버에 이미지를 전송할 때 필요한 token과 API 키를 추가했으므로, 이미지를 로드할 때도 동일한 작업이 필요했다. 이를 처리하기 위해 AnyModifier를 활용하여 Kingfisher로 이미지를 로드하는 로직을 수정했다. AnyModifier를 사용하여 인증 토큰과 API 키를 요청에 추가함으로써, 서버로부터 이미지를 불러올 수 없었던 문제를 해결했다.
+
+``` swift
+
+import UIKit
+import Kingfisher
+
+extension UIImageView {
+    func loadImage(from url: URL, placeHolderImage: UIImage? = nil) {
+        let modifier = AnyModifier { request in
+            var r = request
+            if let token = KeychainStorage.shared.userToken {
+                r.setValue(token, forHTTPHeaderField: "Authorization")
+                r.setValue(APIKey.sesacKey, forHTTPHeaderField: "SesacKey")
+            }
+            return r
+        }
+        self.kf.setImage(with: url, placeholder: placeHolderImage, options: [.requestModifier(modifier), .forceRefresh])
+    }
+}
+
+            
+```
+
 
 ### 2. RefreshToken?
 
