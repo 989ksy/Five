@@ -1,6 +1,9 @@
 # Five
 
-![120](https://github.com/989ksy/Five/assets/122261047/208a9179-802a-463f-99d7-da79090197a7)
+<img width="120" height="120" src="https://github.com/989ksy/Five/assets/122261047/a1da73db-c862-4fa0-8ccb-8a3d3d56c74d">
+
+</br>
+</br>
 
 **📸 타인과 공유하고 싶은 순간을 이미지와 텍스트 기반으로 공유하고 공감 받을 수 있는 SNS 어플리케이션**
 
@@ -132,9 +135,6 @@ String 또는 Int 값처럼 단순한 데이터로 보냈을 때처럼 Data타�
 
 ``` swift
 
-import UIKit
-import Kingfisher
-
 extension UIImageView {
     func loadImage(from url: URL, placeHolderImage: UIImage? = nil) {
         let modifier = AnyModifier { request in
@@ -148,18 +148,72 @@ extension UIImageView {
         self.kf.setImage(with: url, placeholder: placeHolderImage, options: [.requestModifier(modifier), .forceRefresh])
     }
 }
-
             
 ```
 
 
-### 2. RefreshToken?
+### 2. Token 갱신
 
 #### [문제사항]
 
+Access Token이 만료 되면 자동 로그아웃 되어 서비스를 장기적으로 이용할 수 없었다. 사용자가 서비스를 이용하다가 강제 종료되는 상황을 피하기 위해서 Access Token의 유효성을 확인 하고, 만료 시 Refresh Token으로 갱신 하는 로직이 필요했다.
 
-#### [해결방안]
+#### [문제해결]
 
+Access Token 만료를 나타내는 상태코드 418을 감지한 경우, keychain에 저장한 Refresh Token으로 새 Access Token을 요청하는 retry 로직을 구현했다. 이 retry 메서드 내에서 Access Token을 성공적으로 받아오면 저장된 토큰을 교체하고, 갱신에 실패하면 사용자를 로그인 화면으로 안내하여 다시 로그인을 할 수 있도록 했다.
+
+``` swift
+
+  //response의 statusCode가 418인 경우 토큰을 갱신하는 API 호출
+    func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {
+        print("retry 진입")
+        
+        guard let response = request.task?.response as? HTTPURLResponse, response.statusCode == 418
+        else {
+            print("retry Error")
+            print(error)
+            completion(.doNotRetryWithError(error))
+            return
+        }
+        
+        print("refresh token 진입")
+        
+        APIManager.shared.RefreshToken()
+            .subscribe(with: self) { owner, result in
+                switch result {
+                case .success(let response):
+                    print("Retry-토큰 재발급 성공, 토큰 교체")
+                    KeychainStorage.shared.userToken = response.token
+                    
+                    completion(.retry)
+                    
+                case .failure(let error):
+                    //토큰 갱신 실패, 로그인 화면 전환
+
+                    completion(.doNotRetryWithError(error))
+                    
+                    let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+                    let sceneDelegate = windowScene?.delegate as? SceneDelegate
+                    
+                    let vc = LoginViewController()
+                    let nav = UINavigationController(rootViewController: vc)
+                    
+                    sceneDelegate?.window?.rootViewController = nav
+                    sceneDelegate?.window?.makeKeyAndVisible()
+                }
+            }
+            .disposed(by: disposeBag)
+    }
+            
+```
+
+Moya의 provider에 해당 로직을 추가하여, 원래 헤더에 개별로 추가해야하는 로직이었으나 provider에 추가하여 코드를 간소화 시켰다.
+
+``` swift
+
+    private let provider = MoyaProvider<FiveAPI>(session: Session(interceptor: AuthInterceptor.shared))
+
+```
 
  </br>
 
