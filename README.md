@@ -160,15 +160,15 @@ Access Token이 만료 되면 자동 로그아웃 되어 서비스를 장기적�
 
 #### [문제해결]
 
-Access Token 만료를 나타내는 상태코드 418을 감지한 경우, keychain에 저장한 Refresh Token으로 새 Access Token을 요청하는 retry 로직을 구현했다. 이 retry 메서드 내에서 Access Token을 성공적으로 받아오면 저장된 토큰을 교체하고, 갱신에 실패하면 사용자를 로그인 화면으로 안내하여 다시 로그인을 할 수 있도록 했다.
+Access Token 만료를 나타내는 상태코드 419을 감지한 경우, keychain에 저장한 Refresh Token으로 새 Access Token을 요청하는 retry 로직을 구현했다. 이 retry 메서드 내에서 Access Token을 성공적으로 받아오면 저장된 토큰을 교체하고, 갱신에 실패하면 사용자를 로그인 화면으로 안내하여 다시 로그인을 할 수 있도록 했다.
 
 ``` swift
 
-  //response의 statusCode가 418인 경우 토큰을 갱신하는 API 호출
+  //response의 statusCode가 419인 경우 토큰을 갱신하는 API 호출
     func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {
         print("retry 진입")
         
-        guard let response = request.task?.response as? HTTPURLResponse, response.statusCode == 418
+        guard let response = request.task?.response as? HTTPURLResponse, response.statusCode == 419
         else {
             print("retry Error")
             print(error)
@@ -178,7 +178,7 @@ Access Token 만료를 나타내는 상태코드 418을 감지한 경우, keycha
         
         print("refresh token 진입")
         
-        APIManager.shared.RefreshToken()
+        APIManager.shared.refreshToken()
             .subscribe(with: self) { owner, result in
                 switch result {
                 case .success(let response):
