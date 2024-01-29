@@ -5,7 +5,7 @@
 </br>
 </br>
 
-**📸 타인과 공유하고 싶은 순간을 이미지와 텍스트 기반으로 공유하고 공감 받을 수 있는 SNS 어플리케이션**
+**📸 타인과 공유하고 싶은 순간을 이미지와 텍스트 기반으로 공유하는 SNS 어플리케이션**
 
 
 ## Preview
@@ -43,6 +43,9 @@
 - 내 프로필 이미지 또는 이름 변경
 - 해시태그 검색
 
+- MVVM과 Input-Output Pattern을 활용한 RxSwift 사용으로 일관된 코드 구조 아래 비즈니스 로직 구분
+
+
 </br>
 
 ## 스택
@@ -61,7 +64,6 @@
   
   - 이메일 중복 API를 활용하여 이메일 중복 방지
   - 이메일 및 비밀번호 **정규표현식**을 통해 입력값에 대한 유효성 검증
-  - Input-Output Pattern을 활용한 RxSwift 사용으로 일관된 코드 구조 아래 회원가입 및 로그인 로직 간소화
 
 - **AccessToken 갱신**
   
@@ -70,11 +72,9 @@
 - **포스트 작성 및 조회**
   
   - YPImagePicker 라이브러리를 사용하여 이미지 크기 조절 및 필터 등의 이미지 커스텀 지원, 최대 5장까지 이미지 선택 및 해제 가능
-  - Cursor-based pagination를 통해 더보기 기능 없이 모든 유저의 게시글을 중복 없이 로드, 자연스러운 스크롤 경험 지원
-  - RxSwift cellIdentifier로 collectionView 표현 및 modelSelected를 활용하여 데이터 전달
-  - MVVM과 Input-Output Pattern으로 비즈니스 로직 구분
+  - Cursor-based pagination를 활용하여 피드 구현
  
-- **해시태그 검색**
+- **해시태그 검색 UI**
   
   - 다양한 이미지 비율에 대응하는 레이아웃을 제공하기 위해 DiffableDatasource와 Compositional Layout을 활용하여 UICollectionView 구현
   -  Compositional Layout으로 하나의 컬렉션뷰에 여러 layout을 구성하여 관련 구조와 코드 간결화, 메모리 사용량 개선
@@ -84,15 +84,21 @@
 
  ## 트러블 슈팅
 
-### 1. multipart/form-data으로 반환하여 서버에 이미지 전송 및 받기
+### 1. multipart/form-data으로 반환하여 서버에 이미지 전송 및 수신
 
 #### [문제사항 1-1]
 
-String 또는 Int 값처럼 단순한 데이터로 보냈을 때처럼 Data타입으로 encoding을 해야하는 이미지를 string값으로 서버에 전송할 수 없었다.
+Data타입으로 encoding을 해야하는 이미지를 string값으로 서버에 전송할 수 없었다.
 
 #### [해결방안 1-1]
 
-이미지는 바이너리 데이터로 이루어져 있어서, 서버에 업로드하기 위해서는 HTTP POST 요청을 multipart/form-data 형식으로 보내야 했다. 이를 위해 요청 헤더에 "Content-Type"을 "multipart/form-data"로 설정했다. 서버에 이미지를 전송할 때 게시글을 포스팅 할 때 필수조건인 텍스트와 이후 UI를 구성할 때 필요한 비율을 함께 보내야했다. 이미지 파일 외에도 텍스트 데이터와 비율 데이터를 함께 보내기 위해 multipartFormData에 해당 데이터를 추가했다. 게시글을 포스트하기 위해 필요한 데이터들은 Moya의 라우터 패턴을 사용하여 서버에 전송했다.
+i. 서버에 업로드하기 위해서는 HTTP POST 요청을 기존의 application/json 형식 대신 multipart/form-data 형식으로 보내야 했다. 
+
+ii. 요청 헤더에 "Content-Type"을 "multipart/form-data"로 설정했다. 
+
+iii. 이미지 파일 외에도 텍스트 데이터와 비율 데이터를 함께 보내기 위해 multipartFormData에 해당 데이터를 추가했다. 
+
+iV. 게시글을 포스트하기 위해 필요한 데이터들은 Moya의 라우터 패턴을 사용하여 서버에 전송했다.
 
 ``` swift
 
@@ -127,11 +133,15 @@ String 또는 Int 값처럼 단순한 데이터로 보냈을 때처럼 Data타�
 
 #### [문제사항 1-2]
 
-서버에서 get으로 받은 이미지를 kingfisher를 통해 로드하려고 하였으나, 이미지 로드에 실패했을 때 대응하려고 설정한 placeholder 이미지로 대체 되고 있었다.
+이미지를 kingfisher를 통해 로드하려고 하였으나, 이미지 로드에 실패했다.
 
 #### [문제해결 1-2]
 
-서버에 이미지를 전송할 때 필요한 token과 API 키를 추가했으므로, 이미지를 로드할 때도 동일한 작업이 필요했다. 이를 처리하기 위해 AnyModifier를 활용하여 Kingfisher로 이미지를 로드하는 로직을 수정했다. AnyModifier를 사용하여 인증 토큰과 API 키를 요청에 추가함으로써, 서버로부터 이미지를 불러올 수 없었던 문제를 해결했다.
+i. 서버에 이미지를 전송할 때 필요한 token과 API 키를 추가했으므로, 이미지를 로드할 때도 동일한 작업이 필요했다.
+
+ii. 이를 처리하기 위해 AnyModifier를 활용하여 Kingfisher로 이미지를 로드하는 로직을 수정했다. 
+
+iii. AnyModifier를 사용하여 인증 토큰과 API 키를 요청에 추가함으로써, 서버로부터 이미지를 불러올 수 없었던 문제를 해결했다.
 
 ``` swift
 
@@ -156,11 +166,13 @@ extension UIImageView {
 
 #### [문제사항]
 
-Access Token이 만료 되면 자동 로그아웃 되어 서비스를 장기적으로 이용할 수 없었다. 사용자가 서비스를 이용하다가 강제 종료되는 상황을 피하기 위해서 Access Token의 유효성을 확인 하고, 만료 시 Refresh Token으로 갱신 하는 로직이 필요했다.
+Access Token이 만료 될 경우를 대비해서 Access Token의 유효성을 확인하고, 만료 시 Refresh Token으로 갱신하는 로직이 필요했다.
 
 #### [문제해결]
 
-Access Token 만료를 나타내는 상태코드 419을 감지한 경우, keychain에 저장한 Refresh Token으로 새 Access Token을 요청하는 retry 로직을 구현했다. 이 retry 메서드 내에서 Access Token을 성공적으로 받아오면 저장된 토큰을 교체하고, 갱신에 실패하면 사용자를 로그인 화면으로 안내하여 다시 로그인을 할 수 있도록 했다.
+i. Access Token 만료를 나타내는 에러를 감지한 경우, keychain에 저장한 Refresh Token으로 새 Access Token을 요청하는 retry 로직을 구현했다.
+
+ii. 이 retry 메서드 내에서 Access Token을 성공적으로 받아오면 저장된 토큰을 교체하고, 갱신에 실패하면 로그인 화면으로 전환했다.
 
 ``` swift
 
