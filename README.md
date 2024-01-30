@@ -36,7 +36,7 @@
 
 ## 특징
 
-- 회원가입, 로그인, 로그아웃, 회원탈퇴
+- 회원가입, 로그인, 로그아웃, 회원탈퇴 기능
 - 이미지, 텍스트를 포함한 포스트 등록 및 삭제
 - 다른 유저의 포스트 조회 및 프로필 조회 가능
 - 모든 포스트에 좋아요 표시 및 취소, 댓글 작성 및 삭제 기능
@@ -48,23 +48,25 @@
 
 ## 스택
 
-- `UIKit`, `CodeBaseUI`, `DiffableDatasource`, `CompositionalLayout`
+- `UIKit`, `CodeBaseUI`
 - `Moya`, `Kingfisher`, `RxSWift`, `RxCocoa`, `SnapKit`
 - `SwiftKeychainWrapper`, `YPImagePicker`, `IQKeyboardManager`
+- `DiffableDatasource`, `CompositionalLayout`, `UISheetPresentation`
 - `MVVM`, `Singleton`, `Input/Output`, `Repository Pattern`
 
 </br>
 
 ## 구현기능
-  
+
 - **정규표현식**을 통해 이메일 및 비밀번호 입력값에 대한 유효성 검증
-- **Alamofire Intercepter**를 통해 AccessToken 만료 시 keychain에 저장된 Refresh Token으로 갱신하는 **JWT 인증 로직** 구현  
+- **Alamofire Intercepter**를 통해 AccessToken 만료 시 keychain에 저장된 Refresh Token으로 갱신하는 **JWT 인증 로직** 구현
+- **Kingfisher**의 **AnyModifier**로 이미지 캐싱 및 다운로드 구현
 - 게시글 작성 시 **YPImagePicker** 라이브러리를 사용하여 이미지 커스텀 지원, 최대 5장까지 이미지 선택 및 해제 가능
 - **Cursor-based pagination**을 활용하여 게시글 중복을 방지한 피드 목록 구현  
 - **Compositional Layout**을 사용해서 각 이미지 비율에 대응하는 UICollectionView 구현 및 메모리 사용량 개선
 
 - **Moya**의 **Router Pattern**으로 네트워크 통신을 구현하여 로직 추상화 및 유지보수
-- **enum**으로 네트워크 에러 세분화 관리 및 대응
+- **enum**으로 네트워크 에러 세분화 및 대응
 - **RxSwift**와 **MVVM Input/Output 패턴**을 사용하여 비즈니스 로직 분리 및 코드 구조 일관성 유지
 - **Access Control**의 **private**과 **final** 키워드를 통해 Swift 성능 최적화
   
@@ -72,12 +74,12 @@
 
  ## 트러블 슈팅
 
-### 1. multipart/form-data으로 반환하여 서버에 이미지 전송 및 수신
+### 1. 피드 업데이트
 
-#### [문제사항 1]
+#### [문제사항]
 
 
-#### [해결방안 1]
+#### [해결방안]
 
 
 ``` swift
@@ -90,6 +92,7 @@
 ### 2. Token 갱신
 
 #### [문제사항]
+
 
 
 #### [문제해결]
