@@ -27,7 +27,7 @@
 
 **개발인원**: 1인
 
-**iOS 최소 지원버전**: 16 이상
+**iOS 최소 지원버전**: 16.0 이상
 
 **Package Dependency Manager**: Swift Package Manager
 
@@ -38,47 +38,35 @@
 
 - 회원가입, 로그인, 로그아웃, 회원탈퇴
 - 이미지, 텍스트를 포함한 포스트 등록 및 삭제
-- 모든 유저의 포스트 조회 및 프로필 조회
+- 다른 유저의 포스트 조회 및 프로필 조회 가능
 - 모든 포스트에 좋아요 표시 및 취소, 댓글 작성 및 삭제 기능
 - 내 프로필 이미지 또는 이름 변경
 - 해시태그 검색
-
-- MVVM과 Input-Output Pattern을 활용한 RxSwift 사용으로 일관된 코드 구조 아래 비즈니스 로직 구분
 
 
 </br>
 
 ## 스택
 
-- `UIKit`, `RxSWift`, `RxCocoa`
-- `CodeBaseUI`, `SnapKit`, `DiffableDatasource`, `CompositionalLayout`
-- `Moya`, `Kingfisher`
+- `UIKit`, `CodeBaseUI`, `DiffableDatasource`, `CompositionalLayout`
+- `Moya`, `Kingfisher`, `RxSWift`, `RxCocoa`, `SnapKit`
 - `SwiftKeychainWrapper`, `YPImagePicker`, `IQKeyboardManager`
 - `MVVM`, `Singleton`, `Input/Output`, `Repository Pattern`
 
 </br>
 
 ## 구현기능
+  
+- **정규표현식**을 통해 이메일 및 비밀번호 입력값에 대한 유효성 검증
+- **Alamofire Intercepter**를 통해 AccessToken 만료 시 keychain에 저장된 Refresh Token으로 갱신하는 **JWT 인증 로직** 구현  
+- 게시글 작성 시 **YPImagePicker** 라이브러리를 사용하여 이미지 커스텀 지원, 최대 5장까지 이미지 선택 및 해제 가능
+- **Cursor-based pagination**을 활용하여 게시글 중복을 방지한 피드 목록 구현  
+- **Compositional Layout**을 사용해서 각 이미지 비율에 대응하는 UICollectionView 구현 및 메모리 사용량 개선
 
-- **회원가입 및 로그인**
-  
-  - 이메일 중복 API를 활용하여 이메일 중복 방지
-  - 이메일 및 비밀번호 **정규표현식**을 통해 입력값에 대한 유효성 검증
-
-- **AccessToken 갱신**
-  
-  - `Alamofire Intercepter`를 통해 AccessToken 만료 시 Keychain에 저장된 Refresh Token으로 갱신하는 JWT 인증 로직 구현
-
-- **포스트 작성 및 조회**
-  
-  - YPImagePicker 라이브러리를 사용하여 이미지 크기 조절 및 필터 등의 이미지 커스텀 지원, 최대 5장까지 이미지 선택 및 해제 가능
-  - Cursor-based pagination를 활용하여 피드 구현
- 
-- **해시태그 검색 UI**
-  
-  - 다양한 이미지 비율에 대응하는 레이아웃을 제공하기 위해 DiffableDatasource와 Compositional Layout을 활용하여 UICollectionView 구현
-  -  Compositional Layout으로 하나의 컬렉션뷰에 여러 layout을 구성하여 관련 구조와 코드 간결화, 메모리 사용량 개선
- 
+- **Moya**의 **Router Pattern**으로 네트워크 통신을 구현하여 로직 추상화 및 유지보수
+- **enum**으로 네트워크 에러 세분화 관리 및 대응
+- **RxSwift**와 **MVVM Input/Output 패턴**을 사용하여 비즈니스 로직 분리 및 코드 구조 일관성 유지
+- **Access Control**의 **private**과 **final** 키워드를 통해 Swift 성능 최적화
   
 </br>
 
@@ -86,78 +74,15 @@
 
 ### 1. multipart/form-data으로 반환하여 서버에 이미지 전송 및 수신
 
-#### [문제사항 1-1]
+#### [문제사항 1]
 
-Data타입으로 encoding을 해야하는 이미지를 string값으로 서버에 전송할 수 없었다.
 
-#### [해결방안 1-1]
+#### [해결방안 1]
 
-i. 서버에 업로드하기 위해서는 HTTP POST 요청을 기존의 application/json 형식 대신 multipart/form-data 형식으로 보내야 했다. 
-
-ii. 요청 헤더에 "Content-Type"을 "multipart/form-data"로 설정했다. 
-
-iii. 이미지 파일 외에도 텍스트 데이터와 비율 데이터를 함께 보내기 위해 multipartFormData에 해당 데이터를 추가했다. 
-
-iV. 게시글을 포스트하기 위해 필요한 데이터들은 Moya의 라우터 패턴을 사용하여 서버에 전송했다.
 
 ``` swift
 
- var multipartData: [MultipartFormData] = []
-            
-            if let file = data.file {
-                for item in file {
-                    let multi = MultipartFormData(
-                        provider: .data(item),
-                        name: "file",
-                        fileName: "\(Date()).jpeg", //UUID().uuidString
-                        mimeType: "image/jpeg"
-                    )
-                    multipartData.append(multi)
-                }
-            }
-            
-            let productIdData = MultipartFormData(provider: .data(data.product_id.data(using: .utf8)!), name: "product_id")
-            multipartData.append(productIdData)
-            
-            if let contentData = data.content {
-                let multi = MultipartFormData(provider: .data(contentData.data(using: .utf8)!), name: "content")
-                multipartData.append(multi)
-            }
-            
-            let content1Data = MultipartFormData(provider: .data(data.content1.data(using: .utf8)!), name: "content1")
-                multipartData.append(content1Data)
-            
-            return .uploadMultipart(multipartData)
-            
-```
-
-#### [문제사항 1-2]
-
-이미지를 kingfisher를 통해 로드하려고 하였으나, 이미지 로드에 실패했다.
-
-#### [문제해결 1-2]
-
-i. 서버에 이미지를 전송할 때 필요한 token과 API 키를 추가했으므로, 이미지를 로드할 때도 동일한 작업이 필요했다.
-
-ii. 이를 처리하기 위해 AnyModifier를 활용하여 Kingfisher로 이미지를 로드하는 로직을 수정했다. 
-
-iii. AnyModifier를 사용하여 인증 토큰과 API 키를 요청에 추가함으로써, 서버로부터 이미지를 불러올 수 없었던 문제를 해결했다.
-
-``` swift
-
-extension UIImageView {
-    func loadImage(from url: URL, placeHolderImage: UIImage? = nil) {
-        let modifier = AnyModifier { request in
-            var r = request
-            if let token = KeychainStorage.shared.userToken {
-                r.setValue(token, forHTTPHeaderField: "Authorization")
-                r.setValue(APIKey.sesacKey, forHTTPHeaderField: "SesacKey")
-            }
-            return r
-        }
-        self.kf.setImage(with: url, placeholder: placeHolderImage, options: [.requestModifier(modifier), .forceRefresh])
-    }
-}
+      
             
 ```
 
@@ -166,60 +91,10 @@ extension UIImageView {
 
 #### [문제사항]
 
-Access Token이 만료 될 경우를 대비해서 Access Token의 유효성을 확인하고, 만료 시 Refresh Token으로 갱신하는 로직이 필요했다.
 
 #### [문제해결]
 
-i. Access Token 만료를 나타내는 에러를 감지한 경우, keychain에 저장한 Refresh Token으로 새 Access Token을 요청하는 retry 로직을 구현했다.
 
-ii. 이 retry 메서드 내에서 Access Token을 성공적으로 받아오면 저장된 토큰을 교체하고, 갱신에 실패하면 로그인 화면으로 전환했다.
-
-``` swift
-
-  //response의 statusCode가 419인 경우 토큰을 갱신하는 API 호출
-    func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {
-        print("retry 진입")
-        
-        guard let response = request.task?.response as? HTTPURLResponse, response.statusCode == 419
-        else {
-            print("retry Error")
-            print(error)
-            completion(.doNotRetryWithError(error))
-            return
-        }
-        
-        print("refresh token 진입")
-        
-        APIManager.shared.refreshToken()
-            .subscribe(with: self) { owner, result in
-                switch result {
-                case .success(let response):
-                    print("Retry-토큰 재발급 성공, 토큰 교체")
-                    KeychainStorage.shared.userToken = response.token
-                    
-                    completion(.retry)
-                    
-                case .failure(let error):
-                    //토큰 갱신 실패, 로그인 화면 전환
-
-                    completion(.doNotRetryWithError(error))
-                    
-                    let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
-                    let sceneDelegate = windowScene?.delegate as? SceneDelegate
-                    
-                    let vc = LoginViewController()
-                    let nav = UINavigationController(rootViewController: vc)
-                    
-                    sceneDelegate?.window?.rootViewController = nav
-                    sceneDelegate?.window?.makeKeyAndVisible()
-                }
-            }
-            .disposed(by: disposeBag)
-    }
-            
-```
-
-Moya의 provider에 해당 로직을 추가하여, 원래 헤더에 개별로 추가해야하는 로직이었으나 provider에 추가하여 코드를 간소화 시켰다.
 
 ``` swift
 
