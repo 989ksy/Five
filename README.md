@@ -65,7 +65,7 @@
 - **Cursor-based pagination**을 활용하여 게시글 중복을 방지한 피드 목록 구현  
 - **Compositional Layout**을 사용해서 각 이미지 비율에 대응하는 UICollectionView 구현 및 메모리 사용량 개선
 
-- **Moya**의 **Router Pattern**으로 네트워크 통신을 구현하여 로직 추상화 및 유지보수
+- **Moya**의 **Router Pattern**으로 네트워크 통신을 구현하여 유지보수에 용이한 로직 추상화
 - **enum**으로 네트워크 에러 세분화 및 대응
 - **RxSwift**와 **MVVM Input/Output 패턴**을 사용하여 비즈니스 로직 분리 및 코드 구조 일관성 유지
 - **Access Control**의 **private**과 **final** 키워드를 통해 Swift 성능 최적화
@@ -77,6 +77,7 @@
 ### 1. 피드 업데이트
 
 #### [문제사항]
+
 
 
 #### [해결방안]
@@ -101,12 +102,50 @@
 
 ``` swift
 
-    private let provider = MoyaProvider<FiveAPI>(session: Session(interceptor: AuthInterceptor.shared))
+let value = Observable.combineLatest (
+            input.images,
+            text
+        )
 
+input.uploadTap
+            .throttle(.seconds(1), scheduler: MainScheduler.instance)
+            .withLatestFrom(value, resultSelector: { _, value in
+                return value
+            })
+            .map { value in
+                let datas = value.0
+                let text = value.1
+                
+                let preview = datas.first ?? Data()
+                let image = UIImage(data: preview) ?? UIImage()
+                let imageSize = image.size
+                let ratio = imageSize.width / imageSize.height
+                
+                return (images: datas, text: text, ratio: ratio)
+            }
+            .flatMap {
+                APIManager.shared.createPost(
+                    content: $0.text,
+                    file: $0.images,
+                    productID: "Five_Feed",
+                    content1: "\($0.ratio)"
+                )
+            }
+            .subscribe(with: self) { owner, result in
+                
+                switch result {
+                case .success(let response):
+                    isSucceeded.onNext(true)
+                    
+                case .failure(let failure):
+                    isSucceeded.onNext(false)
+                }
+            }
+            .disposed(by: disposeBag)
 ```
 
  </br>
 
  ## 회고
 
- - RxSwift로 모든 로직을 구현하고 싶었다.
+ - RxSwift를 중점으로 사용하며 MVVM과 In/Out Pattern을 처음 적용시켜 본 프로젝트였던 만큼 최대한 RxSwift로 로직을 구현하고자 했습니다.
