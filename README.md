@@ -123,7 +123,7 @@ cell.nicknameButton
 ```
 
 
-### 2. 이미지 비율로 dynamic collectionView 구현
+### 2. 이미지 비율로 Dynamic CollectionView 구현
 
 #### [문제사항]
 
