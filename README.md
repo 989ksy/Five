@@ -58,12 +58,16 @@
 
 ## 구현기능
 
+[**서비스**]
+
 - **정규표현식**을 통해 이메일 및 비밀번호 입력값에 대한 유효성 검증
 - **Alamofire Intercepter**를 통해 AccessToken 만료 시 keychain에 저장된 Refresh Token으로 갱신하는 **JWT 인증 로직** 구현
 - **Kingfisher**의 **AnyModifier**로 이미지 캐싱 및 다운로드 구현
 - 게시글 작성 시 **YPImagePicker** 라이브러리를 사용하여 이미지 커스텀 지원, 최대 5장까지 이미지 선택 및 해제 가능
 - **Cursor-based pagination**을 활용하여 게시글 중복을 방지한 피드 목록 구현  
 - **Compositional Layout**을 사용해서 각 이미지 비율에 대응하는 UICollectionView 구현 및 메모리 사용량 개선
+
+[**그외**]
 
 - **Moya**의 **Router Pattern**으로 네트워크 통신을 구현하여 유지보수에 용이한 로직 추상화
 - **enum**으로 네트워크 에러 세분화 및 대응
@@ -74,31 +78,64 @@
 
  ## 트러블 슈팅
 
-### 1. 피드 업데이트
+### 1. RxSwift로 구현한 컬렉션뷰 cell 이벤트 구독
 
 #### [문제사항]
 
+피드 화면에서 유저의 닉네임을 탭하여 프로필 화면으로 전환하고자 할 때, 버튼 탭 이벤트가 여러 번 발생하며 화면 전환이 연속해서 일어남
 
 
 #### [해결방안]
 
+i. subcribe으로 발생하는 이벤트를 viewController에 구현한 disposeBag으로 해당 stream을 해제하려고 함
+
+ii. 이벤트가 중복으로 구독되어 해당 문제가 발생했기 때문에 각 셀에 대해 이벤트를 구독할 때, 해당 셀이 재사용되기 전에 이전에 생성된 구독을 해제하고자 함
 
 ``` swift
 
+override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
+    }
       
             
 ```
 
 
-### 2. Token 갱신
+iii. 각 셀의 prepareForReuse 메소드 내에서 disposeBag을 새로 할당함으로써 이전 구독을 모두 해제하고, 셀이 재사용될 때마다 이벤트를 새로 구독 할 수 있도록 구현함
+
+``` swift
+
+cell.nicknameButton
+      .rx
+      .tap
+      .subscribe(with: self) { owner, _ in
+
+          let vc = ProfileViewController()
+                        
+          vc.FeedUserId = element.creator.id
+          vc.FeedUserProfile = element.creator.profile
+          vc.type = .selectedUser
+                        
+          self.navigationController?.pushViewController(vc, animated: true)
+
+}
+.disposed(by: cell.disposeBag)
+            
+```
+
+
+### 2. 이미지 비율로 dynamic collectionView 구현
 
 #### [문제사항]
 
+해시태그 검색 화면을 Compositional Layout을 활용하여 이미지 비율에 기반한 UI로 기획
 
+i. kingfisher는 이미지를 비동기로 로딩하기 때문에 Compositional Layout이 레이아웃을 잡는 시점과 이미지가 완전히 다운로드 되는 시점 불일치로 다운로드 된 이미지의 비율로 레이아웃을 잡을 수 없음
 
 #### [문제해결]
 
-
+이미지 비율을 미리 계산하여 서버로 보낸 뒤 이를 기반으로 셀 크기를 계산하고, 이 정보를 레이아웃 크기를 계산할 때 실시간으로 사용하도록 함
 
 ``` swift
 
@@ -148,4 +185,4 @@ input.uploadTap
 
  ## 회고
 
- - RxSwift를 중점으로 사용하며 MVVM과 In/Out Pattern을 처음 적용시켜 본 프로젝트였던 만큼 최대한 RxSwift로 로직을 구현하고자 했습니다.
+ - RxSwift를 중점으로 사용하며 MVVM과 In/Out Pattern을 처음 적용시켜 본 프로젝트였던 만큼 최대한 RxSwift로 비즈니스 로직을 구분하는 로직을 구현하고자 했습니다. RxSwift 사용으로 반응형 프로그래밍을 
