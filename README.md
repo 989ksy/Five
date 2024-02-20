@@ -58,16 +58,13 @@
 
 ## 구현기능
 
-[**서비스**]
 
 - **정규표현식**을 통해 이메일 및 비밀번호 입력값에 대한 유효성 검증
 - **Alamofire Intercepter**를 통해 AccessToken 만료 시 keychain에 저장된 Refresh Token으로 갱신하는 **JWT 인증 로직** 구현
 - 게시글 작성 시 **YPImagePicker** 라이브러리를 사용하여 이미지 커스텀 지원, 최대 5장까지 이미지 선택 및 해제 가능
 - **Cursor-based pagination**을 활용하여 게시글 중복을 방지한 피드 목록 구현  
 - **Compositional Layout**을 사용해서 각 이미지 비율에 대응하는 UICollectionView 구현 및 메모리 사용량 개선
-
-[**그외**]
-
+- **Multipart/form-data** 기반 이미지 업로드 구현
 - **Moya**의 **Router Pattern**으로 네트워크 통신을 구현하여 로직 추상화
 - **RxSwift**와 **MVVM Input/Output 패턴**을 사용하여 비즈니스 로직 분리 및 코드 구조 일관성 유지
   
