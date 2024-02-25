@@ -65,7 +65,7 @@
 - 게시글 작성 시 **YPImagePicker** 라이브러리를 사용하여 이미지 커스텀 지원, 최대 5장까지 이미지 선택 및 해제 가능
 - **Cursor-based pagination**을 활용하여 게시글 중복을 방지한 피드 목록 구현  
 - **Compositional Layout**을 사용해서 각 이미지 비율에 대응하는 UICollectionView 구현 및 메모리 사용량 개선
-- **Multipart/form-data** 기반 이미지 업로드 구현
+- **Multipart/form-data** 기반 이미지 업로드 구현 및 다운샘플링
 - **Moya**의 **Router Pattern**으로 네트워크 통신을 구현하여 로직 추상화
 - **RxSwift**와 **MVVM Input/Output 패턴**을 사용하여 비즈니스 로직 분리 및 코드 구조 일관성 유지
   
